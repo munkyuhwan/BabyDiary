@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/shopping_navigation"
+    app:startDestination="@id/shopListFragment">
+
+    <fragment
+        android:id="@+id/shopListFragment"
+        android:name="com.anji.babydiary.shopping.listFragment.ShopListFragment"
+        android:label="shop_list_fragment"
+        tools:layout="@layout/shop_list_fragment" >
+        <action
+            android:id="@+id/action_shopListFragment_to_writeProduct"
+            app:destination="@id/writeProduct" />
+    </fragment>
+    <fragment
+        android:id="@+id/writeProduct"
+        android:name="com.anji.babydiary.shopping.writeFragment.WriteProduct"
+        android:label="write_product_fragment"
+        tools:layout="@layout/write_product_fragment" >
+        <argument
+            android:name="idx"
+            app:argType="long" />
+    </fragment>
+</navigation>

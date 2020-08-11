@@ -1,0 +1,143 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppBarDailyCheckIcon">
+        <item name="android:background">#00000000</item>
+        <item name="android:src">@drawable/daily_check_icon</item>
+    </style>
+
+    <style name="MainFeedCategory">
+        <item name="android:background">#00000000</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:text">전체보기</item>
+    </style>
+
+    <style name="MainFeedAppBar" >
+    </style>
+    
+    <style name="MainFeedMemberThumbnail">
+        <item name="android:layout_width">28sp</item>
+        <item name="android:layout_height">27sp</item>
+        <item name="android:radius">30sp</item>
+    </style>
+
+    <style name="MainFeedMemberAccount">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#636363</item>
+    </style>
+    <style name="LikeButton"  >
+        <item name="android:layout_width">14sp</item>
+        <item name="android:layout_height">14sp</item>
+        <item name="android:text"></item>
+        <item name="android:background">@drawable/like_btn</item>
+    </style>
+    <style name="CommentButton"  >
+        <item name="android:layout_width">14sp</item>
+        <item name="android:layout_height">14sp</item>
+        <item name="android:background">@drawable/comment_btn</item>
+    </style>
+    <style name="LikeCnt">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#636363</item>
+    </style>
+    <style name="MainFeedTextStyle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#636363</item>
+    </style>
+
+    <style name="MainFeedImage" >
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">195sp</item>
+        <item name="android:background">@drawable/feed_image</item>
+        <item name="android:windowClipToOutline">true</item>
+        <item name="android:scaleType">centerCrop</item >
+    </style>
+
+    <style name="MainThumb">
+        <item name="android:radius">30sp</item>
+    </style>
+
+    <style name="MainAppBarSelect">
+        <item name="android:background">@drawable/main_appbar_select</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">150sp</item>
+    </style>
+
+    <style name="MainFeedCategoryText">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MainFeedCatOne" parent="MainFeedCategoryText">
+        <item name="android:text">@string/main_menu_1</item>
+    </style>
+    <style name="MainFeedCatTwo" parent="MainFeedCategoryText">
+        <item name="android:text">@string/main_menu_2</item>
+    </style>
+    
+
+    <!--bottom tab button style-->
+    <style name="GNBWrapper">
+        <item name="android:topLeftRadius" >30sp</item>
+        <item name="android:topRightRadius" >30sp</item>
+        <item name="android:background">@drawable/gnb_wrapper</item>
+    </style>
+    <style name="BottomGNB">
+        <item name="android:gravity">center</item>
+        <item name="android:button">@android:color/transparent</item>
+    </style>
+    <style name="GNBPoplular" parent="BottomGNB">
+        <item name="android:button">@drawable/bottom_nav_popular</item>
+    </style>
+    <style name="GNBShopping" parent="BottomGNB">
+        <item name="android:button">@drawable/bottom_nav_shopping</item>
+    </style>
+    <style name="GNBMain" parent="BottomGNB">
+        <item name="android:button">@drawable/bottom_nav_main</item>
+    </style>
+    <style name="GNBTip" parent="BottomGNB">
+        <item name="android:button">@drawable/bottom_nav_tip</item>
+    </style>
+    <style name="GNBMyPage" parent="BottomGNB">
+        <item name="android:button">@drawable/bottom_nav_mypage</item>
+    </style>
+
+    <style name="InputStyle" >
+        <item name="android:paddingTop">10sp</item>
+        <item name="android:paddingBottom">10sp</item>
+        <item name="android:layout_marginTop">15sp</item>
+        <item name="borderWidth">1sp</item>
+        <item name="android:background">@drawable/bottom_border_layout</item>
+    </style>
+
+    <style name="WriteProductLabel">
+        <item name="android:textColor">#636363</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="PriceInput">
+        <item name="android:layout_marginLeft">10sp</item>
+        <item name="android:textColor">#636363</item>
+        <item name="android:background">@drawable/shadow</item>
+    </style>
+
+    <style name="UrlInsertBtn">
+        <item name="android:background">#00000000</item>
+    </style>
+
+    <style name="URLBtn">
+        <item name="android:background">@drawable/url_pop</item>
+    </style>
+
+</resources>

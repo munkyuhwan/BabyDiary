@@ -1,0 +1,51 @@
+package com.anji.babydiary.common
+
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
+import com.anji.babydiary.R
+import com.anji.babydiary.gnb.NavViewModel
+import com.anji.babydiary.gnb.NavViewModelFactory
+import com.google.android.material.appbar.CollapsingToolbarLayout
+
+abstract class BaseActivity() : AppCompatActivity() {
+
+
+    fun setNav(nestedHost:Int) {
+        var appBarConfiguration: AppBarConfiguration.Builder
+
+        val navViewModelFactory = NavViewModelFactory(application)
+        val navViewModel = ViewModelProviders.of(this, navViewModelFactory).get(NavViewModel::class.java)
+        //binding.navController = navViewModel
+
+        val navController = this.findNavController(nestedHost)
+        val layout = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar_layout)
+        val toolbar = findViewById<Toolbar>(R.id.activity_toolbar)
+
+        setSupportActionBar(toolbar)
+        var actionBar = supportActionBar
+        if (actionBar != null) {
+            actionBar.setDisplayShowCustomEnabled(true)
+            actionBar.setDisplayHomeAsUpEnabled(true)
+            actionBar.setHomeAsUpIndicator(R.drawable.back_btn)
+        }
+
+
+
+        appBarConfiguration = AppBarConfiguration.Builder(navController.graph)
+        layout.isTitleEnabled=false
+        layout.setupWithNavController(toolbar, navController, appBarConfiguration.build())
+
+        navViewModel.isOpen.observe(this, Observer {
+            //layout.nav_category.bringToFront()
+
+        })
+
+    }
+
+
+}

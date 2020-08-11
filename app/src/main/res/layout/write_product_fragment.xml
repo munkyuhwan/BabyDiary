@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="writeViewModel"
+            type="com.anji.babydiary.shopping.writeFragment.WriteProductViewModel"/>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".shopping.writeFragment.WriteProduct"
+        android:paddingTop="20sp"
+        android:paddingLeft="20sp"
+        android:paddingRight="20sp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="300sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <Button
+                android:layout_width="74sp"
+                android:layout_height="37sp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="30dp"
+                android:visibility="@{writeViewModel.isProductURLTag}"
+                style="@style/URLBtn"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            style="@style/InputStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/productInput"
+                style="@style/PriceInput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="안전망이 있어 아이들이 놀때 안심할 수 있는 트램폴린이에요!" />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            style="@style/InputStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+            <TextView
+                android:id="@+id/price_tag"
+                style="@style/WriteProductLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/price_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/product_price"
+                style="@style/PriceInput"
+                android:layout_width="100sp"
+                android:layout_height="40sp"
+                app:layout_constraintBottom_toBottomOf="@+id/price_tag"
+                app:layout_constraintStart_toEndOf="@+id/price_tag"
+                app:layout_constraintTop_toTopOf="@+id/price_tag" />
+
+            <TextView
+                android:id="@+id/price_unit"
+                style="@style/WriteProductLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/price_unit"
+                app:layout_constraintBottom_toBottomOf="@+id/product_price"
+                app:layout_constraintStart_toEndOf="@+id/product_price"
+                app:layout_constraintTop_toTopOf="@+id/product_price"
+                app:layout_constraintVertical_bias="0.761" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/textLayout"
+            style="@style/InputStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foregroundGravity="center_vertical"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+            <TextView
+                android:id="@+id/url_text"
+                style="@style/WriteProductLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/url_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/product_url"
+                style="@style/PriceInput"
+                android:layout_width="200sp"
+                android:layout_height="40sp"
+                app:layout_constraintBottom_toBottomOf="@+id/url_text"
+                app:layout_constraintStart_toEndOf="@+id/url_text"
+                app:layout_constraintTop_toTopOf="@+id/url_text" />
+
+            <TextView
+                android:id="@+id/button3"
+                style="@style/WriteProductLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="입력"
+                android:onClick="@{() -> writeViewModel.setURLTag(productUrl.getText())}"
+                app:layout_constraintBottom_toBottomOf="@+id/product_url"
+                app:layout_constraintStart_toEndOf="@+id/product_url"
+                app:layout_constraintTop_toTopOf="@+id/url_text"
+                app:layout_constraintVertical_bias="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="save"
+            android:onClick="@{ () -> writeViewModel.saveData(productInput.getText(),productPrice.getText(), productUrl.getText() ) }"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
+
