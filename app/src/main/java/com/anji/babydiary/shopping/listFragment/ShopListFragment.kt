@@ -66,8 +66,8 @@ class ShopListFragment : Fragment() {
         binding.productList.layoutManager = manager
 
         binding.writeProduct.setOnClickListener {
+            
             findNavController().navigate(ShopListFragmentDirections.actionShopListFragmentToWriteProduct(1))
-
         }
 
         return binding.root

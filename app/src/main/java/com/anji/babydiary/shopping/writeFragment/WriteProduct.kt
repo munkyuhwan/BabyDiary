@@ -16,9 +16,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.database.shopping.ShoppingDatabase
 import com.anji.babydiary.databinding.WriteProductFragmentBinding
+import com.anji.babydiary.shopping.listFragment.ShopListFragmentDirections
 import com.bumptech.glide.Glide
 
 
@@ -32,6 +34,7 @@ class WriteProduct : Fragment() {
     private lateinit var binding:WriteProductFragmentBinding
 
     private lateinit var application:Application
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,10 +73,11 @@ class WriteProduct : Fragment() {
         viewModel.isDone.observe(viewLifecycleOwner, Observer {
             it?.let{
                 if(it) {
-                    requireActivity().finishAndRemoveTask()
+                    findNavController().popBackStack()
                 }
             }
         })
+
 
         return binding.root
     }

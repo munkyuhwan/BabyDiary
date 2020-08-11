@@ -56,6 +56,8 @@ class WriteProductViewModel(val database:ShoppingDao, application: Application) 
 
             uiScope.launch {
                 insertData(shopData)
+                isDone.value = true
+
             }
         }
     }
@@ -95,7 +97,7 @@ class WriteProductViewModel(val database:ShoppingDao, application: Application) 
     private suspend fun insertData(shopdata:Shopping) {
         withContext(Dispatchers.IO) {
             database.insert(shopdata)
-            isDone.value = true
+
         }
     }
 
