@@ -10,9 +10,9 @@ import androidx.room.Query
 interface TipDao {
 
     @Insert
-    fun insert(shopping:Tip)
+    fun insert(tip:Tip)
 
-    @Query("SELECT * FROM tbl_product")
+    @Query("SELECT * FROM tbl_tip")
     fun selectAll():LiveData<List<Tip>>
 
     @Query("DELETE FROM tbl_tip")

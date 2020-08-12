@@ -1,14 +1,11 @@
 package com.anji.babydiary.tips
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.ui.AppBarConfiguration
 import com.anji.babydiary.R
 import com.anji.babydiary.common.BaseActivity
-import com.anji.babydiary.databinding.ActivityShoppingBinding
 import com.anji.babydiary.databinding.ActivityTipBinding
-import com.anji.babydiary.shopping.ShopActivityViewModel
 
 class TipActivity : BaseActivity() {
 

@@ -8,7 +8,7 @@
     <data>
         <variable
             name="writeViewModel"
-            type="com.anji.babydiary.tips.tipWriteFragment.WriteTipViewModel"/>
+            type="com.anji.babydiary.shopping.writeFragment.WriteProductViewModel"/>
 
     </data>
 
