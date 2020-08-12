@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/tip_navigation"
+    app:startDestination="@id/tipListFragment">
+
+    <fragment
+        android:id="@+id/tipListFragment"
+        android:name="com.anji.babydiary.tips.tipListFragment.TipListFragment"
+        android:label="TipListFragment" >
+        <action
+            android:id="@+id/action_tipListFragment_to_writeTip"
+            app:destination="@id/writeTip" />
+    </fragment>
+    <fragment
+        android:id="@+id/writeTip"
+        android:name="com.anji.babydiary.tips.tipWriteFragment.WriteTip"
+        android:label="WriteTip" />
+</navigation>

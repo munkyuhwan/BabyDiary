@@ -13,6 +13,7 @@ class ShoppingActivity() : BaseActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration.Builder
     private lateinit var viewModel:ShopActivityViewModel
     private lateinit var binding:ActivityShoppingBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

@@ -10,6 +10,7 @@ import com.anji.babydiary.common.BaseActivity
 import com.anji.babydiary.R
 import com.anji.babydiary.databinding.ActivityMainFeedBinding
 import com.anji.babydiary.shopping.ShoppingActivity
+import com.anji.babydiary.tips.TipActivity
 
 class MainFeedActivity() : BaseActivity() {
     private lateinit var binding:ActivityMainFeedBinding
@@ -67,7 +68,7 @@ class MainFeedActivity() : BaseActivity() {
 */
     fun goShopping() {
 
-        val intent: Intent = Intent(this, ShoppingActivity::class.java)
+        val intent: Intent = Intent(this, TipActivity::class.java)
         startActivity(intent)
 
     }
