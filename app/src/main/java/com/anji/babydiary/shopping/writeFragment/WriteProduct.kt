@@ -18,6 +18,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
+import com.anji.babydiary.common.OpenGallery
 import com.anji.babydiary.database.shopping.ShoppingDatabase
 import com.anji.babydiary.databinding.WriteProductFragmentBinding
 import com.anji.babydiary.shopping.listFragment.ShopListFragmentDirections
@@ -78,17 +79,18 @@ class WriteProduct : Fragment() {
             }
         })
 
-
         return binding.root
     }
 
     fun openGallery() {
+        //activity?.let {
+        //    OpenGallery.getInstance().permissionCheck(this.application, it)
+        // }
         permissionCheck()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if (requestCode == IMAGE_PICK_CODE) {
 
             if (data != null) {

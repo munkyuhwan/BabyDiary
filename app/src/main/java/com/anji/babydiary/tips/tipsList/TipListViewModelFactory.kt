@@ -4,10 +4,11 @@ import android.app.Application
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.anji.babydiary.database.shopping.TipDao
 import com.anji.babydiary.database.shopping.TipDatabase
 import java.lang.IllegalArgumentException
 
-class TipListViewModelFactory(val database:TipDatabase, val application:Application) : ViewModelProvider.Factory {
+class TipListViewModelFactory(val database:TipDao, val application:Application) : ViewModelProvider.Factory {
 
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
