@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.mainFeed.MainFeedActivity
 import com.anji.babydiary.shopping.ShoppingActivity
+import com.anji.babydiary.tips.TipActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         Thread.sleep(1000)
-        val intent:Intent = Intent(this, MainFeedActivity::class.java)
+        val intent:Intent = Intent(this, TipActivity::class.java)
         startActivity(intent)
         finish()
 

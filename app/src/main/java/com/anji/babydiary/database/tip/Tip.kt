@@ -11,6 +11,8 @@ data class Tip(
     var idx:Long = 0L,
     @ColumnInfo(name = "tip_text")
     var text:String = "",
+    @ColumnInfo(name = "tip_user")
+    var user:String = "",
     @ColumnInfo(name = "like_cnt")
     var cnt:String = "",
     @ColumnInfo(name = "tip_image")

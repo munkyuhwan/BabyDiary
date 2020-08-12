@@ -84,6 +84,7 @@
             android:id="@+id/category_spinner"
             android:layout_width="200sp"
             android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"
             app:layout_constraintBottom_toBottomOf="@+id/category_tag"
             app:layout_constraintStart_toEndOf="@+id/category_tag"
             app:layout_constraintTop_toTopOf="@+id/category_tag" />

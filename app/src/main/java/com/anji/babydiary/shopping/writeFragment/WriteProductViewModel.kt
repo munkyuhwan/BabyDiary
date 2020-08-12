@@ -3,20 +3,12 @@ package com.anji.babydiary.shopping.writeFragment
 import android.app.Application
 import android.content.Intent
 import android.net.Uri
-import android.provider.MediaStore
-import android.util.Log
 import android.view.View
-import androidx.databinding.adapters.AutoCompleteTextViewBindingAdapter
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.database.shopping.Shopping
 import com.anji.babydiary.database.shopping.ShoppingDao
-import com.anji.babydiary.database.shopping.ShoppingDatabase
-import com.bumptech.glide.Glide
 import kotlinx.coroutines.*
-import kotlinx.coroutines.selects.select
 
 class WriteProductViewModel(val database:ShoppingDao, application: Application) : AndroidViewModel(application) {
 

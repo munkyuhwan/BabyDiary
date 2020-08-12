@@ -9,16 +9,20 @@ import android.os.Build
 import com.anji.babydiary.databinding.WriteTipFragmentBinding
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.database.shopping.TipDatabase
+import com.anji.babydiary.tips.writeTip.tipCategorySpinner.TipCategoryAdapter
 import com.bumptech.glide.Glide
 
 class WriteTip : Fragment() {
@@ -51,6 +55,49 @@ class WriteTip : Fragment() {
                 Glide.with(application).load(url).into(binding.tipImgView)
             }
         })
+
+        viewModel.isDone.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if(it) {
+                    findNavController().popBackStack()
+                }
+            }
+        })
+        viewModel.categories.observe(viewLifecycleOwner, Observer{
+            it?.let{
+                val listItemsTxt = it
+
+                var spinnerAdapter: TipCategoryAdapter = TipCategoryAdapter(application, listItemsTxt)
+                binding.categorySpinner.adapter = spinnerAdapter
+
+            }
+        })
+
+        /*
+        binding.categorySpinner.setOnItemClickListener { adapterView, view, i, l ->
+            Log.e("item select","==========================================")
+            Log.e("item select","${i}, ${l}")
+            Log.e("item select","==========================================")
+            viewModel.onCategorySelected(i);
+        }
+
+         */
+
+        binding.categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                //print("onItemSelected position = $position id = $id")
+                viewModel.onCategorySelected(position);
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+
+            }
+        }
+
+
+
+
+
 
         return binding.root
     }
@@ -99,3 +146,4 @@ class WriteTip : Fragment() {
         }
     }
 }
+

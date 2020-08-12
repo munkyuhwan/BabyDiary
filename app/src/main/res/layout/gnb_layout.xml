@@ -43,7 +43,6 @@
         <RadioButton
             android:id="@+id/tabShopBtn"
             style="@style/GNBShopping"
-            android:checked="@{mv.isShopping()}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -51,7 +50,6 @@
         <RadioButton
             android:id="@+id/tabMainBtn"
             style="@style/GNBMain"
-            android:checked="@{mv.isMain()}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -59,7 +57,6 @@
         <RadioButton
             android:id="@+id/tabTipBtn"
             style="@style/GNBTip"
-            android:checked="@{mv.isTip()}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -67,7 +64,6 @@
         <RadioButton
             android:id="@+id/tabMyPageBtn"
             style="@style/GNBMyPage"
-            android:checked="@{mv.isMy()}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

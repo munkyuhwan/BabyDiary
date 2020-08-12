@@ -33,6 +33,7 @@ class MainFeedActivity() : BaseActivity() {
         binding.lifecycleOwner = this
         binding.feedMain = viewModel
 
+
         setNav(R.id.feedNestedHost)
 
         viewModel.isMain.value = true

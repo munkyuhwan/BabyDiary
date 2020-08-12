@@ -5,6 +5,8 @@ import android.content.Intent
 import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.database.shopping.Tip
 import com.anji.babydiary.database.shopping.TipDao
 import kotlinx.coroutines.*
@@ -15,10 +17,13 @@ class WriteTipViewModel(val database:TipDao, application:Application) : AndroidV
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     var selectedImage = MutableLiveData<Uri>()
 
-    val categories = MutableLiveData<List<String>>()
+    var isDone = MutableLiveData<Boolean>()
 
+    val categories = MutableLiveData<Array<String>>()
+    var selectedCategory = ""
     init {
-        categories.value = listOf(
+        isDone.value = false
+        categories.value = arrayOf(
             "건강",
             "놀이",
             "교육",
@@ -29,12 +34,13 @@ class WriteTipViewModel(val database:TipDao, application:Application) : AndroidV
     fun insertTip(text:CharSequence) {
 
         var tip = Tip()
-        tip.category = "d"
+        tip.category = selectedCategory
         tip.text = text.toString()
         tip.imgDir = selectedImage.value.toString()
 
         uiScope.launch {
             doInsert(tip)
+            isDone.value = true
         }
     }
 
@@ -44,8 +50,13 @@ class WriteTipViewModel(val database:TipDao, application:Application) : AndroidV
         }
     }
 
+
     fun onImageSelected(data: Intent?) {
         selectedImage.value = data?.data!!
+    }
+
+    fun onCategorySelected(item:Int) {
+        selectedCategory = categories.value!!.get(item).toString()
     }
 
 }

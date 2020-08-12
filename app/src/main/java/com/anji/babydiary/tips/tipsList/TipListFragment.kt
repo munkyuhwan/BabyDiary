@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.database.shopping.TipDatabase
 import com.anji.babydiary.databinding.TipListFragmentBinding
+import com.anji.babydiary.tips.tipsList.listAdapter.TipListAdpater
 
 class TipListFragment : Fragment() {
 
@@ -29,12 +31,23 @@ class TipListFragment : Fragment() {
         val viewModelFactory = TipListViewModelFactory(database, application)
         val viewmodel = ViewModelProviders.of(this, viewModelFactory).get(TipListViewModel::class.java)
 
+        val adapter = TipListAdpater(TipClickListener {
+
+        })
+        binding.tipList.adapter = adapter
+
         binding.lifecycleOwner = viewLifecycleOwner
         binding.tipListViewModel = viewmodel
 
         binding.goWriteTip.setOnClickListener {
             findNavController().navigate(TipListFragmentDirections.actionTipListFragmentToWriteTip())
         }
+
+        viewmodel.dataAll.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.submitList(it)
+            }
+        })
 
         return binding.root
     }

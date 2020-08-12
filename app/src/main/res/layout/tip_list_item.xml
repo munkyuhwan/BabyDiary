@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable
+            name="clickListener"
+            type="com.anji.babydiary.tips.tipsList.TipClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/LikeCnt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20sp"
+        android:paddingTop="15sp"
+        android:paddingRight="20sp"
+        android:paddingBottom="15sp">
+
+        <ImageView
+            android:id="@+id/tip_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"
+            android:theme="@style/MainFeedMemberThumbnail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/usericon" />
+
+        <TextView
+            android:id="@+id/tip_user_id"
+            style="@style/MainFeedMemberAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tip_icon"
+            app:layout_constraintStart_toEndOf="@+id/tip_icon"
+            app:layout_constraintTop_toTopOf="@+id/tip_icon" />
+
+
+        <ImageView
+            android:id="@+id/tip_img"
+            style="@style/MainFeedImage"
+            android:layout_marginTop="15dp"
+            android:contentDescription="@string/usericon"
+            android:radius="30sp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/sample_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tip_icon" />
+
+
+
+        <Button
+            android:id="@+id/button"
+            style="@style/LikeButton"
+            android:layout_marginTop="15dp"
+            android:width="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tip_img" />
+
+        <Button
+            android:id="@+id/button2"
+            style="@style/CommentButton"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/button"
+            app:layout_constraintStart_toEndOf="@+id/button"
+            app:layout_constraintTop_toTopOf="@+id/button" />
+
+        <TextView
+            android:id="@+id/tip_like_cnt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button" />
+
+        <TextView
+            android:id="@+id/tip_text"
+            style="@style/MainFeedTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tip_like_cnt" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

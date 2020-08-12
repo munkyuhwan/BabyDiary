@@ -36,19 +36,6 @@ class MainFeedViewModel (application:Application):AndroidViewModel(application) 
         }
     }
 
-    fun goPop() {
-    }
-    fun goShopping() {
-
-    }
-
-    fun goTip() {
-
-    }
-
-    fun goMy() {
-
-    }
 
 }
 
