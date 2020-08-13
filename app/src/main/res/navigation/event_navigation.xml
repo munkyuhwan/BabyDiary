@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/event_navigation"
+    app:startDestination="@id/eventList">
+
+    <fragment
+        android:id="@+id/eventList"
+        android:name="com.anji.babydiary.event.eventList.EventList"
+        android:label="EventList" >
+        <action
+            android:id="@+id/action_eventList_to_eventDetail"
+            app:destination="@id/eventDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventDetail"
+        android:name="com.anji.babydiary.event.eventDetail.EventDetail"
+        android:label="EventDetail" />
+</navigation>

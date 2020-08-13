@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -18,7 +19,8 @@ import com.google.android.material.appbar.CollapsingToolbarLayout
 
 abstract class BaseActivity() : AppCompatActivity() {
 
-
+    lateinit var toolbar:Toolbar;
+    lateinit var navController:NavController
 
     fun setNav(nestedHost:Int) {
         var appBarConfiguration: AppBarConfiguration.Builder
@@ -27,9 +29,11 @@ abstract class BaseActivity() : AppCompatActivity() {
         val navViewModel = ViewModelProviders.of(this, navViewModelFactory).get(NavViewModel::class.java)
         //binding.navController = navViewModel
 
-        val navController = this.findNavController(nestedHost)
+        navController = this.findNavController(nestedHost)
         val layout = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar_layout)
-        val toolbar = findViewById<Toolbar>(R.id.activity_toolbar)
+        toolbar = findViewById<Toolbar>(R.id.activity_toolbar)
+
+
 
         setSupportActionBar(toolbar)
         var actionBar = supportActionBar

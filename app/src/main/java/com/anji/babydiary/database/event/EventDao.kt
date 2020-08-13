@@ -1,5 +1,6 @@
 package com.anji.babydiary.database.event
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Insert
@@ -12,7 +13,7 @@ interface EventDao {
     fun insert(event:Event)
 
     @Query("SELECT * FROM tbl_event")
-    fun selectAll():MutableLiveData<List<Event>>
+    fun selectAll():LiveData<List<Event>>
 
     @Query("DELETE FROM tbl_event")
     fun deleteAll()

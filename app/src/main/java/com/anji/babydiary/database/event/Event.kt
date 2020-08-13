@@ -5,13 +5,13 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "tbl_event")
-class Event (
-    @PrimaryKey
+data class Event (
+    @PrimaryKey(autoGenerate = true)
     val idx:Long = 0L,
     @ColumnInfo(name = "img")
-    val imgDir:String = "",
+    var imgDir:String = "",
     @ColumnInfo(name = "title")
-    val title:String = "",
+    var title:String = "",
     @ColumnInfo(name = "text")
-    val text:String = ""
+    var text:String = ""
 )

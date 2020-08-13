@@ -12,14 +12,14 @@ import com.bumptech.glide.Glide
 
 class TipListAdpater(val clickListener: TipClickListener): ListAdapter<Tip, TipListAdpater.ViewHolder>(TipListDiffCallback()) {
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder.from(parent)
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)!!
         val res = holder.itemView.context.resources
         holder.bind(item, clickListener)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
     }
 
     class ViewHolder private constructor(val binding: TipListItemBinding) : RecyclerView.ViewHolder(binding.root) {
