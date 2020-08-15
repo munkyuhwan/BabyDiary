@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.anji.babydiary.database.shopping.TipDatabase
 
-@Database(entities = [Event::class], version = 2, exportSchema = false)
+@Database(entities = [Event::class], version = 3, exportSchema = false)
 abstract class EventDatabase:RoomDatabase() {
     abstract val database:EventDao
 

@@ -18,4 +18,7 @@ interface EventDao {
     @Query("DELETE FROM tbl_event")
     fun deleteAll()
 
+    @Query("SELECT * FROM tbl_event WHERE idx= :key")
+    fun selectIdx(key:Long):LiveData<Event>
+
 }
