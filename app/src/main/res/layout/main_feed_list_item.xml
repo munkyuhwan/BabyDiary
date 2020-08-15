@@ -22,7 +22,8 @@
     android:paddingLeft="20sp"
     android:paddingTop="15sp"
     android:paddingRight="20sp"
-    android:paddingBottom="15sp">
+    android:paddingBottom="15sp"
+    android:onClick="@{() -> clickListener.onClick(mainFeed) }">
 
 
     <ImageView

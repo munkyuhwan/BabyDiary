@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
 import com.anji.babydiary.databinding.FeedListFragmentBinding
@@ -38,7 +39,8 @@ class FeedList : Fragment() {
         binding.mainFeed = viewModel
 
         val adapter = MainFeedListAdapter(FeedClickListener {
-            Toast.makeText(application,"${it}", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(application,"${it}", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(FeedListDirections.actionFeedListToFeedDetail(1))
         })
         binding.feedList.adapter = adapter
 

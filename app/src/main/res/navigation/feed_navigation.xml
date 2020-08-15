@@ -7,5 +7,17 @@
     <fragment
         android:id="@+id/feedList"
         android:name="com.anji.babydiary.mainFeed.feedList.FeedList"
-        android:label="FeedList" />
+        android:label="FeedList" >
+        <action
+            android:id="@+id/action_feedList_to_feedDetail"
+            app:destination="@id/feedDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/feedDetail"
+        android:name="com.anji.babydiary.mainFeed.feedDetail.FeedDetail"
+        android:label="FeedDetail" >
+        <argument
+            android:name="feed_idx"
+            app:argType="long" />
+    </fragment>
 </navigation>
