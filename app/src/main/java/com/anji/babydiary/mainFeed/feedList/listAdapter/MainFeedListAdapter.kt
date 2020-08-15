@@ -2,12 +2,15 @@ package com.anji.babydiary.mainFeed.feedList.listAdapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.anji.babydiary.R
 import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.databinding.MainFeedListItemBinding
 import com.anji.babydiary.mainFeed.feedList.FeedClickListener
+import com.google.android.material.shape.CornerFamily
+
 
 class MainFeedListAdapter(val clickListener: FeedClickListener):ListAdapter<MainFeed, MainFeedListAdapter.ViewHolder>(ResultListDiffCallback()) {
 
@@ -27,6 +30,8 @@ class MainFeedListAdapter(val clickListener: FeedClickListener):ListAdapter<Main
             //binding.idx = item
             binding.likeCnt.text = item.likeCnt.toString()
             binding.feedImg.setImageResource(  item.imgDir )
+
+
             binding.mainFeedText.text = item.text.toString()
             binding.userId.text = item.userId.toString()
 

@@ -37,7 +37,7 @@ class MainFeedActivity() : BaseActivity() {
         setNav(R.id.feedNestedHost)
 
         viewModel.isMain.value = true
-        goShopping()
+
 
     }
 
