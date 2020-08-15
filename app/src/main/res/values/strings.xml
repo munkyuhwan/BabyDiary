@@ -9,4 +9,6 @@
     <string name="url_text">주소URL/</string>
     <string name="category_text">카테고리</string>
     <string name="recommendation_text">추천</string>
+    <string name="follower">팔로워</string>
+    <string name="following">팔로잉</string>
 </resources>

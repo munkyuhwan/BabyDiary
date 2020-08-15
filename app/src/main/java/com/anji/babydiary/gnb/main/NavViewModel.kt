@@ -1,4 +1,4 @@
-package com.anji.babydiary.gnb
+package com.anji.babydiary.gnb.main
 
 import android.app.Application
 import android.view.View

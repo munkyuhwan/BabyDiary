@@ -12,7 +12,7 @@
             type="com.anji.babydiary.mainFeed.MainFeedViewModel" />
         <variable
             name="navController"
-            type="com.anji.babydiary.gnb.NavViewModel" />
+            type="com.anji.babydiary.gnb.main.NavViewModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout

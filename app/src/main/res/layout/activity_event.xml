@@ -11,7 +11,7 @@
             type="com.anji.babydiary.event.EventViewModel" />
         <variable
             name="navController"
-            type="com.anji.babydiary.gnb.NavViewModel" />
+            type="com.anji.babydiary.gnb.main.NavViewModel" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"

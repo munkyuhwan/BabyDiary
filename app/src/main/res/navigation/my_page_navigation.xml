@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/my_page_navigation"
+    app:startDestination="@id/myFeed">
+
+    <fragment
+        android:id="@+id/myFeed"
+        android:name="com.anji.babydiary.myPage.myFeed.MyFeed"
+        android:label="MyFeed" />
+</navigation>

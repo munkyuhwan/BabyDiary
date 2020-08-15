@@ -24,10 +24,10 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap" >
 
             <androidx.appcompat.widget.Toolbar
-                android:background="@drawable/main_feed_actionbar"
                 android:id="@+id/activity_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="300sp"
+                android:background="@drawable/main_feed_actionbar"
                 android:contentInsetStart="0dp"
                 android:contentInsetLeft="0dp"
                 android:contentInsetEnd="0dp"
@@ -35,8 +35,7 @@
                 app:contentInsetEnd="0dp"
                 app:contentInsetLeft="0dp"
                 app:contentInsetRight="0dp"
-                app:contentInsetStart="0dp"
-                >
+                app:contentInsetStart="0dp">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,21 +45,22 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/main_nav_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="99sp"
+                        android:layout_height="wrap_content"
                         android:onClick="@{() -> navController.onCategoryClicked() }"
                         android:orientation="horizontal"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.68">
+                        app:layout_constraintVertical_bias="1.0">
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/dailycheck_btn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:src="@drawable/daily_check_icon"
+                            android:src="@drawable/chatting_icon"
                             app:layout_constraintBottom_toBottomOf="@+id/main_feed_category"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/main_feed_category" />
@@ -70,41 +70,118 @@
                             style="@style/MainFeedCategory"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.65999997" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/more_category"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginStart="15dp"
+                            android:layout_marginStart="10dp"
                             android:src="@drawable/main_feed_open_icon"
-                            app:layout_constraintBottom_toBottomOf="@+id/main_feed_category"
-                            app:layout_constraintStart_toEndOf="@+id/main_feed_category"
-                            app:layout_constraintTop_toTopOf="@+id/main_feed_category" />
+                            app:layout_constraintBottom_toBottomOf="@+id/name_kid"
+                            app:layout_constraintStart_toEndOf="@+id/name_kid"
+                            app:layout_constraintTop_toTopOf="@+id/name_kid" />
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/appCompatImageView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="15dp"
-                            android:src="@drawable/main_feed_search_icon"
+                            android:src="@drawable/mypage_menu"
                             app:layout_constraintBottom_toBottomOf="@+id/main_feed_category"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/main_feed_category" />
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/shapeableImageView"
+                            android:layout_width="164dp"
+                            android:layout_height="164dp"
+                            android:layout_marginTop="20dp"
+                            android:background="#efefef"
+                            android:src="@drawable/sample_1"
+                            app:shapeAppearanceOverlay="@style/circleImageView"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/name_kid" />
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            style="@style/MyPageFollowNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="50dp"
+                            android:text="@string/follower"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/shapeableImageView"
+                            app:layout_constraintEnd_toStartOf="@+id/shapeableImageView" />
+
+                        <TextView
+                            android:id="@+id/num_follower"
+                            style="@style/MyPageFollowNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="12"
+                            app:layout_constraintBottom_toTopOf="@+id/textView2"
+                            app:layout_constraintEnd_toEndOf="@+id/textView2"
+                            app:layout_constraintStart_toStartOf="@+id/textView2" />
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            style="@style/MyPageFollowNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="50dp"
+                            android:text="@string/following"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/shapeableImageView"
+                            app:layout_constraintStart_toEndOf="@+id/shapeableImageView" />
+
+                        <TextView
+                            android:id="@+id/num_following"
+                            style="@style/MyPageFollowNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="30"
+                            app:layout_constraintBottom_toTopOf="@+id/textView5"
+                            app:layout_constraintEnd_toEndOf="@+id/textView5"
+                            app:layout_constraintStart_toStartOf="@+id/textView5" />
+
+                        <TextView
+                            android:id="@+id/intro_text"
+                            style="@style/MyPageFollowNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:text="장난끼 많은 애교장이 장남"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="@+id/shapeableImageView"
+                            app:layout_constraintStart_toStartOf="@+id/shapeableImageView"
+                            app:layout_constraintTop_toBottomOf="@+id/shapeableImageView" />
+
+                        <TextView
+                            android:id="@+id/age_kid"
+                            style="@style/MyPageSmallText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="6개월"
+                            app:layout_constraintEnd_toEndOf="@+id/intro_text"
+                            app:layout_constraintStart_toStartOf="@+id/intro_text"
+                            app:layout_constraintTop_toBottomOf="@+id/intro_text" />
+
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <LinearLayout
                         android:id="@+id/nav_category"
                         style="@style/MainAppBarSelect"
                         android:gravity="center_horizontal"
-                        android:paddingBottom="10sp"
                         android:orientation="vertical"
                         android:paddingTop="0sp"
+                        android:paddingBottom="10sp"
                         android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
