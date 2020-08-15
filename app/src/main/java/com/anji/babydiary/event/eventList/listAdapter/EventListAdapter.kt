@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.anji.babydiary.database.event.Event
 import com.anji.babydiary.databinding.EventListItemBinding
+import com.anji.babydiary.event.eventList.EventListClickListener
 import com.bumptech.glide.Glide
 
 class EventListAdapter (val eventListClickListener: EventListClickListener):ListAdapter<Event, EventListAdapter.ViewHolder>(EventListDiffCallback()) {
@@ -23,7 +24,7 @@ class EventListAdapter (val eventListClickListener: EventListClickListener):List
 
     class ViewHolder private constructor(val binding:EventListItemBinding):RecyclerView.ViewHolder(binding.root) {
         fun bind(item:Event, onClickListener: EventListClickListener) {
-
+            binding.event = item
             binding.eventTitle.text = item.title
             Glide.with(binding.root.context).load(item.imgDir).into(binding.eventListImg)
             binding.clickListener = onClickListener
@@ -50,9 +51,4 @@ class EventListDiffCallback: DiffUtil.ItemCallback<Event>() {
         return oldItem == newItem
     }
 
-}
-
-
-class EventListClickListener(val clickListener:(eventIdx:Long)->Unit) {
-    fun onEventClick(event: Event) = clickListener(event.idx)
 }

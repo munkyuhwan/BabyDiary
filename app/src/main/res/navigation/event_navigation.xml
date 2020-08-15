@@ -14,5 +14,9 @@
     <fragment
         android:id="@+id/eventDetail"
         android:name="com.anji.babydiary.event.eventDetail.EventDetail"
-        android:label="EventDetail" />
+        android:label="EventDetail" >
+        <argument
+            android:name="event_idx"
+            app:argType="long" />
+    </fragment>
 </navigation>

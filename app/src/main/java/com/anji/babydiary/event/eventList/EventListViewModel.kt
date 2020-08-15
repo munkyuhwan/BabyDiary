@@ -57,6 +57,11 @@ class EventListViewModel(val database:EventDao, application: Application) : Andr
         selectedImage.value = data?.data!!
         insertData()
     }
+
 }
 
+
+class EventListClickListener(val clickListener:(eventIdx:Long)->Unit) {
+    fun onEventClick(event: Event) = clickListener(event.idx)
+}
 

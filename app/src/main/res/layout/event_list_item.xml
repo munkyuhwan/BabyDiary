@@ -6,7 +6,7 @@
     <data>
         <variable
             name="clickListener"
-            type="com.anji.babydiary.event.eventList.listAdapter.EventListClickListener" />
+            type="com.anji.babydiary.event.eventList.EventListClickListener" />
         <variable
             name="event"
             type="com.anji.babydiary.database.event.Event" />
@@ -15,13 +15,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{() -> clickListener.onEventClick(event)}"
         android:foregroundGravity="center_vertical|fill_vertical|center_horizontal">
 
         <ImageView
             android:id="@+id/event_list_img"
             android:layout_width="match_parent"
             android:layout_height="300sp"
-            android:onClick="@{() -> clickListener.onEventClick(event)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

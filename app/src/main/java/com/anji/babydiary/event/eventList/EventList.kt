@@ -6,23 +6,20 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.database.event.EventDatabase
 import com.anji.babydiary.databinding.EventListFragmentBinding
 import com.anji.babydiary.event.eventList.listAdapter.EventListAdapter
-import com.anji.babydiary.event.eventList.listAdapter.EventListClickListener
 
 class EventList : Fragment() {
 
@@ -43,20 +40,20 @@ class EventList : Fragment() {
 
         binding.eventListViewModel = viewModel
 
-        var adapter = EventListAdapter(EventListClickListener {
-            //Toast.makeText(context, "${it}", Toast.LENGTH_SHORT).show()
+        val adapter = EventListAdapter(EventListClickListener {
+            it?.let {
+                //viewModel.onClickImage(it)
+                findNavController().navigate(EventListDirections.actionEventListToEventDetail(it))
+            }
         })
         binding.eventList.adapter = adapter
+
 
 
 
         binding.lifecycleOwner = viewLifecycleOwner
 
         viewModel.selectAll.observe(viewLifecycleOwner, Observer {
-            Log.e("selectAll","======================================================")
-            Log.e("selectAll","${it}")
-            Log.e("selectAll","======================================================")
-
             it?.let{
                 adapter.submitList(it)
             }
