@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import com.anji.babydiary.R
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
 import com.anji.babydiary.databinding.MyFeedFragmentBinding
+import com.anji.babydiary.myPage.myFeed.myFeedListAdapter.MyFeedListAdapter
 
 class MyFeed : Fragment() {
 
@@ -33,6 +34,12 @@ class MyFeed : Fragment() {
         binding.myFeedViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+
+        val clickAdapter = MyFeedListAdapter(MyFeedClickListener {
+
+        })
+
+        binding.myFeedList.adapter = clickAdapter
 
 
 
