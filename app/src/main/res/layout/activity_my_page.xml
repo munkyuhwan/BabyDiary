@@ -7,30 +7,33 @@
     >
     <data>
         <variable
-            name="navController"
-            type="com.anji.babydiary.gnb.main.NavViewModel" />
+            name="viewModel"
+            type="com.anji.babydiary.myPage.MyPageViewModel" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     tools:context=".myPage.MyPage">
 
     <fragment
         android:id="@+id/myPageNestFragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        app:navGraph="@navigation/my_page_navigation"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="99sp"
-        android:layout_marginBottom="64sp"
+        android:layout_height="wrap_content"
         app:defaultNavHost="true"
+        app:navGraph="@navigation/my_page_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/naviTop"/>
-
+        app:layout_constraintTop_toBottomOf="@+id/include"
+        android:background="#000000"/>
     <include
+        android:id="@+id/include"
         layout="@layout/nav_mypage_layout"
-        bind:navController="@{navController}"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        bind:viewModel="@{viewModel}" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

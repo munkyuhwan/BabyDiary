@@ -1,5 +1,7 @@
 package com.anji.babydiary.common
 
+import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
@@ -9,8 +11,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.anji.babydiary.R
+import com.anji.babydiary.databinding.ActivityMyPageBinding
 import com.anji.babydiary.gnb.main.NavViewModel
 import com.anji.babydiary.gnb.main.NavViewModelFactory
+import com.anji.babydiary.gnb.myPage.MyPageNavViewModel
+import com.anji.babydiary.gnb.myPage.MyPageNavViewModelFactory
 import com.google.android.material.appbar.CollapsingToolbarLayout
 
 abstract class BaseActivity() : AppCompatActivity() {
@@ -44,6 +49,7 @@ abstract class BaseActivity() : AppCompatActivity() {
         layout.isTitleEnabled=false
         layout.setupWithNavController(toolbar, navController, appBarConfiguration.build())
 
+
         navViewModel.isOpen.observe(this, Observer {
             //layout.nav_category.bringToFront()
 
@@ -51,6 +57,10 @@ abstract class BaseActivity() : AppCompatActivity() {
 
     }
 
+    fun myPageNav(nestedHost:Int, binding: ActivityMyPageBinding) {
+
+
+    }
 
     fun bindGNB() {
 

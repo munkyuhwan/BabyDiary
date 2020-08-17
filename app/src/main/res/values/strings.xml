@@ -11,4 +11,6 @@
     <string name="recommendation_text">추천</string>
     <string name="follower">팔로워</string>
     <string name="following">팔로잉</string>
+    <string name="my_keed_today">오늘 우리아이</string>
+    <string name="complete_btn">완료</string>
 </resources>

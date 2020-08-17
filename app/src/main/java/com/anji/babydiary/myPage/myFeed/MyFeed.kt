@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
 import com.anji.babydiary.databinding.MyFeedFragmentBinding
@@ -38,8 +40,12 @@ class MyFeed : Fragment() {
         val clickAdapter = MyFeedListAdapter(MyFeedClickListener {
 
         })
-
         binding.myFeedList.adapter = clickAdapter
+
+        binding.addMyfeed.setOnClickListener {
+            findNavController().navigate(MyFeedDirections.actionMyFeedToMyFeedWrite())
+        }
+
 
 
 

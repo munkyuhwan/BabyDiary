@@ -4,10 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="navController"
-            type="com.anji.babydiary.gnb.main.NavViewModel" />
+            name="viewModel"
+            type="com.anji.babydiary.myPage.MyPageViewModel" />
     </data>
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_main"
         android:layout_width="match_parent"
@@ -18,13 +17,14 @@
         android:background="#ffffff"
         >
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar_layout"
+            android:id="@+id/mypage_collapsing_toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="@{viewModel.isMain()}"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap" >
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/activity_toolbar"
+                android:id="@+id/mypage_activity_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="300sp"
                 android:background="@drawable/main_feed_actionbar"
@@ -39,6 +39,7 @@
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/mypage_main_nav"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -46,7 +47,6 @@
                         android:id="@+id/main_nav_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:onClick="@{() -> navController.onCategoryClicked() }"
                         android:orientation="horizontal"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -172,7 +172,6 @@
                             app:layout_constraintStart_toStartOf="@+id/intro_text"
                             app:layout_constraintTop_toBottomOf="@+id/intro_text" />
 
-
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <LinearLayout
@@ -206,11 +205,75 @@
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.appcompat.widget.Toolbar>
-
-
-
-
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/mypage_write_collapsing_toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.isSub()}"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap" >
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/mypage_write_toolbar"
+                android:background="@drawable/main_feed_actionbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentInsetStart="0dp"
+                android:contentInsetLeft="0dp"
+                android:contentInsetEnd="0dp"
+                android:contentInsetRight="0dp"
+                app:contentInsetEnd="0dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetStart="0dp"
+                >
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/mypage_sub_nav_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="99sp"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.68">
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/myfeed_write"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="15dp"
+                            android:src="@drawable/myfeed_write_btn"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/complete_button"
+                            style="@style/completeBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="15dp"
+                            android:src="@drawable/main_feed_search_icon"
+                            android:text="@string/complete_btn"
+                            app:layout_constraintBottom_toBottomOf="@+id/myfeed_write"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/myfeed_write" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 </layout>

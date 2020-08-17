@@ -6,5 +6,13 @@
     <fragment
         android:id="@+id/myFeed"
         android:name="com.anji.babydiary.myPage.myFeed.MyFeed"
-        android:label="MyFeed" />
+        android:label="MyFeed" >
+        <action
+            android:id="@+id/action_myFeed_to_myFeedWrite"
+            app:destination="@id/myFeedWrite" />
+    </fragment>
+    <fragment
+        android:id="@+id/myFeedWrite"
+        android:name="com.anji.babydiary.myPage.myFeedWrite.MyFeedWrite"
+        android:label="MyFeedWrite" />
 </navigation>

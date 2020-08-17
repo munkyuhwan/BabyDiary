@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".myPage.MyPage"></activity>
+        <activity
+            android:name=".myPage.MyPage"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            ></activity>
         <activity
             android:name=".event.EventActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
@@ -25,7 +28,8 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".mainFeed.MainFeedActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

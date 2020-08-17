@@ -116,6 +116,8 @@
     <style name="InputStyle" >
         <item name="android:paddingTop">10sp</item>
         <item name="android:paddingBottom">10sp</item>
+        <item name="android:paddingLeft">10sp</item>
+        <item name="android:paddingRight">10sp</item>
         <item name="android:layout_marginTop">15sp</item>
         <item name="borderWidth">1sp</item>
         <item name="android:background">@drawable/bottom_border_layout</item>
@@ -163,5 +165,31 @@
     <style name="circleImageView" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="addMyFeed">
+        <item name="android:background">@drawable/add_btn</item>
+        <item name="android:layout_width">30sp</item>
+        <item name="android:layout_height">30sp</item>
+    </style>
+
+    <style name="addBookMark">
+        <item name="android:background">@drawable/bookmark_btn</item>
+        <item name="android:layout_width">20sp</item>
+        <item name="android:layout_height">30sp</item>
+    </style>
+
+    <style name="feedWriteTextLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">#FF8800</item>
+    </style>
+
+    <style name="completeBtn">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">#00000000</item>
     </style>
 </resources>
