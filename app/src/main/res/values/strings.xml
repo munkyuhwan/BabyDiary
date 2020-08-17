@@ -13,4 +13,12 @@
     <string name="following">팔로잉</string>
     <string name="my_keed_today">오늘 우리아이</string>
     <string name="complete_btn">완료</string>
+    <string name="height">키</string>
+    <string name="weight">몸무게</string>
+    <string name="kg">kg</string>
+    <string name="cm">cm</string>
+    <string name="head_size_label">머리둘레</string>
+    <string name="is_shown">비공개</string>
+    <string name="to_wife_label">아내에게 칭찬한마디</string>
+    <string name="to_location">위치</string>
 </resources>

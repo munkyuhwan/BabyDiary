@@ -69,27 +69,184 @@
                 <TextView
                     android:id="@+id/textView3"
                     style="@style/feedWriteTextLabel"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
                     android:text="@string/my_keed_today"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ToggleButton
                     android:id="@+id/open_kid_info"
                     android:layout_width="16sp"
-                    android:layout_height="16sp"
+                    android:layout_height="6sp"
                     android:background="@drawable/arrow_toggle"
-                    android:textOn=""
                     android:textOff=""
+                    android:textOn=""
                     app:layout_constraintBottom_toBottomOf="@+id/textView3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView3" />
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{writeViewModel.isShown()}"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3"
+                    tools:layout_editor_absoluteX="10dp">
+
+                    <TextView
+                        android:id="@+id/height_label"
+                        style="@style/babyInfoLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/height"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/heightInputEditText"
+                        android:layout_width="30sp"
+                        android:layout_height="13sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/height_label"
+                        app:layout_constraintStart_toEndOf="@+id/height_label" />
+
+                    <TextView
+                        android:id="@+id/height_unit_label"
+                        style="@style/babyInfoLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cm"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/heightInputEditText"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/weight_label"
+                        style="@style/babyInfoLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/weight"
+                        app:layout_constraintBottom_toBottomOf="@+id/height_unit_label"
+                        app:layout_constraintStart_toEndOf="@+id/height_unit_label"
+                        app:layout_constraintTop_toTopOf="@+id/height_unit_label" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/weightInputEditText"
+                        android:layout_width="30sp"
+                        android:layout_height="13sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/weight_label"
+                        app:layout_constraintStart_toEndOf="@+id/weight_label" />
+
+                    <TextView
+                        android:id="@+id/weight_unit_label"
+                        style="@style/babyInfoLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/kg"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/weightInputEditText"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/head_size_label"
+                        style="@style/babyInfoLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/head_size_label"
+                        app:layout_constraintBottom_toBottomOf="@+id/weight_unit_label"
+                        app:layout_constraintStart_toEndOf="@+id/weight_unit_label"
+                        app:layout_constraintTop_toTopOf="@+id/weight_unit_label" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/headInputEditText"
+                        android:layout_width="30sp"
+                        android:layout_height="13sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/head_size_label"
+                        app:layout_constraintStart_toEndOf="@+id/head_size_label" />
+
+                    <TextView
+                        android:id="@+id/head_unit_label"
+                        style="@style/babyInfoLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cm"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/headInputEditText"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <CheckBox
+                        android:id="@+id/is_show_btn"
+                        style="@style/isShownCheckBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/is_show"
+                        android:button="@drawable/actionbar_transparent"
+                        android:text="비공개"
+                        app:layout_constraintBottom_toBottomOf="@+id/head_unit_label"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.111"
+                        app:layout_constraintStart_toEndOf="@+id/head_unit_label"
+                        app:layout_constraintTop_toTopOf="@+id/head_unit_label"
+                        app:layout_constraintVertical_bias="0.777" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/toSpouserLayout"
+                style="@style/InputStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/baby_detail_layout">
+
+                <TextView
+                    android:id="@+id/toWifeLabel"
+                    style="@style/feedWriteTextLabel"
+                    android:text="@string/to_wife_label"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/toWife"
+                    android:layout_width="match_parent"
+                    android:layout_height="20sp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/toWifeLabel" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/tolocationLayer"
+                style="@style/InputStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toSpouserLayout">
+
+                <TextView
+                    android:id="@+id/toLocationLabel"
+                    style="@style/feedWriteTextLabel"
+                    android:text="@string/my_keed_today"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/tolocation"
+                    android:layout_width="6sp"
+                    android:layout_height="16sp"
+                    android:background="@drawable/to_location_btn"
+                    app:layout_constraintBottom_toBottomOf="@+id/toLocationLabel"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/toLocationLabel" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

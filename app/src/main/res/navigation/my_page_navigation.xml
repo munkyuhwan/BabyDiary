@@ -14,5 +14,13 @@
     <fragment
         android:id="@+id/myFeedWrite"
         android:name="com.anji.babydiary.myPage.myFeedWrite.MyFeedWrite"
-        android:label="MyFeedWrite" />
+        android:label="MyFeedWrite" >
+        <action
+            android:id="@+id/action_myFeedWrite_to_myFeedWriteLocation"
+            app:destination="@id/myFeedWriteLocation" />
+    </fragment>
+    <fragment
+        android:id="@+id/myFeedWriteLocation"
+        android:name="com.anji.babydiary.myPage.myFeedWriteLocation.MyFeedWriteLocation"
+        android:label="MyFeedWriteLocation" />
 </navigation>

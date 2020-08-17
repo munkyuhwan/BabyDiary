@@ -8,9 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
 import com.anji.babydiary.databinding.MyFeedWriteFragmentBinding
+import com.anji.babydiary.myPage.myFeed.MyFeedDirections
 
 class MyFeedWrite : Fragment() {
 
@@ -32,9 +34,20 @@ class MyFeedWrite : Fragment() {
 
         binding.writeViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        Log.e("complete","complete loading=================================================")
 
 
+        binding.openKidInfo.setOnCheckedChangeListener { compoundButton, b ->
+
+            if (b) {
+                viewModel.isShown.value = View.VISIBLE
+            }else {
+                viewModel.isShown.value = View.GONE
+            }
+        }
+
+        binding.tolocationLayer.setOnClickListener {
+            findNavController().navigate(MyFeedWriteDirections.actionMyFeedWriteToMyFeedWriteLocation())
+        }
 
         return binding.root
     }
