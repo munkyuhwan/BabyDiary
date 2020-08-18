@@ -12,6 +12,7 @@ import com.anji.babydiary.databinding.MyFeedListItemBinding
 import com.anji.babydiary.mainFeed.feedList.FeedClickListener
 import com.anji.babydiary.mainFeed.feedList.listAdapter.MainFeedListAdapter
 import com.anji.babydiary.myPage.myFeed.MyFeedClickListener
+import com.bumptech.glide.Glide
 
 class MyFeedListAdapter(val clickListener:MyFeedClickListener) :ListAdapter<MainFeed, MyFeedListAdapter.ViewHolder>(MyFeedDiffUtilCallback()) {
 
@@ -28,6 +29,8 @@ class MyFeedListAdapter(val clickListener:MyFeedClickListener) :ListAdapter<Main
 
         fun bind(item:MainFeed, onClickListener:MyFeedClickListener) {
             binding.feedData = item
+            binding.clickListener = onClickListener
+            Glide.with(binding.root.context).load(item.imgDir).into(binding.myFeedImages)
         }
 
         companion object {

@@ -75,15 +75,16 @@ class MyPage : BaseActivity() {
 
 
 
+
     }
 
     fun setToolBar(toolbarId:Int, collapsingToolbarLayoutId:Int) {
         layout = findViewById<CollapsingToolbarLayout>(collapsingToolbarLayoutId)
         layout.isTitleEnabled=false
 
-
         toolbar = findViewById<Toolbar>(toolbarId)
         setSupportActionBar(toolbar)
+
         layout.setupWithNavController(toolbar, navController, appBarConfiguration.build())
 
     }

@@ -2,18 +2,18 @@ package com.anji.babydiary.myPage.myFeedWriteLocation
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.createViewModelLazy
+import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.databinding.MyFeedWriteLocationFragmentBinding
 
 class MyFeedWriteLocation : Fragment() {
-
-
 
     private lateinit var viewModel: MyFeedWriteLocationViewModel
 
@@ -30,13 +30,14 @@ class MyFeedWriteLocation : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
+        binding.itemAddress.setOnClickListener{
+            SelectedAddress.address = "우리집"
+            findNavController().popBackStack()
+        }
+
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MyFeedWriteLocationViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+
 
 }

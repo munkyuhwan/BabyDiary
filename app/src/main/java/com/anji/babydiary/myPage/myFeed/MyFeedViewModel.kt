@@ -15,6 +15,7 @@ class MyFeedViewModel(val database:MainFeedDAO, application: Application) : Andr
     private val job = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
 
+    val selectAll = database.selectAll()
     init {
 
     }

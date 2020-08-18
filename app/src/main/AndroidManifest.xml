@@ -17,13 +17,16 @@
         <activity
             android:name=".myPage.MyPage"
             android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="adjustPan"
             ></activity>
         <activity
             android:name=".event.EventActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name=".tips.TipActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".shopping.ShoppingActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
@@ -31,6 +34,7 @@
         <activity
             android:name=".mainFeed.MainFeedActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="adjustPan"
             />
         <activity android:name=".MainActivity">
             <intent-filter>

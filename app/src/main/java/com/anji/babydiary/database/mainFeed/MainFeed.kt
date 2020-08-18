@@ -13,11 +13,22 @@ data class MainFeed(
     @ColumnInfo(name = "feed_title")
     var title:String = "",
     @ColumnInfo(name = "feed_text")
-    var text:String = "",
+    var toSpouser:String = "",
+
+    @ColumnInfo(name = "location")
+    var location:String = "",
+
+    @ColumnInfo(name = "height")
+    var height:Long = 0L,
+    @ColumnInfo(name = "weight")
+    var weight:Long = 0L,
+    @ColumnInfo(name = "head")
+    var head:Long = 0L,
+
     @ColumnInfo(name="write_data")
     var date:Long = 0L,
     @ColumnInfo(name = "like_cnt")
     var likeCnt:Long = 0L,
     @ColumnInfo(name="img_dir")
-    var imgDir:Int = 0
+    var imgDir:String = ""
 )

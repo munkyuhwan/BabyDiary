@@ -145,5 +145,7 @@ class WriteTip : Fragment() {
             pickImageFromGallery();
         }
     }
+
+
 }
 

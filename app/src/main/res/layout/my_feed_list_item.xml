@@ -9,6 +9,9 @@
         <variable
             name="feedData"
             type="com.anji.babydiary.database.mainFeed.MainFeed" />
+        <variable
+            name="clickListener"
+            type="com.anji.babydiary.myPage.myFeed.MyFeedClickListener" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout

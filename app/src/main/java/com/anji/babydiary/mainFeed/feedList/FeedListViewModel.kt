@@ -55,6 +55,7 @@ class FeedListViewModel(
             Log.d("query","=================insert================================")
             Log.d("query","==========================================================")
 
+            /*
             val mainFeed = MainFeed()
             mainFeed.userId = "tester1"
             mainFeed.title = "test title"
@@ -74,7 +75,7 @@ class FeedListViewModel(
             }
 
             mainFeedDAO.insert(mainFeed)
-
+            */
             count++
         }
     }

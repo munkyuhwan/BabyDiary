@@ -20,9 +20,10 @@
     tools:context=".myPage.myFeedWriteLocation.MyFeedWriteLocation">
 
     <LinearLayout
-        android:background="@drawable/shadow"
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="52sp"
+        android:background="@drawable/shadow"
         android:orientation="horizontal"
         android:paddingRight="10sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,21 +32,37 @@
 
         <EditText
             android:id="@+id/inputAddr"
-            android:textColor="#000000"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="9" />
+            android:layout_weight="9"
+            android:textColor="#000000" />
 
         <Button
             style="@style/searchBtn"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:layout_gravity="center_vertical"
+            android:onClick="@{() -> viewModel.getAddressList( inputAddr.getText() )}"
             app:layout_constraintBottom_toBottomOf="@+id/textInputEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textInputEditText"
-            app:layout_constraintTop_toTopOf="parent"
-            android:onClick="@{() -> viewModel.getAddressList( inputAddr.getText() )}"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        tools:layout_editor_absoluteX="12dp">
+
+        <TextView
+            android:id="@+id/item_address"
+            style="@style/WriteProductLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10sp"
+            android:text="우리집"
             />
     </LinearLayout>
 

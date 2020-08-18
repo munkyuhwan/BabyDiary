@@ -30,10 +30,10 @@ class MainFeedListAdapter(val clickListener: FeedClickListener):ListAdapter<Main
             //binding.idx = item
             binding.mainFeed = item
             binding.likeCnt.text = item.likeCnt.toString()
-            binding.feedImg.setImageResource(  item.imgDir )
+            //binding.feedImg.setImageResource(  item.imgDir )
 
 
-            binding.mainFeedText.text = item.text.toString()
+            //binding.mainFeedText.text = item.text.toString()
             binding.userId.text = item.userId.toString()
 
             binding.executePendingBindings()
