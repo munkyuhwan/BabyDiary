@@ -86,7 +86,11 @@ class MyPage : BaseActivity() {
                     viewModel.isMain.value = View.GONE
                     setToolBar(R.id.mypage_write_toolbar, R.id.mypage_write_collapsing_toolbar_layout)
                 }
-
+                "ThemeSetting" -> {
+                    viewModel.isSub.value = View.VISIBLE
+                    viewModel.isMain.value = View.GONE
+                    setToolBar(R.id.mypage_write_toolbar, R.id.mypage_write_collapsing_toolbar_layout)
+                }
             }
         }
 
@@ -137,7 +141,7 @@ class MyPage : BaseActivity() {
                             navController.navigate(MyFeedDirections.actionMyFeedToMyFamily())
                         }
                         3 -> {
-
+                            navController.navigate(MyFeedDirections.actionMyFeedToThemeSetting())
                         }
                         4 -> {
                             val intent: Intent = Intent(this, Resign::class.java)

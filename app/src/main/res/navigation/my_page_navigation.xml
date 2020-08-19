@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_myFeed_to_myFamily"
             app:destination="@id/myFamily" />
+        <action
+            android:id="@+id/action_myFeed_to_themeSetting"
+            app:destination="@id/themeSetting" />
     </fragment>
     <fragment
         android:id="@+id/myFeedWrite"
@@ -49,4 +52,9 @@
         android:name="com.anji.babydiary.myPage.myFamily.MyFamily"
         android:label="MyFamily"
         tools:layout="@layout/my_family_fragment" />
+    <fragment
+        android:id="@+id/themeSetting"
+        android:name="com.anji.babydiary.myPage.themeSetting.ThemeSetting"
+        android:label="ThemeSetting"
+        tools:layout="@layout/theme_setting_fragment" />
 </navigation>
