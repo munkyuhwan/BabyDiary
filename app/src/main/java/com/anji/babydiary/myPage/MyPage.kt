@@ -17,6 +17,7 @@ import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.bottomActivity.BottomMenu
+import com.anji.babydiary.bottomActivity.resign.Resign
 import com.anji.babydiary.common.BaseActivity
 import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.databinding.ActivityMyPageBinding
@@ -116,15 +117,20 @@ class MyPage : BaseActivity() {
 
         if (requestCode == CommonCode.MYPAGE_ACTIVITY_RESULT) {
 
-            Log.e("complete","destination change=================================================")
-            Log.e("complete","${data}")
             data?.let {
                 it.extras?.let {
                     val itemSelected = it.get("selectedItem")
 
                     when (itemSelected) {
+                        0 -> {
+                            navController.navigate(MyFeedDirections.actionMyFeedToMyAlarm())
+                        }
                         1 -> {
                             navController.navigate(MyFeedDirections.actionMyFeedToMyProfile())
+                        }
+                        4 -> {
+                            val intent: Intent = Intent(this, Resign::class.java)
+                            startActivity(intent)
                         }
                     }
 

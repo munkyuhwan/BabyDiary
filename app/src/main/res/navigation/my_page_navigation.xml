@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_myFeed_to_myProfile"
             app:destination="@id/myProfile" />
+        <action
+            android:id="@+id/action_myFeed_to_myAlarm"
+            app:destination="@id/myAlarm" />
     </fragment>
     <fragment
         android:id="@+id/myFeedWrite"
@@ -33,4 +36,9 @@
         android:name="com.anji.babydiary.myPage.profile.MyProfile"
         android:label="MyProfile"
         tools:layout="@layout/profile_fragment" />
+    <fragment
+        android:id="@+id/myAlarm"
+        android:name="com.anji.babydiary.myPage.alarm.MyAlarm"
+        android:label="MyAlarm"
+        tools:layout="@layout/my_alarm_fragment" />
 </navigation>

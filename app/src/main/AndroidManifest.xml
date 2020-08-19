@@ -15,10 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".bottomActivity.BottomMenu"
+            android:name="com.anji.babydiary.bottomActivity.resign.Resign"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             >
         </activity>
+        <activity
+            android:name=".bottomActivity.BottomMenu"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"></activity>
         <activity
             android:name=".myPage.MyPage"
             android:theme="@style/Theme.AppCompat.NoActionBar"

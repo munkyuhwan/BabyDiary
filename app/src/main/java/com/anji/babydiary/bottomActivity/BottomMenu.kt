@@ -39,11 +39,9 @@ class BottomMenu : AppCompatActivity() {
         val viewModelFactory = BottomMenuViewModelFactory(application)
         val viewModel = ViewModelProviders.of(this, viewModelFactory).get(BottomMenuViewModel::class.java)
 
-
         return binding.root
     }
-
-     */
+    */
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
