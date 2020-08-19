@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_myFeed_to_myAlarm"
             app:destination="@id/myAlarm" />
+        <action
+            android:id="@+id/action_myFeed_to_myFamily"
+            app:destination="@id/myFamily" />
     </fragment>
     <fragment
         android:id="@+id/myFeedWrite"
@@ -41,4 +44,9 @@
         android:name="com.anji.babydiary.myPage.alarm.MyAlarm"
         android:label="MyAlarm"
         tools:layout="@layout/my_alarm_fragment" />
+    <fragment
+        android:id="@+id/myFamily"
+        android:name="com.anji.babydiary.myPage.myFamily.MyFamily"
+        android:label="MyFamily"
+        tools:layout="@layout/my_family_fragment" />
 </navigation>

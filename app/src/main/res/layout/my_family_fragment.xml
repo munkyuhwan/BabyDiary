@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".myPage.myFamily.MyFamily"
+    >
+
+    <data>
+        <variable
+            name="familyViewModel"
+            type="com.anji.babydiary.myPage.myFamily.MyFamilyViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="20sp"
+        android:paddingRight="20sp"
+        android:paddingTop="20sp"
+        >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/familyList"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginTop="15sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/familyList">
+
+            <Button
+                android:id="@+id/addIcon"
+                style="@style/famillyAddIcon"
+                app:layout_constraintBottom_toBottomOf="@+id/familyTextField"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/familyTextField" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/familyTextField"
+                style="@style/famillyAddText"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/addIcon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/addCompleteBtn"
+                style="@style/orangeBtn"
+                android:text="@string/add_family_btn"
+                android:onClick="@{() -> familyViewModel.addFamily(familyTextField.getText()) }"
+                app:layout_constraintBottom_toBottomOf="@+id/familyTextField"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/familyTextField" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+
+
