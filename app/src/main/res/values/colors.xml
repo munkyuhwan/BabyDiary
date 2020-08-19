@@ -8,4 +8,8 @@
 
     <color name="mainThemeOrange">#FC941B</color>
     <color name="mainThemeRed">#FF4600</color>
+
+
+    <color name="mainThemeBackgroundLight">#ffffff</color>
+    <color name="mainThemeBackgroundDark">#3B3939</color>
 </resources>

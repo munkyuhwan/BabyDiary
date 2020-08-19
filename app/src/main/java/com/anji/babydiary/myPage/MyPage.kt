@@ -16,6 +16,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.anji.babydiary.R
+import com.anji.babydiary.backgroudnViewModel.BackgroundViewModel
+import com.anji.babydiary.backgroudnViewModel.BackgroundViewModelFactory
 import com.anji.babydiary.bottomActivity.BottomMenu
 import com.anji.babydiary.bottomActivity.resign.Resign
 import com.anji.babydiary.common.BaseActivity
@@ -33,7 +35,9 @@ class MyPage : BaseActivity() {
     private lateinit var layout:CollapsingToolbarLayout
     private lateinit var appBarConfiguration: AppBarConfiguration.Builder
 
-
+    companion object {
+        private lateinit var viewModel: MyPageViewModel
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +49,7 @@ class MyPage : BaseActivity() {
         val application = requireNotNull(this).application
 
         val viewModelFactory = MyPageViewModelFactory(application)
-        val viewModel = ViewModelProviders.of(this, viewModelFactory).get(MyPageViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(MyPageViewModel::class.java)
 
         binding.viewModel = viewModel
 
@@ -116,7 +120,6 @@ class MyPage : BaseActivity() {
         }
 
         layout.setupWithNavController(toolbar, navController, appBarConfiguration.build())
-
 
     }
 

@@ -42,4 +42,7 @@
 
     <string name="family_add_hint">초대 할 양육자 휴대폰 번호</string>
     <string name="add_family_btn">전송하기</string>
+
+    <string name="theme_setting_light">Light</string>
+    <string name="theme_setting_dark">Dark</string>
 </resources>

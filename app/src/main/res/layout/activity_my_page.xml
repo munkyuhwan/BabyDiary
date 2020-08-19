@@ -11,9 +11,10 @@
             type="com.anji.babydiary.myPage.MyPageViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mypageMainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffffff"
+        android:background="#00000000"
         tools:context=".myPage.MyPage">
 
         <fragment

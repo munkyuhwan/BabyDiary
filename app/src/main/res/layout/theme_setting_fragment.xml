@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".myPage.themeSetting.ThemeSetting"
     >
@@ -10,10 +11,64 @@
             type="com.anji.babydiary.myPage.themeSetting.ThemeSettingViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/actionbar_transparent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:onClick="@{() -> themeSettingViewModel.onThemeSelect(0)}"
+            >
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/themeSetting"
+                android:text="@string/theme_setting_light" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/theme_white"
+                />
+            <RadioButton
+                android:id="@+id/radio_light"
+                style="@style/themeRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{themeSettingViewModel.isLightSelected()}"
+                android:onClick="@{() -> themeSettingViewModel.onThemeSelect(0)}"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:onClick="@{() -> themeSettingViewModel.onThemeSelect(1)}"
+            >
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/themeSetting"
+                android:text="@string/theme_setting_dark" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/theme_black"
+                />
+            <RadioButton
+                android:id="@+id/radio_dark"
+                style="@style/themeRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{themeSettingViewModel.isDarkSelected()}"
+                android:onClick="@{() -> themeSettingViewModel.onThemeSelect(1)}"
+                />
+        </LinearLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>

@@ -11,6 +11,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.anji.babydiary.R
+import com.anji.babydiary.backgroudnViewModel.BackgroundViewModel
+import com.anji.babydiary.backgroudnViewModel.BackgroundViewModelFactory
 import com.anji.babydiary.databinding.ActivityMyPageBinding
 import com.anji.babydiary.gnb.main.NavViewModel
 import com.anji.babydiary.gnb.main.NavViewModelFactory
@@ -22,6 +24,12 @@ abstract class BaseActivity() : AppCompatActivity() {
 
     lateinit var toolbar:Toolbar;
     lateinit var navController:NavController
+
+
+    val backgroundViewModelFactory = BackgroundViewModelFactory()
+    val backgroundViewModel = ViewModelProviders.of(this, backgroundViewModelFactory ).get(BackgroundViewModel::class.java)
+
+
 
     fun setNav(nestedHost:Int) {
         var appBarConfiguration: AppBarConfiguration.Builder
