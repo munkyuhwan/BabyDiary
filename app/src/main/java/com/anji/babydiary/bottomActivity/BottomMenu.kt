@@ -63,29 +63,34 @@ class BottomMenu : AppCompatActivity() {
 
         binding.alarmBtn.setOnClickListener {
             selectedItem = 0
+            finishWithResult(selectedItem)
         }
 
         binding.myAccountBtn.setOnClickListener {
             selectedItem = 1
+            finishWithResult(selectedItem)
         }
         binding.spouserBtn.setOnClickListener {
             selectedItem = 2
+            finishWithResult(selectedItem)
         }
         binding.themeSettingBtn.setOnClickListener {
             selectedItem = 3
+            finishWithResult(selectedItem)
         }
         binding.resignBtn.setOnClickListener {
             selectedItem = 4
+            finishWithResult(selectedItem)
         }
 
+    }
+
+    private fun finishWithResult(selectedItem:Int) {
+
         var intentResult: Intent = Intent()
-        intent.putExtra("selectedItem", selectedItem)
-
-
-
+        intentResult.putExtra("selectedItem", selectedItem)
         setResult(Activity.RESULT_OK, intentResult)
-
-
+        finish()
     }
 
 

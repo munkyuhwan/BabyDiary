@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
@@ -21,6 +22,7 @@ import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.databinding.ActivityMyPageBinding
 import com.anji.babydiary.gnb.myPage.MyPageNavViewModel
 import com.anji.babydiary.gnb.myPage.MyPageNavViewModelFactory
+import com.anji.babydiary.myPage.myFeed.MyFeedDirections
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import kotlinx.android.synthetic.main.nav_mypage_layout.view.*
 
@@ -60,8 +62,6 @@ class MyPage : BaseActivity() {
         appBarConfiguration = AppBarConfiguration.Builder(navController.graph)
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            Log.e("complete","destination change=================================================")
-
             when(destination.label.toString()) {
                 "MyFeed" -> {
                     viewModel.isMain.value = View.VISIBLE
@@ -113,14 +113,18 @@ class MyPage : BaseActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == CommonCode.MYPAGE_ACTIVITY_RESULT && resultCode == Activity.RESULT_OK) {
+
+        if (requestCode == CommonCode.MYPAGE_ACTIVITY_RESULT) {
+
+            Log.e("complete","destination change=================================================")
+            Log.e("complete","${data}")
             data?.let {
                 it.extras?.let {
                     val itemSelected = it.get("selectedItem")
 
                     when (itemSelected) {
                         1 -> {
-
+                            navController.navigate(MyFeedDirections.actionMyFeedToMyProfile())
                         }
                     }
 

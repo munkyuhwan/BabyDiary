@@ -31,6 +31,6 @@
     <fragment
         android:id="@+id/myProfile"
         android:name="com.anji.babydiary.myPage.profile.MyProfile"
-        android:label="profile_fragment"
+        android:label="MyProfile"
         tools:layout="@layout/profile_fragment" />
 </navigation>
