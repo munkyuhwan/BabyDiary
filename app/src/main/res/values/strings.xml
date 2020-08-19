@@ -21,4 +21,18 @@
     <string name="is_shown">비공개</string>
     <string name="to_wife_label">아내에게 칭찬한마디</string>
     <string name="to_location">위치</string>
+    <string name="alim">알림</string>
+    <string name="account_setting">계정설정</string>
+    <string name="spouser_setting">공동양육자</string>
+    <string name="theme_setting">테마</string>
+    <string name="resign_btn">탈퇴하기</string>
+
+    <string name="profile_name">계정 (아이 이름, 별명)</string>
+    <string name="profile_pass">비밀번호</string>
+    <string name="profile_pass_check">비밀번호 확인</string>
+    <string name="profile_introduce">소개글</string>
+
+
+
+    <string name="btn_modi_text">수정</string>
 </resources>

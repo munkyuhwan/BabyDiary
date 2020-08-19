@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".bottomActivity.BottomMenu"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menu_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <View
+            android:id="@+id/dim_layer"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_alignParentBottom="true">
+        </View>
+
+
+        <LinearLayout
+            android:id="@+id/menu_layer"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_menu_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingLeft="20sp"
+            android:paddingRight="20sp">
+            <TextView
+                android:id="@+id/alarmBtn"
+                style="@style/menuItemStyle"
+                android:text="@string/alim"
+                />
+            <TextView
+                android:id="@+id/myAccountBtn"
+                style="@style/menuItemStyle"
+                android:text="@string/account_setting"
+                />
+            <TextView
+                android:id="@+id/spouserBtn"
+                style="@style/menuItemStyle"
+                android:text="@string/spouser_setting"
+                />
+            <TextView
+                android:id="@+id/themeSettingBtn"
+                style="@style/menuItemStyle"
+                android:text="@string/theme_setting"
+                />
+            <TextView
+                android:id="@+id/resignBtn"
+                style="@style/menuItemStyle"
+                android:text="@string/resign_btn"
+                />
+
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

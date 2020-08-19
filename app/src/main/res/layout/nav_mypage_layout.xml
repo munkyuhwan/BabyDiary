@@ -70,7 +70,7 @@
                             style="@style/MainFeedCategory"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"
+                            app:layout_constraintEnd_toStartOf="@+id/moreMenuBtn"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -86,8 +86,8 @@
                             app:layout_constraintTop_toTopOf="@+id/name_kid" />
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/appCompatImageView"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/moreMenuBtn"
+                            android:layout_width="20sp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="15dp"
                             android:src="@drawable/mypage_menu"
