@@ -72,7 +72,6 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-scalars:$retrofit_version"
     implementation "com.squareup.moshi:moshi-kotlin:$mosh_version"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
-    compile 'jp.wasabeef:blurry:3.0.0'
 
 
 

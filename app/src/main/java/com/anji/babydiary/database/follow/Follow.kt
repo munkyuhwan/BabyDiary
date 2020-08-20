@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 
 @Entity(tableName = "tbl_follow")
-class Follow (
+data class Follow (
     @PrimaryKey(autoGenerate = true)
     val idx:Long=0L,
     @ColumnInfo(name = "followee")

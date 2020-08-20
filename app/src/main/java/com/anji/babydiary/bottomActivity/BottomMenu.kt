@@ -19,7 +19,6 @@ import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.databinding.ActivityBottomMenuBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions.bitmapTransform
-import jp.wasabeef.blurry.Blurry
 import kotlinx.coroutines.selects.select
 
 

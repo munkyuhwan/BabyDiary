@@ -45,12 +45,11 @@ class FollowListAdapter :ListAdapter<Follow, FollowListAdapter.FollowViewHolder>
 
 class FollowDiffUtilCallback:DiffUtil.ItemCallback<Follow>() {
     override fun areItemsTheSame(oldItem: Follow, newItem: Follow): Boolean {
-        return oldItem.idx == newItem.idx
+        return oldItem == newItem
     }
 
-    @SuppressLint("DiffUtilEquals")
     override fun areContentsTheSame(oldItem: Follow, newItem: Follow): Boolean {
-        return oldItem == newItem
+        return newItem.idx == oldItem.idx
     }
 
 }
