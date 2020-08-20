@@ -26,11 +26,6 @@ abstract class BaseActivity() : AppCompatActivity() {
     lateinit var navController:NavController
 
 
-    val backgroundViewModelFactory = BackgroundViewModelFactory()
-    val backgroundViewModel = ViewModelProviders.of(this, backgroundViewModelFactory ).get(BackgroundViewModel::class.java)
-
-
-
     fun setNav(nestedHost:Int) {
         var appBarConfiguration: AppBarConfiguration.Builder
 

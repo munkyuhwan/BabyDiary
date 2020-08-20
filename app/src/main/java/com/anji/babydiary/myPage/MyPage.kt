@@ -56,7 +56,6 @@ class MyPage : BaseActivity() {
 
         navController = this.findNavController(R.id.myPageNestFragment)
 
-
         var actionBar = supportActionBar
         if (actionBar != null) {
             actionBar.setDisplayShowCustomEnabled(true)
