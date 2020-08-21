@@ -6,10 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.anji.babydiary.R
 import com.anji.babydiary.database.follow.Follow
 import com.anji.babydiary.databinding.FollowListItemBinding
 import com.anji.babydiary.databinding.FollowerFragmentBinding
 import com.anji.babydiary.databinding.MyFeedListItemBinding
+import com.bumptech.glide.Glide
 
 class FollowListAdapter :ListAdapter<Follow, FollowListAdapter.FollowViewHolder>(FollowDiffUtilCallback()) {
 
@@ -26,6 +28,11 @@ class FollowListAdapter :ListAdapter<Follow, FollowListAdapter.FollowViewHolder>
     class FollowViewHolder private constructor(val binding:FollowListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item:Follow) {
+
+            binding.userId.text = item.followee
+            binding.userIntro.text = "소개글글글"
+
+            Glide.with(binding.root.context).load(R.drawable.ic_launcher_background).into(binding.followImg)
 
         }
 

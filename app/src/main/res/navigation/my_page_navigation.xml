@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_myFeed_to_themeSetting"
             app:destination="@id/themeSetting" />
+        <action
+            android:id="@+id/action_myFeed_to_follower"
+            app:destination="@id/follower" />
     </fragment>
     <fragment
         android:id="@+id/myFeedWrite"
@@ -57,4 +60,12 @@
         android:name="com.anji.babydiary.myPage.themeSetting.ThemeSetting"
         android:label="ThemeSetting"
         tools:layout="@layout/theme_setting_fragment" />
+    <fragment
+        android:id="@+id/follower"
+        android:name="com.anji.babydiary.myPage.myFollower.Follower"
+        android:label="Follower" >
+        <argument
+            android:name="type"
+            app:argType="string" />
+    </fragment>
 </navigation>

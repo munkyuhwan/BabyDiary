@@ -116,7 +116,21 @@ class MyPage : BaseActivity() {
                 intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
                 startActivityForResult(intent, CommonCode.MYPAGE_ACTIVITY_RESULT)
             }
+            toolbar.followerLabel.setOnClickListener {
+                navController.navigate(MyFeedDirections.actionMyFeedToFollower("follower"))
+            }
+            toolbar.num_follower.setOnClickListener {
+                navController.navigate(MyFeedDirections.actionMyFeedToFollower("follower"))
+            }
+
+            toolbar.followingLabel.setOnClickListener {
+                navController.navigate(MyFeedDirections.actionMyFeedToFollower("followee"))
+            }
+            toolbar.num_following.setOnClickListener {
+                navController.navigate(MyFeedDirections.actionMyFeedToFollower("followee"))
+            }
         }
+
 
         layout.setupWithNavController(toolbar, navController, appBarConfiguration.build())
 

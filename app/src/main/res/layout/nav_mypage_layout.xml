@@ -108,7 +108,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/name_kid" />
 
                         <TextView
-                            android:id="@+id/textView2"
+                            android:id="@+id/followerLabel"
                             style="@style/MyPageFollowNumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -124,12 +124,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="12"
-                            app:layout_constraintBottom_toTopOf="@+id/textView2"
-                            app:layout_constraintEnd_toEndOf="@+id/textView2"
-                            app:layout_constraintStart_toStartOf="@+id/textView2" />
+                            app:layout_constraintBottom_toTopOf="@+id/followerLabel"
+                            app:layout_constraintEnd_toEndOf="@+id/followerLabel"
+                            app:layout_constraintStart_toStartOf="@+id/followerLabel" />
 
                         <TextView
-                            android:id="@+id/textView5"
+                            android:id="@+id/followingLabel"
                             style="@style/MyPageFollowNumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -145,9 +145,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="30"
-                            app:layout_constraintBottom_toTopOf="@+id/textView5"
-                            app:layout_constraintEnd_toEndOf="@+id/textView5"
-                            app:layout_constraintStart_toStartOf="@+id/textView5" />
+                            app:layout_constraintBottom_toTopOf="@+id/followingLabel"
+                            app:layout_constraintEnd_toEndOf="@+id/followingLabel"
+                            app:layout_constraintStart_toStartOf="@+id/followingLabel" />
 
                         <TextView
                             android:id="@+id/intro_text"

@@ -7,9 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.anji.babydiary.R
 import com.anji.babydiary.database.follow.FollowDatabase
 import com.anji.babydiary.databinding.FollowerFragmentBinding
+import com.anji.babydiary.event.eventDetail.EventDetailArgs
+import com.anji.babydiary.myPage.myFollower.listAdapter.FollowListAdapter
 
 class Follower : Fragment() {
 
@@ -32,6 +35,30 @@ class Follower : Fragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.followerViewModel = viewModel
+
+        val adapter = FollowListAdapter()
+
+        binding.followList.adapter = adapter
+
+        val argument = arguments?.let { EventDetailArgs.fromBundle(it) }
+
+
+        if (argument!!.equals("follower")) {
+            viewModel.selectAllFollowee.observe(viewLifecycleOwner, Observer {
+                it?.let {
+                    adapter.submitList(it)
+                }
+            })
+        }
+
+        if (argument!!.equals("followeee")) {
+            viewModel.selectAllFollower.observe(viewLifecycleOwner, Observer {
+                it?.let {
+                    adapter.submitList(it)
+                }
+            })
+        }
+
 
 
         return binding.root
