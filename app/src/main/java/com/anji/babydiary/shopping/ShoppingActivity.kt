@@ -22,8 +22,28 @@ class ShoppingActivity() : BaseActivity() {
         binding.shopMain = viewModel
 
         setNav(R.id.shoppingNestedHost)
+        setOnclickMenu()
     }
 
+    fun setOnclickMenu() {
+
+        binding.tabPopBtn.setOnClickListener {
+            goEvent()
+        }
+        binding.tabShopBtn.setOnClickListener {
+            goShopping()
+        }
+        binding.tabMainBtn.setOnClickListener {
+            goMain()
+        }
+        binding.tabTipBtn.setOnClickListener {
+            goTip()
+        }
+        binding.tabMyPageBtn.setOnClickListener {
+            goMyPage()
+        }
+
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 

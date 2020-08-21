@@ -14,12 +14,6 @@ class MainFeedViewModel (application:Application):AndroidViewModel(application) 
     var isOpen = MutableLiveData<Boolean>()
     var isVisible = MutableLiveData<Int>()
 
-    var isMain = MutableLiveData<Boolean>()
-    var isPop = MutableLiveData<Boolean>()
-    var isShopping = MutableLiveData<Boolean>()
-    var isTip = MutableLiveData<Boolean>()
-    var isMy = MutableLiveData<Boolean>()
-
     init {
         isOpen.value = false
         isVisible.value = View.GONE

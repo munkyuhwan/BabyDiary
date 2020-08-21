@@ -36,41 +36,29 @@ class MainFeedActivity() : BaseActivity() {
 
         setNav(R.id.feedNestedHost)
 
-        viewModel.isMain.value = true
+        navViewModel.isMain.value = true
 
-
-    }
-
-    /*
-    private fun setNav() {
-
-        val navViewModelFactory = NavViewModelFactory(application)
-        val navViewModel = ViewModelProviders.of(this, navViewModelFactory).get(NavViewModel::class.java)
-        binding.navController = navViewModel
-
-        val navController = this.findNavController(R.id.feedNestedHost)
-        val layout = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar_layout)
-        val toolbar = findViewById<Toolbar>(R.id.feed_activity_toolbar)
-
-        appBarConfiguration = AppBarConfiguration.Builder(navController.graph)
-        layout.isTitleEnabled=false
-        layout.setupWithNavController(toolbar, navController, appBarConfiguration.build())
-
-        navViewModel.isOpen.observe(this, Observer {
-            binding.mainCategory.bringToFront()
-            if (it == true) {
-                binding.naviTop.setBackgroundResource(R.drawable.main_appbar_select)
-            }else {
-                binding.naviTop.setBackgroundResource(R.drawable.main_feed_white)
-            }
-        })
+        setOnclickMenu()
 
     }
-*/
-    fun goShopping() {
 
-        val intent: Intent = Intent(this, TipActivity::class.java)
-        startActivity(intent)
+    fun setOnclickMenu() {
+
+        binding.tabPopBtn.setOnClickListener {
+            goEvent()
+        }
+        binding.tabShopBtn.setOnClickListener {
+            goShopping()
+        }
+        binding.tabMainBtn.setOnClickListener {
+            goMain()
+        }
+        binding.tabTipBtn.setOnClickListener {
+            goTip()
+        }
+        binding.tabMyPageBtn.setOnClickListener {
+            goMyPage()
+        }
 
     }
 

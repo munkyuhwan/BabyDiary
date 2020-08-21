@@ -7,8 +7,8 @@
 
     <data>
         <variable
-            name="mv"
-            type="com.anji.babydiary.mainFeed.MainFeedViewModel" />
+            name="navMv"
+            type="com.anji.babydiary.gnb.main.NavViewModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +35,7 @@
         <RadioButton
             android:id="@+id/tabPopBtn"
             style="@style/GNBPoplular"
-            android:checked="@{mv.isPop()}"
+            android:checked="@{navMv.isPopular()}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -43,6 +43,7 @@
         <RadioButton
             android:id="@+id/tabShopBtn"
             style="@style/GNBShopping"
+            android:checked="@{navMv.isShopping()}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -50,6 +51,7 @@
         <RadioButton
             android:id="@+id/tabMainBtn"
             style="@style/GNBMain"
+            android:checked="@{navMv.isMain()}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -57,6 +59,7 @@
         <RadioButton
             android:id="@+id/tabTipBtn"
             style="@style/GNBTip"
+            android:checked="@{navMv.isTip()}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -64,6 +67,7 @@
         <RadioButton
             android:id="@+id/tabMyPageBtn"
             style="@style/GNBMyPage"
+            android:checked="@{navMv.isMyPage()}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

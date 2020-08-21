@@ -83,17 +83,58 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <include
-            layout="@layout/gnb_layout"
-            bind:mv="@{feedMain}"
-            app:layout_constraintBottom_toBottomOf="@+id/app_bar_main"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent" />
+            <RadioGroup
+                style="@style/GNBWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="76sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:orientation="horizontal"
+                android:gravity="center|right"
+                android:foregroundGravity="center|right"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="right"
+                android:paddingLeft="40sp"
+                >
 
-
-
-
+                <RadioButton
+                    android:id="@+id/tabPopBtn"
+                    style="@style/GNBPoplular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+                <RadioButton
+                    android:id="@+id/tabShopBtn"
+                    style="@style/GNBShopping"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+                <RadioButton
+                    android:id="@+id/tabMainBtn"
+                    style="@style/GNBMain"
+                    android:checked="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+                <RadioButton
+                    android:id="@+id/tabTipBtn"
+                    style="@style/GNBTip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+                <RadioButton
+                    android:id="@+id/tabMyPageBtn"
+                    style="@style/GNBMyPage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+            </RadioGroup>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

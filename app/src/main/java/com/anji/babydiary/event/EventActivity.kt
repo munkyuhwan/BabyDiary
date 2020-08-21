@@ -12,12 +12,13 @@ import com.anji.babydiary.databinding.ActivityEventBinding
 class EventActivity : BaseActivity() {
 
 
+    private lateinit var binding:ActivityEventBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
        // setContentView(R.layout.activity_event)
 
-        val binding = DataBindingUtil.setContentView<ActivityEventBinding>(this, R.layout.activity_event)
+        binding = DataBindingUtil.setContentView<ActivityEventBinding>(this, R.layout.activity_event)
 
         val application = requireNotNull(this).application
 
@@ -44,10 +45,30 @@ class EventActivity : BaseActivity() {
 
         }
 
+        setOnclickMenu()
 
 
     }
 
 
+    fun setOnclickMenu() {
+
+        binding.tabPopBtn.setOnClickListener {
+            goEvent()
+        }
+        binding.tabShopBtn.setOnClickListener {
+            goShopping()
+        }
+        binding.tabMainBtn.setOnClickListener {
+            goMain()
+        }
+        binding.tabTipBtn.setOnClickListener {
+            goTip()
+        }
+        binding.tabMyPageBtn.setOnClickListener {
+            goMyPage()
+        }
+
+    }
 
 }

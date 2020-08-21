@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         Thread.sleep(1000)
-        val intent:Intent = Intent(this, MyPage::class.java)
+        val intent:Intent = Intent(this, MainFeedActivity::class.java)
         startActivity(intent)
         finish()
 

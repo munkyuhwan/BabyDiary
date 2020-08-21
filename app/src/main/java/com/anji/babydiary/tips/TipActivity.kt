@@ -22,6 +22,27 @@ class TipActivity : BaseActivity() {
         binding.tipViewModel = viewModel
 
         setNav(R.id.tipNestedHost)
+        setOnclickMenu()
+    }
+
+
+    fun setOnclickMenu() {
+
+        binding.tabPopBtn.setOnClickListener {
+            goEvent()
+        }
+        binding.tabShopBtn.setOnClickListener {
+            goShopping()
+        }
+        binding.tabMainBtn.setOnClickListener {
+            goMain()
+        }
+        binding.tabTipBtn.setOnClickListener {
+            goTip()
+        }
+        binding.tabMyPageBtn.setOnClickListener {
+            goMyPage()
+        }
 
     }
 }
