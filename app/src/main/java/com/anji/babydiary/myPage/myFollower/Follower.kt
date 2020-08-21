@@ -40,7 +40,7 @@ class Follower : Fragment() {
 
         binding.followList.adapter = adapter
 
-        val argument = arguments?.let { EventDetailArgs.fromBundle(it) }
+        val argument = arguments?.let { FollowerArgs.fromBundle(it) }
 
 
         if (argument!!.equals("follower")) {

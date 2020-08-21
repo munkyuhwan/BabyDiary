@@ -11,7 +11,7 @@ class FollowerViewModelFactory (val database:FollowDao, val application: Applica
 
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(Follower::class.java)) {
+        if (modelClass.isAssignableFrom(FollowerViewModel::class.java)) {
             return FollowerViewModel(database, application) as T
         }
         throw IllegalArgumentException()
