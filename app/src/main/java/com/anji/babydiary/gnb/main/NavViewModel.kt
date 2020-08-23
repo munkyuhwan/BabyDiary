@@ -1,10 +1,13 @@
 package com.anji.babydiary.gnb.main
 
 import android.app.Application
+import android.util.Log
 import android.view.View
+import android.widget.CalendarView
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import java.util.*
 
 class NavViewModel(application: Application):AndroidViewModel(application) {
 
@@ -17,6 +20,7 @@ class NavViewModel(application: Application):AndroidViewModel(application) {
     var isTip = MutableLiveData<Boolean>()
     var isMyPage = MutableLiveData<Boolean>()
 
+
     init {
         isOpen.value = false
         isVisible.value = View.GONE
@@ -26,6 +30,7 @@ class NavViewModel(application: Application):AndroidViewModel(application) {
         isMain.value = false
         isTip.value = false
         isMyPage.value = false
+
     }
 
     fun onCategoryClicked() {
@@ -38,5 +43,6 @@ class NavViewModel(application: Application):AndroidViewModel(application) {
             isVisible.value = View.GONE
         }
     }
+
 
 }

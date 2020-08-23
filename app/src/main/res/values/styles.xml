@@ -339,4 +339,158 @@
     <style name="themeDarkBackground">
         <item name="android:background">#3B3939</item>
     </style>
+
+
+    <style name="calendarBtn" >
+        <item name="android:layout_width">6sp</item>
+        <item name="android:layout_height">16sp</item>
+    </style>
+    <style name="calendarMonth">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CalenderViewCustom" >
+        <item name="colorAccent">@color/mainThemeRed</item>
+        <item name="colorPrimary">@color/calendarTextColor</item>
+        <item name="android:textColor">@color/calendarTextColor</item>
+        <item name="textColorAlertDialogListItem">@color/calendarTextColor</item>
+        <item name="android:headerBackground">@drawable/daily_check_nav_gradient</item>
+    </style>
+
+    <style name="CalenderViewDateCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">@color/calendarTextColor</item>
+        <item name="android:firstDayOfWeek">@color/mainThemeRed</item>
+        <item name="android:unfocusedMonthDateColor">@color/mainThemeRed</item>
+        <item name="android:focusedMonthDateColor">@color/mainThemeRed</item>
+    </style>
+
+    <style name="CalenderViewWeekCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">@color/calendarTextColor</item>
+        <item name="android:firstDayOfWeek">@color/mainThemeRed</item>
+    </style>
+
+
+    <!-- daily check -->
+    <style name="dailyCheckEditBtnText">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:background">@drawable/actionbar_transparent</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:text">@string/daily_check_edit_text</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="dailyCheckBackBtn">
+        <item name="android:background">@drawable/daily_check_back_btn</item>
+        <item name="android:layout_width">10sp</item>
+        <item name="android:layout_height">20sp</item>
+    </style>
+
+    <style name="iconSize" parent="Widget.AppCompat.ImageButton">
+        <item name="android:layout_width">36sp</item>
+        <item name="android:layout_height">36sp</item>
+        <item name="android:layout_marginRight">10sp</item>
+    </style>
+
+    <!-- yellow circle -->
+    <style name="weightIcon" parent="iconSize">
+        <item name="android:background">@drawable/circle_orange</item>
+        <item name="android:src">@drawable/weight_icon</item>
+    </style>
+    <style name="heightIcon" parent="iconSize">
+        <item name="android:background">@drawable/circle_orange</item>
+        <item name="android:src">@drawable/height_icon</item>
+    </style>
+    <style name="headIcon" parent="iconSize">
+        <item name="android:background">@drawable/circle_orange</item>
+        <item name="android:src">@drawable/head_size_icon</item>
+    </style>
+
+    <!-- green circle -->
+    <style name="breastFeedIcon" parent="iconSize">
+        <item name="android:background">@drawable/circle_green</item>
+        <item name="android:src">@drawable/breast_feed_icon</item>
+    </style>
+    <style name="breastPumpFeedIcon" parent="iconSize">
+        <item name="android:background">@drawable/circle_green</item>
+        <item name="android:src">@drawable/breast_icon</item>
+    </style>
+    <style name="breastPumpSaveIcon" parent="iconSize">
+        <item name="android:background">@drawable/circle_green</item>
+        <item name="android:src">@drawable/breast_amount</item>
+    </style>
+    <style name="powerFeedIcon" parent="iconSize">
+        <item name="android:background">@drawable/circle_green</item>
+        <item name="android:src">@drawable/powder_icon</item>
+    </style>
+    <style name="foodIcon" parent="iconSize">
+        <item name="android:background">@drawable/circle_green</item>
+        <item name="android:src">@drawable/food_icon</item>
+    </style>
+    <style name="sideFoodIcon" parent="iconSize">
+        <item name="android:background">@drawable/circle_green</item>
+        <item name="android:src">@drawable/side_food_icon</item>
+    </style>
+
+    <!-- blue circle -->
+    <style name="diaperIcon" parent="iconSize">
+        <item name="android:background">@drawable/circle_blue</item>
+        <item name="android:src">@drawable/diaper_icon</item>
+    </style>
+    <style name="sleepIcon" parent="iconSize">
+        <item name="android:background">@drawable/circle_blue</item>
+        <item name="android:src">@drawable/sleep_icon</item>
+    </style>
+    <style name="bathIcon" parent="iconSize">
+        <item name="android:background">@drawable/circle_blue</item>
+        <item name="android:src">@drawable/bath_icon</item>
+    </style>
+    <style name="playIcon" parent="iconSize">
+        <item name="android:background">@drawable/circle_blue</item>
+        <item name="android:src">@drawable/play_icon</item>
+    </style>
+
+    <!-- purple circle -->
+    <style name="hospitalIcon" parent="iconSize">
+        <item name="android:background">@drawable/circle_purple</item>
+        <item name="android:src">@drawable/hospital_icon</item>
+    </style>
+    <style name="temparatureIcon" parent="iconSize">
+        <item name="android:background">@drawable/circle_purple</item>
+        <item name="android:src">@drawable/temperature_icon</item>
+    </style>
+    <style name="pillIcon" parent="iconSize">
+        <item name="android:background">@drawable/circle_purple</item>
+        <item name="android:src">@drawable/pill_icon</item>
+    </style>
+    <style name="injectionIcon" parent="iconSize">
+        <item name="android:background">@drawable/circle_purple</item>
+        <item name="android:src">@drawable/injection_icon</item>
+    </style>
+
+    <!-- time count layout -->
+
+    <style name="measurementWrapper">
+        <item name="android:background">@drawable/top_left_corner</item>
+    </style>
+
+    <style name="timeCount" >
+        <item name="android:background">@drawable/three_round_background_white</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">#636363</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="dailyCheckCompleteBtn" >
+        <item name="android:layout_width">25sp</item>
+        <item name="android:layout_height">25sp</item>
+        <item name="android:background">@drawable/daily_check_complete</item>
+    </style>
+    <style name="dailyCheckList">
+        <item name="android:background">@drawable/top_left_corner_white</item>
+        <item name="android:paddingTop">20sp</item>
+        <item name="android:paddingRight">20sp</item>
+        <item name="android:paddingLeft">20sp</item>
+    </style>
 </resources>

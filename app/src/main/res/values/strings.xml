@@ -45,4 +45,11 @@
 
     <string name="theme_setting_light">Light</string>
     <string name="theme_setting_dark">Dark</string>
+
+    <!-- daily check -->
+    <string name="daily_check_edit_text">편집</string>
+
+
+    <string name="text_left">왼쪽</string>
+    <string name="text_right">오른쪽</string>
 </resources>

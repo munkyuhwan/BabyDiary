@@ -12,4 +12,8 @@
 
     <color name="mainThemeBackgroundLight">#ffffff</color>
     <color name="mainThemeBackgroundDark">#3B3939</color>
+
+    <color name="mainThemePurple">#8467FF</color>
+
+    <color name="calendarTextColor">#636363</color>
 </resources>

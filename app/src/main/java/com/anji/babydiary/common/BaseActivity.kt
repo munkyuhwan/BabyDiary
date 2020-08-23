@@ -16,7 +16,11 @@ import androidx.navigation.ui.setupWithNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.backgroudnViewModel.BackgroundViewModel
 import com.anji.babydiary.backgroudnViewModel.BackgroundViewModelFactory
+import com.anji.babydiary.common.dailyCheck.DailyCheckViewModel
+import com.anji.babydiary.common.dailyCheck.DailyCheckViewModelFactory
 import com.anji.babydiary.databinding.ActivityMyPageBinding
+import com.anji.babydiary.databinding.DailyCheckCalendarBinding
+import com.anji.babydiary.databinding.DailyCheckDrawerBinding
 import com.anji.babydiary.databinding.GnbLayoutBinding
 import com.anji.babydiary.event.EventActivity
 import com.anji.babydiary.gnb.main.NavViewModel
@@ -40,6 +44,9 @@ abstract class BaseActivity() : AppCompatActivity() {
 
         val navViewModelFactory = NavViewModelFactory(application)
         navViewModel = ViewModelProviders.of(this, navViewModelFactory).get(NavViewModel::class.java)
+        //val navBinding = DataBindingUtil.setContentView<DailyCheckCalendarBinding>(this, R.layout.daily_check_calendar)
+        //navBinding.navController = navViewModel
+
 
         //binding.navController = navViewModel
 
@@ -66,8 +73,14 @@ abstract class BaseActivity() : AppCompatActivity() {
             //layout.nav_category.bringToFront()
         })
 
+    }
 
+    fun setDailyCheckViewModel():DailyCheckViewModel {
+        val dailyCheckViewModelFactory = DailyCheckViewModelFactory(this)
+        val dailyCheckViewModel = ViewModelProviders.of(this, dailyCheckViewModelFactory).get(
+            DailyCheckViewModel::class.java)
 
+        return dailyCheckViewModel
     }
 
     fun goTip() {

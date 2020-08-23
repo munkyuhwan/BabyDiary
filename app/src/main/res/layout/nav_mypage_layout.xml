@@ -16,6 +16,8 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="#ffffff"
         >
+
+
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/mypage_collapsing_toolbar_layout"
             android:layout_width="match_parent"
@@ -36,7 +38,6 @@
                 app:contentInsetLeft="0dp"
                 app:contentInsetRight="0dp"
                 app:contentInsetStart="0dp">
-
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/mypage_main_nav"
@@ -61,9 +62,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:src="@drawable/chatting_icon"
-                            app:layout_constraintBottom_toBottomOf="@+id/main_feed_category"
+                            app:layout_constraintBottom_toBottomOf="@+id/more_category"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/main_feed_category" />
+                            app:layout_constraintTop_toTopOf="@+id/more_category" />
 
                         <TextView
                             android:id="@+id/name_kid"
@@ -91,9 +92,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="15dp"
                             android:src="@drawable/mypage_menu"
-                            app:layout_constraintBottom_toBottomOf="@+id/main_feed_category"
+                            app:layout_constraintBottom_toBottomOf="@+id/more_category"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/main_feed_category" />
+                            app:layout_constraintTop_toTopOf="@+id/more_category" />
 
                         <com.google.android.material.imageview.ShapeableImageView
                             android:id="@+id/shapeableImageView"
@@ -203,7 +204,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20sp" />
                     </LinearLayout>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
