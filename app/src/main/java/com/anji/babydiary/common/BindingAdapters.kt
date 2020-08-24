@@ -32,6 +32,12 @@ object BindingAdapters:AppCompatActivity()  {
         view.setImageResource(DailyCheckListObj.itemSrc[selectedIndex])
     }
 
+    @BindingAdapter("setFormattedDate")
+    @JvmStatic
+    fun setFormattedDate(view:TextView, timeLong:Long) {
+        view.setText(Utils.getDate(timeLong, "YYYY. mm . dd"))
+    }
+
 
 
 }

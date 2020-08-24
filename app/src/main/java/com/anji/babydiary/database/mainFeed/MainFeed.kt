@@ -3,6 +3,7 @@ package com.anji.babydiary.database.mainFeed
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.sql.Date
 
 @Entity(tableName = "tbl_main_feed")
 data class MainFeed(
@@ -26,9 +27,10 @@ data class MainFeed(
     var head:Long = 0L,
 
     @ColumnInfo(name="write_data")
-    var date:Long = 0L,
+    var date:Long = System.currentTimeMillis(),
     @ColumnInfo(name = "like_cnt")
     var likeCnt:Long = 0L,
     @ColumnInfo(name="img_dir")
     var imgDir:String = ""
+
 )

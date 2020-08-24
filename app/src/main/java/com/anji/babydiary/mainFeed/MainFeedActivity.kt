@@ -3,6 +3,7 @@ package com.anji.babydiary.mainFeed
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
@@ -38,7 +39,8 @@ class MainFeedActivity() : BaseActivity() {
         binding.lifecycleOwner = this
         binding.feedMain = viewModel
 
-        setNav(R.id.feedNestedHost)
+        val navViewModel = setNav(R.id.feedNestedHost)
+        binding.navController = navViewModel
 
         navViewModel.isMain.value = true
 
@@ -48,7 +50,12 @@ class MainFeedActivity() : BaseActivity() {
 
         binding.bottomNav = setBottomNav(2)
 
+
+        supportActionBar!!.setDisplayShowCustomEnabled(false)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+        supportActionBar!!.setHomeAsUpIndicator(null)
     }
+
 
     private fun dailyCheckDrawerSetting() {
         binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)

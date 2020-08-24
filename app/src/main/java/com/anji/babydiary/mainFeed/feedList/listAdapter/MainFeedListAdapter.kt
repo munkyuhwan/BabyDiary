@@ -37,6 +37,8 @@ class MainFeedListAdapter(val clickListener: FeedClickListener):ListAdapter<Main
             //binding.idx = item
             binding.mainFeed = item
             binding.likeCnt.text = item.likeCnt.toString()
+            binding.mainFeedText.text = item.title.toString()
+
             //binding.feedImg.setImageResource(  item.imgDir )
 
 

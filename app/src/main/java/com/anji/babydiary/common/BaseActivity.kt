@@ -42,7 +42,7 @@ abstract class BaseActivity() : AppCompatActivity() {
     lateinit var navController:NavController
     lateinit var navViewModel: NavViewModel
 
-    fun setNav(nestedHost:Int) {
+    fun setNav(nestedHost:Int):NavViewModel {
         var appBarConfiguration: AppBarConfiguration.Builder
 
         val navViewModelFactory = NavViewModelFactory(application)
@@ -57,14 +57,17 @@ abstract class BaseActivity() : AppCompatActivity() {
         toolbar = findViewById<Toolbar>(R.id.activity_toolbar)
 
 
-
         setSupportActionBar(toolbar)
-        var actionBar = supportActionBar
-        if (actionBar != null) {
-            actionBar.setDisplayShowCustomEnabled(true)
-            actionBar.setDisplayHomeAsUpEnabled(true)
-            actionBar.setHomeAsUpIndicator(R.drawable.back_btn)
-        }
+
+        //if (actionBar != null) {
+
+
+        supportActionBar!!.setDisplayShowCustomEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setHomeAsUpIndicator(null)
+        //actionBar.setHomeAsUpIndicator(R.drawable.back_btn)
+        //}
 
         appBarConfiguration = AppBarConfiguration.Builder(navController.graph)
         layout.isTitleEnabled=false
@@ -74,7 +77,7 @@ abstract class BaseActivity() : AppCompatActivity() {
         navViewModel.isOpen.observe(this, Observer {
             //layout.nav_category.bringToFront()
         })
-
+        return navViewModel
     }
 
     fun setDailyCheckViewModel():DailyCheckViewModel {

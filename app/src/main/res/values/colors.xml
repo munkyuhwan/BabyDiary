@@ -16,4 +16,6 @@
     <color name="mainThemePurple">#8467FF</color>
 
     <color name="calendarTextColor">#636363</color>
+
+    <color name="feedDetailDateTextColor">#c7c7c7</color>
 </resources>

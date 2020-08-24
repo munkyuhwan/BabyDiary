@@ -39,7 +39,7 @@ class FeedList : Fragment() {
         binding.mainFeed = viewModel
 
         val adapter = MainFeedListAdapter(FeedClickListener {
-            findNavController().navigate(FeedListDirections.actionFeedListToFeedDetail(1))
+            findNavController().navigate(FeedListDirections.actionFeedListToFeedDetail(it))
         })
         binding.feedList.adapter = adapter
 

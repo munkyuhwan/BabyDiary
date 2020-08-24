@@ -493,4 +493,11 @@
         <item name="android:paddingRight">20sp</item>
         <item name="android:paddingLeft">20sp</item>
     </style>
+
+
+    <!-- main feed detail -->
+    <style name="feedDateText">
+        <item name="android:textColor">@color/feedDetailDateTextColor</item>
+        <item name="android:textSize">12sp</item>
+    </style>
 </resources>
