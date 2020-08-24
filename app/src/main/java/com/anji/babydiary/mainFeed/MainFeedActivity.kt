@@ -28,7 +28,6 @@ class MainFeedActivity() : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main_feed)
 
         val application = requireNotNull(this).application
@@ -49,7 +48,7 @@ class MainFeedActivity() : BaseActivity() {
     }
 
     private fun dailyCheckDrawerSetting() {
-        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
         var dailycheckViewModel = setDailyCheckViewModel()
         binding.dailyCheckViewModel = dailycheckViewModel
@@ -68,13 +67,11 @@ class MainFeedActivity() : BaseActivity() {
             dailycheckViewModel.onDaySelect(dayOfWeek)
         }
 
-        binding.drawerInc.drawerWrapper.calendarDetailWrapper.setOnClickListener {
-
-        }
 
         binding.fab.setOnClickListener {
             binding.drawerLayout.openDrawer(Gravity.LEFT)
         }
+
     }
 
     fun setOnclickMenu() {

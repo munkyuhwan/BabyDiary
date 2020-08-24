@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
@@ -200,6 +201,7 @@
             style="@style/iconSize"
             android:visibility="@{dailyCheckViewModel.inputVisibility}"
             android:layout_marginStart="30dp"
+            app:setSelectedIcon = "@{dailyCheckViewModel.selectedIndex}"
             app:layout_constraintBottom_toBottomOf="@+id/inputDataWrapper"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/inputDataWrapper" />
@@ -209,7 +211,8 @@
             android:visibility="@{dailyCheckViewModel.inputVisibility}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:paddingTop="15sp"
+            android:paddingBottom="15sp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -236,7 +239,7 @@
             android:id="@+id/completeBtn"
             style="@style/dailyCheckCompleteBtn"
             android:visibility="@{dailyCheckViewModel.inputVisibility}"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/inputDataWrapper"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/inputDataWrapper" />
@@ -245,11 +248,10 @@
             android:id="@+id/recordList"
             style="@style/dailyCheckList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@{dailyCheckViewModel.resultDataMarginTop}"
+            android:layout_height="1200sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/inputDataWrapper" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

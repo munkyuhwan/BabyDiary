@@ -7,7 +7,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-@Database(entities = [Family::class], version = 1, exportSchema = false)
+@Database(entities = [Family::class], version = 2, exportSchema = false)
 abstract class FamilyDatabase:RoomDatabase()  {
 
     abstract val database:FamilyDao

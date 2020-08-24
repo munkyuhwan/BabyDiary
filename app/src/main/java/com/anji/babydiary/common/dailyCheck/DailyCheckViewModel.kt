@@ -32,51 +32,7 @@ class DailyCheckViewModel (val appCompatActivity: AppCompatActivity):ViewModel()
         "SAT"
     )
 
-    val itemBackground = arrayOf(
-        "@drawable/circle_orange",
-        "@drawable/circle_orange",
-        "@drawable/circle_orange",
 
-        "@drawable/circle_green",
-        "@drawable/circle_green",
-        "@drawable/circle_green",
-        "@drawable/circle_green",
-        "@drawable/circle_green",
-        "@drawable/circle_green",
-
-        "@drawable/circle_blue",
-        "@drawable/circle_blue",
-        "@drawable/circle_blue",
-        "@drawable/circle_blue",
-
-        "@drawable/circle_purple",
-        "@drawable/circle_purple",
-        "@drawable/circle_purple",
-        "@drawable/circle_purple"
-
-        )
-    val itemSrc = arrayOf(
-        "@drawable/weight_icon",
-        "@drawable/height_icon",
-        "@drawable/head_size_icon",
-
-        "@drawable/breast_feed_icon",
-        "@drawable/breast_icon",
-        "@drawable/breast_amount",
-        "@drawable/powder_icon",
-        "@drawable/food_icon",
-        "@drawable/side_food_icon",
-
-        "@drawable/diaper_icon",
-        "@drawable/sleep_icon",
-        "@drawable/bath_icon",
-        "@drawable/play_icon",
-
-        "@drawable/hospital_icon",
-        "@drawable/temperature_icon",
-        "@drawable/pill_icon",
-        "@drawable/injection_icon"
-    )
 
 
     init {

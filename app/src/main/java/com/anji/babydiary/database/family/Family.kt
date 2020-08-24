@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "tbl_family")
-class Family (
+data class Family (
     @PrimaryKey(autoGenerate = true)
     var idx:Long = 0L,
     @ColumnInfo(name = "user_idx")
