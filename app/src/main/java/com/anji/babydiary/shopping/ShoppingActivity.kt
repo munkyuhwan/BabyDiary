@@ -3,11 +3,15 @@ package com.anji.babydiary.shopping
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.ui.AppBarConfiguration
 import com.anji.babydiary.common.BaseActivity
 import com.anji.babydiary.R
 import com.anji.babydiary.databinding.ActivityShoppingBinding
+import kotlinx.android.synthetic.main.daily_check_calendar.view.*
+import java.util.*
 
 class ShoppingActivity() : BaseActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration.Builder
@@ -22,61 +26,39 @@ class ShoppingActivity() : BaseActivity() {
         binding.shopMain = viewModel
 
         setNav(R.id.shoppingNestedHost)
-        setOnclickMenu()
+
+        binding.bottomNav = setBottomNav(1)
+        dailyCheckDrawerSetting()
     }
 
-    fun setOnclickMenu() {
+    private fun dailyCheckDrawerSetting() {
+        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
-        binding.tabPopBtn.setOnClickListener {
-            goEvent()
+        var dailycheckViewModel = setDailyCheckViewModel()
+        binding.dailyCheckViewModel = dailycheckViewModel
+
+
+        binding.drawerInc.drawerWrapper.calendarView.setOnDateChangeListener { calendarView, y, m, d ->
+            val calendar = Calendar.getInstance()
+            calendar[y, m] = d
+            val dayOfWeek = calendar[Calendar.DAY_OF_WEEK]
+
+            dailycheckViewModel.selectedMonth.value = m.toString()
+            dailycheckViewModel.selectedDate.value = ".${d}"
+            dailycheckViewModel.onDaySelect(dayOfWeek)
         }
-        binding.tabShopBtn.setOnClickListener {
-            goShopping()
-        }
-        binding.tabMainBtn.setOnClickListener {
-            goMain()
-        }
-        binding.tabTipBtn.setOnClickListener {
-            goTip()
-        }
-        binding.tabMyPageBtn.setOnClickListener {
-            goMyPage()
+
+
+        binding.fab.setOnClickListener {
+            binding.drawerLayout.openDrawer(Gravity.LEFT)
         }
 
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
 
     }
 
-/*
-     fun setNav() {
-
-        val navViewModelFactory = NavViewModelFactory(application)
-        val navViewModel = ViewModelProviders.of(this, navViewModelFactory).get(NavViewModel::class.java)
-        binding.navController = navViewModel
-
-        val navController = this.findNavController(R.id.shoppingNestedHost)
-        val layout = findViewById<CollapsingToolbarLayout>(R.id.shopping_toolbar_layout)
-        val toolbar = findViewById<Toolbar>(R.id.shopping_activity_toolbar)
-
-        appBarConfiguration = AppBarConfiguration.Builder(navController.graph)
-        layout.isTitleEnabled=false
-        layout.setupWithNavController(toolbar, navController, appBarConfiguration.build())
-
-        navViewModel.isOpen.observe(this, Observer {
-            Log.e("menu clicked","======================================================")
-            Log.e("menu clicked","======================================================")
-            Log.e("menu clicked","======================================================")
-            if (it == true) {
-                binding.naviTop.setBackgroundResource(R.drawable.main_appbar_select)
-            }else {
-                binding.naviTop.setBackgroundResource(R.drawable.main_feed_white)
-            }
-            binding.shoppingCategory.bringToFront()
-        })
-
-    }
-*/
 }

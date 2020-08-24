@@ -1,33 +1,27 @@
 package com.anji.babydiary.myPage
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.Gravity
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.anji.babydiary.R
-import com.anji.babydiary.backgroudnViewModel.BackgroundViewModel
-import com.anji.babydiary.backgroudnViewModel.BackgroundViewModelFactory
 import com.anji.babydiary.bottomActivity.BottomMenu
 import com.anji.babydiary.bottomActivity.resign.Resign
 import com.anji.babydiary.common.BaseActivity
 import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.databinding.ActivityMyPageBinding
-import com.anji.babydiary.gnb.myPage.MyPageNavViewModel
-import com.anji.babydiary.gnb.myPage.MyPageNavViewModelFactory
 import com.anji.babydiary.myPage.myFeed.MyFeedDirections
 import com.google.android.material.appbar.CollapsingToolbarLayout
+import kotlinx.android.synthetic.main.daily_check_calendar.view.*
 import kotlinx.android.synthetic.main.nav_mypage_layout.view.*
+import java.util.*
 
 class MyPage : BaseActivity() {
 
@@ -102,9 +96,34 @@ class MyPage : BaseActivity() {
             }
         }
 
+        dailyCheckDrawerSetting()
+
+        binding.bottomNav = setBottomNav(4)
 
 
 
+    }
+    private fun dailyCheckDrawerSetting() {
+        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+        var dailycheckViewModel = setDailyCheckViewModel()
+        binding.dailyCheckViewModel = dailycheckViewModel
+
+
+        binding.drawerInc.drawerWrapper.calendarView.setOnDateChangeListener { calendarView, y, m, d ->
+            val calendar = Calendar.getInstance()
+            calendar[y, m] = d
+            val dayOfWeek = calendar[Calendar.DAY_OF_WEEK]
+
+            dailycheckViewModel.selectedMonth.value = m.toString()
+            dailycheckViewModel.selectedDate.value = ".${d}"
+            dailycheckViewModel.onDaySelect(dayOfWeek)
+        }
+
+
+        binding.fab.setOnClickListener {
+            binding.drawerLayout.openDrawer(Gravity.LEFT)
+        }
 
     }
 
@@ -136,30 +155,10 @@ class MyPage : BaseActivity() {
             }
         }
 
-
         layout.setupWithNavController(toolbar, navController, appBarConfiguration.build())
-        setOnclickMenu()
+       // setOnclickMenu()
     }
 
-    fun setOnclickMenu() {
-
-        binding.tabPopBtn.setOnClickListener {
-            goEvent()
-        }
-        binding.tabShopBtn.setOnClickListener {
-            goShopping()
-        }
-        binding.tabMainBtn.setOnClickListener {
-            goMain()
-        }
-        binding.tabTipBtn.setOnClickListener {
-            goTip()
-        }
-        binding.tabMyPageBtn.setOnClickListener {
-            goMyPage()
-        }
-
-    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 

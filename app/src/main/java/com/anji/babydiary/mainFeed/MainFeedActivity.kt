@@ -42,9 +42,12 @@ class MainFeedActivity() : BaseActivity() {
 
         navViewModel.isMain.value = true
 
-        setOnclickMenu()
+        //setOnclickMenu()
 
         dailyCheckDrawerSetting()
+
+        binding.bottomNav = setBottomNav(2)
+
     }
 
     private fun dailyCheckDrawerSetting() {
@@ -55,9 +58,6 @@ class MainFeedActivity() : BaseActivity() {
 
 
         binding.drawerInc.drawerWrapper.calendarView.setOnDateChangeListener { calendarView, y, m, d ->
-            Log.e("calendar","================================================")
-            Log.e("calendar","${y}. ${m}. ${d}")
-            Log.e("calendar","================================================")
             val calendar = Calendar.getInstance()
             calendar[y, m] = d
             val dayOfWeek = calendar[Calendar.DAY_OF_WEEK]
@@ -74,25 +74,6 @@ class MainFeedActivity() : BaseActivity() {
 
     }
 
-    fun setOnclickMenu() {
-
-        binding.tabPopBtn.setOnClickListener {
-            goEvent()
-        }
-        binding.tabShopBtn.setOnClickListener {
-            goShopping()
-        }
-        binding.tabMainBtn.setOnClickListener {
-            goMain()
-        }
-        binding.tabTipBtn.setOnClickListener {
-            goTip()
-        }
-        binding.tabMyPageBtn.setOnClickListener {
-            goMyPage()
-        }
-
-    }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

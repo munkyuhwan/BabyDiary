@@ -39,7 +39,6 @@ class FeedList : Fragment() {
         binding.mainFeed = viewModel
 
         val adapter = MainFeedListAdapter(FeedClickListener {
-            //Toast.makeText(application,"${it}", Toast.LENGTH_SHORT).show()
             findNavController().navigate(FeedListDirections.actionFeedListToFeedDetail(1))
         })
         binding.feedList.adapter = adapter

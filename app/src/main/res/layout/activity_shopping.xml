@@ -13,130 +13,83 @@
         <variable
             name="navController"
             type="com.anji.babydiary.gnb.main.NavViewModel" />
+        <variable
+            name="dailyCheckViewModel"
+            type="com.anji.babydiary.common.dailyCheck.DailyCheckViewModel" />
+        <variable
+            name="bottomNav"
+            type="com.anji.babydiary.common.bottomNavigation.BottomNavigationViewModel" />
+
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".mainFeed.MainFeedActivity"
-        android:background="#ffffff">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/naviTop"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:background="#ffffff"
-        >
-
-        <fragment
-            android:id="@+id/shoppingNestedHost"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="99sp"
-            android:layout_marginBottom="64sp"
-            app:defaultNavHost="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/naviTop"
-            app:navGraph="@navigation/shopping_navigation" />
-
-
-        <include
-            layout="@layout/nav_layout"
-            bind:navController="@{navController}"/>
-
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+        android:fitsSystemWindows="true"
+        tools:openDrawer="start">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/naviTop"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="#ffffff"
+            >
 
-            <RadioGroup
-                style="@style/GNBWrapper"
+            <fragment
+                android:id="@+id/shoppingNestedHost"
+                android:name="androidx.navigation.fragment.NavHostFragment"
                 android:layout_width="match_parent"
-                android:layout_height="76sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="99sp"
+                android:layout_marginBottom="64sp"
+                app:defaultNavHost="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:orientation="horizontal"
-                android:gravity="center|right"
-                android:foregroundGravity="center|right"
-                android:layout_alignParentLeft="true"
-                android:layout_gravity="right"
-                android:paddingLeft="40sp"
-                >
+                app:layout_constraintTop_toBottomOf="@+id/naviTop"
+                app:navGraph="@navigation/shopping_navigation" />
 
-                <RadioButton
-                    android:id="@+id/tabPopBtn"
-                    style="@style/GNBPoplular"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    />
-                <RadioButton
-                    android:id="@+id/tabShopBtn"
-                    style="@style/GNBShopping"
-                    android:checked="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    />
-                <RadioButton
-                    android:id="@+id/tabMainBtn"
-                    style="@style/GNBMain"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    />
-                <RadioButton
-                    android:id="@+id/tabTipBtn"
-                    style="@style/GNBTip"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    />
-                <RadioButton
-                    android:id="@+id/tabMyPageBtn"
-                    style="@style/GNBMyPage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    />
-            </RadioGroup>
+
+            <include
+                layout="@layout/nav_layout"
+                bind:navController="@{navController}"/>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_margin="16dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/mainThemeRed"
+                android:src="@drawable/add_btn"
+                app:layout_constraintBottom_toBottomOf="@+id/shoppingNestedHost"
+                app:layout_constraintEnd_toEndOf="@+id/naviTop" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <!-- androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
 
         <include
-            layout="@layout/gnb_layout"
-            bind:mv="@{feedMain}"
-            app:layout_constraintBottom_toBottomOf="@+id/app_bar_main"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent" />
+            layout="@layout/bottom_navigation_tab"
+            app:bottomNav = "@{bottomNav}"
+            />
 
+        <include
+            android:id="@+id/drawer_inc"
+            bind:dailyCheckViewModel = "@{dailyCheckViewModel}"
+            layout="@layout/daily_check_drawer"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
+    </androidx.drawerlayout.widget.DrawerLayout>
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout -->
 
 </layout>
 

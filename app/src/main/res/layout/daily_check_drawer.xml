@@ -6,9 +6,6 @@
 
     <data>
         <variable
-            name="feedMain"
-            type="com.anji.babydiary.mainFeed.MainFeedViewModel" />
-        <variable
             name="dailyCheckViewModel"
             type="com.anji.babydiary.common.dailyCheck.DailyCheckViewModel" />
 
@@ -32,14 +29,12 @@
             layout="@layout/daily_check_calendar"
             android:visibility="@{dailyCheckViewModel.calendarVisibility}"
             bind:dailyCheckViewModel="@{dailyCheckViewModel}"
-            bind:feedMain="@{feedMain}"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="23dp" />
 
         <include
             android:id="@+id/calender_detail"
             bind:dailyCheckViewModel = "@{dailyCheckViewModel}"
-            bind:feedMain = "@{feedMain}"
             layout="@layout/daily_check_detail"
             android:visibility="@{dailyCheckViewModel.detailVisibility}"
             />

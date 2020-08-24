@@ -3,11 +3,15 @@ package com.anji.babydiary.event
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProviders
 import com.anji.babydiary.R
 import com.anji.babydiary.common.BaseActivity
 import com.anji.babydiary.databinding.ActivityEventBinding
+import kotlinx.android.synthetic.main.daily_check_calendar.view.*
+import java.util.*
 
 class EventActivity : BaseActivity() {
 
@@ -45,30 +49,36 @@ class EventActivity : BaseActivity() {
 
         }
 
-        setOnclickMenu()
+        //setOnclickMenu()
+        dailyCheckDrawerSetting()
+        binding.bottomNav = setBottomNav(0)
 
+    }
+
+    private fun dailyCheckDrawerSetting() {
+        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+        var dailycheckViewModel = setDailyCheckViewModel()
+        binding.dailyCheckViewModel = dailycheckViewModel
+
+
+        binding.drawerInc.drawerWrapper.calendarView.setOnDateChangeListener { calendarView, y, m, d ->
+            val calendar = Calendar.getInstance()
+            calendar[y, m] = d
+            val dayOfWeek = calendar[Calendar.DAY_OF_WEEK]
+
+            dailycheckViewModel.selectedMonth.value = m.toString()
+            dailycheckViewModel.selectedDate.value = ".${d}"
+            dailycheckViewModel.onDaySelect(dayOfWeek)
+        }
+
+
+        binding.fab.setOnClickListener {
+            binding.drawerLayout.openDrawer(Gravity.LEFT)
+        }
 
     }
 
 
-    fun setOnclickMenu() {
-
-        binding.tabPopBtn.setOnClickListener {
-            goEvent()
-        }
-        binding.tabShopBtn.setOnClickListener {
-            goShopping()
-        }
-        binding.tabMainBtn.setOnClickListener {
-            goMain()
-        }
-        binding.tabTipBtn.setOnClickListener {
-            goTip()
-        }
-        binding.tabMyPageBtn.setOnClickListener {
-            goMyPage()
-        }
-
-    }
 
 }

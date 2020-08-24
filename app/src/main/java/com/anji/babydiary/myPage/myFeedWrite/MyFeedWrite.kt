@@ -22,6 +22,7 @@ import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
 import com.anji.babydiary.databinding.MyFeedWriteFragmentBinding
 import com.anji.babydiary.myPage.myFeed.MyFeedDirections
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.nav_mypage_layout.*
 
 class MyFeedWrite : Fragment() {
@@ -45,7 +46,6 @@ class MyFeedWrite : Fragment() {
 
         binding.writeViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-
 
         binding.openKidInfo.setOnCheckedChangeListener { compoundButton, b ->
 
@@ -78,6 +78,11 @@ class MyFeedWrite : Fragment() {
             }
         })
 
+        viewModel.selectedImage.observe(viewLifecycleOwner, Observer {
+            it?.let { url ->
+                Glide.with(application).load(url).into(binding.myFeedImage)
+            }
+        })
 
         return binding.root
     }

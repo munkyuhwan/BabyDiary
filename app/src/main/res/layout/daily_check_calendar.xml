@@ -5,9 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="feedMain"
-            type="com.anji.babydiary.mainFeed.MainFeedViewModel" />
-        <variable
             name="dailyCheckViewModel"
             type="com.anji.babydiary.common.dailyCheck.DailyCheckViewModel" />
     </data>

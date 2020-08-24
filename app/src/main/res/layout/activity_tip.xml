@@ -12,11 +12,22 @@
         <variable
             name="navController"
             type="com.anji.babydiary.gnb.main.NavViewModel" />
+        <variable
+            name="dailyCheckViewModel"
+            type="com.anji.babydiary.common.dailyCheck.DailyCheckViewModel" />
+        <variable
+            name="bottomNav"
+            type="com.anji.babydiary.common.bottomNavigation.BottomNavigationViewModel" />
+
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".tips.TipActivity">
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".tips.TipActivity"
+        android:background="#ffffff"
+        android:fitsSystemWindows="true"
+        tools:openDrawer="start">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/naviTop"
             android:layout_width="match_parent"
@@ -46,68 +57,32 @@
             <include
                 layout="@layout/nav_layout"
                 bind:navController="@{navController}"/>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_margin="16dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/mainThemeRed"
+                android:src="@drawable/add_btn"
+                app:layout_constraintBottom_toBottomOf="@+id/tipNestedHost"
+                app:layout_constraintEnd_toEndOf="@+id/naviTop" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+        <include
+            layout="@layout/bottom_navigation_tab"
+            app:bottomNav = "@{bottomNav}"
+            />
 
-            <RadioGroup
-                style="@style/GNBWrapper"
-                android:layout_width="match_parent"
-                android:layout_height="76sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:orientation="horizontal"
-                android:gravity="center|right"
-                android:foregroundGravity="center|right"
-                android:layout_alignParentLeft="true"
-                android:layout_gravity="right"
-                android:paddingLeft="40sp"
-                >
+        <include
+            android:id="@+id/drawer_inc"
+            bind:dailyCheckViewModel = "@{dailyCheckViewModel}"
+            layout="@layout/daily_check_drawer"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-                <RadioButton
-                    android:id="@+id/tabPopBtn"
-                    style="@style/GNBPoplular"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    />
-                <RadioButton
-                    android:id="@+id/tabShopBtn"
-                    style="@style/GNBShopping"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    />
-                <RadioButton
-                    android:id="@+id/tabMainBtn"
-                    style="@style/GNBMain"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    />
-                <RadioButton
-                    android:id="@+id/tabTipBtn"
-                    style="@style/GNBTip"
-                    android:checked="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    />
-                <RadioButton
-                    android:id="@+id/tabMyPageBtn"
-                    style="@style/GNBMyPage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    />
-            </RadioGroup>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
 </layout>

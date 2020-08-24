@@ -9,7 +9,14 @@ import com.anji.babydiary.R
 import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.databinding.MainFeedListItemBinding
 import com.anji.babydiary.mainFeed.feedList.FeedClickListener
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.BitmapImageViewTarget
 import com.google.android.material.shape.CornerFamily
+import com.google.android.material.shape.RoundedCornerTreatment
+import com.google.android.material.shape.ShapePath
 
 
 class MainFeedListAdapter(val clickListener: FeedClickListener):ListAdapter<MainFeed, MainFeedListAdapter.ViewHolder>(ResultListDiffCallback()) {
@@ -31,6 +38,16 @@ class MainFeedListAdapter(val clickListener: FeedClickListener):ListAdapter<Main
             binding.mainFeed = item
             binding.likeCnt.text = item.likeCnt.toString()
             //binding.feedImg.setImageResource(  item.imgDir )
+
+
+
+            Glide.with(binding.root.context)
+                .load(item.imgDir)
+                .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
+                //.apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(20)))
+                //.apply( RequestOptions.bitmapTransform(RoundedCorners(40)))
+                //.roundedCorners(getApplicationContext(), 5)
+                .into(binding.feedImg)
 
 
             //binding.mainFeedText.text = item.text.toString()

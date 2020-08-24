@@ -16,6 +16,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.backgroudnViewModel.BackgroundViewModel
 import com.anji.babydiary.backgroudnViewModel.BackgroundViewModelFactory
+import com.anji.babydiary.common.bottomNavigation.BottomNavigationViewModel
+import com.anji.babydiary.common.bottomNavigation.BottomNavigationViewModelFactory
 import com.anji.babydiary.common.dailyCheck.DailyCheckViewModel
 import com.anji.babydiary.common.dailyCheck.DailyCheckViewModelFactory
 import com.anji.babydiary.databinding.ActivityMyPageBinding
@@ -32,6 +34,7 @@ import com.anji.babydiary.myPage.MyPage
 import com.anji.babydiary.shopping.ShoppingActivity
 import com.anji.babydiary.tips.TipActivity
 import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 abstract class BaseActivity() : AppCompatActivity() {
 
@@ -46,7 +49,6 @@ abstract class BaseActivity() : AppCompatActivity() {
         navViewModel = ViewModelProviders.of(this, navViewModelFactory).get(NavViewModel::class.java)
         //val navBinding = DataBindingUtil.setContentView<DailyCheckCalendarBinding>(this, R.layout.daily_check_calendar)
         //navBinding.navController = navViewModel
-
 
         //binding.navController = navViewModel
 
@@ -83,40 +85,39 @@ abstract class BaseActivity() : AppCompatActivity() {
         return dailyCheckViewModel
     }
 
-    fun goTip() {
+    fun setBottomNav(idx:Int):BottomNavigationViewModel {
+        val bottomNavViewModelFactory = BottomNavigationViewModelFactory(this, idx)
+        val bottomNavViewModel = ViewModelProviders.of(this, bottomNavViewModelFactory).get(BottomNavigationViewModel::class.java)
+        return bottomNavViewModel
+    }
+
+
+    fun eventIntent() {
+        val intent: Intent = Intent(this, EventActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun tipIntent() {
         val intent: Intent = Intent(this, TipActivity::class.java)
         startActivity(intent)
-
     }
-    fun goShopping() {
+    fun shoppingIntent() {
 
         val intent: Intent = Intent(this, ShoppingActivity::class.java)
         startActivity(intent)
 
     }
 
-    fun goMain() {
+    fun mainIntent() {
 
         val intent: Intent = Intent(this, MainFeedActivity::class.java)
         startActivity(intent)
 
     }
 
-    fun goEvent() {
-
-        val intent: Intent = Intent(this, EventActivity::class.java)
-        startActivity(intent)
-
-    }
-
-    fun goMyPage() {
-
+    fun myPageIntent() {
         val intent: Intent = Intent(this, MyPage::class.java)
         startActivity(intent)
-
-    }
-    fun myPageNav(nestedHost:Int, binding: ActivityMyPageBinding) {
-
 
     }
 

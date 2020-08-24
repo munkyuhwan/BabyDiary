@@ -63,12 +63,11 @@
             android:layout_height="149dp"
             android:contentDescription="@string/usericon"
             android:radius="30sp"
-            android:scaleType="centerCrop"
+            android:background="@drawable/round_bottom_left"
             android:src="@drawable/sample_1"
             android:foregroundGravity="center_horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <Button
             android:id="@+id/button"
