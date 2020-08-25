@@ -16,7 +16,7 @@ import com.anji.babydiary.database.mainFeed.MainFeedDatabase
 import com.anji.babydiary.databinding.FeedDetailFragmentBinding
 import com.bumptech.glide.Glide
 
-class FeedDetail : Fragment() {
+class MyFeedDetail : Fragment() {
 
     private lateinit var viewModel: FeedDetailViewModel
 
@@ -25,7 +25,7 @@ class FeedDetail : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val argment = arguments?.let { FeedDetailArgs.fromBundle(it) }
+        val argment = arguments?.let { MyFeedDetailArgs.fromBundle(it) }
 
         val idx = argment!!.feedIdx
 
@@ -63,7 +63,7 @@ class FeedDetail : Fragment() {
         binding.commentBtn.setOnClickListener {
             //findNavController().navigate(FeedDetailDirections.actionFeedDetailFromMyPageToCommentFromMyFeed(idx) )
 
-            findNavController().navigate(FeedDetailDirections.actionFeedDetailToComment(idx) )
+            findNavController().navigate(MyFeedDetailDirections.actionMyFeedDetailToComment3(idx) )
 
 
 

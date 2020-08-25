@@ -9,7 +9,7 @@ import com.anji.babydiary.database.mainFeed.MainFeedDatabase
 import java.lang.IllegalArgumentException
 
 
-class FeedDetailViewModelFactory(val idx:Long, val database:MainFeedDAO, val likeDatabase:LikesDao):ViewModelProvider.Factory  {
+class MyFeedDetailViewModelFactory(val idx:Long, val database:MainFeedDAO, val likeDatabase:LikesDao):ViewModelProvider.Factory  {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(FeedDetailViewModel::class.java)) {
             return FeedDetailViewModel(idx, database, likeDatabase) as T

@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_myFeed_to_follower"
             app:destination="@id/follower" />
+        <action
+            android:id="@+id/action_myFeed_to_myFeedDetail"
+            app:destination="@id/myFeedDetail" />
     </fragment>
     <fragment
         android:id="@+id/myFeedWrite"
@@ -67,5 +70,24 @@
         <argument
             android:name="type"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/myFeedDetail"
+        android:name="com.anji.babydiary.mainFeed.feedDetail.MyFeedDetail"
+        android:label="MyFeedDetail" >
+        <argument
+            android:name="feedIdx"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_myFeedDetail_to_comment3"
+            app:destination="@id/comment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/comment3"
+        android:name="com.anji.babydiary.comment.Comment"
+        android:label="Comment" >
+        <argument
+            android:name="feedIdx"
+            app:argType="long" />
     </fragment>
 </navigation>

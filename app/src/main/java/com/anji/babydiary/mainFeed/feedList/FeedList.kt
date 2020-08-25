@@ -42,7 +42,6 @@ class FeedList : Fragment() {
             findNavController().navigate(FeedListDirections.actionFeedListToFeedDetail(it))
         })
         binding.feedList.adapter = adapter
-
         binding.setLifecycleOwner(this)
 
         viewModel.selectAll()

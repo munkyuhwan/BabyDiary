@@ -11,25 +11,62 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".mainFeed.feedDetail.FeedDetail">
+        tools:context=".mainFeed.feedDetail.MyFeedDetail">
+
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/myFeedImage"
             android:layout_width="match_parent"
             android:layout_height="325sp"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+        <CheckBox
+            android:id="@+id/like_checkbox"
+            style="@style/likeStyle"
+            android:layout_width="14sp"
+            android:layout_height="14sp"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toBottomOf="@+id/myFeedImage"
+            app:layout_constraintStart_toStartOf="parent"
+            android:onClick="@{() -> feedViewModel.onLikeButtonClicked() }"/>
+
+        <Button
+            android:id="@+id/comment_btn"
+            style="@style/CommentButton"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toBottomOf="@+id/myFeedImage"
+            app:layout_constraintStart_toEndOf="@+id/like_checkbox" />
+
+        <TextView
+            android:id="@+id/vibe"
+            style="@style/vibeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="공감 0개"
+            app:layout_constraintStart_toStartOf="@+id/like_checkbox"
+            app:layout_constraintTop_toBottomOf="@+id/like_checkbox" />
 
         <ScrollView
+            android:id="@+id/scrollView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/myFeedImage"
+            android:layout_marginTop="12dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myFeedImage">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingLeft="20sp"
+                android:paddingRight="20sp">
 
                 <TextView
                     android:id="@+id/written_date"
@@ -40,6 +77,85 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/babyWeight"
+                    style="@style/numberText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="110dp"
+                    android:layout_marginTop="20dp"
+                    android:text="7.0"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/written_date"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/babyWeightUnit"
+                    style="@style/feedDateText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/unit_kg"
+                    app:layout_constraintBottom_toBottomOf="@+id/babyWeight"
+                    app:layout_constraintStart_toEndOf="@+id/babyWeight" />
+
+                <TextView
+                    android:id="@+id/babyHeight"
+                    style="@style/numberText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="110dp"
+                    android:text="80"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/written_date"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/babyHeightUnit"
+                    style="@style/feedDateText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/unit_cm"
+                    app:layout_constraintBottom_toBottomOf="@+id/babyHeight"
+                    app:layout_constraintStart_toEndOf="@+id/babyHeight" />
+
+                <TextView
+                    android:id="@+id/feedText"
+                    style="@style/feedDateText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="asdfjaisodfhaiusdhfahdsfiouahsdfiulhasdfiluh liashdfiul"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/babyWeight" />
+
+                <TextView
+                    android:id="@+id/toSpouserLabel"
+                    style="@style/feedWriteTextLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/myFeedToSpouser"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/feedText" />
+
+                <TextView
+                    android:id="@+id/toSpouser"
+                    style="@style/feedDateText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="asdfjaisodfhaiusdhfahdsfiouahsdfiulhasdfiluh liashdfiul"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/toSpouserLabel" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

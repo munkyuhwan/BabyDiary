@@ -11,7 +11,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.Main
 import okhttp3.Dispatcher
 
-class FeedDetailViewModel(val idx:Long, val database:MainFeedDAO, val likeDatabase:LikesDao) : ViewModel() {
+class MyFeedDetailViewModel(val idx:Long, val database:MainFeedDAO, val likeDatabase:LikesDao) : ViewModel() {
 
     val select = database.selectSingle(idx)
     val writtenDate = MutableLiveData<String>()

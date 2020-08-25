@@ -52,4 +52,10 @@
 
     <string name="text_left">왼쪽</string>
     <string name="text_right">오른쪽</string>
+
+    <string name="unit_kg">kg</string>
+    <string name="unit_cm">cm</string>
+
+    <string name="myFeedToSpouser">남편/아내에게 한마디</string>
+
 </resources>

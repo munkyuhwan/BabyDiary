@@ -2,6 +2,7 @@ package com.anji.babydiary.myPage
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import androidx.appcompat.widget.Toolbar
@@ -60,6 +61,7 @@ class MyPage : BaseActivity() {
         appBarConfiguration = AppBarConfiguration.Builder(navController.graph)
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            Log.e("currentFragment", "${destination.label.toString()}")
             when(destination.label.toString()) {
                 "MyFeed" -> {
                     viewModel.isMain.value = View.VISIBLE
@@ -89,6 +91,16 @@ class MyPage : BaseActivity() {
                     setToolBar(R.id.mypage_write_toolbar, R.id.mypage_write_collapsing_toolbar_layout)
                 }
                 "Follower" -> {
+                    viewModel.isSub.value = View.VISIBLE
+                    viewModel.isMain.value = View.GONE
+                    setToolBar(R.id.mypage_write_toolbar, R.id.mypage_write_collapsing_toolbar_layout)
+                }
+                "FeedDetailFromMyPage" -> {
+                    viewModel.isSub.value = View.VISIBLE
+                    viewModel.isMain.value = View.GONE
+                    setToolBar(R.id.mypage_write_toolbar, R.id.mypage_write_collapsing_toolbar_layout)
+                }
+                "Comment" -> {
                     viewModel.isSub.value = View.VISIBLE
                     viewModel.isMain.value = View.GONE
                     setToolBar(R.id.mypage_write_toolbar, R.id.mypage_write_collapsing_toolbar_layout)

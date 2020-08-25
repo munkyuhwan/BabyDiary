@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable
+            name="commentViewModel"
+            type="com.anji.babydiary.comment.CommentViewModel" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".comment.Comment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/commentList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingLeft="20sp"
+        android:paddingRight="20sp">
+        <ImageView
+            android:id="@+id/commentUsrIcon"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:src="@drawable/sample_2"
+            android:background="@drawable/circle"
+            />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="37sp"
+            android:background="@drawable/comment_text_layout"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="7sp"
+            android:paddingLeft="7sp"
+            >
+            <EditText
+                android:id="@+id/commentText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="15sp"
+                android:layout_weight="1"
+                android:hint="댓글"
+                android:gravity="center_vertical"
+                android:background="#00000000"
+                android:textColor="#000000"/>
+            <Button
+                android:id="@+id/commentCompleteBtn"
+                android:layout_width="match_parent"
+                android:layout_weight="5"
+                android:layout_height="wrap_content"
+                android:text="게시"
+                android:background="#00000000"
+                android:onClick="@{() -> commentViewModel.completeComment(commentText.getText())}"
+                android:textColor="@color/mainThemeOrange"
+                />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

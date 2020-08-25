@@ -15,9 +15,21 @@
     <fragment
         android:id="@+id/feedDetail"
         android:name="com.anji.babydiary.mainFeed.feedDetail.FeedDetail"
-        android:label="FeedDetail" >
+        android:label="FeedDetail">
         <argument
             android:name="feed_idx"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_feedDetail_to_comment"
+            app:destination="@id/comment" />
+    </fragment>
+    <fragment
+        android:id="@+id/comment"
+        android:name="com.anji.babydiary.comment.Comment"
+        android:label="commentFragment"
+        tools:layout="@layout/comment_fragment" >
+        <argument
+            android:name="feedIdx"
             app:argType="long" />
     </fragment>
 </navigation>

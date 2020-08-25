@@ -14,31 +14,32 @@ import com.anji.babydiary.mainFeed.feedList.listAdapter.MainFeedListAdapter
 import com.anji.babydiary.myPage.myFeed.MyFeedClickListener
 import com.bumptech.glide.Glide
 
-class MyFeedListAdapter(val clickListener:MyFeedClickListener) :ListAdapter<MainFeed, MyFeedListAdapter.ViewHolder>(MyFeedDiffUtilCallback()) {
+class MyFeedListAdapter(val clickListener:MyFeedClickListener) :ListAdapter<MainFeed, MyFeedListAdapter.MyFeedViewHolder>(MyFeedDiffUtilCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyFeedViewHolder {
+        return MyFeedViewHolder.from(parent)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyFeedViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item, clickListener)
     }
 
-    class ViewHolder private constructor(val binding:MyFeedListItemBinding): RecyclerView.ViewHolder(binding.root) {
+    class MyFeedViewHolder private constructor(val binding:MyFeedListItemBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item:MainFeed, onClickListener:MyFeedClickListener) {
-            binding.feedData = item
             binding.clickListener = onClickListener
+            binding.feedData = item
             Glide.with(binding.root.context).load(item.imgDir).into(binding.myFeedImages)
+            binding.executePendingBindings()
         }
 
         companion object {
-            fun from(parent:ViewGroup):ViewHolder {
+            fun from(parent:ViewGroup):MyFeedViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = MyFeedListItemBinding.inflate(layoutInflater, parent, false)
 
-                return MyFeedListAdapter.ViewHolder(binding)
+                return MyFeedViewHolder(binding)
             }
         }
 

@@ -24,7 +24,6 @@ import com.anji.babydiary.myPage.myFeed.myFeedListAdapter.MyFeedListAdapter
 class MyFeed : Fragment() {
 
 
-
     private lateinit var viewModel: MyFeedViewModel
 
     override fun onCreateView(
@@ -38,20 +37,21 @@ class MyFeed : Fragment() {
         val database = MainFeedDatabase.getInstance(application).database
 
         val viewModelFactory = MyFeedViewModelFactory(database, application)
-        val viewModel = ViewModelProviders.of(this, viewModelFactory).get(MyFeedViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(MyFeedViewModel::class.java)
 
         binding.myFeedViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-
         val clickAdapter = MyFeedListAdapter(MyFeedClickListener {
-
+            it?.let {
+                findNavController().navigate(MyFeedDirections.actionMyFeedToMyFeedDetail(it))
+            }
         })
+        binding.myFeedList.adapter = clickAdapter
 
 
         val manager = GridLayoutManager(activity,3)
         binding.myFeedList.layoutManager = manager
-        binding.myFeedList.adapter = clickAdapter
 
         binding.addMyfeed.setOnClickListener {
             findNavController().navigate(MyFeedDirections.actionMyFeedToMyFeedWrite())

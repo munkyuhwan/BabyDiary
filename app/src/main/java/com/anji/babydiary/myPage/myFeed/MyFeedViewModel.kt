@@ -24,6 +24,6 @@ class MyFeedViewModel(val database:MainFeedDAO, application: Application) : Andr
 }
 
 class MyFeedClickListener(val clickListener:(feedId:Long)->Unit) {
-    fun clickListener(mainFeed:MainFeed) = clickListener(mainFeed.idx)
+    fun onMyFeedClicked(mainFeed:MainFeed) = clickListener(mainFeed.idx)
 }
 
