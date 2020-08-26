@@ -50,34 +50,21 @@ class EventActivity : BaseActivity() {
         }
 
         //setOnclickMenu()
-        dailyCheckDrawerSetting()
-        binding.bottomNav = setBottomNav(0)
-
-    }
-
-    private fun dailyCheckDrawerSetting() {
-        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
         var dailycheckViewModel = setDailyCheckViewModel()
         binding.dailyCheckViewModel = dailycheckViewModel
 
+        dailyCheckDrawerSetting(
+            binding.drawerLayout,
+            binding.drawerInc.drawerWrapper,
+            binding.fab,
+            dailycheckViewModel
+        )
 
-        binding.drawerInc.drawerWrapper.calendarView.setOnDateChangeListener { calendarView, y, m, d ->
-            val calendar = Calendar.getInstance()
-            calendar[y, m] = d
-            val dayOfWeek = calendar[Calendar.DAY_OF_WEEK]
-
-            dailycheckViewModel.selectedMonth.value = m.toString()
-            dailycheckViewModel.selectedDate.value = ".${d}"
-            dailycheckViewModel.onDaySelect(dayOfWeek)
-        }
-
-
-        binding.fab.setOnClickListener {
-            binding.drawerLayout.openDrawer(Gravity.LEFT)
-        }
+        binding.bottomNav = setBottomNav(0)
 
     }
+
 
 
 

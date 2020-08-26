@@ -2,10 +2,13 @@ package com.anji.babydiary.common
 
 import android.content.Intent
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
@@ -20,10 +23,7 @@ import com.anji.babydiary.common.bottomNavigation.BottomNavigationViewModel
 import com.anji.babydiary.common.bottomNavigation.BottomNavigationViewModelFactory
 import com.anji.babydiary.common.dailyCheck.DailyCheckViewModel
 import com.anji.babydiary.common.dailyCheck.DailyCheckViewModelFactory
-import com.anji.babydiary.databinding.ActivityMyPageBinding
-import com.anji.babydiary.databinding.DailyCheckCalendarBinding
-import com.anji.babydiary.databinding.DailyCheckDrawerBinding
-import com.anji.babydiary.databinding.GnbLayoutBinding
+import com.anji.babydiary.databinding.*
 import com.anji.babydiary.event.EventActivity
 import com.anji.babydiary.gnb.main.NavViewModel
 import com.anji.babydiary.gnb.main.NavViewModelFactory
@@ -35,6 +35,9 @@ import com.anji.babydiary.shopping.ShoppingActivity
 import com.anji.babydiary.tips.TipActivity
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.daily_check_calendar.view.*
+import java.util.*
 
 abstract class BaseActivity() : AppCompatActivity() {
 
@@ -129,6 +132,32 @@ abstract class BaseActivity() : AppCompatActivity() {
     }
 
 
+
+    fun dailyCheckDrawerSetting(
+        drawerLayout:DrawerLayout,
+        drawerWrapper:ConstraintLayout,
+        fab:FloatingActionButton,
+        dailyCheckViewModel: DailyCheckViewModel
+        )
+    {
+        //drawerlayout, dailyCheckVIewModel, drawerWrapper, fab
+
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+
+        drawerWrapper.calendarView.setOnDateChangeListener { calendarView, y, m, d ->
+            val calendar = Calendar.getInstance()
+            calendar[y, m] = d
+            val dayOfWeek = calendar[Calendar.DAY_OF_WEEK]
+            dailyCheckViewModel.selectedMonth.value = m.toString()
+            dailyCheckViewModel.selectedDate.value = ".${d}"
+            dailyCheckViewModel.onDaySelect(dayOfWeek)
+        }
+        fab.setOnClickListener {
+            drawerLayout.openDrawer(Gravity.LEFT)
+        }
+
+    }
 
 
 }

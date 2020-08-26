@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
@@ -125,7 +126,16 @@ class MyPage : BaseActivity() {
             }
         }
 
-        dailyCheckDrawerSetting()
+
+        var dailycheckViewModel = setDailyCheckViewModel()
+        binding.dailyCheckViewModel = dailycheckViewModel
+
+        dailyCheckDrawerSetting(
+            binding.drawerLayout,
+            binding.drawerInc.drawerWrapper,
+            binding.fab,
+            dailycheckViewModel
+        )
 
         binding.bottomNav = setBottomNav(4)
 
@@ -144,9 +154,10 @@ class MyPage : BaseActivity() {
 
         })
 
-
     }
-    private fun dailyCheckDrawerSetting() {
+
+/*
+    private fun dailyCheckDrawerSetting(){
         binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
         var dailycheckViewModel = setDailyCheckViewModel()
@@ -161,16 +172,17 @@ class MyPage : BaseActivity() {
             dailycheckViewModel.selectedMonth.value = m.toString()
             dailycheckViewModel.selectedDate.value = ".${d}"
             dailycheckViewModel.onDaySelect(dayOfWeek)
-        }
 
+        }
 
         binding.fab.setOnClickListener {
             binding.drawerLayout.openDrawer(Gravity.LEFT)
         }
-
-
-
     }
+
+ */
+
+
 
     fun setToolBar(toolbarId:Int, collapsingToolbarLayoutId:Int) {
         layout = findViewById<CollapsingToolbarLayout>(collapsingToolbarLayoutId)
