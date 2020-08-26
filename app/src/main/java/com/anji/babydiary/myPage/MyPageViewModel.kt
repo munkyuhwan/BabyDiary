@@ -4,16 +4,34 @@ import android.app.Application
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.anji.babydiary.database.profile.ProfileDao
+import com.anji.babydiary.database.profile.Profiles
+import kotlinx.coroutines.*
 
-class MyPageViewModel (application: Application):AndroidViewModel(application) {
+class MyPageViewModel (val database: ProfileDao, val idx:Long, application: Application):AndroidViewModel(application) {
 
     var isMain = MutableLiveData<Int>();
     var isSub = MutableLiveData<Int>();
+
+    val job = Job()
+    val uiScope = CoroutineScope(Dispatchers.Main + job)
+
+    val myProfile = MutableLiveData<Profiles>()
 
     init {
         isMain.value = View.GONE
         isSub.value = View.GONE
 
+        uiScope.launch {
+            selectAll()
+        }
+
+    }
+
+    suspend fun selectAll() {
+        withContext(Dispatchers.IO) {
+            myProfile.postValue(database.selectProfile(idx))
+        }
     }
 
 }

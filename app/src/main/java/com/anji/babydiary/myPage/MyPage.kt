@@ -17,8 +17,11 @@ import com.anji.babydiary.bottomActivity.BottomMenu
 import com.anji.babydiary.bottomActivity.resign.Resign
 import com.anji.babydiary.common.BaseActivity
 import com.anji.babydiary.common.CommonCode
+import com.anji.babydiary.database.profile.ProfileDatabase
+import com.anji.babydiary.database.profile.Profiles
 import com.anji.babydiary.databinding.ActivityMyPageBinding
 import com.anji.babydiary.myPage.myFeed.MyFeedDirections
+import com.bumptech.glide.Glide
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import kotlinx.android.synthetic.main.daily_check_calendar.view.*
 import kotlinx.android.synthetic.main.nav_mypage_layout.view.*
@@ -38,12 +41,15 @@ class MyPage : BaseActivity() {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_my_page)
 
+        val idx:Long = 1
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_my_page)
         binding.lifecycleOwner = this
 
         val application = requireNotNull(this).application
+        val database = ProfileDatabase.getInstance(application).database
 
-        val viewModelFactory = MyPageViewModelFactory(application)
+        val viewModelFactory = MyPageViewModelFactory(database, idx, application)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MyPageViewModel::class.java)
 
         binding.viewModel = viewModel
@@ -124,6 +130,20 @@ class MyPage : BaseActivity() {
         binding.bottomNav = setBottomNav(4)
 
 
+        viewModel.myProfile.observe(this, androidx.lifecycle.Observer {
+            it?.let {
+                binding.drawerLayout.num_follower.text = it.follower.toString()
+                binding.drawerLayout.num_following.text = it.following.toString()
+
+                Glide.with(application).load(it.img).into(binding.drawerLayout.shapeableImageView)
+
+                binding.drawerLayout.intro_text.text = it.introduce.toString()
+
+
+            }
+
+        })
+
 
     }
     private fun dailyCheckDrawerSetting() {
@@ -147,6 +167,8 @@ class MyPage : BaseActivity() {
         binding.fab.setOnClickListener {
             binding.drawerLayout.openDrawer(Gravity.LEFT)
         }
+
+
 
     }
 

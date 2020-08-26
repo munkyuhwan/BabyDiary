@@ -519,4 +519,9 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+
+    <style name="editTextStyle">
+        <item name="android:background">@drawable/bottom_border_layout</item>
+    </style>
+
 </resources>
