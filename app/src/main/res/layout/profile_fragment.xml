@@ -43,7 +43,7 @@
             android:layout_width="33sp"
             android:layout_height="33sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"></ImageView>
+            app:layout_constraintEnd_toEndOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -72,8 +72,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/profile_name"
                 android:layout_width="match_parent"
-                android:layout_height="20sp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:textColor="@color/cardview_dark_background"
+                android:text="@{profileViewModel.data.name}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nameLabel" />
@@ -98,8 +100,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/profile_pass"
                 android:layout_width="match_parent"
-                android:layout_height="20sp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:text="@{profileViewModel.data.pass}"
+                android:textColor="@color/cardview_dark_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/passLabel" />
@@ -124,8 +128,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/profile_pass_check"
                 android:layout_width="match_parent"
-                android:layout_height="20sp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:textColor="@color/cardview_dark_background"
+                android:text="@{profileViewModel.data.pass}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/passCheckLabel" />
@@ -150,8 +156,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/profile_introduce"
                 android:layout_width="match_parent"
-                android:layout_height="20sp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:textColor="@color/cardview_dark_background"
+                android:text="@{profileViewModel.data.introduce}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/introduceLabel" />
@@ -164,6 +172,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
+        android:onClick="@{() -> profileViewModel.onSubmitClick(profileName.getText(), profilePass.getText(), profileIntroduce.getText()  )}"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
