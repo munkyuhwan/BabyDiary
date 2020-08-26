@@ -100,6 +100,11 @@ class MyPage : BaseActivity() {
                     viewModel.isMain.value = View.GONE
                     setToolBar(R.id.mypage_write_toolbar, R.id.mypage_write_collapsing_toolbar_layout)
                 }
+                "MyFeedDetail" -> {
+                    viewModel.isSub.value = View.VISIBLE
+                    viewModel.isMain.value = View.GONE
+                    setToolBar(R.id.mypage_write_toolbar, R.id.mypage_write_collapsing_toolbar_layout)
+                }
                 "Comment" -> {
                     viewModel.isSub.value = View.VISIBLE
                     viewModel.isMain.value = View.GONE
