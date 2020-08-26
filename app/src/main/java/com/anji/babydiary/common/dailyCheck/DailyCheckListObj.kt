@@ -1,5 +1,7 @@
 package com.anji.babydiary.common.dailyCheck
 
+import android.opengl.Visibility
+import android.view.View
 import com.anji.babydiary.R
 
 object DailyCheckListObj  {
@@ -48,6 +50,48 @@ object DailyCheckListObj  {
         R.drawable.temperature_icon,
         R.drawable.pill_icon,
         R.drawable.injection_icon
-
     )
+
+    val itemName = arrayOf(
+        "몸무게",
+        "키",
+        "머리둘레",
+        "수유",
+        "유축수유",
+        "유축",
+        "분유",
+        "이유식",
+        "간식",
+        "배변",
+        "수면",
+        "목욕",
+        "놀이",
+        "병원",
+        "체온",
+        "약",
+        "주사/예방접종",
+        "기타"
+    )
+    //true 메모일경우, false 타이머경
+    val itemInput = arrayOf(
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+    )
+
 }

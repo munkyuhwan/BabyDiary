@@ -205,38 +205,52 @@
 
         <LinearLayout
             android:id="@+id/inputDataWrapper"
-            android:visibility="@{dailyCheckViewModel.inputVisibility}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="15sp"
-            android:paddingBottom="15sp"
             android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:foregroundGravity="center_vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
+            app:layout_constraintTop_toTopOf="parent"
+            >
             <TextView
                 android:id="@+id/leftTime"
                 style="@style/timeCount"
+                android:visibility="@{dailyCheckViewModel.isCountDown()}"
                 android:layout_width="51sp"
                 android:layout_height="25sp"
                 android:layout_marginRight="5sp"
+                android:layout_marginTop="15sp"
+                android:layout_marginBottom="15sp"
                 android:text="@string/text_left" />
-
             <TextView
                 android:id="@+id/rightTime"
                 style="@style/timeCount"
+                android:visibility="@{dailyCheckViewModel.isCountDown()}"
                 android:layout_width="51sp"
                 android:layout_height="25sp"
                 android:layout_marginLeft="5sp"
                 android:text="@string/text_right" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/checkMemo"
+                android:layout_width="160sp"
+                android:layout_height="wrap_content"
+                android:visibility="@{dailyCheckViewModel.isMemo()}"
+                android:textSize="17sp"
+                style="@style/InputStyle"
+                android:padding="2sp"
+                android:textColor="@color/calendarTextColor"
+                android:layout_marginTop="14sp"
+                android:layout_marginBottom="14sp"
+                />
         </LinearLayout>
 
         <ImageButton
             android:id="@+id/completeBtn"
             style="@style/dailyCheckCompleteBtn"
-            android:visibility="@{dailyCheckViewModel.inputVisibility}"
             android:layout_marginEnd="20sp"
+            android:onClick="@{() -> dailyCheckViewModel.saveData(checkMemo.getText())}"
             app:layout_constraintBottom_toBottomOf="@+id/inputDataWrapper"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/inputDataWrapper" />

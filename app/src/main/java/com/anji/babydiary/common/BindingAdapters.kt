@@ -45,5 +45,11 @@ object BindingAdapters:AppCompatActivity()  {
         view.setText("공감 ${num}개")
     }
 
+    @BindingAdapter("setCountUp")
+    @JvmStatic
+    fun setCountUp(view:TextView, seconds:Int) {
+
+    }
+
 
 }

@@ -23,6 +23,7 @@ import com.anji.babydiary.common.bottomNavigation.BottomNavigationViewModel
 import com.anji.babydiary.common.bottomNavigation.BottomNavigationViewModelFactory
 import com.anji.babydiary.common.dailyCheck.DailyCheckViewModel
 import com.anji.babydiary.common.dailyCheck.DailyCheckViewModelFactory
+import com.anji.babydiary.database.dailyCheck.DailyCheckDatabase
 import com.anji.babydiary.databinding.*
 import com.anji.babydiary.event.EventActivity
 import com.anji.babydiary.gnb.main.NavViewModel
@@ -84,7 +85,10 @@ abstract class BaseActivity() : AppCompatActivity() {
     }
 
     fun setDailyCheckViewModel():DailyCheckViewModel {
-        val dailyCheckViewModelFactory = DailyCheckViewModelFactory(this)
+
+        val database = DailyCheckDatabase.getInstance(this).database
+
+        val dailyCheckViewModelFactory = DailyCheckViewModelFactory(database, this)
         val dailyCheckViewModel = ViewModelProviders.of(this, dailyCheckViewModelFactory).get(
             DailyCheckViewModel::class.java)
 
@@ -149,8 +153,10 @@ abstract class BaseActivity() : AppCompatActivity() {
             val calendar = Calendar.getInstance()
             calendar[y, m] = d
             val dayOfWeek = calendar[Calendar.DAY_OF_WEEK]
+
+            dailyCheckViewModel.selectedYear.value = y.toString()
             dailyCheckViewModel.selectedMonth.value = m.toString()
-            dailyCheckViewModel.selectedDate.value = ".${d}"
+            dailyCheckViewModel.selectedDate.value = d.toString()
             dailyCheckViewModel.onDaySelect(dayOfWeek)
         }
         fab.setOnClickListener {

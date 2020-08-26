@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.anji.babydiary.database.event.EventDatabase
 
-@Database(entities = [DailyCheck::class], version = 1, exportSchema = false)
+@Database(entities = [DailyCheck::class], version = 3, exportSchema = false)
 abstract class DailyCheckDatabase ():RoomDatabase() {
     abstract val database:DailyCheckDao
 

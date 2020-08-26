@@ -12,11 +12,11 @@ data class DailyCheck (
 
     var user_idx:Long = 0L,
     @ColumnInfo(name = "weight")
-    var weight:Long = 0L,
+    var weight:String = "",
     @ColumnInfo(name = "height")
-    var height:Long = 0L,
+    var height:String = "",
     @ColumnInfo(name = "head")
-    var head:Long = 0L,
+    var head:String = "",
 
     @ColumnInfo(name = "breast_feed_left")
     var breast_feed_left:Long=0L,
@@ -61,8 +61,8 @@ data class DailyCheck (
     var year:Int = 0,
     @ColumnInfo(name = "insert_month")
     var month:Int = 0,
-    @ColumnInfo(name = "insert_day")
-    var day:Int = 0,
+    @ColumnInfo(name = "insert_date")
+    var date:Int = 0,
 
     @ColumnInfo(name = "insert_hour")
     var hour:Int = 0,
