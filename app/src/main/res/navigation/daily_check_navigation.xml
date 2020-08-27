@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/daily_check_navigation"
+    app:startDestination="@id/dailyCheckCalendar2">
+    <fragment
+        android:id="@+id/dailyCheckCalendar2"
+        android:name="com.anji.babydiary.dailyCheck.dailyCheckCalendar.DailyCheckCalendar"
+        android:label="DailyCheckCalendar" >
+        <action
+            android:id="@+id/action_dailyCheckCalendar2_to_dailyCheckWrite"
+            app:destination="@id/dailyCheckWrite" />
+    </fragment>
+    <fragment
+        android:id="@+id/dailyCheckWrite"
+        android:name="com.anji.babydiary.dailyCheck.dailyCheckWrite.DailyCheckWrite"
+        android:label="DailyCheckWrite" >
+        <argument
+            android:name="year"
+            app:argType="string" />
+        <argument
+            android:name="month"
+            app:argType="string" />
+        <argument
+            android:name="date"
+            app:argType="string" />
+    </fragment>
+</navigation>

@@ -8,7 +8,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import com.anji.babydiary.R
 import com.anji.babydiary.common.BaseActivity
 import com.anji.babydiary.databinding.ActivityTipBinding
-import kotlinx.android.synthetic.main.daily_check_calendar.view.*
 import java.util.*
 
 class TipActivity : BaseActivity() {
@@ -28,15 +27,6 @@ class TipActivity : BaseActivity() {
         setNav(R.id.tipNestedHost)
         //setOnclickMenu()
 
-        var dailycheckViewModel = setDailyCheckViewModel()
-        binding.dailyCheckViewModel = dailycheckViewModel
-
-        dailyCheckDrawerSetting(
-            binding.drawerLayout,
-            binding.drawerInc.drawerWrapper,
-            binding.fab,
-            dailycheckViewModel
-        )
         binding.bottomNav = setBottomNav(3)
     }
 

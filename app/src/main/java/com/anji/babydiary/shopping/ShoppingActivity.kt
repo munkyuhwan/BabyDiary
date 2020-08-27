@@ -10,7 +10,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import com.anji.babydiary.common.BaseActivity
 import com.anji.babydiary.R
 import com.anji.babydiary.databinding.ActivityShoppingBinding
-import kotlinx.android.synthetic.main.daily_check_calendar.view.*
 import java.util.*
 
 class ShoppingActivity() : BaseActivity() {
@@ -27,15 +26,6 @@ class ShoppingActivity() : BaseActivity() {
 
         setNav(R.id.shoppingNestedHost)
 
-        var dailycheckViewModel = setDailyCheckViewModel()
-        binding.dailyCheckViewModel = dailycheckViewModel
-
-        dailyCheckDrawerSetting(
-            binding.drawerLayout,
-            binding.drawerInc.drawerWrapper,
-            binding.fab,
-            dailycheckViewModel
-        )
         binding.bottomNav = setBottomNav(1)
 
     }

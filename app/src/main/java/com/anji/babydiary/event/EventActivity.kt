@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.anji.babydiary.R
 import com.anji.babydiary.common.BaseActivity
 import com.anji.babydiary.databinding.ActivityEventBinding
-import kotlinx.android.synthetic.main.daily_check_calendar.view.*
 import java.util.*
 
 class EventActivity : BaseActivity() {
@@ -50,16 +49,6 @@ class EventActivity : BaseActivity() {
         }
 
         //setOnclickMenu()
-
-        var dailycheckViewModel = setDailyCheckViewModel()
-        binding.dailyCheckViewModel = dailycheckViewModel
-
-        dailyCheckDrawerSetting(
-            binding.drawerLayout,
-            binding.drawerInc.drawerWrapper,
-            binding.fab,
-            dailycheckViewModel
-        )
 
         binding.bottomNav = setBottomNav(0)
 

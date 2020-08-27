@@ -1,19 +1,17 @@
-package com.anji.babydiary.common.dailyCheck
+package com.anji.babydiary.dailyCheck
 
-import android.graphics.drawable.Drawable
+import android.app.Application
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.dailyCheck.DailyCheck
 import com.anji.babydiary.database.dailyCheck.DailyCheckDao
-import com.bumptech.glide.load.engine.Resource
 import kotlinx.coroutines.*
-import java.sql.Date
 
-class DailyCheckViewModel (val database:DailyCheckDao ,val appCompatActivity: AppCompatActivity):ViewModel() {
+class DailyCheckViewModel (val database:DailyCheckDao , application: Application):AndroidViewModel(application) {
 
     var selectedYear = MutableLiveData<String>()
     var selectedMonth = MutableLiveData<String>()
@@ -35,7 +33,7 @@ class DailyCheckViewModel (val database:DailyCheckDao ,val appCompatActivity: Ap
     val rightCount = MutableLiveData<Int>()
 
     var dataToday = MutableLiveData<DailyCheck>()
-
+    var allData = database.selectAll()
     val days = arrayOf(
         "",
         "SUN",
@@ -58,12 +56,15 @@ class DailyCheckViewModel (val database:DailyCheckDao ,val appCompatActivity: Ap
         isMemo.value = View.GONE
         isCountDown.value = View.GONE
 
+        Log.e("alldata", "${allData.value}");
 
     }
 
     suspend fun selectToadyData() {
         withContext(Dispatchers.IO) {
-            dataToday.postValue( database.selectByDate(selectedYear.value!!.toInt(), selectedMonth.value!!.toInt(), selectedDate.value!!.toInt()) )
+            Log.e("date","date: ${selectedYear.value!!.toInt()}. ${selectedMonth.value!!.toInt()}.  ${selectedDate.value!!.toInt()}")
+            //dataToday.postValue( database.selectByDate(selectedYear.value!!.toInt(), selectedMonth.value!!.toInt(), selectedDate.value!!.toInt()) )
+
             Log.e("todya","${dataToday.value}")
         }
     }
@@ -123,7 +124,7 @@ class DailyCheckViewModel (val database:DailyCheckDao ,val appCompatActivity: Ap
         Log.e("savedata","memo: ${selectedYear.value}")
         Log.e("savedata","memo: ${selectedMonth.value}")
         Log.e("savedata","memo: ${selectedDate.value}")
-        Log.e("savedata","memo: ${Utils.getDate(System.currentTimeMillis(), "YYYY-mm-dd HH:mm")}")
+        Log.e("savedata","memo: ${Utils.getDate(System.currentTimeMillis(), "YYYY-MM-dd HH:mm")}")
         Log.e("savedata","memo: ${currentHour}. ${currentMinute}")
         Log.e("savedata","today: ${dataToday.value}")
         Log.e("savedata","====================================================")
@@ -156,11 +157,12 @@ class DailyCheckViewModel (val database:DailyCheckDao ,val appCompatActivity: Ap
         uiScope.launch {
             insertData(dailyCheck)
         }
-
     }
 
     suspend fun insertData(dailyCheck: DailyCheck) {
+        Log.e("savedata","=====wuery!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!===============================================")
         withContext(Dispatchers.IO) {
+            Log.e("savedata","=====with context!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!===============================================")
             database.insert(dailyCheck)
         }
     }

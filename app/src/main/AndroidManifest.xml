@@ -14,10 +14,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".dailyCheck.DailyCheck"></activity>
+        <activity
+            android:name=".dailyCheck.DailyCheckActivity"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
+            ></activity>
         <activity
             android:name=".bottomActivity.resign.Resign"
-            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar" />
         <activity
             android:name=".bottomActivity.BottomMenu"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar" />

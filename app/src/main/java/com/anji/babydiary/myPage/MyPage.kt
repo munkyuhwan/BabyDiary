@@ -24,7 +24,6 @@ import com.anji.babydiary.databinding.ActivityMyPageBinding
 import com.anji.babydiary.myPage.myFeed.MyFeedDirections
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.CollapsingToolbarLayout
-import kotlinx.android.synthetic.main.daily_check_calendar.view.*
 import kotlinx.android.synthetic.main.nav_mypage_layout.view.*
 import java.util.*
 
@@ -127,27 +126,18 @@ class MyPage : BaseActivity() {
         }
 
 
-        var dailycheckViewModel = setDailyCheckViewModel()
-        binding.dailyCheckViewModel = dailycheckViewModel
-
-        dailyCheckDrawerSetting(
-            binding.drawerLayout,
-            binding.drawerInc.drawerWrapper,
-            binding.fab,
-            dailycheckViewModel
-        )
 
         binding.bottomNav = setBottomNav(4)
 
 
         viewModel.myProfile.observe(this, androidx.lifecycle.Observer {
             it?.let {
-                binding.drawerLayout.num_follower.text = it.follower.toString()
-                binding.drawerLayout.num_following.text = it.following.toString()
+                binding.mypageMainLayout.num_follower.text = it.follower.toString()
+                binding.mypageMainLayout.num_following.text = it.following.toString()
 
-                Glide.with(application).load(it.img).into(binding.drawerLayout.shapeableImageView)
+                Glide.with(application).load(it.img).into(binding.mypageMainLayout.shapeableImageView)
 
-                binding.drawerLayout.intro_text.text = it.introduce.toString()
+                binding.mypageMainLayout.intro_text.text = it.introduce.toString()
 
 
             }

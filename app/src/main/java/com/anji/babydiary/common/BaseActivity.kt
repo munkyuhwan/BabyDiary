@@ -1,43 +1,32 @@
 package com.anji.babydiary.common
 
 import android.content.Intent
-import android.util.Log
 import android.view.Gravity
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.anji.babydiary.R
-import com.anji.babydiary.backgroudnViewModel.BackgroundViewModel
-import com.anji.babydiary.backgroudnViewModel.BackgroundViewModelFactory
 import com.anji.babydiary.common.bottomNavigation.BottomNavigationViewModel
 import com.anji.babydiary.common.bottomNavigation.BottomNavigationViewModelFactory
-import com.anji.babydiary.common.dailyCheck.DailyCheckViewModel
-import com.anji.babydiary.common.dailyCheck.DailyCheckViewModelFactory
+import com.anji.babydiary.dailyCheck.DailyCheckViewModel
+import com.anji.babydiary.dailyCheck.DailyCheckViewModelFactory
 import com.anji.babydiary.database.dailyCheck.DailyCheckDatabase
-import com.anji.babydiary.databinding.*
 import com.anji.babydiary.event.EventActivity
 import com.anji.babydiary.gnb.main.NavViewModel
 import com.anji.babydiary.gnb.main.NavViewModelFactory
-import com.anji.babydiary.gnb.myPage.MyPageNavViewModel
-import com.anji.babydiary.gnb.myPage.MyPageNavViewModelFactory
 import com.anji.babydiary.mainFeed.MainFeedActivity
 import com.anji.babydiary.myPage.MyPage
 import com.anji.babydiary.shopping.ShoppingActivity
 import com.anji.babydiary.tips.TipActivity
 import com.google.android.material.appbar.CollapsingToolbarLayout
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.daily_check_calendar.view.*
 import java.util.*
 
 abstract class BaseActivity() : AppCompatActivity() {
@@ -84,16 +73,24 @@ abstract class BaseActivity() : AppCompatActivity() {
         return navViewModel
     }
 
-    fun setDailyCheckViewModel():DailyCheckViewModel {
+    /*
+    fun setDailyCheckViewModel(): DailyCheckViewModel {
 
         val database = DailyCheckDatabase.getInstance(this).database
-
-        val dailyCheckViewModelFactory = DailyCheckViewModelFactory(database, this)
+        val application = requireNotNull(this).application
+        val dailyCheckViewModelFactory =
+            DailyCheckViewModelFactory(
+                database,
+                this,
+                application
+            )
         val dailyCheckViewModel = ViewModelProviders.of(this, dailyCheckViewModelFactory).get(
             DailyCheckViewModel::class.java)
 
         return dailyCheckViewModel
     }
+
+     */
 
     fun setBottomNav(idx:Int):BottomNavigationViewModel {
         val bottomNavViewModelFactory = BottomNavigationViewModelFactory(this, idx)
@@ -146,6 +143,7 @@ abstract class BaseActivity() : AppCompatActivity() {
     {
         //drawerlayout, dailyCheckVIewModel, drawerWrapper, fab
 
+        /*
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
 
@@ -160,8 +158,10 @@ abstract class BaseActivity() : AppCompatActivity() {
             dailyCheckViewModel.onDaySelect(dayOfWeek)
         }
         fab.setOnClickListener {
-            drawerLayout.openDrawer(Gravity.LEFT)
+            //drawerLayout.openDrawer(Gravity.LEFT)
         }
+
+         */
 
     }
 

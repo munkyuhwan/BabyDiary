@@ -1,4 +1,4 @@
-package com.anji.babydiary.common.dailyCheck
+package com.anji.babydiary.dailyCheck
 
 import android.opengl.Visibility
 import android.view.View

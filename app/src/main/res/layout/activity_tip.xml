@@ -13,21 +13,11 @@
             name="navController"
             type="com.anji.babydiary.gnb.main.NavViewModel" />
         <variable
-            name="dailyCheckViewModel"
-            type="com.anji.babydiary.common.dailyCheck.DailyCheckViewModel" />
-        <variable
             name="bottomNav"
             type="com.anji.babydiary.common.bottomNavigation.BottomNavigationViewModel" />
 
     </data>
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".tips.TipActivity"
-        android:background="#ffffff"
-        android:fitsSystemWindows="true"
-        tools:openDrawer="start">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/naviTop"
             android:layout_width="match_parent"
@@ -70,19 +60,11 @@
                 app:layout_constraintBottom_toBottomOf="@+id/tipNestedHost"
                 app:layout_constraintEnd_toEndOf="@+id/naviTop" />
 
+            <include
+                layout="@layout/bottom_navigation_tab"
+                app:bottomNav = "@{bottomNav}"
+                />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <include
-            layout="@layout/bottom_navigation_tab"
-            app:bottomNav = "@{bottomNav}"
-            />
 
-        <include
-            android:id="@+id/drawer_inc"
-            bind:dailyCheckViewModel = "@{dailyCheckViewModel}"
-            layout="@layout/daily_check_drawer"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-</androidx.drawerlayout.widget.DrawerLayout>
 </layout>
