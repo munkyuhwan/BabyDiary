@@ -52,7 +52,7 @@ class DailyCheckCalendar : Fragment() {
         }
 
         binding.calendarDetailWrapper.setOnClickListener {
-            findNavController().navigate(DailyCheckCalendarDirections.actionDailyCheckCalendar2ToDailyCheckWrite(viewModel.selectedYear.value.toString(), viewModel.selectedMonth.value.toString(), viewModel.selectedDate.value.toString()) )
+            findNavController().navigate(DailyCheckCalendarDirections.actionDailyCheckCalendar2ToDailyCheckWrite(viewModel.selectedYear.value.toString(), viewModel.selectedMonth.value.toString(), viewModel.selectedDate.value.toString(), viewModel.selectedDay.value.toString()) )
         }
 
 

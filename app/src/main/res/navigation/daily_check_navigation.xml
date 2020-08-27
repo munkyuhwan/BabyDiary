@@ -23,5 +23,8 @@
         <argument
             android:name="date"
             app:argType="string" />
+        <argument
+            android:name="day"
+            app:argType="string" />
     </fragment>
 </navigation>

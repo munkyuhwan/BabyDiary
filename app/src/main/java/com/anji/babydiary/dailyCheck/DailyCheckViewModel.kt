@@ -135,7 +135,7 @@ class DailyCheckViewModel (val database:DailyCheckDao , application: Application
 
             var dailyCheck = DailyCheck()
 
-            dailyCheck.weight = memo.toString()
+            //dailyCheck.weight = memo.toString()
             dailyCheck.year = selectedYear.value!!.toInt()
             dailyCheck.month = selectedMonth.value!!.toInt()
             dailyCheck.date = selectedDate.value!!.toInt()

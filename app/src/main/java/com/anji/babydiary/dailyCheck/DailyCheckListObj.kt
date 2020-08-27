@@ -25,7 +25,10 @@ object DailyCheckListObj  {
         R.drawable.circle_purple,
         R.drawable.circle_purple,
         R.drawable.circle_purple,
-        R.drawable.circle_purple
+        R.drawable.circle_purple,
+
+        R.drawable.circle_grey
+
 
     )
     val itemSrc = arrayOf(
@@ -49,7 +52,8 @@ object DailyCheckListObj  {
         R.drawable.hospital_icon,
         R.drawable.temperature_icon,
         R.drawable.pill_icon,
-        R.drawable.injection_icon
+        R.drawable.injection_icon,
+        R.drawable.add_icon
     )
 
     val itemName = arrayOf(

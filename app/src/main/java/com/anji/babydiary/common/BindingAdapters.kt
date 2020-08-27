@@ -1,12 +1,14 @@
 package com.anji.babydiary.common
 
+import android.view.ViewGroup.MarginLayoutParams
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.RecyclerView
 import com.anji.babydiary.dailyCheck.DailyCheckListObj
 import com.anji.babydiary.database.likes.Likes
+
 
 object BindingAdapters  {
 
@@ -47,6 +49,16 @@ object BindingAdapters  {
             view.setText(".${date.value}")
         }else {
             view.setText("")
+        }
+    }
+
+    @BindingAdapter("layout_marginLeft")
+    @JvmStatic
+    fun setLayoutMarginLeft(view: RecyclerView, marginTop: Float) {
+        if (view.layoutParams is MarginLayoutParams) {
+            val p = view.layoutParams as MarginLayoutParams
+            p.setMargins(marginTop.toInt(), 0, 0, 0)
+            view.requestLayout()
         }
     }
 
