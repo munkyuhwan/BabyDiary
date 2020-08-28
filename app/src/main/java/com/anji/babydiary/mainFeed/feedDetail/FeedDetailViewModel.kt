@@ -3,6 +3,7 @@ package com.anji.babydiary.mainFeed.feedDetail
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.database.likes.Likes
 import com.anji.babydiary.database.likes.LikesDao
 import com.anji.babydiary.database.mainFeed.MainFeed
@@ -26,16 +27,19 @@ class FeedDetailViewModel(val idx:Long, val database:MainFeedDAO, val likeDataba
 
     }
 
-    fun onLikeButtonClicked() {
+    fun onLikeButtonClicked(likeCnt:CharSequence) {
         var like:Likes = Likes()
 
         like.feed_idx = idx
-        like.user_idx = 0L
+        like.user_idx = CommonCode.USER_IDX
         like.date = System.currentTimeMillis()
-
 
         uiScope.launch {
             likeInsert(like)
+        }
+
+        uiScope.launch {
+            updateLike(likeCnt)
         }
 
     }
@@ -44,6 +48,15 @@ class FeedDetailViewModel(val idx:Long, val database:MainFeedDAO, val likeDataba
         withContext(Dispatchers.IO) {
             likeDatabase.insert(like)
         }
+    }
+
+
+    suspend fun updateLike(likeCnt:CharSequence) {
+        var like = likeCnt.toString().replace("공감 ","").replace("개","").toLong()+1
+        withContext(Dispatchers.IO) {
+            database.updateLike(like, idx)
+        }
+
     }
 
 

@@ -1,10 +1,7 @@
 package com.anji.babydiary.database.shopping
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface TipDao {
@@ -17,6 +14,10 @@ interface TipDao {
 
     @Query("DELETE FROM tbl_tip")
     fun deleteAll()
+
+    @Transaction
+    @Query("SELECT * FROM tbl_tip WHERE user_idx= :pk")
+    fun selectTipWithUser(pk:Long):List<TipAndProfile>
 
 
 }

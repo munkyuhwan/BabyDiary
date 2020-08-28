@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.anji.babydiary.R
+import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.database.mainFeed.MainFeedDAO
 import com.anji.babydiary.database.profile.ProfileDao
@@ -23,12 +24,21 @@ class FeedListViewModel(
 
     var allFeeds = mainFeedDAO.selectAll()
 
+    var profileData = MutableLiveData<Profiles>()
+
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     init {
-        Log.d("query","=================init================================")
-        Log.d("query","==========================================================")
+        uiScope.launch {
+            selectProfile()
+        }
+    }
+
+    suspend fun selectProfile() {
+        withContext(Dispatchers.IO) {
+            profileData.postValue( profile.selectProfile(CommonCode.USER_IDX) )
+        }
     }
 
 

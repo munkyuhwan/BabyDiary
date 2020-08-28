@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "tbl_profile")
 data class Profiles (
     @PrimaryKey(autoGenerate = true)
-    var idx:Long = 0L,
+    var profile_idx:Long = 0L,
 
     @ColumnInfo(name = "profile_img")
     var img:String ="",

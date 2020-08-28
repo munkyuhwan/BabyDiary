@@ -1,16 +1,17 @@
 package com.anji.babydiary.database.shopping
 
 import android.net.Uri
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
+import com.anji.babydiary.database.profile.Profiles
 
 @Entity(tableName = "tbl_tip")
 data class Tip(
     @PrimaryKey(autoGenerate = true)
-    var idx:Long = 0L,
+    var tip_idx:Long = 0L,
     @ColumnInfo(name = "tip_text")
     var text:String = "",
+    @ColumnInfo(name = "user_idx")
+    var user_idx:Long = 0L,
     @ColumnInfo(name = "tip_user")
     var user:String = "",
     @ColumnInfo(name = "like_cnt")
@@ -19,4 +20,14 @@ data class Tip(
     var imgDir: String = "",
     @ColumnInfo(name="tip_category")
     var category:String = ""
+)
+
+data class TipAndProfile(
+    @Embedded
+    val tip:Tip,
+    @Relation(
+        parentColumn = "user_idx",
+        entityColumn = "profile_idx"
+    )
+    val profile: Profiles
 )

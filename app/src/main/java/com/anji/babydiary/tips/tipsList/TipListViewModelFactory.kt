@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.anji.babydiary.database.profile.ProfileDao
 import com.anji.babydiary.database.shopping.TipDao
 import com.anji.babydiary.database.shopping.TipDatabase
 import java.lang.IllegalArgumentException

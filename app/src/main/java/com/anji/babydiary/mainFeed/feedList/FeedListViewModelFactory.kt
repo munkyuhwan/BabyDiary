@@ -3,6 +3,7 @@ package com.anji.babydiary.mainFeed.feedList
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.anji.babydiary.database.likes.LikesDao
 import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.database.mainFeed.MainFeedDAO
 import com.anji.babydiary.database.profile.ProfileDao

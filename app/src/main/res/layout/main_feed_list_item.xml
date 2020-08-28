@@ -28,8 +28,8 @@
 
     <ImageView
         android:id="@+id/user_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="28sp"
+        android:layout_height="28sp"
         android:src="@mipmap/ic_launcher"
         android:theme="@style/MainFeedMemberThumbnail"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +73,6 @@
             android:id="@+id/button"
             style="@style/LikeButton"
             android:layout_marginStart="10dp"
-            android:width="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/like_cnt"
             app:layout_constraintStart_toEndOf="@+id/like_cnt"
             app:layout_constraintTop_toTopOf="@+id/like_cnt" />
@@ -91,7 +90,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="100"
+            android:layout_marginBottom="10sp"
+            style="@style/mainFeedLikeCnt"
             app:layout_constraintBottom_toBottomOf="@+id/feed_img"
             app:layout_constraintStart_toEndOf="@+id/feed_img" />
 

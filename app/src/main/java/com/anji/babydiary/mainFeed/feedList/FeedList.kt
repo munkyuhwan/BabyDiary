@@ -35,22 +35,27 @@ class FeedList : Fragment() {
         val dataSource = MainFeedDatabase.getInstance(application).database
         val profileData = ProfileDatabase.getInstance(application).database
 
+
         viewModelFactory = FeedListViewModelFactory(dataSource, profileData, application)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(FeedListViewModel::class.java)
+        viewModel.selectAll()
 
         binding.mainFeed = viewModel
-
-        val adapter = MainFeedListAdapter(FeedClickListener {
-            findNavController().navigate(FeedListDirections.actionFeedListToFeedDetail(it))
-        })
-        binding.feedList.adapter = adapter
         binding.setLifecycleOwner(this)
 
-        viewModel.selectAll()
-        viewModel.allFeeds.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                adapter.submitList(it)
-            }
+        viewModel.profileData.observe(viewLifecycleOwner, Observer {
+
+            val adapter = MainFeedListAdapter(FeedClickListener {
+                findNavController().navigate(FeedListDirections.actionFeedListToFeedDetail(it))
+            }, it.img, it.name)
+            binding.feedList.adapter = adapter
+
+            viewModel.allFeeds.observe(viewLifecycleOwner, Observer {
+                it?.let {
+                    adapter.submitList(it)
+                }
+            })
+
         })
 
         return binding.root

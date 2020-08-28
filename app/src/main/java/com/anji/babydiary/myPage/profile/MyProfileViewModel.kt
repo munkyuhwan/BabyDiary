@@ -44,7 +44,10 @@ class MyProfileViewModel(val idx:Long, val database: ProfileDao, application: Ap
                 profile.name = name.toString()
                 profile.pass = pass.toString()
                 profile.introduce = introduce.toString()
-                profile.img = selectedImage.value.toString()
+
+                selectedImage.value?.let {
+                    profile.img = it.toString()
+                }
 
                 if (it.value == null) {
                     insertData(profile)

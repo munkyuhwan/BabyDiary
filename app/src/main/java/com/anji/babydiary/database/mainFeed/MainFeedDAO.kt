@@ -21,6 +21,8 @@ interface MainFeedDAO{
     @Query("SELECT * FROM tbl_main_feed WHERE user_idx= :key")
     fun selectByUserIdx(key:Long): List<MainFeed>
 
+    @Query("UPDATE tbl_main_feed SET like_cnt = :cnt WHERE idx = :pk ")
+    fun updateLike(cnt:Long, pk:Long)
 
     @Query("DELETE FROM tbl_main_feed")
     fun deleteAll()
