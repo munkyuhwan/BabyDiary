@@ -4,10 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.anji.babydiary.database.dailyCheck.DailyCheck
 import com.anji.babydiary.database.dailyCheck.DailyCheckDao
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
 
 class DailyCheckCalendarViewModel(val database:DailyCheckDao, application: Application) : AndroidViewModel(application) {
 
@@ -15,6 +14,7 @@ class DailyCheckCalendarViewModel(val database:DailyCheckDao, application: Appli
     var selectedMonth = MutableLiveData<String>()
     var selectedDate = MutableLiveData<String>()
     var selectedDay = MutableLiveData<String>()
+    var dataToday = MutableLiveData<List<DailyCheck>>()
     val days = arrayOf(
         "",
         "SUN",
@@ -36,7 +36,16 @@ class DailyCheckCalendarViewModel(val database:DailyCheckDao, application: Appli
     fun onDaySelect(day:Int) {
 
         selectedDay.value = days[day]
+        uiScope.launch {
+            selecteByDate()
+        }
+    }
 
+
+    suspend fun selecteByDate() {
+        withContext(Dispatchers.IO) {
+            dataToday.postValue(database.selectByDate(selectedYear.value!!.toInt(), selectedMonth.value!!.toInt(), selectedDate.value!!.toInt()) )
+        }
     }
 
 }

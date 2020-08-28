@@ -11,12 +11,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
-import com.anji.babydiary.dailyCheck.DailyCheckViewModel
-import com.anji.babydiary.dailyCheck.DailyCheckViewModelFactory
-import com.anji.babydiary.dailyCheck.dailyCheckWrite.listAdapter.DailyCheckListAdapter
+import com.anji.babydiary.dailyCheck.listAdapter.DailyCheckListAdapter
 import com.anji.babydiary.database.dailyCheck.DailyCheckDatabase
 import com.anji.babydiary.databinding.DailyCheckWriteFragmentBinding
-import com.anji.babydiary.mainFeed.feedDetail.FeedDetailArgs
 
 class DailyCheckWrite : Fragment() {
 
@@ -59,7 +56,7 @@ class DailyCheckWrite : Fragment() {
         viewModel.selectedDay.value = day
 
 
-        val listAdapter = DailyCheckListAdapter()
+        val listAdapter = DailyCheckListAdapter(true)
         binding.recordList.adapter = listAdapter
 
         viewModel.dataToday.observe(viewLifecycleOwner, Observer {

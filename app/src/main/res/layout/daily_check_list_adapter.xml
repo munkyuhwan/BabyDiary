@@ -54,6 +54,7 @@
             app:layout_constraintStart_toEndOf="@+id/checkIcon" />
 
         <ImageButton
+            android:id="@+id/editRecordBtn"
             style="@style/checkEditBtn"
             app:layout_constraintBottom_toBottomOf="@+id/checkIcon"
             app:layout_constraintEnd_toEndOf="parent"

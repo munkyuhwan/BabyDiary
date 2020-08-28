@@ -88,6 +88,19 @@
                 app:layout_constraintStart_toEndOf="@+id/selectedDate"
                 app:layout_constraintTop_toTopOf="@+id/selectedDate" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/calendarRecordList"
+                style="@style/dailyCheckList"
+                android:background="#00000000"
+                android:layout_width="match_parent"
+                android:layout_height="1200sp"
+                android:layout_marginTop="10dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/selectedDate" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

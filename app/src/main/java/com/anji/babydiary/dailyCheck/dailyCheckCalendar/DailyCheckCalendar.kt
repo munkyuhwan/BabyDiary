@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.dailyCheck.DailyCheckViewModel
 import com.anji.babydiary.dailyCheck.DailyCheckViewModelFactory
+import com.anji.babydiary.dailyCheck.listAdapter.DailyCheckListAdapter
 import com.anji.babydiary.database.dailyCheck.DailyCheckDatabase
 import com.anji.babydiary.databinding.ActivityDailyCheckBinding
 import com.anji.babydiary.databinding.DailyCheckCalendarFragmentBinding
@@ -42,6 +43,9 @@ class DailyCheckCalendar : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.calendarViewModel = viewModel
 
+        val listAdapter = DailyCheckListAdapter(false)
+        binding.calendarRecordList.adapter = listAdapter
+
 
         binding.calendarView.setOnDateChangeListener { calendarView, y, m, d ->
             val calendar = Calendar.getInstance()
@@ -51,11 +55,18 @@ class DailyCheckCalendar : Fragment() {
             viewModel.selectedMonth.value = months[m].toString()
             viewModel.selectedDate.value = d.toString()
             viewModel.onDaySelect(dayOfWeek)
+
         }
 
         binding.calendarDetailWrapper.setOnClickListener {
             findNavController().navigate(DailyCheckCalendarDirections.actionDailyCheckCalendar2ToDailyCheckWrite(viewModel.selectedYear.value.toString(), viewModel.selectedMonth.value.toString(), viewModel.selectedDate.value.toString(), viewModel.selectedDay.value.toString()) )
         }
+
+        viewModel.dataToday.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            it?.let {
+                listAdapter.submitList(it)
+            }
+        })
 
         return binding.root
     }
