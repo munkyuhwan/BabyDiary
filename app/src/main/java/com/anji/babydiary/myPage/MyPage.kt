@@ -18,6 +18,7 @@ import com.anji.babydiary.bottomActivity.BottomMenu
 import com.anji.babydiary.bottomActivity.resign.Resign
 import com.anji.babydiary.common.BaseActivity
 import com.anji.babydiary.common.CommonCode
+import com.anji.babydiary.dailyCheck.DailyCheckActivity
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.database.profile.Profiles
 import com.anji.babydiary.databinding.ActivityMyPageBinding
@@ -143,6 +144,11 @@ class MyPage : BaseActivity() {
             }
 
         })
+
+        binding.fab.setOnClickListener {
+            val intent: Intent = Intent(this, DailyCheckActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 

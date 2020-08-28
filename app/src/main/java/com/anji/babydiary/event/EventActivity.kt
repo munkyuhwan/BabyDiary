@@ -1,5 +1,6 @@
 package com.anji.babydiary.event
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProviders
 import com.anji.babydiary.R
 import com.anji.babydiary.common.BaseActivity
+import com.anji.babydiary.dailyCheck.DailyCheckActivity
 import com.anji.babydiary.databinding.ActivityEventBinding
 import java.util.*
 
@@ -33,9 +35,6 @@ class EventActivity : BaseActivity() {
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
 
-            Log.e("nav","============================================")
-            Log.e("nav","${destination.label}")
-
             when(destination.label.toString()) {
                 "EventList" ->
                     toolbar.setBackgroundResource(R.drawable.actionbar_transparent)
@@ -44,13 +43,16 @@ class EventActivity : BaseActivity() {
 
             }
 
-            Log.e("nav","============================================")
-
         }
 
         //setOnclickMenu()
 
         binding.bottomNav = setBottomNav(0)
+
+        binding.fab.setOnClickListener {
+            val intent: Intent = Intent(this, DailyCheckActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 

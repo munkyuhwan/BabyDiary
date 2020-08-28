@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.ui.AppBarConfiguration
 import com.anji.babydiary.common.BaseActivity
 import com.anji.babydiary.R
+import com.anji.babydiary.dailyCheck.DailyCheckActivity
 import com.anji.babydiary.databinding.ActivityShoppingBinding
 import java.util.*
 
@@ -27,6 +28,11 @@ class ShoppingActivity() : BaseActivity() {
         setNav(R.id.shoppingNestedHost)
 
         binding.bottomNav = setBottomNav(1)
+
+        binding.fab.setOnClickListener {
+            val intent: Intent = Intent(this, DailyCheckActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 
