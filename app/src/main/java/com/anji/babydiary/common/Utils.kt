@@ -16,4 +16,12 @@ object Utils {
         return formatter.format(calendar.getTime())
     }
 
+    fun convertToTime(seconds:String):String {
+        val minSecond = 60
+        var min =  String.format("%02d", seconds.toInt()/minSecond)
+        var second = String.format("%02d", seconds.toInt()%minSecond)
+
+        return "${min}:${second}"
+    }
+
 }

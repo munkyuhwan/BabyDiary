@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.anji.babydiary.common.Utils
 import com.anji.babydiary.dailyCheck.DailyCheckListObj
 import com.anji.babydiary.database.dailyCheck.DailyCheck
 import com.anji.babydiary.database.event.Event
@@ -28,7 +29,13 @@ class DailyCheckListAdapter:ListAdapter<DailyCheck, DailyCheckListAdapter.DailyC
         fun bind(item:DailyCheck){
             binding.dailyCheck = item
             binding.checkCategory.text = DailyCheckListObj.itemName[item.category]
-            binding.checkText.text = item.valueOne
+
+            if (item.valueTwo!="") {
+                binding.checkText.text = "${Utils.convertToTime(item.valueOne)} ${Utils.convertToTime(item.valueTwo)}"
+            }else {
+                binding.checkText.text = "${item.valueOne}"
+            }
+
             binding.checkTime.text = "${item.hour}:${item.minute}"
             binding.checkIcon.setBackgroundResource(DailyCheckListObj.itemBackground[item.category])
             binding.checkIcon.setImageResource(DailyCheckListObj.itemSrc[item.category])

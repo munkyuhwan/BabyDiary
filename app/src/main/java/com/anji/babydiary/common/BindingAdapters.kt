@@ -6,8 +6,10 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
+import com.anji.babydiary.R
 import com.anji.babydiary.dailyCheck.DailyCheckListObj
 import com.anji.babydiary.database.likes.Likes
+import kotlinx.android.synthetic.main.daily_check_write_fragment.view.*
 
 
 object BindingAdapters  {
@@ -59,6 +61,23 @@ object BindingAdapters  {
             val p = view.layoutParams as MarginLayoutParams
             p.setMargins(marginTop.toInt(), 0, 0, 0)
             view.requestLayout()
+        }
+    }
+
+    @BindingAdapter("setCountingText")
+    @JvmStatic
+    fun setCountingText(view:TextView, count:Int) {
+        val minSecond = 60
+        var min =  String.format("%02d", count/minSecond)
+        var second = String.format("%02d", count%minSecond)
+        if(count > 0) {
+            view.setText( "${min}:${second}")
+        }else {
+            if (view.id == R.id.leftTime) {
+                view.setText("왼쪽")
+            }else {
+                view.setText("오른쪽")
+            }
         }
     }
 

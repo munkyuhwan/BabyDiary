@@ -218,20 +218,24 @@
                     android:id="@+id/leftTime"
                     style="@style/timeCount"
                     android:visibility="@{writeViewModel.isCountDown}"
+                    android:onClick="@{() -> writeViewModel.startCounting(true)}"
                     android:layout_width="51sp"
                     android:layout_height="25sp"
                     android:layout_marginRight="5sp"
                     android:layout_marginTop="15sp"
                     android:layout_marginBottom="15sp"
-                    android:text="@string/text_left" />
+                    android:hint="왼쪽"
+                    app:setCountingText="@{writeViewModel.leftCounting}" />
                 <TextView
                     android:id="@+id/rightTime"
                     style="@style/timeCount"
                     android:visibility="@{writeViewModel.isCountDown}"
+                    android:onClick="@{() -> writeViewModel.startCounting(false)}"
                     android:layout_width="51sp"
                     android:layout_height="25sp"
                     android:layout_marginLeft="5sp"
-                    android:text="@string/text_right" />
+                    android:hint="오른쪽"
+                    app:setCountingText="@{writeViewModel.rightCounting}" />
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/checkMemo"
@@ -243,6 +247,7 @@
                     android:padding="2sp"
                     android:textColor="@color/calendarTextColor"
                     android:textSize="17sp"
+                    android:text="@{writeViewModel.initText}"
                     android:visibility="@{writeViewModel.isMemo}" />
             </LinearLayout>
 

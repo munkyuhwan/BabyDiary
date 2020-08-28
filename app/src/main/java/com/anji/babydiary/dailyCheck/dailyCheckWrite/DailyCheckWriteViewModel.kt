@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.anji.babydiary.common.CountUpTimer
 import com.anji.babydiary.common.Utils
 import com.anji.babydiary.dailyCheck.DailyCheckListObj
 import com.anji.babydiary.database.dailyCheck.DailyCheck
@@ -34,14 +35,18 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao, application: Applica
     val job = Job()
     val uiScope = CoroutineScope(Dispatchers.Main + job)
 
-
     var dataToday = MutableLiveData<List<DailyCheck>>()
-
     var selectedData = MutableLiveData<DailyCheck>()
-
-
-
     val marginTop = MutableLiveData<Float>()
+
+
+    var leftCounting = MutableLiveData<Int>()
+    var rightCounting = MutableLiveData<Int>()
+    var isLeftCountingStarted = MutableLiveData<Boolean>()
+    var isRightCountingStarted = MutableLiveData<Boolean>()
+
+    val initText = MutableLiveData<String>()
+
     init {
         calendarVisibility.value = View.VISIBLE
         detailVisibility.value = View.GONE
@@ -49,6 +54,12 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao, application: Applica
         isMemo.value = View.GONE
         isCountDown.value = View.GONE
         marginTop.value = 0F
+
+        leftCounting.value = 0
+        rightCounting.value = 0
+        isLeftCountingStarted.value = true
+        isRightCountingStarted.value = true
+
         uiScope.launch {
             selecteByDate()
         }
@@ -57,7 +68,6 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao, application: Applica
     suspend fun selecteByDate() {
         withContext(Dispatchers.IO) {
             dataToday.postValue(database.selectByDate(selectedYear.value!!.toInt(), selectedMonth.value!!.toInt(), selectedDate.value!!.toInt()) )
-
         }
     }
 
@@ -83,6 +93,14 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao, application: Applica
         }
     }
 
+    fun initializeFields() {
+        initText.value = ""
+        leftCounting.value = 0
+        rightCounting.value = 0
+        isLeftCountingStarted.value = true
+        isRightCountingStarted.value = true
+    }
+
     fun saveData(memo:CharSequence) {
 
 
@@ -90,7 +108,7 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao, application: Applica
         //    delete()
         //}
 
-
+        initializeFields()
 
 
         //입력되었는지 확인
@@ -132,8 +150,8 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao, application: Applica
                 data.valueOne = globalMemo
             }else {
                 //카운트 업
-                data.valueOne = "0"
-                data.valueTwo = "0"
+                data.valueOne = leftCounting.value!!.toString()
+                data.valueTwo = rightCounting.value!!.toString()
             }
             data.year = selectedYear.value!!.toInt()
             data.month = selectedMonth.value!!.toInt()
@@ -185,6 +203,64 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao, application: Applica
         }
     }
 
+    fun startCounting(isLeft:Boolean) {
+        if (isLeft && leftCounting.value!! > 0 ) {
+            Log.e("is left couting:" ,"${isLeftCountingStarted.value!!}")
+            if (isLeftCountingStarted.value!!) {
+                stopCounting(isLeft)
+            }else {
+                isLeftCountingStarted.value = true
+                uiScope.launch {
+                    count(isLeft)
+                }
+            }
+        }else {
+            uiScope.launch {
+                count(isLeft)
+            }
+        }
+
+        if(!isLeft && rightCounting.value!! > 0){
+            if (isRightCountingStarted.value!!) {
+                stopCounting(isLeft)
+            }else {
+                isRightCountingStarted.value = true
+                uiScope.launch {
+                    count(isLeft)
+                }
+            }
+        }else {
+            uiScope.launch {
+                count(isLeft)
+            }
+        }
+    }
+
+    suspend fun count(isLeft:Boolean) {
+        withContext(Dispatchers.IO) {
+            if (isLeft) {
+                while (isLeftCountingStarted.value!!) {
+                    Thread.sleep(1000)
+                    leftCounting.postValue(leftCounting.value!! + 1)
+                }
+            }else {
+                while (isRightCountingStarted.value!!) {
+                    Thread.sleep(1000)
+                    rightCounting.postValue(rightCounting.value!! + 1)
+                }
+            }
+        }
+
+    }
+
+    fun stopCounting(isLeft:Boolean) {
+        if (isLeft) {
+            isLeftCountingStarted.value = false
+        }else {
+            isRightCountingStarted.value = false
+        }
+
+    }
 
 
 }
