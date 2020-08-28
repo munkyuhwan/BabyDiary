@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.database.dailyCheck.DailyCheck
 import com.anji.babydiary.database.dailyCheck.DailyCheckDao
 import kotlinx.coroutines.*
@@ -34,7 +35,6 @@ class DailyCheckCalendarViewModel(val database:DailyCheckDao, application: Appli
     }
 
     fun onDaySelect(day:Int) {
-
         selectedDay.value = days[day]
         uiScope.launch {
             selecteByDate()
@@ -44,7 +44,7 @@ class DailyCheckCalendarViewModel(val database:DailyCheckDao, application: Appli
 
     suspend fun selecteByDate() {
         withContext(Dispatchers.IO) {
-            dataToday.postValue(database.selectByDate(selectedYear.value!!.toInt(), selectedMonth.value!!.toInt(), selectedDate.value!!.toInt()) )
+            dataToday.postValue(database.selectByDate(selectedYear.value!!.toInt(), selectedMonth.value!!.toInt(), selectedDate.value!!.toInt(), CommonCode.USER_IDX) )
         }
     }
 

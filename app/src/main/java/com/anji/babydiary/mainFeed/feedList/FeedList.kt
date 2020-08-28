@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
+import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.databinding.FeedListFragmentBinding
 import com.anji.babydiary.mainFeed.feedList.listAdapter.MainFeedListAdapter
 
@@ -32,8 +33,9 @@ class FeedList : Fragment() {
 
         val application = requireNotNull(this.activity).application
         val dataSource = MainFeedDatabase.getInstance(application).database
+        val profileData = ProfileDatabase.getInstance(application).database
 
-        viewModelFactory = FeedListViewModelFactory(dataSource, application)
+        viewModelFactory = FeedListViewModelFactory(dataSource, profileData, application)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(FeedListViewModel::class.java)
 
         binding.mainFeed = viewModel
@@ -50,8 +52,6 @@ class FeedList : Fragment() {
                 adapter.submitList(it)
             }
         })
-
-
 
         return binding.root
     }

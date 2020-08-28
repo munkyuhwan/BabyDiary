@@ -42,7 +42,7 @@ class MyPage : BaseActivity() {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_my_page)
 
-        val idx:Long = 1
+        val idx:Long = CommonCode.USER_IDX
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_my_page)
         binding.lifecycleOwner = this

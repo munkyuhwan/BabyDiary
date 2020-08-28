@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.common.CountUpTimer
 import com.anji.babydiary.common.Utils
 import com.anji.babydiary.dailyCheck.DailyCheckListObj
@@ -15,7 +16,7 @@ import com.anji.babydiary.database.dailyCheck.DailyCheckDao
 import kotlinx.coroutines.*
 import okhttp3.Dispatcher
 
-class DailyCheckWriteViewModel(val database: DailyCheckDao, application: Application) : AndroidViewModel(application) {
+class DailyCheckWriteViewModel(val database: DailyCheckDao,val idx:Long, application: Application) : AndroidViewModel(application) {
 
     var selectedYear = MutableLiveData<String>()
     var selectedMonth = MutableLiveData<String>()
@@ -63,11 +64,12 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao, application: Applica
         uiScope.launch {
             selecteByDate()
         }
+
     }
 
     suspend fun selecteByDate() {
         withContext(Dispatchers.IO) {
-            dataToday.postValue(database.selectByDate(selectedYear.value!!.toInt(), selectedMonth.value!!.toInt(), selectedDate.value!!.toInt()) )
+            dataToday.postValue(database.selectByDate(selectedYear.value!!.toInt(), selectedMonth.value!!.toInt(), selectedDate.value!!.toInt(), idx) )
         }
     }
 
@@ -124,10 +126,11 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao, application: Applica
         globalMemo = memo
         withContext(Dispatchers.IO) {
             selectedData.postValue(database.selectByCategory(
-                   selectedIndex.value!!.toInt(),
-                   selectedYear.value!!.toInt(),
-                   selectedMonth.value!!.toInt(),
-                   selectedDate.value!!.toInt()
+                selectedIndex.value!!.toInt(),
+                selectedYear.value!!.toInt(),
+                selectedMonth.value!!.toInt(),
+                selectedDate.value!!.toInt(),
+                idx
                 )
             )
 
@@ -158,6 +161,7 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao, application: Applica
             data.date = selectedDate.value!!.toInt()
             data.hour = currentHour!!.toInt()
             data.minute = currentMinute!!.toInt()
+            data.user_idx = CommonCode.USER_IDX
 
             saveMemo(data)
 
@@ -179,7 +183,7 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao, application: Applica
 
     suspend fun update(valueOne:String, valueTwo:String,currentHour:String, currentMin:String) {
         withContext(Dispatchers.IO) {
-            database.update(valueOne, valueTwo, selectedIndex.value!!, selectedYear.value!!.toInt(), selectedMonth.value!!.toInt(), selectedDate.value!!.toInt())
+            database.update(valueOne, valueTwo, selectedIndex.value!!, selectedYear.value!!.toInt(), selectedMonth.value!!.toInt(), selectedDate.value!!.toInt(), idx)
             uiScope.launch {
                 selecteByDate()
             }

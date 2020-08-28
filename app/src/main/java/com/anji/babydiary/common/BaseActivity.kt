@@ -40,10 +40,7 @@ abstract class BaseActivity() : AppCompatActivity() {
 
         val navViewModelFactory = NavViewModelFactory(application)
         navViewModel = ViewModelProviders.of(this, navViewModelFactory).get(NavViewModel::class.java)
-        //val navBinding = DataBindingUtil.setContentView<DailyCheckCalendarBinding>(this, R.layout.daily_check_calendar)
-        //navBinding.navController = navViewModel
 
-        //binding.navController = navViewModel
 
         navController = this.findNavController(nestedHost)
         val layout = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar_layout)
@@ -52,15 +49,11 @@ abstract class BaseActivity() : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
-        //if (actionBar != null) {
-
 
         supportActionBar!!.setDisplayShowCustomEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeAsUpIndicator(null)
-        //actionBar.setHomeAsUpIndicator(R.drawable.back_btn)
-        //}
 
         appBarConfiguration = AppBarConfiguration.Builder(navController.graph)
         layout.isTitleEnabled=false
@@ -73,24 +66,6 @@ abstract class BaseActivity() : AppCompatActivity() {
         return navViewModel
     }
 
-    /*
-    fun setDailyCheckViewModel(): DailyCheckViewModel {
-
-        val database = DailyCheckDatabase.getInstance(this).database
-        val application = requireNotNull(this).application
-        val dailyCheckViewModelFactory =
-            DailyCheckViewModelFactory(
-                database,
-                this,
-                application
-            )
-        val dailyCheckViewModel = ViewModelProviders.of(this, dailyCheckViewModelFactory).get(
-            DailyCheckViewModel::class.java)
-
-        return dailyCheckViewModel
-    }
-
-     */
 
     fun setBottomNav(idx:Int):BottomNavigationViewModel {
         val bottomNavViewModelFactory = BottomNavigationViewModelFactory(this, idx)

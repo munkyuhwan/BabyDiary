@@ -9,15 +9,17 @@ import androidx.lifecycle.ViewModel
 import com.anji.babydiary.R
 import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.database.mainFeed.MainFeedDAO
+import com.anji.babydiary.database.profile.ProfileDao
+import com.anji.babydiary.database.profile.Profiles
 import com.anji.babydiary.gnb.GNBSelect
 import kotlinx.coroutines.*
 import timber.log.Timber
 
 class FeedListViewModel(
     val mainFeedDAO: MainFeedDAO,
+    val profile: ProfileDao,
     application: Application
 ) : AndroidViewModel(application) {
-
 
     var allFeeds = mainFeedDAO.selectAll()
 

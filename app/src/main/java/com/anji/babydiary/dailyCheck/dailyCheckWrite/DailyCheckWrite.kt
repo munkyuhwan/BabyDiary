@@ -11,15 +11,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
+import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.dailyCheck.listAdapter.DailyCheckListAdapter
 import com.anji.babydiary.database.dailyCheck.DailyCheckDatabase
 import com.anji.babydiary.databinding.DailyCheckWriteFragmentBinding
 
 class DailyCheckWrite : Fragment() {
 
-    companion object {
-        fun newInstance() = DailyCheckWrite()
-    }
 
     private lateinit var viewModel: DailyCheckWriteViewModel
 
@@ -27,6 +25,8 @@ class DailyCheckWrite : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        val idx = CommonCode.USER_IDX
 
         val arg = arguments?.let { DailyCheckWriteArgs.fromBundle(it) }
         var year = arg!!.year
@@ -44,7 +44,7 @@ class DailyCheckWrite : Fragment() {
         val application = requireNotNull(this.activity).application
         val database = DailyCheckDatabase.getInstance(application).database
 
-        val viewModelFactory = DailyCheckWriteViewModelFactory(database, application)
+        val viewModelFactory = DailyCheckWriteViewModelFactory(database, idx, application)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(DailyCheckWriteViewModel::class.java)
 
         binding.lifecycleOwner = viewLifecycleOwner

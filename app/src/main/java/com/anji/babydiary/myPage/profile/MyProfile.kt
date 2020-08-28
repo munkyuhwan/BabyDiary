@@ -35,7 +35,7 @@ class MyProfile : Fragment() {
     ): View? {
 
         val binding = DataBindingUtil.inflate<ProfileFragmentBinding>(inflater, R.layout.profile_fragment, container, false)
-        val idx:Long = 1
+        val idx:Long = CommonCode.USER_IDX
 
         application = requireNotNull(this.activity).application
         val database = ProfileDatabase.getInstance(application).database

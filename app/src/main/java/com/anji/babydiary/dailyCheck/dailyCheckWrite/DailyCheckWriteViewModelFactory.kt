@@ -8,10 +8,10 @@ import com.anji.babydiary.database.dailyCheck.DailyCheck
 import com.anji.babydiary.database.dailyCheck.DailyCheckDao
 import java.lang.IllegalArgumentException
 
-class DailyCheckWriteViewModelFactory(val database: DailyCheckDao, val application: Application):ViewModelProvider.Factory {
+class DailyCheckWriteViewModelFactory(val database: DailyCheckDao,val idx:Long, val application: Application):ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(DailyCheckWriteViewModel::class.java)) {
-            return DailyCheckWriteViewModel(database, application) as T
+            return DailyCheckWriteViewModel(database,idx, application) as T
         }
         throw  IllegalArgumentException()
     }
