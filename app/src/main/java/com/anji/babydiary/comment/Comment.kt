@@ -12,7 +12,10 @@ import androidx.lifecycle.ViewModel
 import com.anji.babydiary.R
 import com.anji.babydiary.comment.commentListAdapter.CommentListAdapter
 import com.anji.babydiary.database.comments.CommentsDatabase
+import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.databinding.CommentFragmentBinding
+import com.anji.babydiary.myPage.profile.MyProfileViewModelFactory
+import com.bumptech.glide.Glide
 
 class Comment : Fragment() {
 
@@ -32,8 +35,9 @@ class Comment : Fragment() {
 
         val application = requireNotNull(this.activity).application
         val database = CommentsDatabase.getInstance(application).database
+        val profileDatabase = ProfileDatabase.getInstance(application).database
 
-        val viewModelFactory = CommentViewModelFactory(application, database, idx)
+        val viewModelFactory = CommentViewModelFactory(application, database, profileDatabase, idx)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(CommentViewModel::class.java)
 
         binding.lifecycleOwner = viewLifecycleOwner
@@ -45,6 +49,13 @@ class Comment : Fragment() {
         viewModel.totalList.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
+            }
+        })
+
+        viewModel.profile.observe(viewLifecycleOwner, Observer {
+            it?.let{
+                Glide.with(binding.root.context).load(it.img).into(binding.commentUsrIcon)
+                binding.executePendingBindings()
             }
         })
 

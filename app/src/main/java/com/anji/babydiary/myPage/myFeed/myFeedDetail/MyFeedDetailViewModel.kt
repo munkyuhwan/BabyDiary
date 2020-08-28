@@ -3,6 +3,7 @@ package com.anji.babydiary.mainFeed.feedDetail
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.database.likes.Likes
 import com.anji.babydiary.database.likes.LikesDao
 import com.anji.babydiary.database.mainFeed.MainFeed
@@ -30,7 +31,7 @@ class MyFeedDetailViewModel(val idx:Long, val database:MainFeedDAO, val likeData
         var like:Likes = Likes()
 
         like.feed_idx = idx
-        like.user_idx = 0L
+        like.user_idx = CommonCode.USER_IDX
         like.date = System.currentTimeMillis()
 
 

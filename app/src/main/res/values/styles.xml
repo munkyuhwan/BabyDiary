@@ -40,8 +40,8 @@
         <item name="android:background">@drawable/like_btn</item>
     </style>
     <style name="CommentButton"  >
-        <item name="android:layout_width">14sp</item>
-        <item name="android:layout_height">14sp</item>
+        <item name="android:layout_width">20sp</item>
+        <item name="android:layout_height">20sp</item>
         <item name="android:background">@drawable/comment_btn</item>
     </style>
     <style name="LikeCnt">
