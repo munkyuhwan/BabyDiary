@@ -22,6 +22,10 @@ class DailyCheckCalendar : Fragment() {
 
     private lateinit var viewModel: DailyCheckCalendarViewModel
 
+    val months = arrayOf(
+        1,2,3,4,5,6,7,8,9,10,11,12
+    )
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,14 +43,12 @@ class DailyCheckCalendar : Fragment() {
         binding.calendarViewModel = viewModel
 
 
-
-
         binding.calendarView.setOnDateChangeListener { calendarView, y, m, d ->
             val calendar = Calendar.getInstance()
-            calendar[y, m] = d
+            calendar[y, months[m]] = d
             val dayOfWeek = calendar[Calendar.DAY_OF_WEEK]
             viewModel.selectedYear.value = y.toString()
-            viewModel.selectedMonth.value = m.toString()
+            viewModel.selectedMonth.value = months[m].toString()
             viewModel.selectedDate.value = d.toString()
             viewModel.onDaySelect(dayOfWeek)
         }
@@ -55,14 +57,8 @@ class DailyCheckCalendar : Fragment() {
             findNavController().navigate(DailyCheckCalendarDirections.actionDailyCheckCalendar2ToDailyCheckWrite(viewModel.selectedYear.value.toString(), viewModel.selectedMonth.value.toString(), viewModel.selectedDate.value.toString(), viewModel.selectedDay.value.toString()) )
         }
 
-
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(DailyCheckCalendarViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
 }

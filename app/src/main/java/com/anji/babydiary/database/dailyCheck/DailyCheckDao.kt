@@ -16,10 +16,10 @@ interface DailyCheckDao  {
     fun selectAll():LiveData<List<DailyCheck>>
 
     @Query("SELECT * FROM tbl_daily_check WHERE insert_year = :year AND insert_month = :month AND insert_date = :date ORDER BY insert_hour, insert_min")
-    fun selectByDate(year:Int, month:Int, date:Int):LiveData<DailyCheck>
+    fun selectByDate(year:Int, month:Int, date:Int):List<DailyCheck>
 
     @Query("SELECT * FROM tbl_daily_check WHERE category= :category AND insert_year= :year AND insert_month= :month AND insert_date = :date")
-    fun selectByCategory(category:Int, year: Int, month: Int, date: Int):MutableLiveData<DailyCheck>
+    fun selectByCategory(category:Int, year: Int, month: Int, date: Int):DailyCheck
 
     @Query("UPDATE tbl_daily_check SET value_one= :valueOne, value_two= :valueTwo  WHERE category= :category AND insert_year= :year AND insert_month= :month AND insert_date = :date")
     fun update(valueOne:String, valueTwo:String, category:Int, year: Int, month: Int, date: Int)

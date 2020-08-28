@@ -524,4 +524,23 @@
         <item name="android:background">@drawable/bottom_border_layout</item>
     </style>
 
+    <style name="checkCategory">
+        <item name="android:textColor">#636363</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="checkText">
+        <item name="android:textColor">#636363</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="checkTime">
+        <item name="android:textColor">#636363</item>
+        <item name="android:textSize">8sp</item>
+    </style>
+    <style name="checkEditBtn">
+        <item name="android:layout_width">21sp</item>
+        <item name="android:layout_height">21sp</item>
+        <item name="android:background">@drawable/check_list_edit_btn</item>
+    </style>
 </resources>

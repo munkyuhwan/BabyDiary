@@ -259,6 +259,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recordList"
                 style="@style/dailyCheckList"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:layout_width="match_parent"
                 android:layout_height="1200sp"
                 android:layout_marginTop="54dp"

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <data>
+        <variable
+            name="dailyCheck"
+            type="com.anji.babydiary.database.dailyCheck.DailyCheck" />
+    </data>
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10sp"
+        android:paddingLeft="10sp"
+        android:paddingRight="10sp">
+
+        <ImageView
+            android:id="@+id/checkIcon"
+            android:layout_width="36sp"
+            android:layout_height="36sp"
+            style="@style/weightIcon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/checkCategory"
+            style="@style/checkCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="몸무게"
+            app:layout_constraintStart_toEndOf="@+id/checkIcon"
+            app:layout_constraintTop_toTopOf="@+id/checkIcon" />
+
+        <TextView
+            android:id="@+id/checkText"
+            style="@style/checkText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="12kg"
+            app:layout_constraintStart_toEndOf="@+id/checkCategory"
+            app:layout_constraintTop_toTopOf="@+id/checkCategory" />
+
+        <TextView
+            android:id="@+id/checkTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/checkTime"
+            android:layout_marginStart="10dp"
+            android:text="11:20"
+            app:layout_constraintBottom_toBottomOf="@+id/checkIcon"
+            app:layout_constraintStart_toEndOf="@+id/checkIcon" />
+
+        <ImageButton
+            style="@style/checkEditBtn"
+            app:layout_constraintBottom_toBottomOf="@+id/checkIcon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/checkIcon" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
+    
