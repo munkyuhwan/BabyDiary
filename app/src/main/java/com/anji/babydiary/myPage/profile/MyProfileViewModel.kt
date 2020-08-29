@@ -14,6 +14,8 @@ class MyProfileViewModel(val idx:Long, val database: ProfileDao, application: Ap
     var selectedImage = MutableLiveData<Uri>()
     var data = MutableLiveData<Profiles>()
 
+    var isDone = MutableLiveData<Boolean>()
+
     val job = Job()
     val uiScope = CoroutineScope(Dispatchers.Main + job)
 
@@ -21,12 +23,14 @@ class MyProfileViewModel(val idx:Long, val database: ProfileDao, application: Ap
         uiScope.launch {
             getInitialData()
         }
+        isDone.value = false
     }
 
     private suspend fun getInitialData() {
         withContext(Dispatchers.IO) {
-
-           data.postValue( database.selectProfile(idx) )
+            val tmpData = database.selectProfile(idx)
+            data.postValue( tmpData )
+            selectedImage.postValue(Uri.parse(tmpData.img))
         }
     }
 
@@ -45,9 +49,7 @@ class MyProfileViewModel(val idx:Long, val database: ProfileDao, application: Ap
                 profile.pass = pass.toString()
                 profile.introduce = introduce.toString()
 
-                selectedImage.value?.let {
-                    profile.img = it.toString()
-                }
+                profile.img = selectedImage.value.toString()
 
                 if (it.value == null) {
                     insertData(profile)
@@ -63,6 +65,7 @@ class MyProfileViewModel(val idx:Long, val database: ProfileDao, application: Ap
     fun insertData(profile:Profiles) {
         uiScope.launch {
             insert(profile)
+            isDone.value = true
         }
     }
 
@@ -70,6 +73,7 @@ class MyProfileViewModel(val idx:Long, val database: ProfileDao, application: Ap
 
         uiScope.launch {
             update(profile)
+            isDone.value = true
         }
 
     }

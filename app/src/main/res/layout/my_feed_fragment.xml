@@ -16,7 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingLeft="20sp"
-        android:paddingTop="10sp"
+        android:paddingTop="320sp"
+        android:layout_marginBottom="64sp"
         android:paddingRight="20sp"
         android:background="#ffffff"
         tools:context=".myPage.myFeed.MyFeed">

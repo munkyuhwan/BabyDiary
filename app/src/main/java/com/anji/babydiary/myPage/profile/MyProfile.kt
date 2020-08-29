@@ -12,10 +12,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.common.OpenGallery
@@ -58,12 +60,20 @@ class MyProfile : Fragment() {
 
         viewModel.data.observe(viewLifecycleOwner, Observer {
             it?.let {
-                Log.e("tag","img: ${it.img}")
                 Glide.with(application).load(it.img).into(binding.profileImg)
                 binding.profileName.setText(it.name)
                 binding.profilePass.setText(it.pass)
                 binding.profilePassCheck.setText(it.pass)
                 binding.profileIntroduce.setText(it.introduce)
+            }
+        })
+        viewModel.isDone.observe(viewLifecycleOwner, Observer {
+            it?.let{
+
+                if(it) {
+                    Toast.makeText(context, "수정되었습니다.",Toast.LENGTH_SHORT).show()
+                    findNavController().popBackStack()
+                }
             }
         })
 

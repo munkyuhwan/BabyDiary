@@ -125,13 +125,12 @@ class MyPage : BaseActivity() {
             }
         }
 
-
-
         binding.bottomNav = setBottomNav(4)
 
-
         viewModel.myProfile.observe(this, androidx.lifecycle.Observer {
+
             it?.let {
+                binding.mypageMainLayout.name_kid.text = it.name.toString()
                 binding.mypageMainLayout.num_follower.text = it.follower.toString()
                 binding.mypageMainLayout.num_following.text = it.following.toString()
 
@@ -139,10 +138,10 @@ class MyPage : BaseActivity() {
 
                 binding.mypageMainLayout.intro_text.text = it.introduce.toString()
 
-
             }
-
         })
+
+
 
         binding.fab.setOnClickListener {
             val intent: Intent = Intent(this, DailyCheckActivity::class.java)
@@ -150,32 +149,6 @@ class MyPage : BaseActivity() {
         }
 
     }
-
-/*
-    private fun dailyCheckDrawerSetting(){
-        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-
-        var dailycheckViewModel = setDailyCheckViewModel()
-        binding.dailyCheckViewModel = dailycheckViewModel
-
-
-        binding.drawerInc.drawerWrapper.calendarView.setOnDateChangeListener { calendarView, y, m, d ->
-            val calendar = Calendar.getInstance()
-            calendar[y, m] = d
-            val dayOfWeek = calendar[Calendar.DAY_OF_WEEK]
-
-            dailycheckViewModel.selectedMonth.value = m.toString()
-            dailycheckViewModel.selectedDate.value = ".${d}"
-            dailycheckViewModel.onDaySelect(dayOfWeek)
-
-        }
-
-        binding.fab.setOnClickListener {
-            binding.drawerLayout.openDrawer(Gravity.LEFT)
-        }
-    }
-
- */
 
 
 

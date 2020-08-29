@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="#ffffff"
+        android:background="#00000000"
         >
 
 
@@ -102,6 +102,7 @@
                             android:layout_height="164dp"
                             android:layout_marginTop="20dp"
                             android:background="#efefef"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/sample_1"
                             app:shapeAppearanceOverlay="@style/circleImageView"
                             app:layout_constraintEnd_toEndOf="parent"

@@ -49,7 +49,6 @@ class MyFeed : Fragment() {
         })
         binding.myFeedList.adapter = clickAdapter
 
-
         val manager = GridLayoutManager(activity,3)
         binding.myFeedList.layoutManager = manager
 
@@ -65,8 +64,6 @@ class MyFeed : Fragment() {
                 clickAdapter.submitList(it)
             }
         })
-
-
 
         return binding.root
     }
