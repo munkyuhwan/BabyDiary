@@ -6,21 +6,20 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.anji.babydiary.database.profile.Profiles
 
-@Database(entities = [Tip::class], version = 12, exportSchema = false)
-abstract class TipDatabase:RoomDatabase() {
+@Database(entities = [Tips::class], version = 3, exportSchema = false)
+abstract class TipsDatabase:RoomDatabase() {
 
-    abstract val database:TipDao
+    abstract val database:TipsDao
 
     companion object {
 
         @Volatile
-        private var INSTANCE:TipDatabase? = null
-        fun getInstance(context:Context):TipDatabase {
+        private var INSTANCE:TipsDatabase? = null
+        fun getInstance(context:Context):TipsDatabase {
             synchronized(this) {
                 var instance = INSTANCE
                 if (instance == null) {
-
-                    instance = Room.databaseBuilder(context, TipDatabase::class.java, "tbl_tip")
+                    instance = Room.databaseBuilder(context, TipsDatabase::class.java, "tbl_tips")
                         .fallbackToDestructiveMigration()
                         .build()
                 }

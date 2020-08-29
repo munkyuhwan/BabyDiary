@@ -33,10 +33,6 @@ class MainFeedListAdapter(val clickListener: FeedClickListener, val profileImage
 
     class ViewHolder private constructor(val binding: MainFeedListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        suspend fun selectLikeCnt() {
-
-        }
-
         fun bind (item:MainFeed, clickListener: FeedClickListener, profileImage: String, userName:String) {
             //binding.idx = item
 

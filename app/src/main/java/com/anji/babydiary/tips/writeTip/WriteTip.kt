@@ -3,25 +3,23 @@ package com.anji.babydiary.tips.writeTip
 import android.Manifest
 import android.app.Application
 import android.content.Intent
-import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Build
-import com.anji.babydiary.databinding.WriteTipFragmentBinding
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.common.CommonCode
-import com.anji.babydiary.database.shopping.TipDatabase
+import com.anji.babydiary.database.shopping.TipsDatabase
+import com.anji.babydiary.databinding.WriteTipFragmentBinding
 import com.anji.babydiary.tips.writeTip.tipCategorySpinner.TipCategoryAdapter
 import com.bumptech.glide.Glide
 
@@ -38,7 +36,7 @@ class WriteTip : Fragment() {
         binding = DataBindingUtil.inflate<WriteTipFragmentBinding>(inflater, R.layout.write_tip_fragment, container, false)
 
         application = requireNotNull(this.activity).application
-        val database = TipDatabase.getInstance(application).database
+        val database = TipsDatabase.getInstance(application).database
 
         val viewModelFactory = WriteTipViewModelFactory(database, application)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(WriteTipViewModel::class.java)

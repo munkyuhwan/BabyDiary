@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.anji.babydiary.database.shopping.Tip
+import com.anji.babydiary.database.shopping.Tips
 import com.anji.babydiary.databinding.TipListItemBinding
 import com.anji.babydiary.tips.tipsList.TipClickListener
 import com.bumptech.glide.Glide
 
-class TipListAdpater(val clickListener: TipClickListener): ListAdapter<Tip, TipListAdpater.ViewHolder>(TipListDiffCallback()) {
+class TipListAdpater(val clickListener: TipClickListener): ListAdapter<Tips, TipListAdpater.ViewHolder>(TipListDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
@@ -18,13 +18,12 @@ class TipListAdpater(val clickListener: TipClickListener): ListAdapter<Tip, TipL
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)!!
-        val res = holder.itemView.context.resources
         holder.bind(item, clickListener)
     }
 
     class ViewHolder private constructor(val binding: TipListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind (item: Tip, clickListener: TipClickListener) {
+        fun bind (item: Tips, clickListener: TipClickListener) {
             //binding.idx = item
 
             binding.tipLikeCnt.text = item.cnt.toString()
@@ -54,12 +53,12 @@ class TipListAdpater(val clickListener: TipClickListener): ListAdapter<Tip, TipL
 }
 
 
-class TipListDiffCallback: DiffUtil.ItemCallback<Tip>() {
-    override fun areItemsTheSame(oldItem: Tip, newItem: Tip): Boolean {
+class TipListDiffCallback: DiffUtil.ItemCallback<Tips>() {
+    override fun areItemsTheSame(oldItem: Tips, newItem: Tips): Boolean {
         return oldItem.idx == newItem.idx
     }
 
-    override fun areContentsTheSame(oldItem: Tip, newItem: Tip): Boolean {
+    override fun areContentsTheSame(oldItem: Tips, newItem: Tips): Boolean {
         return oldItem == newItem
     }
 
@@ -69,7 +68,7 @@ sealed class DataItem {
 
     abstract val id:Long
 
-    data class ResultItem(val tip:Tip):DataItem() {
+    data class ResultItem(val tip:Tips):DataItem() {
         override val id = tip.idx
     }
 

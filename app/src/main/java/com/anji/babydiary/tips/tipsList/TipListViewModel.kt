@@ -8,13 +8,13 @@ import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.database.profile.ProfileDao
 import com.anji.babydiary.database.profile.Profiles
-import com.anji.babydiary.database.shopping.Tip
-import com.anji.babydiary.database.shopping.TipDao
-import com.anji.babydiary.database.shopping.TipDatabase
+import com.anji.babydiary.database.shopping.Tips
+
+import com.anji.babydiary.database.shopping.TipsDao
 import kotlinx.coroutines.*
 
 class TipListViewModel(
-    var database: TipDao,
+    var database: TipsDao,
     application:Application
 ) : AndroidViewModel(application) {
 
@@ -45,7 +45,7 @@ class TipListViewModel(
 
 
 class TipClickListener(val clickListener:(resultId:Long)->Unit ) {
-    fun onClick(result: Tip) = clickListener(result.idx)
+    fun onClick(result: Tips) = clickListener(result.idx)
 }
 
 

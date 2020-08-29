@@ -8,11 +8,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.common.CommonCode
-import com.anji.babydiary.database.shopping.Tip
-import com.anji.babydiary.database.shopping.TipDao
+import com.anji.babydiary.database.shopping.Tips
+import com.anji.babydiary.database.shopping.TipsDao
 import kotlinx.coroutines.*
 
-class WriteTipViewModel(val database:TipDao, application:Application) : AndroidViewModel(application) {
+class WriteTipViewModel(val database: TipsDao, application:Application) : AndroidViewModel(application) {
 
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -34,7 +34,7 @@ class WriteTipViewModel(val database:TipDao, application:Application) : AndroidV
 
     fun insertTip(text:CharSequence) {
 
-        var tip = Tip()
+        var tip = Tips()
         tip.user_idx = CommonCode.USER_IDX
         tip.category = selectedCategory
         tip.text = text.toString()
@@ -47,7 +47,7 @@ class WriteTipViewModel(val database:TipDao, application:Application) : AndroidV
 
     }
 
-    private suspend fun doInsert(tip: Tip) {
+    private suspend fun doInsert(tip: Tips) {
         withContext(Dispatchers.IO) {
             database.insert(tip)
         }

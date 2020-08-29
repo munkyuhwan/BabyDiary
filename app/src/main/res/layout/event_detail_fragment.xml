@@ -8,6 +8,7 @@
         <variable
             name="eventViewModel"
             type="com.anji.babydiary.event.eventDetail.EventDetailViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModel
 import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.database.mainFeed.MainFeedDAO
-import com.anji.babydiary.database.shopping.Tip
 import com.anji.babydiary.myPage.myFeedWriteLocation.SelectedAddress
 import kotlinx.coroutines.*
 

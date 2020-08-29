@@ -4,13 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
-interface TipDao {
+interface TipsDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(tip:Tip)
+    @Insert
+    fun insert(tip:Tips)
 
-    @Query("SELECT * FROM tbl_tip")
-    fun selectAll():LiveData<List<Tip>>
+    @Query("SELECT * FROM tbl_tips")
+    fun selectAll():LiveData<List<Tips>>
 
     /*
     @Query("SELECT * " +
@@ -21,7 +21,7 @@ interface TipDao {
      */
 
 
-    @Query("DELETE FROM tbl_tip")
+    @Query("DELETE FROM tbl_tips")
     fun deleteAll()
 
 

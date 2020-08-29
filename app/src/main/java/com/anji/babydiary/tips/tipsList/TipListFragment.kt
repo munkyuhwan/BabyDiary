@@ -13,7 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.database.profile.ProfileDatabase
-import com.anji.babydiary.database.shopping.TipDatabase
+import com.anji.babydiary.database.shopping.TipsDatabase
 import com.anji.babydiary.databinding.TipListFragmentBinding
 import com.anji.babydiary.tips.tipsList.listAdapter.TipListAdpater
 
@@ -28,7 +28,7 @@ class TipListFragment : Fragment() {
         val binding = DataBindingUtil.inflate<TipListFragmentBinding>(inflater, R.layout.tip_list_fragment, container, false)
 
         val application = requireNotNull(this.activity).application
-        val database = TipDatabase.getInstance(application).database
+        val database = TipsDatabase.getInstance(application).database
 
         val viewModelFactory = TipListViewModelFactory(database, application)
         val viewmodel = ViewModelProviders.of(this, viewModelFactory).get(TipListViewModel::class.java)
