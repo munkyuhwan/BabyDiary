@@ -19,12 +19,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 
 
-class MainFeedListAdapter(val clickListener: FeedClickListener, val profileImage:String, val userName:String):ListAdapter<MainFeed, MainFeedListAdapter.ViewHolder>(ResultListDiffCallback()) {
+class MainFeedListAdapter(val clickListener: FeedClickListener):ListAdapter<MainFeed, MainFeedListAdapter.ViewHolder>(ResultListDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)!!
         val res = holder.itemView.context.resources
-        holder.bind(item, clickListener, profileImage, userName)
+        holder.bind(item, clickListener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,18 +33,22 @@ class MainFeedListAdapter(val clickListener: FeedClickListener, val profileImage
 
     class ViewHolder private constructor(val binding: MainFeedListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind (item:MainFeed, clickListener: FeedClickListener, profileImage: String, userName:String) {
+        fun bind (item:MainFeed, clickListener: FeedClickListener) {
             //binding.idx = item
 
             binding.mainFeed = item
             binding.likeCnt.text = item.likeCnt.toString()
             binding.mainFeedText.text = item.title.toString()
+
+            /*
             binding.userId.setText(userName)
 
             Glide.with(binding.root.context)
                 .load(profileImage)
                 .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
                 .into(binding.userIcon)
+
+             */
 
             Glide.with(binding.root.context)
                 .load(item.imgDir)

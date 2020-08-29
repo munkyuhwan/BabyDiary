@@ -8,6 +8,7 @@ import android.view.Gravity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.common.BaseActivity
 import com.anji.babydiary.dailyCheck.DailyCheckActivity
@@ -32,6 +33,9 @@ class EventActivity : BaseActivity() {
         binding.eventViewModel = viewModel
 
         setNav(R.id.eventNestFragment)
+
+        navController = this.findNavController(R.id.eventNestFragment)
+        binding.navController = navViewModel
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
 

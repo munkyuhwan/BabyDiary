@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:bind="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/actionbar_event"
     >
     <data>
         <variable
@@ -25,7 +26,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="#ffffff"
         >
 
         <fragment
@@ -34,16 +34,16 @@
             app:navGraph="@navigation/event_navigation"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="99sp"
             android:layout_marginBottom="64sp"
             app:defaultNavHost="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/naviTop"/>
+            app:layout_constraintTop_toBottomOf="parent"/>
 
         <include
-            layout="@layout/nav_layout"
-            bind:navController="@{navController}"/>
+            android:id="@+id/include3"
+            layout="@layout/nav_layout_event"
+            bind:navController="@{navController}" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"

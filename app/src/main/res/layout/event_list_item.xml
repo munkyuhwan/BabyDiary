@@ -22,6 +22,8 @@
             android:id="@+id/event_list_img"
             android:layout_width="match_parent"
             android:layout_height="300sp"
+            android:src="@drawable/sample_2"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

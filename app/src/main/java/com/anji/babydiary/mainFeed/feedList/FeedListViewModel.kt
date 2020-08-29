@@ -38,6 +38,7 @@ class FeedListViewModel(
     suspend fun selectProfile() {
         withContext(Dispatchers.IO) {
             profileData.postValue( profile.selectProfile(CommonCode.USER_IDX) )
+
         }
     }
 

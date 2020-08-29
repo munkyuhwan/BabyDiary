@@ -12,6 +12,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="99sp"
+        android:background="#00000000"
         tools:context=".event.eventList.EventList">
 
         <Button
@@ -33,15 +35,53 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <LinearLayout
+            android:id="@+id/promotionWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#00000000"
+            android:paddingLeft="20sp"
+            android:paddingRight="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                style="@style/promotionTextMid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="가정의 달 기념" />
+            <TextView
+                android:layout_marginTop="10sp"
+                style="@style/promotionTextLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="포토북 50% 할인!"
+                />
+            <TextView
+                android:layout_marginTop="10sp"
+                style="@style/promotionTextSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(5월 30일 이전 주문가능)"
+                />
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/event_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="130sp"
+            android:background="@drawable/white_round_top"
+            android:paddingLeft="20sp"
+            android:paddingRight="20sp"
+            android:paddingTop="20sp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-        
+            app:layout_constraintTop_toBottomOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -47,10 +47,6 @@ class EventList : Fragment() {
             }
         })
         binding.eventList.adapter = adapter
-
-
-
-
         binding.lifecycleOwner = viewLifecycleOwner
 
         viewModel.selectAll.observe(viewLifecycleOwner, Observer {

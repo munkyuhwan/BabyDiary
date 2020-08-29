@@ -32,6 +32,7 @@ import java.util.*
 abstract class BaseActivity() : AppCompatActivity() {
 
     lateinit var toolbar:Toolbar;
+    lateinit var layout:CollapsingToolbarLayout;
     lateinit var navController:NavController
     lateinit var navViewModel: NavViewModel
 
@@ -43,12 +44,16 @@ abstract class BaseActivity() : AppCompatActivity() {
 
 
         navController = this.findNavController(nestedHost)
-        val layout = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar_layout)
-        toolbar = findViewById<Toolbar>(R.id.activity_toolbar)
 
+        if (nestedHost == R.id.eventNestFragment) {
+            layout = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar_event_layout)
+            toolbar = findViewById<Toolbar>(R.id.activity_event_toolbar)
+        }else {
+            layout = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar_layout)
+            toolbar = findViewById<Toolbar>(R.id.activity_toolbar)
+        }
 
         setSupportActionBar(toolbar)
-
 
         supportActionBar!!.setDisplayShowCustomEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)

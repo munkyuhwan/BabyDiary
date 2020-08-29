@@ -31,7 +31,6 @@ import java.util.*
 class MyPage : BaseActivity() {
 
     private lateinit var binding:ActivityMyPageBinding
-    private lateinit var layout:CollapsingToolbarLayout
     private lateinit var appBarConfiguration: AppBarConfiguration.Builder
 
     companion object {

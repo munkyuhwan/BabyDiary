@@ -43,23 +43,17 @@ class FeedList : Fragment() {
         binding.mainFeed = viewModel
         binding.setLifecycleOwner(this)
 
-        viewModel.profileData.observe(viewLifecycleOwner, Observer {
 
-            it?.let {
-                val adapter = MainFeedListAdapter(FeedClickListener {
-                    findNavController().navigate(FeedListDirections.actionFeedListToFeedDetail(it))
-                }, it.img, it.name)
-                binding.feedList.adapter = adapter
-
-                viewModel.allFeeds.observe(viewLifecycleOwner, Observer {
-                    it?.let {
-                        adapter.submitList(it)
-                    }
-                })
-            }
-
+        val adapter = MainFeedListAdapter(FeedClickListener {
+            findNavController().navigate(FeedListDirections.actionFeedListToFeedDetail(it))
         })
+        binding.feedList.adapter = adapter
 
+        viewModel.allFeeds.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.submitList(it)
+            }
+        })
         return binding.root
     }
 
