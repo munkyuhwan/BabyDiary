@@ -34,7 +34,6 @@ class WriteTipViewModel(val database:TipDao, application:Application) : AndroidV
 
     fun insertTip(text:CharSequence) {
 
-
         var tip = Tip()
         tip.user_idx = CommonCode.USER_IDX
         tip.category = selectedCategory
@@ -45,7 +44,6 @@ class WriteTipViewModel(val database:TipDao, application:Application) : AndroidV
             doInsert(tip)
             isDone.value = true
         }
-
 
     }
 

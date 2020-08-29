@@ -4,8 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.anji.babydiary.database.profile.Profiles
 
-@Database(entities = [Tip::class], version = 5, exportSchema = false)
+@Database(entities = [Tip::class], version = 12, exportSchema = false)
 abstract class TipDatabase:RoomDatabase() {
 
     abstract val database:TipDao
@@ -18,6 +19,7 @@ abstract class TipDatabase:RoomDatabase() {
             synchronized(this) {
                 var instance = INSTANCE
                 if (instance == null) {
+
                     instance = Room.databaseBuilder(context, TipDatabase::class.java, "tbl_tip")
                         .fallbackToDestructiveMigration()
                         .build()

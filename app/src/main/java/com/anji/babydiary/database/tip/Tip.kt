@@ -4,10 +4,12 @@ import android.net.Uri
 import androidx.room.*
 import com.anji.babydiary.database.profile.Profiles
 
-@Entity(tableName = "tbl_tip")
+@Entity(
+    tableName = "tbl_tip"
+    )
 data class Tip(
     @PrimaryKey(autoGenerate = true)
-    var tip_idx:Long = 0L,
+    var idx:Long = 0L,
     @ColumnInfo(name = "tip_text")
     var text:String = "",
     @ColumnInfo(name = "user_idx")
@@ -20,14 +22,4 @@ data class Tip(
     var imgDir: String = "",
     @ColumnInfo(name="tip_category")
     var category:String = ""
-)
-
-data class TipAndProfile(
-    @Embedded
-    val tip:Tip,
-    @Relation(
-        parentColumn = "user_idx",
-        entityColumn = "profile_idx"
-    )
-    val profile: Profiles
 )

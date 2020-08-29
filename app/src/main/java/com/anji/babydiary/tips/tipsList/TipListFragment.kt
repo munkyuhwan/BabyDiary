@@ -48,9 +48,20 @@ class TipListFragment : Fragment() {
         viewmodel.dataAll.observe(viewLifecycleOwner, Observer {
             it?.let {
                 Log.e("data","data:${it}")
-                //adapter.submitList(it)
+                adapter.submitList(it)
             }
         })
+
+        /*
+        viewmodel.dataWithProfile.observe(viewLifecycleOwner, Observer {
+            it?.let{
+                Log.e("dataProfile","============================================================")
+                Log.e("dataProfile","dataProfile: ${it}")
+                Log.e("dataProfile","============================================================")
+            }
+        })
+
+         */
 
         return binding.root
     }

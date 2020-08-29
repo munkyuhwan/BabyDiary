@@ -28,8 +28,7 @@
 
     <ImageView
         android:id="@+id/user_icon"
-        android:layout_width="28sp"
-        android:layout_height="28sp"
+        style="@style/MainFeedMemberThumbnail"
         android:src="@mipmap/ic_launcher"
         android:theme="@style/MainFeedMemberThumbnail"
         app:layout_constraintStart_toStartOf="parent"

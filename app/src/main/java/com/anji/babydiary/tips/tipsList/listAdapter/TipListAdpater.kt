@@ -56,7 +56,7 @@ class TipListAdpater(val clickListener: TipClickListener): ListAdapter<Tip, TipL
 
 class TipListDiffCallback: DiffUtil.ItemCallback<Tip>() {
     override fun areItemsTheSame(oldItem: Tip, newItem: Tip): Boolean {
-        return oldItem.tip_idx == newItem.tip_idx
+        return oldItem.idx == newItem.idx
     }
 
     override fun areContentsTheSame(oldItem: Tip, newItem: Tip): Boolean {
@@ -70,7 +70,7 @@ sealed class DataItem {
     abstract val id:Long
 
     data class ResultItem(val tip:Tip):DataItem() {
-        override val id = tip.tip_idx
+        override val id = tip.idx
     }
 
     object Header:DataItem() {
