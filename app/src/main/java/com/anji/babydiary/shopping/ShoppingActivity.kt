@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.Gravity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import com.anji.babydiary.common.BaseActivity
 import com.anji.babydiary.R
@@ -26,6 +27,9 @@ class ShoppingActivity() : BaseActivity() {
         binding.shopMain = viewModel
 
         setNav(R.id.shoppingNestedHost)
+        navController = this.findNavController(R.id.shoppingNestedHost)
+
+        binding.navController = navViewModel
 
         binding.bottomNav = setBottomNav(1)
 
