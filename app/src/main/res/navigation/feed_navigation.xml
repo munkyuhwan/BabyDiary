@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_feedList_to_feedDetail"
             app:destination="@id/feedDetail" />
+        <action
+            android:id="@+id/action_feedList_to_comment"
+            app:destination="@id/comment" />
     </fragment>
     <fragment
         android:id="@+id/feedDetail"

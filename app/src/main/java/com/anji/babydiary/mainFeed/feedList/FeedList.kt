@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
+import com.anji.babydiary.database.likes.LikesDatabase
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.databinding.FeedListFragmentBinding
@@ -35,20 +36,26 @@ class FeedList : Fragment() {
         val application = requireNotNull(this.activity).application
         val dataSource = MainFeedDatabase.getInstance(application).database
         val profileData = ProfileDatabase.getInstance(application).database
+        val likeDatabase = LikesDatabase.getInstance(application).database
 
 
-        viewModelFactory = FeedListViewModelFactory(dataSource, profileData, application)
+        viewModelFactory = FeedListViewModelFactory(dataSource, profileData, likeDatabase, application)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(FeedListViewModel::class.java)
         viewModel.selectAll()
 
         binding.mainFeed = viewModel
         binding.setLifecycleOwner(this)
 
+        var navOption = NavOptions.Builder().setEnterAnim(R.anim.fade_in).setExitAnim(R.anim.fade_out).build()
 
         val adapter = MainFeedListAdapter(FeedClickListener {
-            var navOption = NavOptions.Builder().setEnterAnim(R.anim.fade_in).setExitAnim(R.anim.fade_out).build()
             findNavController().navigate(FeedListDirections.actionFeedListToFeedDetail(it), navOption)
-        })
+        }, FeedCommentClickListener {
+            it?.let {
+                findNavController().navigate(FeedListDirections.actionFeedListToComment(it), navOption)
+            }
+
+        }, viewModel)
         binding.feedList.adapter = adapter
 
         viewModel.allFeeds.observe(viewLifecycleOwner, Observer {
@@ -56,6 +63,9 @@ class FeedList : Fragment() {
                 adapter.submitList(it)
             }
         })
+
+
+
         return binding.root
     }
 

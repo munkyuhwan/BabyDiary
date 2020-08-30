@@ -1,9 +1,11 @@
 package com.anji.babydiary.common
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.view.Gravity
+import android.util.Log
+import android.view.View
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -18,8 +20,6 @@ import com.anji.babydiary.R
 import com.anji.babydiary.common.bottomNavigation.BottomNavigationViewModel
 import com.anji.babydiary.common.bottomNavigation.BottomNavigationViewModelFactory
 import com.anji.babydiary.dailyCheck.DailyCheckViewModel
-import com.anji.babydiary.dailyCheck.DailyCheckViewModelFactory
-import com.anji.babydiary.database.dailyCheck.DailyCheckDatabase
 import com.anji.babydiary.event.EventActivity
 import com.anji.babydiary.gnb.main.NavViewModel
 import com.anji.babydiary.gnb.main.NavViewModelFactory
@@ -29,7 +29,8 @@ import com.anji.babydiary.shopping.ShoppingActivity
 import com.anji.babydiary.tips.TipActivity
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.util.*
+import kotlinx.android.synthetic.main.nav_layout.view.*
+
 
 abstract class BaseActivity() : AppCompatActivity() {
 
@@ -37,15 +38,18 @@ abstract class BaseActivity() : AppCompatActivity() {
     lateinit var layout:CollapsingToolbarLayout;
     lateinit var navController:NavController
     lateinit var navViewModel: NavViewModel
+    lateinit var navView:LinearLayout
+
 
     fun setNav(nestedHost:Int):NavViewModel {
         var appBarConfiguration: AppBarConfiguration.Builder
-
+        var navViewClosedHeight:Int = 278
         val navViewModelFactory = NavViewModelFactory(application)
         navViewModel = ViewModelProviders.of(this, navViewModelFactory).get(NavViewModel::class.java)
 
 
         navController = this.findNavController(nestedHost)
+
 
         if (nestedHost == R.id.eventNestFragment) {
             layout = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar_event_layout)
@@ -53,6 +57,8 @@ abstract class BaseActivity() : AppCompatActivity() {
         }else {
             layout = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar_layout)
             toolbar = findViewById<Toolbar>(R.id.activity_toolbar)
+            navView = toolbar.nav_category
+            navView.animate().translationY(navView.height.toFloat()).setDuration(1000)
         }
 
         setSupportActionBar(toolbar)
@@ -66,9 +72,20 @@ abstract class BaseActivity() : AppCompatActivity() {
         layout.isTitleEnabled=false
         layout.setupWithNavController(toolbar, navController, appBarConfiguration.build())
 
-
         navViewModel.isOpen.observe(this, Observer {
             //layout.nav_category.bringToFront()
+            it?.let {
+                Log.e("isopen","${it}")
+                Log.e("isopen","${navView.visibility}")
+                Log.e("isopen","${View.GONE}")
+                var layoutParam = layout.layoutParams
+                if (!it) {
+                    layoutParam.height = 278
+                }else {
+                    layoutParam.height = 578
+                }
+            }
+
         })
         return navViewModel
     }

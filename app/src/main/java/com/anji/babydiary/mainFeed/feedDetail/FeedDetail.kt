@@ -61,12 +61,7 @@ class FeedDetail : Fragment() {
         })
 
         binding.commentBtn.setOnClickListener {
-            //findNavController().navigate(FeedDetailDirections.actionFeedDetailFromMyPageToCommentFromMyFeed(idx) )
-
             findNavController().navigate(FeedDetailDirections.actionFeedDetailToComment(idx) )
-
-
-
         }
 
         return binding.root

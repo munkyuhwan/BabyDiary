@@ -34,7 +34,8 @@
             android:layout_marginBottom="50dp"
             app:layout_constraintBottom_toBottomOf="@+id/myFeedImage"
             app:layout_constraintStart_toStartOf="parent"
-            android:onClick="@{() -> feedViewModel.onLikeButtonClicked(vibe.getText()) }"/>
+            android:onClick="@{() -> feedViewModel.onLikeButtonClicked(vibe.getText()) }"
+            />
 
         <Button
             android:id="@+id/comment_btn"
