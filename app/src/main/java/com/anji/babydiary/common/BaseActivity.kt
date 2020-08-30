@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -15,6 +16,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.common.bottomNavigation.BottomNavigationViewModel
@@ -50,7 +52,6 @@ abstract class BaseActivity() : AppCompatActivity() {
 
         navController = this.findNavController(nestedHost)
 
-
         if (nestedHost == R.id.eventNestFragment) {
             layout = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar_event_layout)
             toolbar = findViewById<Toolbar>(R.id.activity_event_toolbar)
@@ -61,15 +62,15 @@ abstract class BaseActivity() : AppCompatActivity() {
             navView.animate().translationY(navView.height.toFloat()).setDuration(1000)
         }
 
+
+        //toolbar.navigationIcon!!.setVisible(false, false)
+        //toolbar.setNavigationIcon(R.drawable.ic_launcher_background)
         setSupportActionBar(toolbar)
 
-        supportActionBar!!.setDisplayShowCustomEnabled(true)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setHomeAsUpIndicator(null)
 
         appBarConfiguration = AppBarConfiguration.Builder(navController.graph)
         layout.isTitleEnabled=false
+
         layout.setupWithNavController(toolbar, navController, appBarConfiguration.build())
 
         navViewModel.isOpen.observe(this, Observer {
@@ -87,6 +88,11 @@ abstract class BaseActivity() : AppCompatActivity() {
             }
 
         })
+
+
+        Log.e("navigation icon", "icon: ${toolbar.navigationIcon}")
+
+
         return navViewModel
     }
 

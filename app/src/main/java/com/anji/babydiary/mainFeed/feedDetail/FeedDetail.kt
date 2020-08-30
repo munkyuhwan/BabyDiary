@@ -15,6 +15,7 @@ import com.anji.babydiary.database.likes.LikesDatabase
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
 import com.anji.babydiary.databinding.FeedDetailFragmentBinding
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.nav_layout.*
 
 class FeedDetail : Fragment() {
 
@@ -63,6 +64,9 @@ class FeedDetail : Fragment() {
         binding.commentBtn.setOnClickListener {
             findNavController().navigate(FeedDetailDirections.actionFeedDetailToComment(idx) )
         }
+
+
+
 
         return binding.root
     }
