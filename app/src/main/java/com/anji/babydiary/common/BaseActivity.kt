@@ -1,6 +1,8 @@
 package com.anji.babydiary.common
 
 import android.content.Intent
+import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.Gravity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -71,6 +73,19 @@ abstract class BaseActivity() : AppCompatActivity() {
         return navViewModel
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+
+    }
+
+
 
     fun setBottomNav(idx:Int):BottomNavigationViewModel {
         val bottomNavViewModelFactory = BottomNavigationViewModelFactory(this, idx)
@@ -81,16 +96,19 @@ abstract class BaseActivity() : AppCompatActivity() {
 
     fun eventIntent() {
         val intent: Intent = Intent(this, EventActivity::class.java)
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
         startActivity(intent)
     }
 
     fun tipIntent() {
         val intent: Intent = Intent(this, TipActivity::class.java)
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
         startActivity(intent)
     }
     fun shoppingIntent() {
 
         val intent: Intent = Intent(this, ShoppingActivity::class.java)
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
         startActivity(intent)
 
     }
@@ -98,12 +116,14 @@ abstract class BaseActivity() : AppCompatActivity() {
     fun mainIntent() {
 
         val intent: Intent = Intent(this, MainFeedActivity::class.java)
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
         startActivity(intent)
 
     }
 
     fun myPageIntent() {
         val intent: Intent = Intent(this, MyPage::class.java)
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
         startActivity(intent)
 
     }
