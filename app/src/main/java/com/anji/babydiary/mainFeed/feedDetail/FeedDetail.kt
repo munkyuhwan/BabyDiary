@@ -72,4 +72,10 @@ class FeedDetail : Fragment() {
         return binding.root
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+
+    }
+
 }
