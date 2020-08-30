@@ -48,12 +48,14 @@ class MyFeedWrite : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.openKidInfo.setOnCheckedChangeListener { compoundButton, b ->
-
             if (b) {
                 viewModel.isShown.value = View.VISIBLE
             }else {
                 viewModel.isShown.value = View.GONE
             }
+        }
+        binding.babyDetailLayout.setOnClickListener {
+            binding.openKidInfo.performClick()
         }
 
         binding.tolocationLayer.setOnClickListener {
@@ -67,6 +69,9 @@ class MyFeedWrite : Fragment() {
 
 
         binding.myFeedImage.setOnClickListener{
+            permissionCheck()
+        }
+        binding.addBtn.setOnClickListener{
             permissionCheck()
         }
 

@@ -122,6 +122,10 @@
         <item name="borderWidth">1sp</item>
         <item name="android:background">@drawable/bottom_border_layout</item>
     </style>
+    <style name="infoInputStyle">
+        <item name="android:textColor">@color/calendarTextColor</item>
+        <item name="android:background">@drawable/info_inptu_background</item>
+    </style>
 
     <style name="WriteProductLabel">
         <item name="android:textColor">#636363</item>

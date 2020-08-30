@@ -15,7 +15,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="15sp"
+    android:paddingTop="100sp"
     android:paddingRight="20sp"
     android:paddingLeft="20sp"
     android:paddingBottom="15sp"
@@ -28,6 +28,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/add_btn"
+        style="@style/editBtn"
+        android:layout_width="24sp"
+        android:layout_height="24sp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/myFeedImage"
+        app:layout_constraintEnd_toEndOf="@+id/myFeedImage" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -104,9 +114,12 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/heightInputEditText"
                         android:layout_width="30sp"
-                        android:layout_height="13sp"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        style="@style/infoInputStyle"
                         app:layout_constraintBottom_toBottomOf="@+id/height_label"
-                        app:layout_constraintStart_toEndOf="@+id/height_label" />
+                        app:layout_constraintStart_toEndOf="@+id/height_label"
+                        app:layout_constraintTop_toTopOf="@+id/height_label" />
 
                     <TextView
                         android:id="@+id/height_unit_label"
@@ -123,6 +136,7 @@
                         style="@style/babyInfoLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
                         android:text="@string/weight"
                         app:layout_constraintBottom_toBottomOf="@+id/height_unit_label"
                         app:layout_constraintStart_toEndOf="@+id/height_unit_label"
@@ -131,9 +145,12 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/weightInputEditText"
                         android:layout_width="30sp"
-                        android:layout_height="13sp"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        style="@style/infoInputStyle"
                         app:layout_constraintBottom_toBottomOf="@+id/weight_label"
-                        app:layout_constraintStart_toEndOf="@+id/weight_label" />
+                        app:layout_constraintStart_toEndOf="@+id/weight_label"
+                        app:layout_constraintTop_toTopOf="@+id/weight_label" />
 
                     <TextView
                         android:id="@+id/weight_unit_label"
@@ -150,6 +167,7 @@
                         style="@style/babyInfoLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
                         android:text="@string/head_size_label"
                         app:layout_constraintBottom_toBottomOf="@+id/weight_unit_label"
                         app:layout_constraintStart_toEndOf="@+id/weight_unit_label"
@@ -158,9 +176,12 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/headInputEditText"
                         android:layout_width="30sp"
-                        android:layout_height="13sp"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        style="@style/infoInputStyle"
                         app:layout_constraintBottom_toBottomOf="@+id/head_size_label"
-                        app:layout_constraintStart_toEndOf="@+id/head_size_label" />
+                        app:layout_constraintStart_toEndOf="@+id/head_size_label"
+                        app:layout_constraintTop_toTopOf="@+id/head_size_label" />
 
                     <TextView
                         android:id="@+id/head_unit_label"
@@ -192,9 +213,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/toSpouserLayout"
-                style="@style/InputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/baby_detail_layout">
@@ -202,15 +224,19 @@
                 <TextView
                     android:id="@+id/toWifeLabel"
                     style="@style/feedWriteTextLabel"
+                    android:layout_marginLeft="10sp"
                     android:text="@string/to_wife_label"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/toWife"
+                    style="@style/InputStyle"
+                    android:textColor="@color/calendarTextColor"
                     android:layout_width="match_parent"
-                    android:layout_height="20sp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:textSize="13sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/toWifeLabel" />
