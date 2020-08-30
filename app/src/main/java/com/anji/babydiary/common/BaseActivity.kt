@@ -40,7 +40,6 @@ abstract class BaseActivity() : AppCompatActivity() {
     lateinit var layout:CollapsingToolbarLayout;
     lateinit var navController:NavController
     lateinit var navViewModel: NavViewModel
-    lateinit var navView:LinearLayout
 
 
     fun setNav(nestedHost:Int):NavViewModel {
@@ -58,7 +57,7 @@ abstract class BaseActivity() : AppCompatActivity() {
         }else {
             layout = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar_layout)
             toolbar = findViewById<Toolbar>(R.id.activity_toolbar)
-            navView = toolbar.nav_category
+            var navView = toolbar.nav_category
             navView.animate().translationY(navView.height.toFloat()).setDuration(1000)
         }
 
@@ -76,9 +75,6 @@ abstract class BaseActivity() : AppCompatActivity() {
         navViewModel.isOpen.observe(this, Observer {
             //layout.nav_category.bringToFront()
             it?.let {
-                Log.e("isopen","${it}")
-                Log.e("isopen","${navView.visibility}")
-                Log.e("isopen","${View.GONE}")
                 var layoutParam = layout.layoutParams
                 if (!it) {
                     layoutParam.height = 278
