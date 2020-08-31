@@ -15,35 +15,210 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="20sp"
-        android:paddingTop="320sp"
         android:layout_marginBottom="64sp"
-        android:paddingRight="20sp"
         android:background="#ffffff"
         tools:context=".myPage.myFeed.MyFeed">
 
-        <Button
-            android:id="@+id/myfeed_bookmark"
-            style="@style/addBookMark"
-            android:layout_marginEnd="10dp"
-            app:layout_constraintEnd_toStartOf="@+id/add_myfeed"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/add_myfeed"
-            style="@style/addMyFeed"
-            android:layout_marginEnd="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/my_feed_list"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mypage_main_nav"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/myfeed_bookmark" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:background="@drawable/main_feed_actionbar"
+                android:id="@+id/main_nav_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="20sp"
+                android:paddingBottom="20sp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/dailycheck_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/chatting_icon"
+                    app:layout_constraintBottom_toBottomOf="@+id/more_category"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/more_category" />
+
+                <TextView
+                    android:id="@+id/name_kid"
+                    style="@style/MainFeedCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@+id/moreMenuBtn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/more_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/main_feed_open_icon"
+                    app:layout_constraintBottom_toBottomOf="@+id/name_kid"
+                    app:layout_constraintStart_toEndOf="@+id/name_kid"
+                    app:layout_constraintTop_toTopOf="@+id/name_kid" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/moreMenuBtn"
+                    android:layout_width="20sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/mypage_menu"
+                    app:layout_constraintBottom_toBottomOf="@+id/more_category"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/more_category" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/shapeableImageView"
+                    android:layout_width="164dp"
+                    android:layout_height="164dp"
+                    android:layout_marginTop="20dp"
+                    android:background="#efefef"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/sample_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/name_kid"
+                    app:shapeAppearanceOverlay="@style/circleImageView" />
+
+                <TextView
+                    android:id="@+id/followerLabel"
+                    style="@style/MyPageFollowNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="50dp"
+                    android:text="@string/follower"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/shapeableImageView"
+                    app:layout_constraintEnd_toStartOf="@+id/shapeableImageView" />
+
+                <TextView
+                    android:id="@+id/num_follower"
+                    style="@style/MyPageFollowNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="12"
+                    app:layout_constraintBottom_toTopOf="@+id/followerLabel"
+                    app:layout_constraintEnd_toEndOf="@+id/followerLabel"
+                    app:layout_constraintStart_toStartOf="@+id/followerLabel" />
+
+                <TextView
+                    android:id="@+id/followingLabel"
+                    style="@style/MyPageFollowNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:text="@string/following"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/shapeableImageView"
+                    app:layout_constraintStart_toEndOf="@+id/shapeableImageView" />
+
+                <TextView
+                    android:id="@+id/num_following"
+                    style="@style/MyPageFollowNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30"
+                    app:layout_constraintBottom_toTopOf="@+id/followingLabel"
+                    app:layout_constraintEnd_toEndOf="@+id/followingLabel"
+                    app:layout_constraintStart_toStartOf="@+id/followingLabel" />
+
+                <TextView
+                    android:id="@+id/intro_text"
+                    style="@style/MyPageFollowNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="장난끼 많은 애교장이 장남"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/shapeableImageView"
+                    app:layout_constraintStart_toStartOf="@+id/shapeableImageView"
+                    app:layout_constraintTop_toBottomOf="@+id/shapeableImageView" />
+
+                <TextView
+                    android:id="@+id/age_kid"
+                    style="@style/MyPageSmallText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="6개월"
+                    app:layout_constraintEnd_toEndOf="@+id/intro_text"
+                    app:layout_constraintStart_toStartOf="@+id/intro_text"
+                    app:layout_constraintTop_toBottomOf="@+id/intro_text" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/nav_category"
+                style="@style/MainAppBarSelect"
+                android:layout_marginTop="200sp"
+                android:orientation="vertical"
+                android:paddingLeft="20sp"
+                android:paddingTop="0sp"
+                android:paddingRight="20sp"
+                android:paddingBottom="10sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/main_nav_layout">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="32sp"
+                    android:background="@drawable/corner_30" />
+
+                <TextView
+                    style="@style/MainFeedCatOne"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    style="@style/MainFeedCatTwo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/my_feed_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20sp"
+                android:paddingRight="20sp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/myfeed_bookmark" />
+
+            <Button
+                android:id="@+id/myfeed_bookmark"
+                style="@style/addBookMark"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintEnd_toStartOf="@+id/add_myfeed"
+                app:layout_constraintTop_toBottomOf="@+id/main_nav_layout" />
+
+            <Button
+                android:id="@+id/add_myfeed"
+                style="@style/addMyFeed"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintBottom_toBottomOf="@+id/myfeed_bookmark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/myfeed_bookmark" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

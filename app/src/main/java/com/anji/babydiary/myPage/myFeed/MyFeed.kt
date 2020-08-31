@@ -16,10 +16,15 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.anji.babydiary.R
+import com.anji.babydiary.bottomActivity.BottomMenu
+import com.anji.babydiary.bottomActivity.resign.Resign
 import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
+import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.databinding.MyFeedFragmentBinding
 import com.anji.babydiary.myPage.myFeed.myFeedListAdapter.MyFeedListAdapter
+import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.nav_mypage_layout.view.*
 
 class MyFeed : Fragment() {
 
@@ -35,8 +40,9 @@ class MyFeed : Fragment() {
 
         val application = requireNotNull(this.activity).application
         val database = MainFeedDatabase.getInstance(application).database
+        val profileDatabase = ProfileDatabase.getInstance(application).database
 
-        val viewModelFactory = MyFeedViewModelFactory(database, application)
+        val viewModelFactory = MyFeedViewModelFactory(database, profileDatabase, application)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MyFeedViewModel::class.java)
 
         binding.myFeedViewModel = viewModel
@@ -64,22 +70,56 @@ class MyFeed : Fragment() {
                 clickAdapter.submitList(it)
             }
         })
+        binding.moreMenuBtn.setOnClickListener {
+            val intent: Intent = Intent(requireActivity(), BottomMenu::class.java)
+            intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+            startActivityForResult(intent, CommonCode.MYPAGE_ACTIVITY_RESULT)
+        }
+
+        viewModel.myProfile.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+
+            it?.let {
+                binding.nameKid.text = it.name.toString()
+                binding.numFollower.text = it.follower.toString()
+                binding.numFollowing.text = it.following.toString()
+
+                Glide.with(application).load(it.img).into(binding.shapeableImageView)
+
+                binding.introText.text = it.introduce.toString()
+
+            }
+        })
 
         return binding.root
     }
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        Toast.makeText(context, "activity result", Toast.LENGTH_SHORT).show()
-        if (requestCode == CommonCode.MYPAGE_ACTIVITY_RESULT && resultCode == Activity.RESULT_OK) {
+
+
+        if (requestCode == CommonCode.MYPAGE_ACTIVITY_RESULT) {
+
             data?.let {
                 it.extras?.let {
                     val itemSelected = it.get("selectedItem")
 
                     when (itemSelected) {
+                        0 -> {
+                            findNavController().navigate(MyFeedDirections.actionMyFeedToMyAlarm())
+                        }
                         1 -> {
                             findNavController().navigate(MyFeedDirections.actionMyFeedToMyProfile())
+                        }
+                        2 -> {
+                            findNavController().navigate(MyFeedDirections.actionMyFeedToMyFamily())
+                        }
+                        3 -> {
+                            findNavController().navigate(MyFeedDirections.actionMyFeedToThemeSetting())
+                        }
+                        4 -> {
+                            val intent: Intent = Intent(requireActivity(), Resign::class.java)
+                            intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                            startActivity(intent)
                         }
                     }
 
@@ -95,7 +135,6 @@ class MyFeed : Fragment() {
 
 
     }
-
 
 
 

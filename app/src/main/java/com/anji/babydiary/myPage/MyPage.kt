@@ -57,6 +57,7 @@ class MyPage : BaseActivity() {
 
         navController = this.findNavController(R.id.myPageNestFragment)
 
+        /*
         var actionBar = supportActionBar
         if (actionBar != null) {
             actionBar.setDisplayShowCustomEnabled(true)
@@ -125,8 +126,11 @@ class MyPage : BaseActivity() {
             }
         }
 
+         */
+
         binding.bottomNav = setBottomNav(4)
 
+        /*
         viewModel.myProfile.observe(this, androidx.lifecycle.Observer {
 
             it?.let {
@@ -140,6 +144,8 @@ class MyPage : BaseActivity() {
 
             }
         })
+
+         */
 
 
 

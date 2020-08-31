@@ -14,9 +14,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="12sp"
-    android:paddingRight="12sp"
-    android:paddingTop="10sp"
     tools:context=".myPage.myFeedWriteLocation.MyFeedWriteLocation">
 
     <LinearLayout
@@ -25,6 +22,10 @@
         android:layout_height="52sp"
         android:background="@drawable/shadow"
         android:orientation="horizontal"
+        android:layout_marginTop="110sp"
+        android:layout_marginRight="20sp"
+        android:layout_marginLeft="20sp"
+        android:paddingLeft="10sp"
         android:paddingRight="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,6 +54,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:paddingRight="20sp"
+        android:paddingLeft="20sp"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         tools:layout_editor_absoluteX="12dp">
 
@@ -65,6 +68,44 @@
             android:text="우리집"
             />
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mypage_sub_nav_layout"
+        android:layout_width="match_parent"
+        android:layout_height="99sp"
+        android:background="@drawable/main_feed_actionbar"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/backBtn"
+            android:layout_width="16sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/back_btn"
+            app:layout_constraintBottom_toBottomOf="@+id/complete_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/complete_button"
+            app:layout_constraintVertical_bias="0.7" />
+
+        <Button
+            android:id="@+id/complete_button"
+            style="@style/completeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/main_feed_search_icon"
+            android:text="알림"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.72" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

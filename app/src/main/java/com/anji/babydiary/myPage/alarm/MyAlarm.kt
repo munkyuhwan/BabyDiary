@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.databinding.MyAlarmFragmentBinding
 
@@ -30,6 +31,9 @@ class MyAlarm : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.alarmViewModel = viewModel
 
+        binding.backBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         return binding.root
     }

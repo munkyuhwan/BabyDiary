@@ -11,7 +11,7 @@
             type="com.anji.babydiary.myPage.themeSetting.ThemeSettingViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mainLayout"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -20,55 +20,119 @@
         >
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/linearLayout3"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_weight="1"
             android:onClick="@{() -> themeSettingViewModel.onThemeSelect(0)}"
-            >
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/imageView2"
+            app:layout_constraintEnd_toEndOf="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="@+id/imageView2">
+
             <com.google.android.material.textview.MaterialTextView
                 style="@style/themeSetting"
                 android:text="@string/theme_setting_light" />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/theme_white"
-                />
-            <RadioButton
-                android:id="@+id/radio_light"
-                style="@style/themeRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="@{themeSettingViewModel.isLightSelected()}"
-                android:onClick="@{() -> themeSettingViewModel.onThemeSelect(0)}"
-                />
+
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_weight="1"
             android:onClick="@{() -> themeSettingViewModel.onThemeSelect(1)}"
-            >
-            <com.google.android.material.textview.MaterialTextView
-                style="@style/themeSetting"
-                android:text="@string/theme_setting_dark" />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/theme_black"
-                />
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="@+id/imageView3"
+            app:layout_constraintStart_toStartOf="@+id/imageView3"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3">
+
             <RadioButton
                 android:id="@+id/radio_dark"
                 style="@style/themeRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="@{themeSettingViewModel.isDarkSelected()}"
-                android:onClick="@{() -> themeSettingViewModel.onThemeSelect(1)}"
-                />
+                android:onClick="@{() -> themeSettingViewModel.onThemeSelect(1)}" />
         </LinearLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mypage_sub_nav_layout"
+            android:layout_width="match_parent"
+            android:layout_height="99sp"
+            android:background="@drawable/main_feed_actionbar"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/backBtn"
+                android:layout_width="16sp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/back_btn"
+                app:layout_constraintBottom_toBottomOf="@+id/complete_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/complete_button"
+                app:layout_constraintVertical_bias="0.7" />
+
+            <Button
+                android:id="@+id/complete_button"
+                style="@style/completeBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/main_feed_search_icon"
+                android:text="테마설정"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.686" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="98sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="70dp"
+            android:src="@drawable/theme_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mypage_sub_nav_layout" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="98sp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="80dp"
+            android:src="@drawable/theme_white"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView3"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <RadioButton
+            android:id="@+id/radio_light"
+            style="@style/themeRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="@{themeSettingViewModel.isLightSelected()}"
+            android:onClick="@{() -> themeSettingViewModel.onThemeSelect(0)}"
+            app:layout_constraintEnd_toEndOf="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/themeSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/theme_setting_dark"
+            app:layout_constraintBottom_toTopOf="@+id/imageView3"
+            app:layout_constraintEnd_toEndOf="@+id/imageView3"
+            app:layout_constraintStart_toStartOf="@+id/imageView3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -77,6 +77,10 @@ class MyProfile : Fragment() {
             }
         })
 
+        binding.myfeedWrite.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         return binding.root
     }
 

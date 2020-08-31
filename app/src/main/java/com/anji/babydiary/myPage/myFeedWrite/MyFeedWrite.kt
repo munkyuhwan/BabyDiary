@@ -63,9 +63,15 @@ class MyFeedWrite : Fragment() {
         }
 
 
-        requireActivity().complete_button.setOnClickListener {
+
+        binding.completeButton.setOnClickListener {
             viewModel.complete(binding.titleInput.text.toString(),  binding.heightInputEditText.text.toString(), binding.weightInputEditText.text.toString(), binding.headInputEditText.text.toString(), binding.selectedAddress.text.toString(), binding.toWife.text.toString() )
         }
+
+        binding.backBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
 
 
         binding.myFeedImage.setOnClickListener{

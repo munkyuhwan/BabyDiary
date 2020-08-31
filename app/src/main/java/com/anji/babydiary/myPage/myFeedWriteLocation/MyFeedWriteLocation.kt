@@ -35,6 +35,10 @@ class MyFeedWriteLocation : Fragment() {
             findNavController().popBackStack()
         }
 
+        binding.backBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         return binding.root
     }
 

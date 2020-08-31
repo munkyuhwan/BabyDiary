@@ -7,19 +7,26 @@ import androidx.lifecycle.ViewModel
 import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.database.mainFeed.MainFeedDAO
+import com.anji.babydiary.database.profile.ProfileDao
+import com.anji.babydiary.database.profile.Profiles
 import kotlinx.coroutines.*
 
-class MyFeedViewModel(val database:MainFeedDAO, application: Application) : AndroidViewModel(application) {
-
+class MyFeedViewModel(val database:MainFeedDAO, val profileDatabas: ProfileDao, application: Application) : AndroidViewModel(application) {
 
     private val job = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
+    val myProfile = MutableLiveData<Profiles>()
 
     val selectAll = MutableLiveData<List<MainFeed>>()
     init {
         uiScope.launch {
             selectByIdx()
         }
+
+        uiScope.launch {
+            selectAll()
+        }
+
     }
 
     suspend fun selectByIdx() {
@@ -28,6 +35,11 @@ class MyFeedViewModel(val database:MainFeedDAO, application: Application) : Andr
         }
     }
 
+    suspend fun selectAll() {
+        withContext(Dispatchers.IO) {
+            myProfile.postValue(profileDatabas.selectProfile(CommonCode.USER_IDX))
+        }
+    }
 }
 
 class MyFeedClickListener(val clickListener:(feedId:Long)->Unit) {

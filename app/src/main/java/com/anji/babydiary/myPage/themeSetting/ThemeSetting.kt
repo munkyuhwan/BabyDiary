@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.databinding.ThemeSettingFragmentBinding
 
@@ -30,14 +31,16 @@ class ThemeSetting : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.themeSettingViewModel = viewModel
 
-
-
         viewModel.theme.observe(viewLifecycleOwner, Observer {
             it?.let {
                 binding.mainLayout.setBackgroundColor(Color.parseColor(it))
 
             }
         })
+
+        binding.backBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         return binding.root
 
