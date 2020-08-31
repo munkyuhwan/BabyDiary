@@ -12,23 +12,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".tips.tipsList.TipListFragment">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tip_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="160dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/go_write_tip" />
 
     <Button
         android:id="@+id/clear_tip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="112dp"
         android:onClick="@{() -> tipListViewModel.clearAll() }"
         android:text="-"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,13 +37,121 @@
 
     <Button
         android:id="@+id/go_write_tip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="55dp"
-        android:text="+"
+        style="@style/addMyFeed"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout5" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/nav_category"
+            style="@style/MainAppBarSelect"
+            android:layout_marginTop="60sp"
+            android:animateLayoutChanges="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingTop="50sp"
+            android:paddingBottom="10sp"
+            android:visibility="@{tipListViewModel.isCategoryOpen()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/main_nav_layout">
+
+            <TextView
+                style="@style/MainFeedCatOne"
+                android:text="전체보기"
+                android:onClick="@{() -> tipListViewModel.doSelectByCateogry(99)}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                style="@style/MainFeedCatOne"
+                android:text="건강"
+                android:onClick="@{() -> tipListViewModel.doSelectByCateogry(0)}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp" />
+            <TextView
+                style="@style/MainFeedCatTwo"
+                android:text="놀이"
+                android:onClick="@{() -> tipListViewModel.doSelectByCateogry(1)}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp" />
+            <TextView
+                style="@style/MainFeedCatTwo"
+                android:text="교육"
+                android:onClick="@{() -> tipListViewModel.doSelectByCateogry(2)}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp" />
+            <TextView
+                style="@style/MainFeedCatTwo"
+                android:text="기타"
+                android:onClick="@{() -> tipListViewModel.doSelectByCateogry(3)}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp" />
+
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_nav_layout"
+            android:layout_width="match_parent"
+            android:layout_height="99sp"
+            android:background="@drawable/main_feed_actionbar"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/name_kid"
+                style="@style/MainFeedCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:gravity="center_vertical"
+                android:onClick="@{() -> tipListViewModel.onCategorySelectClicked()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/more_category"
+                android:layout_width="wrap_content"
+                android:layout_height="60sp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:onClick="@{() -> tipListViewModel.onCategorySelectClicked()}"
+                android:src="@drawable/main_feed_open_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/name_kid"
+                app:layout_constraintStart_toEndOf="@+id/name_kid"
+                app:layout_constraintTop_toTopOf="@+id/name_kid" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/main_feed_search_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/name_kid"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/name_kid" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

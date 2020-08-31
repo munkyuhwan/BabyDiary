@@ -19,7 +19,6 @@ import com.anji.babydiary.tips.tipsList.listAdapter.TipListAdpater
 
 class TipListFragment : Fragment() {
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,7 +46,7 @@ class TipListFragment : Fragment() {
 
         viewmodel.dataAll.observe(viewLifecycleOwner, Observer {
             it?.let {
-                Log.e("data","data:${it}")
+                viewmodel.isCategoryOpen.value = View.GONE
                 adapter.submitList(it)
             }
         })

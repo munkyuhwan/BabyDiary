@@ -10,9 +10,6 @@
             name="tipViewModel"
             type="com.anji.babydiary.tips.TipActivityViewModel" />
         <variable
-            name="navController"
-            type="com.anji.babydiary.gnb.main.NavViewModel" />
-        <variable
             name="bottomNav"
             type="com.anji.babydiary.common.bottomNavigation.BottomNavigationViewModel" />
 
@@ -35,7 +32,6 @@
                 android:name="androidx.navigation.fragment.NavHostFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="99sp"
                 android:layout_marginBottom="64sp"
                 app:defaultNavHost="true"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -44,9 +40,10 @@
                 app:navGraph="@navigation/tip_navigation" />
 
 
-            <include
+            <!-- include
                 layout="@layout/nav_layout"
-                bind:navController="@{navController}"/>
+                bind:navController="@{navController}"/ -->
+
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"

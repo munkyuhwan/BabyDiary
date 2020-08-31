@@ -26,11 +26,8 @@ class TipActivity : BaseActivity() {
         viewModel = TipActivityViewModel(application)
         binding.tipViewModel = viewModel
 
-        setNav(R.id.tipNestedHost)
-        //setOnclickMenu()
-
-        val navViewModel = setNav(R.id.tipNestedHost)
-        binding.navController = navViewModel
+        //val navViewModel = setNav(R.id.tipNestedHost)
+        //binding.navController = navViewModel
 
 
         binding.bottomNav = setBottomNav(3)

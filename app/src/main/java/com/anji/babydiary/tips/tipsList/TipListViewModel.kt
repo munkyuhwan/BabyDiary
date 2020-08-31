@@ -1,6 +1,7 @@
 package com.anji.babydiary.tips.tipsList
 
 import android.app.Application
+import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,13 +21,38 @@ class TipListViewModel(
 
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    var dataAll = database.selectAll()
+    var dataAll = MutableLiveData<List<Tips>>()
+    var isCategoryOpen = MutableLiveData<Int>()
 
     //var dataWithProfile =database.selectAllWithProfile()
 
     init {
+        isCategoryOpen.value = View.GONE
+        uiScope.launch {
+            selectAll()
+        }
     }
 
+    suspend fun selectAll() {
+        withContext(Dispatchers.IO) {
+            dataAll.postValue(database.selectAll())
+        }
+    }
+
+    fun doSelectByCateogry(sel:Int) {
+        uiScope.launch {
+            if (sel == 99 ) {
+                selectAll()
+            }else {
+                selectByCategory(CommonCode.TIP_CATEGORY.get(sel))
+            }
+        }
+    }
+    suspend fun selectByCategory(sel:String) {
+        withContext(Dispatchers.IO) {
+            dataAll.postValue(database.selectByCategory(sel))
+        }
+    }
 
     fun clearAll() {
         uiScope.launch {
@@ -38,6 +64,14 @@ class TipListViewModel(
         withContext(Dispatchers.IO) {
             database.deleteAll()
         }
+    }
+    fun onCategorySelectClicked() {
+        if (isCategoryOpen.value == View.VISIBLE ) {
+            isCategoryOpen.value = View.GONE
+        }else {
+            isCategoryOpen.value = View.VISIBLE
+        }
+
     }
 
 }

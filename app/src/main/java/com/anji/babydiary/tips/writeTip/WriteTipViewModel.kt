@@ -24,12 +24,7 @@ class WriteTipViewModel(val database: TipsDao, application:Application) : Androi
     var selectedCategory = ""
     init {
         isDone.value = false
-        categories.value = arrayOf(
-            "건강",
-            "놀이",
-            "교육",
-            "기타"
-        )
+        categories.value = CommonCode.TIP_CATEGORY
     }
 
     fun insertTip(text:CharSequence) {

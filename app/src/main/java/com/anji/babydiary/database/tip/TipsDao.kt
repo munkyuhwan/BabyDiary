@@ -10,7 +10,7 @@ interface TipsDao {
     fun insert(tip:Tips)
 
     @Query("SELECT * FROM tbl_tips")
-    fun selectAll():LiveData<List<Tips>>
+    fun selectAll():List<Tips>
 
     /*
     @Query("SELECT * " +
@@ -20,6 +20,8 @@ interface TipsDao {
 
      */
 
+    @Query("SELECT * FROM tbl_tips WHERE tip_category= :cat")
+    fun selectByCategory(cat:String):List<Tips>
 
     @Query("DELETE FROM tbl_tips")
     fun deleteAll()

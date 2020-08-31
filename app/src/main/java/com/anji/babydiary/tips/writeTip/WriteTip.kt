@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.AdapterView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -32,6 +33,7 @@ class WriteTip : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         binding = DataBindingUtil.inflate<WriteTipFragmentBinding>(inflater, R.layout.write_tip_fragment, container, false)
 
@@ -47,6 +49,10 @@ class WriteTip : Fragment() {
         binding.tipImgView.setOnClickListener {
             permissionCheck()
         }
+        binding.addImgBtn.setOnClickListener {
+            permissionCheck()
+        }
+
 
         viewModel.selectedImage.observe(viewLifecycleOwner, Observer {
             it?.let { url ->
@@ -64,22 +70,12 @@ class WriteTip : Fragment() {
         viewModel.categories.observe(viewLifecycleOwner, Observer{
             it?.let{
                 val listItemsTxt = it
-
                 var spinnerAdapter: TipCategoryAdapter = TipCategoryAdapter(application, listItemsTxt)
                 binding.categorySpinner.adapter = spinnerAdapter
 
             }
         })
 
-        /*
-        binding.categorySpinner.setOnItemClickListener { adapterView, view, i, l ->
-            Log.e("item select","==========================================")
-            Log.e("item select","${i}, ${l}")
-            Log.e("item select","==========================================")
-            viewModel.onCategorySelected(i);
-        }
-
-         */
 
         binding.categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
