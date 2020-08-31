@@ -32,8 +32,8 @@ class EventActivity : BaseActivity() {
         val viewModel = ViewModelProviders.of(this, viewModelFactory).get(EventViewModel::class.java)
         binding.eventViewModel = viewModel
 
+        /*
         setNav(R.id.eventNestFragment)
-
         navController = this.findNavController(R.id.eventNestFragment)
         binding.navController = navViewModel
 
@@ -48,6 +48,8 @@ class EventActivity : BaseActivity() {
             }
 
         }
+
+         */
 
         //setOnclickMenu()
 

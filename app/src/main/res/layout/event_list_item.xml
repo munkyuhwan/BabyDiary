@@ -15,6 +15,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="10sp"
         android:onClick="@{() -> clickListener.onEventClick(event)}"
         android:foregroundGravity="center_vertical|fill_vertical|center_horizontal">
 
