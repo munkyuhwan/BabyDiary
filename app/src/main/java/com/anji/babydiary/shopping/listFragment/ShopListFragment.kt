@@ -1,27 +1,22 @@
 package com.anji.babydiary.shopping.listFragment
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.room.Room
+import androidx.recyclerview.widget.RecyclerView
 import com.anji.babydiary.R
-import com.anji.babydiary.database.shopping.Shopping
 import com.anji.babydiary.database.shopping.ShoppingDatabase
-import com.anji.babydiary.databinding.ActivityShoppingBinding
 import com.anji.babydiary.databinding.ShopListFragmentBinding
-import com.anji.babydiary.mainFeed.feedList.FeedClickListener
-import com.anji.babydiary.mainFeed.feedList.listAdapter.MainFeedListAdapter
 import com.anji.babydiary.shopping.listFragment.listAdapter.ShoppingListAdapter
+
 
 class ShopListFragment : Fragment() {
 
@@ -63,7 +58,9 @@ class ShopListFragment : Fragment() {
         })
 
         val manager = GridLayoutManager(activity,2)
+
         binding.productList.layoutManager = manager
+
 
         binding.writeProduct.setOnClickListener {
             

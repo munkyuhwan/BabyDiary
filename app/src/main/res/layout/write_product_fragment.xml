@@ -15,18 +15,67 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".shopping.writeFragment.WriteProduct"
-        android:paddingTop="20sp"
-        android:paddingLeft="20sp"
-        android:paddingRight="20sp">
+        tools:context=".shopping.writeFragment.WriteProduct">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mypage_sub_nav_layout"
+            android:layout_width="match_parent"
+            android:layout_height="99sp"
+            android:background="@drawable/main_feed_actionbar"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/backBtn"
+                android:layout_width="16sp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/back_btn"
+                app:layout_constraintBottom_toBottomOf="@+id/myfeed_write"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/myfeed_write"
+                app:layout_constraintVertical_bias="0.7" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/myfeed_write"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/myfeed_write_btn"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.73" />
+
+            <Button
+                android:id="@+id/complete_button"
+                style="@style/completeBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/main_feed_search_icon"
+                android:text="@string/complete_btn"
+                android:onClick="@{ () -> writeViewModel.saveData(productInput.getText(),productPrice.getText(), productUrl.getText() ) }"
+                app:layout_constraintBottom_toBottomOf="@+id/myfeed_write"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/myfeed_write" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="110sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingLeft="20sp"
+            android:paddingRight="20sp">
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
@@ -35,6 +84,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 />
+
+            <ImageButton
+                android:id="@+id/add_btn"
+                style="@style/editBtn"
+                android:layout_width="24sp"
+                android:layout_height="24sp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="30dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintEnd_toEndOf="@+id/imageView" />
 
             <Button
                 android:layout_width="74sp"
@@ -49,7 +108,8 @@
 
         <LinearLayout
             android:id="@+id/linearLayout"
-            style="@style/InputStyle"
+            android:layout_marginRight="20sp"
+            android:layout_marginLeft="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -59,7 +119,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/productInput"
-                style="@style/PriceInput"
+                style="@style/InputStyle"
+                android:textColor="@color/calendarTextColor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="안전망이 있어 아이들이 놀때 안심할 수 있는 트램폴린이에요!" />
@@ -70,6 +131,8 @@
             style="@style/InputStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="20sp"
+            android:layout_marginLeft="20sp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -112,6 +175,8 @@
             style="@style/InputStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="20sp"
+            android:layout_marginLeft="20sp"
             android:foregroundGravity="center_vertical"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
@@ -151,14 +216,6 @@
                 app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="save"
-            android:onClick="@{ () -> writeViewModel.saveData(productInput.getText(),productPrice.getText(), productUrl.getText() ) }"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

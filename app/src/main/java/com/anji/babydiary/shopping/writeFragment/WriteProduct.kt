@@ -79,6 +79,10 @@ class WriteProduct : Fragment() {
             }
         })
 
+        binding.backBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         return binding.root
     }
 

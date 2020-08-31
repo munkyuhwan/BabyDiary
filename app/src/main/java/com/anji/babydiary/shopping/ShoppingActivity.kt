@@ -26,10 +26,10 @@ class ShoppingActivity() : BaseActivity() {
         viewModel = ShopActivityViewModel(application)
         binding.shopMain = viewModel
 
-        setNav(R.id.shoppingNestedHost)
-        navController = this.findNavController(R.id.shoppingNestedHost)
+       // setNav(R.id.shoppingNestedHost)
+        //navController = this.findNavController(R.id.shoppingNestedHost)
 
-        binding.navController = navViewModel
+        //binding.navController = navViewModel
 
         binding.bottomNav = setBottomNav(1)
 
