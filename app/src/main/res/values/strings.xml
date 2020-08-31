@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BabyDiary</string>
+    <string name="app_name">육아일기</string>
     <string name="usericon">userIcon</string>
 
     <string name="main_menu_1">내 주변</string>

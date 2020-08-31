@@ -30,7 +30,9 @@ class MyProfileViewModel(val idx:Long, val database: ProfileDao, application: Ap
         withContext(Dispatchers.IO) {
             val tmpData = database.selectProfile(idx)
             data.postValue( tmpData )
-            selectedImage.postValue(Uri.parse(tmpData.img))
+            if (tmpData != null) {
+                selectedImage.postValue(Uri.parse(tmpData.img))
+            }
         }
     }
 
@@ -41,8 +43,8 @@ class MyProfileViewModel(val idx:Long, val database: ProfileDao, application: Ap
 
     fun onSubmitClick(name:CharSequence, pass:CharSequence, introduce:CharSequence) {
 
-        data.let {
-            it?.let {
+        //data.let {
+         //   it?.let {
                 var profile = Profiles()
 
                 profile.name = name.toString()
@@ -51,14 +53,14 @@ class MyProfileViewModel(val idx:Long, val database: ProfileDao, application: Ap
 
                 profile.img = selectedImage.value.toString()
 
-                if (it.value == null) {
+                if (data.value == null) {
                     insertData(profile)
                 }else {
                     updateData(profile)
                 }
 
-            }
-        }
+        //    }
+        //}
 
     }
 

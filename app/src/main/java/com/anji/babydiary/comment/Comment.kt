@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.comment.commentListAdapter.CommentListAdapter
 import com.anji.babydiary.database.comments.CommentsDatabase
@@ -58,6 +59,10 @@ class Comment : Fragment() {
                 binding.executePendingBindings()
             }
         })
+
+        binding.backBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         return binding.root
     }
