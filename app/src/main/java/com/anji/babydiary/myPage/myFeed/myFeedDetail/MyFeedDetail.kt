@@ -13,6 +13,7 @@ import com.anji.babydiary.R
 import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.likes.LikesDatabase
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
+import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.databinding.FeedDetailFragmentBinding
 import com.bumptech.glide.Glide
 
@@ -34,8 +35,9 @@ class MyFeedDetail : Fragment() {
         val application = requireNotNull(activity).application
         val database = MainFeedDatabase.getInstance(application).database
         val likeDatabase = LikesDatabase.getInstance(application).database
+        val profileDatabase = ProfileDatabase.getInstance(application).database
 
-        val viewModelFactory = MyFeedDetailViewModelFactory(idx, database, likeDatabase)
+        val viewModelFactory = MyFeedDetailViewModelFactory(idx, database, likeDatabase, profileDatabase)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(FeedDetailViewModel::class.java)
 
         binding.feedViewModel = viewModel

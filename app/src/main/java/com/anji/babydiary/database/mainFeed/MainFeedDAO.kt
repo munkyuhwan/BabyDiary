@@ -15,7 +15,7 @@ interface MainFeedDAO{
     fun selectAll(): LiveData<List<MainFeed>>
 
     @Query("SELECT * FROM tbl_main_feed WHERE idx= :key")
-    fun selectSingle(key:Long): LiveData<MainFeed>
+    fun selectSingle(key:Long):MainFeed
 
 
     @Query("SELECT * FROM tbl_main_feed WHERE user_idx= :key")

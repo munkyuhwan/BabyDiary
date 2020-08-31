@@ -1,5 +1,7 @@
 package com.anji.babydiary.mainFeed.feedDetail
 
+import android.app.Activity
+import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,9 +12,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
+import com.anji.babydiary.bottomActivity.BottomMenu
+import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.likes.LikesDatabase
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
+import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.databinding.FeedDetailFragmentBinding
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.nav_layout.*
@@ -35,8 +40,9 @@ class FeedDetail : Fragment() {
         val application = requireNotNull(activity).application
         val database = MainFeedDatabase.getInstance(application).database
         val likeDatabase = LikesDatabase.getInstance(application).database
+        val profileDatabase = ProfileDatabase.getInstance(application).database
 
-        val viewModelFactory = MyFeedDetailViewModelFactory(idx, database, likeDatabase)
+        val viewModelFactory = MyFeedDetailViewModelFactory(idx, database, likeDatabase, profileDatabase)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(FeedDetailViewModel::class.java)
 
         binding.feedViewModel = viewModel
@@ -65,6 +71,18 @@ class FeedDetail : Fragment() {
             findNavController().navigate(FeedDetailDirections.actionFeedDetailToComment(idx) )
         }
 
+        viewModel.writerProfile.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                binding.nameKid.text = it.name
+            }
+        })
+
+
+        binding.moreMenuBtn.setOnClickListener{
+            //val intent: Intent = Intent(activity, BottomMenu::class.java)
+            //intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+            //startActivityForResult(intent, CommonCode.MYPAGE_ACTIVITY_RESULT)
+        }
 
 
 
@@ -74,7 +92,8 @@ class FeedDetail : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
-
     }
+
+
 
 }

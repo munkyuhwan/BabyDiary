@@ -11,8 +11,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="30sp"
-        android:layout_marginTop="29sp"
         android:layout_marginBottom="64sp"
         tools:context=".mainFeed.feedDetail.MyFeedDetail">
 
@@ -21,6 +19,7 @@
             android:id="@+id/myFeedImage"
             android:layout_width="match_parent"
             android:layout_height="325sp"
+            android:layout_marginTop="50sp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -167,6 +166,99 @@
 
         </ScrollView>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mypage_main_nav"
+            android:background="@drawable/main_feed_actionbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/main_nav_layout"
+                android:layout_width="match_parent"
+                android:layout_height="99sp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/dailycheck_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/chatting_icon"
+                    app:layout_constraintBottom_toBottomOf="@+id/more_category"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/more_category" />
+
+                <TextView
+                    android:id="@+id/name_kid"
+                    style="@style/MainFeedCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/moreMenuBtn"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/more_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/main_feed_open_icon"
+                    app:layout_constraintBottom_toBottomOf="@+id/name_kid"
+                    app:layout_constraintStart_toEndOf="@+id/name_kid"
+                    app:layout_constraintTop_toTopOf="@+id/name_kid" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/moreMenuBtn"
+                    android:layout_width="20sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/mypage_menu"
+                    app:layout_constraintBottom_toBottomOf="@+id/more_category"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/more_category" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/nav_category"
+                style="@style/MainAppBarSelect"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingTop="0sp"
+                android:paddingBottom="10sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/main_nav_layout">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="32sp"
+                    android:background="@drawable/corner_30" />
+
+                <TextView
+                    style="@style/MainFeedCatOne"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    style="@style/MainFeedCatTwo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

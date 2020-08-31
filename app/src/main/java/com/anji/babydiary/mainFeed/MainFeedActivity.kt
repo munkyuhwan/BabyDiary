@@ -35,10 +35,10 @@ class MainFeedActivity() : BaseActivity() {
         binding.lifecycleOwner = this
         binding.feedMain = viewModel
 
-        val navViewModel = setNav(R.id.feedNestedHost)
-        binding.navController = navViewModel
+       // val navViewModel = setNav(R.id.feedNestedHost)
+       // binding.navController = navViewModel
 
-        navViewModel.isMain.value = true
+        //navViewModel.isMain.value = true
 
         //setOnclickMenu()
         binding.bottomNav = setBottomNav(2)
@@ -49,13 +49,11 @@ class MainFeedActivity() : BaseActivity() {
             startActivity(intent)
         }
 
-        supportActionBar!!.setDisplayShowCustomEnabled(false)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-        supportActionBar!!.setHomeAsUpIndicator(null)
+        //supportActionBar!!.setDisplayShowCustomEnabled(false)
+        //supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+        //supportActionBar!!.setHomeAsUpIndicator(null)
 
     }
-
-
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

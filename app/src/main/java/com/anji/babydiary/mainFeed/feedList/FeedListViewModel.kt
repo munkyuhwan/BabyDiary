@@ -26,16 +26,18 @@ class FeedListViewModel(
 ) : AndroidViewModel(application) {
 
     var allFeeds = mainFeedDAO.selectAll()
-
     var profileData = MutableLiveData<Profiles>()
 
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
+    var isCategoryOpen = MutableLiveData<Boolean>()
+
     init {
         uiScope.launch {
             selectProfile()
         }
+        isCategoryOpen.value = false
     }
 
     suspend fun selectProfile() {
@@ -128,6 +130,15 @@ class FeedListViewModel(
     suspend fun updateLike(likeCnt:CharSequence, idx:Long) {
         withContext(Dispatchers.IO) {
             mainFeedDAO.updateLike(likeCnt.toString().toLong()+1, idx)
+        }
+
+    }
+
+    fun onCategorySelectClicked() {
+        if (isCategoryOpen.value!! ) {
+            isCategoryOpen.value = false
+        }else {
+            isCategoryOpen.value = true
         }
 
     }

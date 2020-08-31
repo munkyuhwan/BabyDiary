@@ -64,9 +64,19 @@ class FeedList : Fragment() {
             }
         })
 
-
+        viewModel.isCategoryOpen.observe(viewLifecycleOwner, Observer {
+            Log.e("isCateogry", "is category open: ${it}")
+            it?.let {
+                if (it) {
+                    binding.navCategory.visibility = View.VISIBLE
+                }else {
+                    binding.navCategory.visibility = View.GONE
+                }
+            }
+        })
 
         return binding.root
     }
+
 
 }
