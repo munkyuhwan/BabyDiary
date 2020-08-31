@@ -18,4 +18,6 @@
     <color name="calendarTextColor">#636363</color>
 
     <color name="feedDetailDateTextColor">#c7c7c7</color>
+
+    <color name="transparency">#00000000</color>
 </resources>

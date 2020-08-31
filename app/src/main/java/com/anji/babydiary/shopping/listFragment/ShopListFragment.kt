@@ -1,5 +1,6 @@
 package com.anji.babydiary.shopping.listFragment
 
+import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.anji.babydiary.R
 import com.anji.babydiary.database.shopping.ShoppingDatabase
 import com.anji.babydiary.databinding.ShopListFragmentBinding
@@ -58,8 +60,10 @@ class ShopListFragment : Fragment() {
         })
 
         val manager = GridLayoutManager(activity,2)
-
         binding.productList.layoutManager = manager
+
+        val spacingInPixels = resources.getDimensionPixelSize(R.dimen.recycler_view_item_width)
+        binding.productList.addItemDecoration(SpacesItemDecoration(spacingInPixels))
 
 
         binding.writeProduct.setOnClickListener {
@@ -73,6 +77,25 @@ class ShopListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(ShopListViewModel::class.java)
+    }
+
+}
+
+class SpacesItemDecoration(private val space: Int) : ItemDecoration() {
+    override fun getItemOffsets(
+        outRect: Rect, view: View,
+        parent: RecyclerView, state: RecyclerView.State
+    ) {
+        outRect.left = space
+        outRect.right = space
+        outRect.bottom = space
+
+        // Add top margin only for the first item to avoid double space between items
+        if (parent.getChildLayoutPosition(view) == 0) {
+            outRect.top = space
+        } else {
+            outRect.top = 0
+        }
     }
 
 }
