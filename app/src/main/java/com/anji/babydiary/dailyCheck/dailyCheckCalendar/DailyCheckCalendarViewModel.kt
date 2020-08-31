@@ -1,6 +1,7 @@
 package com.anji.babydiary.dailyCheck.dailyCheckCalendar
 
 import android.app.Application
+import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,6 +17,9 @@ class DailyCheckCalendarViewModel(val database:DailyCheckDao, application: Appli
     var selectedDate = MutableLiveData<String>()
     var selectedDay = MutableLiveData<String>()
     var dataToday = MutableLiveData<List<DailyCheck>>()
+
+    var isVisible = MutableLiveData<Int>()
+
     val days = arrayOf(
         "",
         "SUN",
@@ -30,12 +34,13 @@ class DailyCheckCalendarViewModel(val database:DailyCheckDao, application: Appli
     val uiScope = CoroutineScope(Dispatchers.Main + job)
 
     init {
-
+        isVisible.value = View.GONE
 
     }
 
     fun onDaySelect(day:Int) {
         selectedDay.value = days[day]
+        isVisible.value = View.VISIBLE
         uiScope.launch {
             selecteByDate()
         }

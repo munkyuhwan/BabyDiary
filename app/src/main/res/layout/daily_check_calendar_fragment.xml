@@ -54,6 +54,17 @@
             app:layout_constraintTop_toBottomOf="@+id/calendar_layout"
             app:layout_constraintVertical_bias="0.0">
 
+            <ImageButton
+                android:id="@+id/addDaily"
+                style="@style/addMyFeed"
+                android:visibility="@{calendarViewModel.isVisible}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/selectedMonth"
                 style="@style/calendarMonth"

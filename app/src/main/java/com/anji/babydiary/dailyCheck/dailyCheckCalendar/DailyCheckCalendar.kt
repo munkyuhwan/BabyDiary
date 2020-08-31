@@ -59,7 +59,11 @@ class DailyCheckCalendar : Fragment() {
         }
 
         binding.calendarDetailWrapper.setOnClickListener {
+        }
+
+        binding.addDaily.setOnClickListener {
             findNavController().navigate(DailyCheckCalendarDirections.actionDailyCheckCalendar2ToDailyCheckWrite(viewModel.selectedYear.value.toString(), viewModel.selectedMonth.value.toString(), viewModel.selectedDate.value.toString(), viewModel.selectedDay.value.toString()) )
+
         }
 
         viewModel.dataToday.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
