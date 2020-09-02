@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="chatData"
+            type="com.anji.babydiary.database.chatting.Chatting" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!--  상대방  -->
+
+    <LinearLayout
+        android:id="@+id/YourTextLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/chatting_left_border"
+        android:foregroundGravity="center_vertical"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="25sp"
+        android:paddingTop="11sp"
+        android:paddingRight="12sp"
+        android:paddingBottom="11sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/shapeableImageView"
+            android:layout_width="27sp"
+            android:layout_height="27sp"
+            android:background="#efefef"
+            android:scaleType="centerCrop"
+            android:src="@drawable/sample_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name_kid"
+            app:shapeAppearanceOverlay="@style/circleImageView" />
+
+        <TextView
+            android:id="@+id/reponderText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="9sp"
+            android:text="asdhfaiusdhfasfjklhl"
+            android:textColor="#636363"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <!--  나 -->
+
+    <LinearLayout
+        android:id="@+id/myTextLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/chatting_right_border"
+        android:foregroundGravity="right"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="25sp"
+        android:paddingTop="11sp"
+        android:paddingRight="12sp"
+        android:paddingBottom="11sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/myText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="9sp"
+            android:textAlignment="viewStart"
+            android:textColor="#636363"
+            android:textSize="13sp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -84,6 +85,17 @@ class FeedDetail : Fragment() {
             //startActivityForResult(intent, CommonCode.MYPAGE_ACTIVITY_RESULT)
         }
 
+
+        binding.dailycheckBtn.setOnClickListener {
+            it?.let {
+
+                Log.e("writer","writer idx: ${viewModel.writerProfile.value!!.idx}")
+                Log.e("writer","My idx: ${CommonCode.USER_IDX}")
+
+                findNavController().navigate(FeedDetailDirections.actionFeedDetailToChattingRoom2( viewModel.writerProfile.value!!.idx ) )
+
+            }
+        }
 
 
         return binding.root

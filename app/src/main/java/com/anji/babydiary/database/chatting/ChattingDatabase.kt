@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.anji.babydiary.database.comments.CommentsDatabase
 
-@Database(entities = [Chatting::class], version = 1, exportSchema = false)
+@Database(entities = [Chatting::class], version = 3, exportSchema = false)
 abstract class ChattingDatabase:RoomDatabase() {
 
     abstract val database:ChattingDao

@@ -63,11 +63,10 @@ class MyFeedDetail : Fragment() {
         })
 
         binding.commentBtn.setOnClickListener {
-            //findNavController().navigate(FeedDetailDirections.actionFeedDetailFromMyPageToCommentFromMyFeed(idx) )
-
             findNavController().navigate(MyFeedDetailDirections.actionMyFeedDetailToComment3(idx) )
+        }
 
-
+        binding.dailycheckBtn.setOnClickListener {
 
         }
 

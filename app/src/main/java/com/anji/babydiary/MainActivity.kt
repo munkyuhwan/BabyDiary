@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import com.anji.babydiary.common.CommonCode
+import com.anji.babydiary.databinding.ActivityMainBinding
 import com.anji.babydiary.mainFeed.MainFeedActivity
 import kotlinx.coroutines.*
 import java.util.*
@@ -13,7 +16,9 @@ import kotlin.system.exitProcess
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        //setContentView(R.layout.activity_main)
+
+        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
         //month -1
         val expDate = GregorianCalendar(2020, 8, 9) // midnight
@@ -28,13 +33,20 @@ class MainActivity : AppCompatActivity() {
             exitProcess(-1)
         }
 
-
         var job = Job()
         var uiScope = CoroutineScope(Dispatchers.Main + job)
 
         uiScope.launch {
-            delay()
+         //   delay()
         }
+
+        binding.goMain.setOnClickListener {
+            if (binding.userIdx.text != null) {
+                CommonCode.USER_IDX = binding.userIdx.text.toString().toLong()
+                goMain()
+            }
+        }
+
 
     }
 

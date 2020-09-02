@@ -90,6 +90,11 @@ class MyFeed : Fragment() {
             }
         })
 
+        binding.dailycheckBtn.setOnClickListener {
+            findNavController().navigate(MyFeedDirections.actionMyFeedToChattingList())
+            requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+        }
+
         return binding.root
     }
 

@@ -6,18 +6,26 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "tbl_chatting")
 data class Chatting(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val idx:Long = 0L,
     @ColumnInfo(name = "chatting_room")
     var roomIdx:Long = 0L,
-    @ColumnInfo(name = "receiver_idx")
-    var receiverIdx:Long = 0L,
+    @ColumnInfo(name="is_my_message")
+    var isMyMessage:Boolean = false,
+
+    @ColumnInfo(name = "user_idx_one")
+    var userIdxOne:Long = 0L,
+    @ColumnInfo(name = "user_idx_two")
+    var userIdxTwo:Long = 0L,
+
+
+
     @ColumnInfo(name = "receiver_img")
-    var receiverImg:Long = 0L,
+    var responderImg:Long = 0L,
     @ColumnInfo(name = "receiver_name")
-    var receiverName:String = "",
+    var responderName:String = "",
     @ColumnInfo(name = "text")
     var msgText:String = "",
     @ColumnInfo(name = "msg_time")
-    var msgTime:Int = 0
+    var msgTime:Long = 0
 )

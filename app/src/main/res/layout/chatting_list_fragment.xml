@@ -6,7 +6,7 @@
     <data>
         <variable
             name="chattingViewModel"
-            type="com.anji.babydiary.myPage.chatting.ChattingList.ChattingListViewModel" />
+            type="com.anji.babydiary.myPage.chatting.chattingList.ChattingListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -66,8 +66,10 @@
             android:id="@+id/msgList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:paddingLeft="25sp"
+            android:paddingRight="25sp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:layout_marginTop="70dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout6" />

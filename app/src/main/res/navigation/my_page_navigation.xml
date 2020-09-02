@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_myFeed_to_myFeedDetail"
             app:destination="@id/myFeedDetail" />
+        <action
+            android:id="@+id/action_myFeed_to_chattingList"
+            app:destination="@id/chattingList" />
     </fragment>
     <fragment
         android:id="@+id/myFeedWrite"
@@ -88,6 +91,22 @@
         android:label="Comment" >
         <argument
             android:name="feedIdx"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/chattingList"
+        android:name="com.anji.babydiary.myPage.chatting.chattingList.ChattingList"
+        android:label="ChattingList" >
+        <action
+            android:id="@+id/action_chattingList_to_chattingRoom2"
+            app:destination="@id/chattingRoom2" />
+    </fragment>
+    <fragment
+        android:id="@+id/chattingRoom2"
+        android:name="com.anji.babydiary.myPage.chatting.chattingRoom.ChattingRoom"
+        android:label="ChattingRoom" >
+        <argument
+            android:name="userIdxOne"
             app:argType="long" />
     </fragment>
 </navigation>

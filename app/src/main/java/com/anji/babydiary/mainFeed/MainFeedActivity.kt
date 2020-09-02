@@ -44,6 +44,7 @@ class MainFeedActivity() : BaseActivity() {
         binding.bottomNav = setBottomNav(2)
 
 
+
         binding.fab.setOnClickListener {
             val intent: Intent = Intent(this, DailyCheckActivity::class.java)
             startActivity(intent)

@@ -1,12 +1,13 @@
-package com.anji.babydiary.myPage.chatting.ChattingList
+package com.anji.babydiary.myPage.chatting.chattingList
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.anji.babydiary.database.chatting.ChattingDao
-import java.lang.IllegalArgumentException
 
-class ChattingListViewModelFactory (val database:ChattingDao, val application: Application):ViewModelProvider.Factory {
+class ChattingListViewModelFactory (val database: ChattingDao, val application: Application): ViewModelProvider.Factory {
+
+    @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ChattingListViewModel::class.java)) {
             return ChattingListViewModel(database, application) as T
@@ -15,7 +16,6 @@ class ChattingListViewModelFactory (val database:ChattingDao, val application: A
     }
 
 }
-
 
 
 

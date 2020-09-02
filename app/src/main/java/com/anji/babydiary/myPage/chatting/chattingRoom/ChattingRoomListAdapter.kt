@@ -1,15 +1,16 @@
-package com.anji.babydiary.myPage.chatting.ChattingList.chattingListAdapter
+package com.anji.babydiary.myPage.chatting.chattingRoom
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.anji.babydiary.database.chatting.Chatting
-import com.anji.babydiary.databinding.ChattingListItemBinding
-import com.anji.babydiary.myPage.chatting.chattingList.OnChattingListClick
+import com.anji.babydiary.databinding.ChattingRoomListItemBinding
 
-class ChattingListAdapter(val clickListener: OnChattingListClick): ListAdapter<Chatting, ChattingListAdapter.ViewHolder>(ChattingListDiffCallback()) {
+
+class ChattingRoomListAdapter: ListAdapter<Chatting, ChattingRoomListAdapter.ViewHolder>(ChattingListDiffCallback()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -18,26 +19,31 @@ class ChattingListAdapter(val clickListener: OnChattingListClick): ListAdapter<C
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)!!
-        holder.bind(item, clickListener)
+        holder.bind(item)
     }
 
-    class ViewHolder private constructor(val binding:ChattingListItemBinding ) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder private constructor(val binding: ChattingRoomListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind (item: Chatting, clickListener: OnChattingListClick) {
+        fun bind (item: Chatting) {
             //binding.idx = item
 
-            binding.chattingList = item
-            binding.onClick = clickListener
-            binding.userName.text = item.responderName
-            binding.lastText.text = item.msgText
-
+            binding.chatData = item
+            if (item.isMyMessage) {
+                binding.myText.text = item.msgText
+                binding.YourTextLayout.visibility = View.GONE
+                binding.myTextLayout.visibility = View.VISIBLE
+            }else {
+                binding.reponderText.text = item.msgText
+                binding.YourTextLayout.visibility = View.VISIBLE
+                binding.myTextLayout.visibility = View.GONE
+            }
 
         }
 
         companion object {
             fun from(parent: ViewGroup):ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ChattingListItemBinding.inflate(layoutInflater, parent, false)
+                val binding = ChattingRoomListItemBinding.inflate(layoutInflater, parent, false)
 
                 return ViewHolder(binding)
             }
@@ -67,7 +73,7 @@ sealed class DataItem {
 
     abstract val id:Long
 
-    data class ResultItem(val tip:Chatting):DataItem() {
+    data class ResultItem(val tip: Chatting):DataItem() {
         override val id = tip.idx
     }
 

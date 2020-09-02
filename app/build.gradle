@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -86,6 +87,12 @@ dependencies {
     implementation "com.squareup.moshi:moshi-kotlin:$mosh_version"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
 
+    //implementation 'com.google.firebase:firebase-analytics:17.5.0'
 
+    implementation 'com.google.firebase:firebase-core:16.0.4'
+    implementation 'com.google.firebase:firebase-messaging:20.0.0'
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
+
+    implementation 'com.squareup.okhttp3:okhttp:3.6.0'
 
 }

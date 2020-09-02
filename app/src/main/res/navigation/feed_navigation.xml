@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_feedDetail_to_comment"
             app:destination="@id/comment" />
+        <action
+            android:id="@+id/action_feedDetail_to_chattingRoom2"
+            app:destination="@id/chattingRoom" />
     </fragment>
     <fragment
         android:id="@+id/comment"
@@ -33,6 +36,14 @@
         tools:layout="@layout/comment_fragment" >
         <argument
             android:name="feedIdx"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/chattingRoom"
+        android:name="com.anji.babydiary.myPage.chatting.chattingRoom.ChattingRoom"
+        android:label="ChattingRoom" >
+        <argument
+            android:name="userIdxOne"
             app:argType="long" />
     </fragment>
 </navigation>
