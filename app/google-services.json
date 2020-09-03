@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "995096422457",
-    "firebase_url": "https://babydiary-38a68.firebaseio.com",
-    "project_id": "babydiary-38a68",
-    "storage_bucket": "babydiary-38a68.appspot.com"
+    "project_number": "367403351297",
+    "firebase_url": "https://bebe-e533e.firebaseio.com",
+    "project_id": "bebe-e533e",
+    "storage_bucket": "bebe-e533e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:995096422457:android:22445245b058c3721185e8",
+        "mobilesdk_app_id": "1:367403351297:android:d68fd909376de7e1d76f00",
         "android_client_info": {
           "package_name": "com.anji.babydiary"
         }
       },
       "oauth_client": [
         {
-          "client_id": "995096422457-to1ibhtvme6hr9hu34lslbo30lgjlfqj.apps.googleusercontent.com",
+          "client_id": "367403351297-1qa5vgl99181lbhiuu6a58ka45ccr3eu.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBXrLQu7tptlUsKRk7Rard1LQqjFFwCBRQ"
+          "current_key": "AIzaSyA70tOaY8f8_z8nDaBxiL43ch_0ppfaC4A"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "995096422457-to1ibhtvme6hr9hu34lslbo30lgjlfqj.apps.googleusercontent.com",
+              "client_id": "367403351297-1qa5vgl99181lbhiuu6a58ka45ccr3eu.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

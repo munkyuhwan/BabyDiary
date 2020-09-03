@@ -46,6 +46,7 @@ class ChattingRoom : Fragment() {
         viewModel.chatData.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
+                binding.chatText.scrollToPosition(binding.chatText!!.adapter!!.itemCount - 1)
             }
         })
 
