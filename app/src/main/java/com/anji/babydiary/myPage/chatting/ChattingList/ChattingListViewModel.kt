@@ -22,16 +22,6 @@ class ChattingListViewModel(val database: ChattingDao, application: Application)
 
     }
 
-    fun sendMsg() {
-        val fm = FirebaseMessaging.getInstance()
-        fm.send(RemoteMessage.Builder("${CommonCode.SENDER_ID} @fcm.googleapis.com")
-            .setMessageId("ddd-1")
-            .addData("my_message", "Hello World")
-            .addData("my_action", "SAY_HELLO")
-            .build())
-        //var remMessage = RemoteMessage()
-        //FirebaseMessaging.getInstance().send()
-    }
     
 
 

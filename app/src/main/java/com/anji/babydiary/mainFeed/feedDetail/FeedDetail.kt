@@ -89,9 +89,6 @@ class FeedDetail : Fragment() {
         binding.dailycheckBtn.setOnClickListener {
             it?.let {
 
-                Log.e("writer","writer idx: ${viewModel.writerProfile.value!!.idx}")
-                Log.e("writer","My idx: ${CommonCode.USER_IDX}")
-
                 findNavController().navigate(FeedDetailDirections.actionFeedDetailToChattingRoom2( viewModel.writerProfile.value!!.idx ) )
 
             }
