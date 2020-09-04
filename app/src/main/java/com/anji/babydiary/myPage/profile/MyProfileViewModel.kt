@@ -30,6 +30,7 @@ class MyProfileViewModel(val idx:Long, val database: ProfileDao, application: Ap
         withContext(Dispatchers.IO) {
             val tmpData = database.selectProfile(idx)
             data.postValue( tmpData )
+            Log.e("data","data:${data}")
             if (tmpData != null) {
                 selectedImage.postValue(Uri.parse(tmpData.img))
             }

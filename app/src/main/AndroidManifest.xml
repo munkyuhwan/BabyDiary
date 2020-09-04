@@ -15,25 +15,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".dailyCheck.DailyCheckActivity"
+            android:name=".login.Login"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             android:windowSoftInputMode="adjustPan"
-            ></activity>
+            />
+        <activity
+            android:name=".dailyCheck.DailyCheckActivity"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".bottomActivity.resign.Resign"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
-            android:windowSoftInputMode="adjustPan"
-            />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".bottomActivity.BottomMenu"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
-            android:windowSoftInputMode="adjustPan"
-            />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".myPage.MyPage"
             android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:windowSoftInputMode="adjustPan"
-            />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".event.EventActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
@@ -53,14 +54,13 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:windowSoftInputMode="adjustPan"
-            >
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service
             android:name=".FCM.MessageReceiver"
             android:enabled="true"

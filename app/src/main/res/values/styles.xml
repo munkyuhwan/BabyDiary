@@ -528,6 +528,12 @@
         <item name="android:background">@drawable/bottom_border_layout</item>
     </style>
 
+    <style name="loginText">
+        <item name="android:background">@color/transparency</item>
+        <item name="android:textColor">@color/mainThemeBackgroundLight</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
     <style name="editTextStyleWhite">
         <item name="android:background">#ffffff</item>
     </style>

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.databinding.ActivityMainBinding
+import com.anji.babydiary.login.Login
 import com.anji.babydiary.mainFeed.MainFeedActivity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
@@ -45,14 +46,7 @@ class MainActivity : AppCompatActivity() {
         var uiScope = CoroutineScope(Dispatchers.Main + job)
 
         uiScope.launch {
-         //   delay()
-        }
-
-        binding.goMain.setOnClickListener {
-            if (binding.userIdx.text != null) {
-                CommonCode.USER_IDX = binding.userIdx.text.toString().toLong()
-                goMain()
-            }
+            delay()
         }
 
 
@@ -103,7 +97,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun goMain() {
-        val intent:Intent = Intent(this, MainFeedActivity::class.java)
+        val intent:Intent = Intent(this, Login::class.java)
         overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
         startActivity(intent)
         finish()

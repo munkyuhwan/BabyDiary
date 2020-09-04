@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.anji.babydiary.login.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/login_background"
+        android:paddingLeft="33sp"
+        android:paddingRight="33sp"
+        tools:context=".login.Login">
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/login_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.32999998" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputID"
+            style="@style/loginText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="41dp"
+            android:paddingTop="10sp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView5"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/imageView5"
+            app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout6"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="1sp"
+            android:background="@drawable/login_input_border"
+            app:layout_constraintEnd_toEndOf="@+id/inputID"
+            app:layout_constraintStart_toStartOf="@+id/inputID"
+            app:layout_constraintTop_toBottomOf="@+id/inputID"></LinearLayout>
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputPW"
+            style="@style/loginText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:paddingTop="10sp"
+            app:layout_constraintEnd_toEndOf="@+id/inputID"
+            app:layout_constraintStart_toStartOf="@+id/inputID"
+            app:layout_constraintTop_toBottomOf="@+id/inputID" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout7"
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:orientation="vertical"
+            android:background="@drawable/login_input_border"
+            app:layout_constraintEnd_toEndOf="@+id/inputPW"
+            app:layout_constraintStart_toStartOf="@+id/inputPW"
+            app:layout_constraintTop_toBottomOf="@+id/inputPW"></LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="46dp"
+            android:text="로그인"
+            android:textColor="#ffffff"
+            android:textSize="13sp"
+            android:onClick="@{() -> viewModel.login(inputID.getText())}"
+            android:background="@drawable/three_round"
+            app:layout_constraintEnd_toEndOf="@+id/inputPW"
+            app:layout_constraintStart_toStartOf="@+id/inputPW"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
