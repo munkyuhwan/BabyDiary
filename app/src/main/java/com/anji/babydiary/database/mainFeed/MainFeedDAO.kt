@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Transaction
 
 @Dao
 interface MainFeedDAO{
@@ -26,5 +27,9 @@ interface MainFeedDAO{
 
     @Query("DELETE FROM tbl_main_feed")
     fun deleteAll()
+
+    @Transaction
+    @Query("SELECT * FROM tbl_main_feed")
+    fun getFeedWithUser(): LiveData<List<FeedWithUser>>
 
 }

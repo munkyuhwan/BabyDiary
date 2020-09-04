@@ -8,7 +8,7 @@ import com.anji.babydiary.database.shopping.ShoppingDao
 import com.anji.babydiary.database.shopping.ShoppingDatabase
 
 
-@Database(entities = [Profiles::class], version = 4, exportSchema = false)
+@Database(entities = [Profiles::class], version = 5, exportSchema = false)
 abstract class ProfileDatabase:RoomDatabase()  {
 
     abstract val database: ProfileDao

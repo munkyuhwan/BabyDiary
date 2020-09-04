@@ -33,12 +33,20 @@ class FeedListViewModel(
 
     var isCategoryOpen = MutableLiveData<Boolean>()
 
+    var feedWithUser = mainFeedDAO.getFeedWithUser()
     init {
         uiScope.launch {
             selectProfile()
         }
         isCategoryOpen.value = false
+
+        Log.e("result","=============================================================")
+        Log.e("result","${feedWithUser}")
+        Log.e("result","=============================================================")
+
     }
+
+
 
     suspend fun selectProfile() {
         withContext(Dispatchers.IO) {
