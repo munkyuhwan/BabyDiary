@@ -34,7 +34,7 @@ class Login : AppCompatActivity() {
                 if (it != 0L) {
                     val intent = Intent(this, MainFeedActivity::class.java)
                     startActivity(intent)
-                    finish()
+                    //finish()
                 }
             }
         })

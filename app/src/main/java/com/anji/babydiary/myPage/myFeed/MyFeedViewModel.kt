@@ -11,7 +11,7 @@ import com.anji.babydiary.database.profile.ProfileDao
 import com.anji.babydiary.database.profile.Profiles
 import kotlinx.coroutines.*
 
-class MyFeedViewModel(val database:MainFeedDAO, val profileDatabas: ProfileDao, application: Application) : AndroidViewModel(application) {
+class MyFeedViewModel(val idx:Long, val database:MainFeedDAO, val profileDatabas: ProfileDao, application: Application) : AndroidViewModel(application) {
 
     private val job = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
@@ -31,13 +31,13 @@ class MyFeedViewModel(val database:MainFeedDAO, val profileDatabas: ProfileDao, 
 
     suspend fun selectByIdx() {
         withContext(Dispatchers.IO) {
-            selectAll.postValue( database.selectByUserIdx(CommonCode.USER_IDX) )
+            selectAll.postValue( database.selectByUserIdx(idx) )
         }
     }
 
     suspend fun selectAll() {
         withContext(Dispatchers.IO) {
-            myProfile.postValue(profileDatabas.selectProfile(CommonCode.USER_IDX))
+            myProfile.postValue(profileDatabas.selectProfile(idx))
         }
     }
 }

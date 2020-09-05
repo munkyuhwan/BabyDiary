@@ -12,7 +12,7 @@ class LoginViewModel (val database: ProfileDao, application: Application):Androi
 
     init {
 
-        idx.value = CommonCode.USER_IDX
+        idx.value = 0L
 
     }
 

@@ -22,6 +22,7 @@ import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.databinding.MyFeedFragmentBinding
+import com.anji.babydiary.mainFeed.feedDetail.FeedDetailArgs
 import com.anji.babydiary.myPage.myFeed.myFeedListAdapter.MyFeedListAdapter
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.nav_mypage_layout.view.*
@@ -36,13 +37,21 @@ class MyFeed : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        var idx = CommonCode.USER_IDX
+
+        val intent = requireActivity().intent.extras
+        intent?.let {
+            idx = it.getLong("userIdx")
+        }
+
+
         val binding = DataBindingUtil.inflate<MyFeedFragmentBinding>(inflater, R.layout.my_feed_fragment, container, false)
 
         val application = requireNotNull(this.activity).application
         val database = MainFeedDatabase.getInstance(application).database
         val profileDatabase = ProfileDatabase.getInstance(application).database
 
-        val viewModelFactory = MyFeedViewModelFactory(database, profileDatabase, application)
+        val viewModelFactory = MyFeedViewModelFactory(idx, database, profileDatabase, application)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MyFeedViewModel::class.java)
 
         binding.myFeedViewModel = viewModel

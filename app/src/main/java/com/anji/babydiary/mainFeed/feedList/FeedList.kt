@@ -1,5 +1,6 @@
 package com.anji.babydiary.mainFeed.feedList
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,6 +19,8 @@ import com.anji.babydiary.database.mainFeed.MainFeedDatabase
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.databinding.FeedListFragmentBinding
 import com.anji.babydiary.mainFeed.feedList.listAdapter.MainFeedListAdapter
+import com.anji.babydiary.myPage.MyPage
+import com.anji.babydiary.myPage.myFeed.MyFeed
 
 class FeedList : Fragment() {
 
@@ -48,14 +51,23 @@ class FeedList : Fragment() {
 
         var navOption = NavOptions.Builder().setEnterAnim(R.anim.fade_in).setExitAnim(R.anim.fade_out).build()
 
-        val adapter = MainFeedListAdapter(FeedClickListener {
-            findNavController().navigate(FeedListDirections.actionFeedListToFeedDetail(it), navOption)
-        }, FeedCommentClickListener {
-            it?.let {
-                findNavController().navigate(FeedListDirections.actionFeedListToComment(it), navOption)
-            }
-
-        }, viewModel)
+        val adapter = MainFeedListAdapter(
+            FeedClickListener {
+                findNavController().navigate(FeedListDirections.actionFeedListToFeedDetail(it), navOption)
+            },
+            FeedCommentClickListener {
+                it?.let {
+                    findNavController().navigate(FeedListDirections.actionFeedListToComment(it), navOption)
+                }
+            },
+            MemberClickListener {
+                it?.let {
+                    var intent = Intent(activity, MyPage::class.java)
+                    intent.putExtra("userIdx",it)
+                    requireActivity().startActivity(intent)
+                }
+            },
+            viewModel)
         binding.feedList.adapter = adapter
 
         viewModel.allFeeds.observe(viewLifecycleOwner, Observer {

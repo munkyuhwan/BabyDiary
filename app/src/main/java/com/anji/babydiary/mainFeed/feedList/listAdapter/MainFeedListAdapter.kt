@@ -15,6 +15,7 @@ import com.anji.babydiary.mainFeed.MainFeedViewModel
 import com.anji.babydiary.mainFeed.feedList.FeedClickListener
 import com.anji.babydiary.mainFeed.feedList.FeedCommentClickListener
 import com.anji.babydiary.mainFeed.feedList.FeedListViewModel
+import com.anji.babydiary.mainFeed.feedList.MemberClickListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -23,12 +24,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 
 
-class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClickListener:FeedCommentClickListener, val feedListViewModel: FeedListViewModel):ListAdapter<FeedWithUser, MainFeedListAdapter.ViewHolder>(ResultListDiffCallback()) {
+class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClickListener:FeedCommentClickListener, val memberClickListener:MemberClickListener, val feedListViewModel: FeedListViewModel):ListAdapter<FeedWithUser, MainFeedListAdapter.ViewHolder>(ResultListDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)!!
         val res = holder.itemView.context.resources
-        holder.bind(item, feedListViewModel, clickListener, commentClickListener)
+        holder.bind(item, feedListViewModel, clickListener, commentClickListener, memberClickListener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,10 +38,11 @@ class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClick
 
     class ViewHolder private constructor(val binding: MainFeedListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind (item: FeedWithUser, feedListViewModel: FeedListViewModel, clickListener: FeedClickListener, commentClickListener:FeedCommentClickListener) {
+        fun bind (item: FeedWithUser, feedListViewModel: FeedListViewModel, clickListener: FeedClickListener, commentClickListener:FeedCommentClickListener, memberClickListener: MemberClickListener) {
             //binding.idx = item
 
-            binding.mainFeed = item
+            binding.mainFeedWithUser = item
+            binding.memberClickListener = memberClickListener
             binding.viewModel = feedListViewModel
             binding.likeCnt.text = item.feed.likeCnt.toString()
             binding.mainFeedText.text = item.feed.title.toString()

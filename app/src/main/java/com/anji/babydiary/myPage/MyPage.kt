@@ -57,97 +57,9 @@ class MyPage : BaseActivity() {
 
         navController = this.findNavController(R.id.myPageNestFragment)
 
-        /*
-        var actionBar = supportActionBar
-        if (actionBar != null) {
-            actionBar.setDisplayShowCustomEnabled(true)
-            actionBar.setDisplayHomeAsUpEnabled(true)
-            actionBar.setHomeAsUpIndicator(R.drawable.back_btn)
-        }
 
-        appBarConfiguration = AppBarConfiguration.Builder(navController.graph)
-
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            Log.e("currentFragment", "${destination.label.toString()}")
-            when(destination.label.toString()) {
-                "MyFeed" -> {
-                    viewModel.isMain.value = View.VISIBLE
-                    viewModel.isSub.value = View.GONE
-                    setToolBar(R.id.mypage_activity_toolbar, R.id.mypage_collapsing_toolbar_layout)
-                }
-
-                "MyFeedWrite" -> {
-                    viewModel.isSub.value = View.VISIBLE
-                    viewModel.isMain.value = View.GONE
-                    setToolBar(R.id.mypage_write_toolbar, R.id.mypage_write_collapsing_toolbar_layout)
-                }
-
-                "MyProfile" -> {
-                    viewModel.isSub.value = View.VISIBLE
-                    viewModel.isMain.value = View.GONE
-                    setToolBar(R.id.mypage_write_toolbar, R.id.mypage_write_collapsing_toolbar_layout)
-                }
-                "MyFamily" -> {
-                    viewModel.isSub.value = View.VISIBLE
-                    viewModel.isMain.value = View.GONE
-                    setToolBar(R.id.mypage_write_toolbar, R.id.mypage_write_collapsing_toolbar_layout)
-                }
-                "ThemeSetting" -> {
-                    viewModel.isSub.value = View.VISIBLE
-                    viewModel.isMain.value = View.GONE
-                    setToolBar(R.id.mypage_write_toolbar, R.id.mypage_write_collapsing_toolbar_layout)
-                }
-                "Follower" -> {
-                    viewModel.isSub.value = View.VISIBLE
-                    viewModel.isMain.value = View.GONE
-                    setToolBar(R.id.mypage_write_toolbar, R.id.mypage_write_collapsing_toolbar_layout)
-                }
-                "FeedDetailFromMyPage" -> {
-                    viewModel.isSub.value = View.VISIBLE
-                    viewModel.isMain.value = View.GONE
-                    setToolBar(R.id.mypage_write_toolbar, R.id.mypage_write_collapsing_toolbar_layout)
-                }
-                "MyFeedDetail" -> {
-                    viewModel.isSub.value = View.VISIBLE
-                    viewModel.isMain.value = View.GONE
-                    setToolBar(R.id.mypage_write_toolbar, R.id.mypage_write_collapsing_toolbar_layout)
-                }
-                "Comment" -> {
-                    viewModel.isSub.value = View.VISIBLE
-                    viewModel.isMain.value = View.GONE
-                    setToolBar(R.id.mypage_write_toolbar, R.id.mypage_write_collapsing_toolbar_layout)
-                }
-
-                "MyAlarm" -> {
-                    viewModel.isSub.value = View.VISIBLE
-                    viewModel.isMain.value = View.GONE
-                    setToolBar(R.id.mypage_write_toolbar, R.id.mypage_write_collapsing_toolbar_layout)
-                }
-            }
-        }
-
-         */
 
         binding.bottomNav = setBottomNav(4)
-
-        /*
-        viewModel.myProfile.observe(this, androidx.lifecycle.Observer {
-
-            it?.let {
-                binding.mypageMainLayout.name_kid.text = it.name.toString()
-                binding.mypageMainLayout.num_follower.text = it.follower.toString()
-                binding.mypageMainLayout.num_following.text = it.following.toString()
-
-                Glide.with(application).load(it.img).into(binding.mypageMainLayout.shapeableImageView)
-
-                binding.mypageMainLayout.intro_text.text = it.introduce.toString()
-
-            }
-        })
-
-         */
-
-
 
         binding.fab.setOnClickListener {
             val intent: Intent = Intent(this, DailyCheckActivity::class.java)
@@ -156,39 +68,6 @@ class MyPage : BaseActivity() {
 
     }
 
-
-
-    fun setToolBar(toolbarId:Int, collapsingToolbarLayoutId:Int) {
-        layout = findViewById<CollapsingToolbarLayout>(collapsingToolbarLayoutId)
-        layout.isTitleEnabled=false
-
-        toolbar = findViewById<Toolbar>(toolbarId)
-        setSupportActionBar(toolbar)
-
-        if (toolbarId == R.id.mypage_activity_toolbar) {
-            toolbar.moreMenuBtn.setOnClickListener {
-                val intent: Intent = Intent(this, BottomMenu::class.java)
-                intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
-                startActivityForResult(intent, CommonCode.MYPAGE_ACTIVITY_RESULT)
-            }
-            toolbar.followerLabel.setOnClickListener {
-                navController.navigate(MyFeedDirections.actionMyFeedToFollower("follower"))
-            }
-            toolbar.num_follower.setOnClickListener {
-                navController.navigate(MyFeedDirections.actionMyFeedToFollower("follower"))
-            }
-
-            toolbar.followingLabel.setOnClickListener {
-                navController.navigate(MyFeedDirections.actionMyFeedToFollower("followee"))
-            }
-            toolbar.num_following.setOnClickListener {
-                navController.navigate(MyFeedDirections.actionMyFeedToFollower("followee"))
-            }
-        }
-
-        layout.setupWithNavController(toolbar, navController, appBarConfiguration.build())
-       // setOnclickMenu()
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

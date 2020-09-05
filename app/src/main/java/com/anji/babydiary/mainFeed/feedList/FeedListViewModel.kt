@@ -10,6 +10,7 @@ import com.anji.babydiary.R
 import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.database.likes.Likes
 import com.anji.babydiary.database.likes.LikesDao
+import com.anji.babydiary.database.mainFeed.FeedWithUser
 import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.database.mainFeed.MainFeedDAO
 import com.anji.babydiary.database.profile.ProfileDao
@@ -156,10 +157,15 @@ class FeedListViewModel(
 
 
 class FeedClickListener(val clickListener:(resultId:Long)->Unit ) {
-    fun onClick(result:MainFeed) = clickListener(result.idx)
+    fun onClick(result:FeedWithUser) = clickListener(result.feed.idx)
 }
+
+class MemberClickListener(val clickListener:(resultId:Long)->Unit ) {
+    fun onClick(result:FeedWithUser) = clickListener(result.userProfile.idx)
+}
+
 class FeedCommentClickListener(val commentClickListener:(resultId:Long)->Unit) {
-    fun onCommentClick(result:MainFeed) = commentClickListener(result.idx)
+    fun onCommentClick(result:FeedWithUser) = commentClickListener(result.feed.idx)
 }
 
 

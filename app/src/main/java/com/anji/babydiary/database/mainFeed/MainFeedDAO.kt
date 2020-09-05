@@ -30,8 +30,8 @@ interface MainFeedDAO{
     fun deleteAll()
 
 
-
-    @Query("SELECT feed.*, profile.name, profile.profile_img, profile.introduce FROM tbl_main_feed AS feed, tbl_profile AS profile WHERE feed.user_idx = profile.idx ")
+    @Transaction
+    @Query("SELECT * FROM tbl_main_feed")
     fun selectWithProfile(): LiveData< List<FeedWithUser> >
 
 
