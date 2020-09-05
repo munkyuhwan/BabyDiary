@@ -1,18 +1,24 @@
 package com.anji.babydiary.database.mainFeed
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
+import com.anji.babydiary.database.profile.Profiles
 import java.sql.Date
 
-@Entity(tableName = "tbl_main_feed")
+
+@Entity(
+    //foreignKeys = [
+    //    ForeignKey(entity = Profiles::class, parentColumns = ["idx"], childColumns = ["user_idx"])
+    //],
+    tableName = "tbl_main_feed")
 data class MainFeed(
     @PrimaryKey(autoGenerate = true)
     val idx:Long = 0L,
     @ColumnInfo(name = "user_id")
     var userId:String = "",
+
     @ColumnInfo(name = "user_idx")
     var userIdx:Long = 0L,
+
     @ColumnInfo(name = "feed_title")
     var title:String = "",
     @ColumnInfo(name = "feed_text")
@@ -36,3 +42,4 @@ data class MainFeed(
     var imgDir:String = ""
 
 )
+

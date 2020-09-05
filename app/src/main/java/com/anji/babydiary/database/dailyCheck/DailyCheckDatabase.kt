@@ -18,7 +18,7 @@ abstract class DailyCheckDatabase ():RoomDatabase() {
             synchronized(this) {
                 var instance = INSTANCE
                 if (instance == null) {
-                    instance = Room.databaseBuilder(context, DailyCheckDatabase::class.java, "tbl_daily_check")
+                    instance = Room.databaseBuilder(context, DailyCheckDatabase::class.java, "baby_db")
                         .fallbackToDestructiveMigration()
                         .build()
                 }

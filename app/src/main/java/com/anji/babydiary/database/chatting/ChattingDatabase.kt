@@ -18,7 +18,7 @@ abstract class ChattingDatabase:RoomDatabase() {
             synchronized(this) {
                 var instance = INSTANCE
                 if (instance == null) {
-                    instance = Room.databaseBuilder(context, ChattingDatabase::class.java, "tbl_chatting")
+                    instance = Room.databaseBuilder(context, ChattingDatabase::class.java, "baby_db")
                         .fallbackToDestructiveMigration()
                         .build()
                 }

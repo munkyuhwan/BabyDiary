@@ -25,15 +25,16 @@ class FeedListViewModel(
     application: Application
 ) : AndroidViewModel(application) {
 
-    var allFeeds = mainFeedDAO.selectAll()
+    var allFeeds = mainFeedDAO.selectWithProfile()
     var profileData = MutableLiveData<Profiles>()
 
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     var isCategoryOpen = MutableLiveData<Boolean>()
+    //var feedWithUser = mainFeedDAO.selectWithProfile()
 
-    var feedWithUser = mainFeedDAO.getFeedWithUser()
+    //var feedWithUser = mainFeedDAO.getFeedWithUser()
     init {
         uiScope.launch {
             selectProfile()
@@ -41,7 +42,7 @@ class FeedListViewModel(
         isCategoryOpen.value = false
 
         Log.e("result","=============================================================")
-        Log.e("result","${feedWithUser}")
+       // Log.e("result","${feedWithUser}")
         Log.e("result","=============================================================")
 
     }

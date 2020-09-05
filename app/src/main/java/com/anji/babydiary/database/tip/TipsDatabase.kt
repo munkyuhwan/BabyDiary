@@ -19,7 +19,7 @@ abstract class TipsDatabase:RoomDatabase() {
             synchronized(this) {
                 var instance = INSTANCE
                 if (instance == null) {
-                    instance = Room.databaseBuilder(context, TipsDatabase::class.java, "tbl_tips")
+                    instance = Room.databaseBuilder(context, TipsDatabase::class.java, "baby_db")
                         .fallbackToDestructiveMigration()
                         .build()
                 }

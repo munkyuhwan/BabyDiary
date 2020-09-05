@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.anji.babydiary.database.mainFeed.FeedWithUser
 import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.databinding.MainFeedListItemBinding
@@ -22,7 +23,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 
 
-class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClickListener:FeedCommentClickListener, val feedListViewModel: FeedListViewModel):ListAdapter<MainFeed, MainFeedListAdapter.ViewHolder>(ResultListDiffCallback()) {
+class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClickListener:FeedCommentClickListener, val feedListViewModel: FeedListViewModel):ListAdapter<FeedWithUser, MainFeedListAdapter.ViewHolder>(ResultListDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)!!
@@ -36,22 +37,25 @@ class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClick
 
     class ViewHolder private constructor(val binding: MainFeedListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind (item:MainFeed,feedListViewModel: FeedListViewModel, clickListener: FeedClickListener, commentClickListener:FeedCommentClickListener) {
+        fun bind (item: FeedWithUser, feedListViewModel: FeedListViewModel, clickListener: FeedClickListener, commentClickListener:FeedCommentClickListener) {
             //binding.idx = item
 
             binding.mainFeed = item
             binding.viewModel = feedListViewModel
-            binding.likeCnt.text = item.likeCnt.toString()
-            binding.mainFeedText.text = item.title.toString()
+            binding.likeCnt.text = item.feed.likeCnt.toString()
+            binding.mainFeedText.text = item.feed.title.toString()
 
             Glide.with(binding.root.context)
-                .load(item.imgDir)
+                .load(item.feed.imgDir)
                 .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
                 .into(binding.feedImg)
 
 
-            //binding.mainFeedText.text = item.text.toString()
-            binding.userId.text = item.userId.toString()
+            binding.userId.text = item.userProfile.name.toString()
+            Glide.with(binding.root.context)
+                .load(item.userProfile.img)
+                .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
+                .into(binding.userIcon)
 
 
             binding.executePendingBindings()
@@ -76,12 +80,12 @@ class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClick
 }
 
 
-class ResultListDiffCallback: DiffUtil.ItemCallback<MainFeed>() {
-    override fun areItemsTheSame(oldItem: MainFeed, newItem: MainFeed): Boolean {
-        return oldItem.idx == newItem.idx
+class ResultListDiffCallback: DiffUtil.ItemCallback<FeedWithUser>() {
+    override fun areItemsTheSame(oldItem: FeedWithUser, newItem: FeedWithUser): Boolean {
+        return oldItem.feed.idx == newItem.feed.idx
     }
 
-    override fun areContentsTheSame(oldItem: MainFeed, newItem: MainFeed): Boolean {
+    override fun areContentsTheSame(oldItem: FeedWithUser, newItem: FeedWithUser): Boolean {
         return oldItem == newItem
     }
 
@@ -91,8 +95,8 @@ sealed class DataItem {
 
     abstract val id:Long
 
-    data class ResultItem(val gameResult:MainFeed):DataItem() {
-        override val id = gameResult.idx
+    data class ResultItem(val gameResult:FeedWithUser):DataItem() {
+        override val id = gameResult.feed.idx
     }
 
     object Header:DataItem() {

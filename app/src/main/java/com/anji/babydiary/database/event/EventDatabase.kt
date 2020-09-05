@@ -17,7 +17,7 @@ abstract class EventDatabase:RoomDatabase() {
             synchronized(this) {
                 var instance = INSTANCE
                 if (instance == null) {
-                    instance = Room.databaseBuilder(context, EventDatabase::class.java, "tbl_event")
+                    instance = Room.databaseBuilder(context, EventDatabase::class.java, "baby_db")
                         .fallbackToDestructiveMigration()
                         .build()
                 }

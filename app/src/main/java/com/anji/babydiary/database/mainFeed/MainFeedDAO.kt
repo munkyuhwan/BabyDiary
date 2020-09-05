@@ -15,6 +15,7 @@ interface MainFeedDAO{
     @Query("SELECT * FROM tbl_main_feed")
     fun selectAll(): LiveData<List<MainFeed>>
 
+
     @Query("SELECT * FROM tbl_main_feed WHERE idx= :key")
     fun selectSingle(key:Long):MainFeed
 
@@ -28,8 +29,12 @@ interface MainFeedDAO{
     @Query("DELETE FROM tbl_main_feed")
     fun deleteAll()
 
-    @Transaction
-    @Query("SELECT * FROM tbl_main_feed")
-    fun getFeedWithUser(): LiveData<List<FeedWithUser>>
+
+
+    @Query("SELECT feed.*, profile.name, profile.profile_img, profile.introduce FROM tbl_main_feed AS feed, tbl_profile AS profile WHERE feed.user_idx = profile.idx ")
+    fun selectWithProfile(): LiveData< List<FeedWithUser> >
+
+
+
 
 }

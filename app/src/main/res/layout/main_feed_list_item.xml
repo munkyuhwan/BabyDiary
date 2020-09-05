@@ -15,7 +15,7 @@
             type="com.anji.babydiary.mainFeed.feedList.FeedCommentClickListener" />
         <variable
             name="mainFeed"
-            type="com.anji.babydiary.database.mainFeed.MainFeed" />
+            type="com.anji.babydiary.database.mainFeed.FeedWithUser" />
         <variable
             name="viewModel"
             type="com.anji.babydiary.mainFeed.feedList.FeedListViewModel" />

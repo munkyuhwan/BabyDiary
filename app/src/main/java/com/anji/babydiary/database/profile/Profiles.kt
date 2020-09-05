@@ -1,15 +1,12 @@
 package com.anji.babydiary.database.profile
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Index
-import androidx.room.PrimaryKey
+import androidx.room.*
+import com.anji.babydiary.database.mainFeed.MainFeed
 
-@Entity( tableName = "tbl_profile")
+@Entity(tableName = "tbl_profile")
 data class Profiles (
     @PrimaryKey(autoGenerate = true)
     var idx:Long = 0L,
-
     @ColumnInfo(name = "profile_img")
     var img:String ="",
     @ColumnInfo(name = "name")

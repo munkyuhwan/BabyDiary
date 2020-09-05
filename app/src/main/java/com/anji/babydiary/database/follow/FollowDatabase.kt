@@ -19,7 +19,7 @@ abstract class FollowDatabase():RoomDatabase() {
             synchronized(this) {
                 var instance = INSTANCE
                 if (instance == null) {
-                    instance = Room.databaseBuilder(context, FollowDatabase::class.java, "tbl_follow")
+                    instance = Room.databaseBuilder(context, FollowDatabase::class.java, "baby_db")
                         .fallbackToDestructiveMigration()
                         .build()
                 }

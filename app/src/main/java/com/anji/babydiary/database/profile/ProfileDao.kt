@@ -1,10 +1,8 @@
 package com.anji.babydiary.database.profile
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
+import com.anji.babydiary.database.mainFeed.FeedWithUser
 
 @Dao
 interface ProfileDao{
@@ -29,5 +27,6 @@ interface ProfileDao{
     fun updateQuery(img:String, name:String, pass:String, introduce:String, pk:Long)
     @Update
     fun update(profile:Profiles)
+
 
 }
