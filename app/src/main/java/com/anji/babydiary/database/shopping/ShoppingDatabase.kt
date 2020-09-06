@@ -18,7 +18,7 @@ abstract class ShoppingDatabase:RoomDatabase() {
             synchronized(this) {
                 var instance = INSTANCE
                 if (instance == null) {
-                    instance = Room.databaseBuilder(context, ShoppingDatabase::class.java, "baby_db")
+                    instance = Room.databaseBuilder(context.applicationContext, ShoppingDatabase::class.java, "baby_db")
                         .fallbackToDestructiveMigration()
                         .build()
                 }

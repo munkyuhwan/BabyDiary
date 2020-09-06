@@ -73,9 +73,7 @@ class MyFeed : Fragment() {
         }
 
         viewModel.selectAll.observe(viewLifecycleOwner, Observer {
-            Log.e("selectAll","================================================================================")
-            Log.e("selectAll","${it}")
-            Log.e("selectAll","================================================================================")
+
             it?.let {
                 clickAdapter.submitList(it)
             }
