@@ -20,6 +20,7 @@ abstract class CommentsDatabase:RoomDatabase()  {
                 var instance = INSTANCE
                 if (instance == null) {
                     instance = Room.databaseBuilder(context, CommentsDatabase::class.java, "baby_db")
+                        .allowMainThreadQueries()
                         .fallbackToDestructiveMigration()
                         .build()
                 }

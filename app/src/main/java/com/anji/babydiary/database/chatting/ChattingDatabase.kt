@@ -19,6 +19,7 @@ abstract class ChattingDatabase:RoomDatabase() {
                 var instance = INSTANCE
                 if (instance == null) {
                     instance = Room.databaseBuilder(context, ChattingDatabase::class.java, "baby_db")
+                        .allowMainThreadQueries()
                         .fallbackToDestructiveMigration()
                         .build()
                 }
