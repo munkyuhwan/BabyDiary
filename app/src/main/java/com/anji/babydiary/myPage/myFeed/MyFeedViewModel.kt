@@ -2,6 +2,7 @@ package com.anji.babydiary.myPage.myFeed
 
 import android.app.Application
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,12 +26,17 @@ class MyFeedViewModel(val idx:Long,
     val myProfile = MutableLiveData<Profiles>()
     val selectAll = MutableLiveData<List<MainFeed>>()
 
+    val selectAllFollow = followDatabase.selectAll()
+
     val loggedInIdx = CommonCode.USER_IDX.toLong()
     val followIdx = idx.toLong()
 
-    var followeeReusult = followDatabase.selectFollowee(loggedInIdx)
-    var followerResult = followDatabase.selectFollower(loggedInIdx)
-    var followChecker = followDatabase.checkFollow(loggedInIdx, followIdx)
+    var followeeReusult = MutableLiveData< List<Follow> >()
+    var followerResult = MutableLiveData< List<Follow> >()
+    var followChecker = MutableLiveData<List<Follow>>()
+
+
+    var isFollowing = MutableLiveData<Int>()
 
     init {
         uiScope.launch {
@@ -40,7 +46,64 @@ class MyFeedViewModel(val idx:Long,
         uiScope.launch {
             selectAll()
         }
+        isFollowing.value = View.GONE
+        getFollowerChecker()
+        getFolloweeResult()
+        getFollowerResult()
+    }
 
+    fun getFolloweeResult() {
+        uiScope.launch {
+            selectFolloweeResult()
+        }
+    }
+    suspend fun selectFolloweeResult() {
+        withContext(Dispatchers.IO) {
+            followeeReusult.postValue(followDatabase.selectFollowee(followIdx))
+        }
+    }
+
+    fun getFollowerResult() {
+        uiScope.launch {
+            selectFollowerResult()
+        }
+    }
+    suspend fun selectFollowerResult() {
+        withContext(Dispatchers.IO) {
+            followerResult.postValue(followDatabase.selectFollower(followIdx))
+        }
+    }
+
+    fun getFollowerChecker() {
+        uiScope.launch {
+            selectFollowChecker()
+        }
+    }
+    suspend fun selectFollowChecker() {
+        withContext(Dispatchers.IO) {
+            followChecker.postValue( followDatabase.checkFollow(followIdx, loggedInIdx) )
+
+            Log.e("followChecker", "============================================================")
+            Log.e("followChecker", "${followChecker.value}")
+            Log.e("followChecker", "============================================================")
+
+            if (followChecker.value != null) {
+                if (followChecker.value != null) {
+                    if (followChecker.value!!.size <= 0) {
+                        isFollowing.postValue(View.GONE)
+                    } else {
+                        isFollowing.postValue(View.VISIBLE)
+                    }
+                } else {
+                    isFollowing.postValue(View.GONE)
+                }
+
+            }else {
+                isFollowing.postValue(View.GONE)
+
+            }
+
+        }
     }
 
     suspend fun selectByIdx() {
@@ -56,19 +119,12 @@ class MyFeedViewModel(val idx:Long,
     }
 
     fun onFollowClicked() {
-
-        Log.e("folow","${loggedInIdx} / ${followIdx}")
-        if (loggedInIdx != followIdx) {
-            Log.e("folow","===========================================")
-            Log.e("folow","${followChecker.value!!.size}")
-
+       if (loggedInIdx != followIdx) {
             if (followChecker.value!!.size <= 0) {
                 var follow = Follow()
                 follow.followee_idx = followIdx
                 follow.follower_idx = loggedInIdx
 
-                Log.e("folow","===========================================")
-                Log.e("folow","insert!!!!!!")
                 uiScope.launch {
                     insertFollow(follow)
                 }
@@ -84,17 +140,19 @@ class MyFeedViewModel(val idx:Long,
     suspend fun deleteFollow() {
         withContext(Dispatchers.IO) {
             followDatabase.deleteAllByFollowe(followIdx, loggedInIdx)
+            getFollowerChecker()
+            getFolloweeResult()
+            getFollowerResult()
         }
     }
 
     suspend fun insertFollow(follow:Follow) {
 
-        Log.e("folow","===========================================")
-        Log.e("folow","do insert!!!!!!")
         withContext(Dispatchers.IO) {
-            Log.e("folow","===========================================")
-            Log.e("folow","do insert with context!!!!!!")
             followDatabase.insert(follow)
+            getFollowerChecker()
+            getFolloweeResult()
+            getFollowerResult()
         }
 
     }

@@ -116,11 +116,8 @@ class MyFeed : Fragment() {
             }
         })
 
-        viewModel.followChecker.observe(viewLifecycleOwner, Observer {
-            Log.e("follwChecker","============================================================")
-            Log.e("follwChecker","${it}")
-            Log.e("follwChecker","============================================================")
-        })
+
+
 
         return binding.root
     }

@@ -171,6 +171,7 @@
         <item name="cornerSize">50%</item>
     </style>
 
+
     <style name="addMyFeed">
         <item name="android:background">@drawable/add_btn</item>
         <item name="android:layout_width">30sp</item>

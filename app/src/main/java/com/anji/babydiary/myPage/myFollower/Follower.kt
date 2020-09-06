@@ -43,7 +43,7 @@ class Follower : Fragment() {
 
         val argument = arguments?.let { FollowerArgs.fromBundle(it) }
 
-
+/*
         if (argument!!.equals("follower")) {
             viewModel.selectAllFollowee.observe(viewLifecycleOwner, Observer {
                 it?.let {
@@ -59,7 +59,7 @@ class Follower : Fragment() {
                 }
             })
         }
-
+*/
 
         binding.backBtn.setOnClickListener {
             findNavController().popBackStack()

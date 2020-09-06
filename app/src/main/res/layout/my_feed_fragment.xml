@@ -80,19 +80,33 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/more_category" />
 
+
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/shapeableImageView"
                     android:layout_width="164dp"
                     android:layout_height="164dp"
-                    android:layout_marginTop="20dp"
-                    android:onClick="@{() -> myFeedViewModel.onFollowClicked()}"
                     android:background="#efefef"
+                    android:onClick="@{() -> myFeedViewModel.onFollowClicked()}"
                     android:scaleType="centerCrop"
                     android:src="@drawable/sample_1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/name_kid"
                     app:shapeAppearanceOverlay="@style/circleImageView" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/shapeableImageViewWrapper"
+                    android:layout_width="164dp"
+                    android:layout_height="164dp"
+                    android:padding="2sp"
+                    android:alpha="0.4"
+                    android:visibility="@{myFeedViewModel.isFollowing}"
+                    android:onClick="@{() -> myFeedViewModel.onFollowClicked()}"
+                    android:background="@drawable/layout_circle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/name_kid"
+                    android:orientation="horizontal">
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                     android:id="@+id/followerLabel"
@@ -110,7 +124,6 @@
                     style="@style/MyPageFollowNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
                     app:layout_constraintBottom_toTopOf="@+id/followerLabel"
                     app:layout_constraintEnd_toEndOf="@+id/followerLabel"
                     app:layout_constraintStart_toStartOf="@+id/followerLabel" />
