@@ -19,6 +19,8 @@ import com.anji.babydiary.R
 import com.anji.babydiary.bottomActivity.BottomMenu
 import com.anji.babydiary.bottomActivity.resign.Resign
 import com.anji.babydiary.common.CommonCode
+import com.anji.babydiary.database.follow.Follow
+import com.anji.babydiary.database.follow.FollowDatabase
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.databinding.MyFeedFragmentBinding
@@ -45,14 +47,14 @@ class MyFeed : Fragment() {
             idx = it.getLong("userIdx")
         }
 
-
         val binding = DataBindingUtil.inflate<MyFeedFragmentBinding>(inflater, R.layout.my_feed_fragment, container, false)
 
         val application = requireNotNull(this.activity).application
         val database = MainFeedDatabase.getInstance(application).database
         val profileDatabase = ProfileDatabase.getInstance(application).database
+        val followDatabase = FollowDatabase.getInstance(application).database
 
-        val viewModelFactory = MyFeedViewModelFactory(idx, database, profileDatabase, application)
+        val viewModelFactory = MyFeedViewModelFactory(idx, database, profileDatabase, followDatabase, application)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MyFeedViewModel::class.java)
 
         binding.myFeedViewModel = viewModel
@@ -102,6 +104,23 @@ class MyFeed : Fragment() {
             findNavController().navigate(MyFeedDirections.actionMyFeedToChattingList())
             requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
         }
+
+        viewModel.followerResult.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                binding.numFollower.text = it.size.toString()
+            }
+        })
+        viewModel.followeeReusult.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                binding.numFollowing.text = it.size.toString()
+            }
+        })
+
+        viewModel.followChecker.observe(viewLifecycleOwner, Observer {
+            Log.e("follwChecker","============================================================")
+            Log.e("follwChecker","${it}")
+            Log.e("follwChecker","============================================================")
+        })
 
         return binding.root
     }

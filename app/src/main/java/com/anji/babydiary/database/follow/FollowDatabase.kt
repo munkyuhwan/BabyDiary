@@ -6,7 +6,7 @@ import androidx.room.Entity
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Follow::class], version = 1, exportSchema = false)
+@Database(entities = [Follow::class], version = 4, exportSchema = false)
 abstract class FollowDatabase():RoomDatabase() {
 
     abstract val database:FollowDao
@@ -19,7 +19,7 @@ abstract class FollowDatabase():RoomDatabase() {
             synchronized(this) {
                 var instance = INSTANCE
                 if (instance == null) {
-                    instance = Room.databaseBuilder(context.applicationContext, FollowDatabase::class.java, "baby_db")
+                    instance = Room.databaseBuilder(context.applicationContext, FollowDatabase::class.java, "baby.db")
                         .allowMainThreadQueries()
                         .fallbackToDestructiveMigration()
                         .build()

@@ -19,7 +19,7 @@ abstract class ProfileDatabase:RoomDatabase()  {
             synchronized(this) {
                 var instance = INSTANCE
                 if (instance == null) {
-                    instance = Room.databaseBuilder(context.applicationContext, ProfileDatabase::class.java, "baby_db")
+                    instance = Room.databaseBuilder(context.applicationContext, ProfileDatabase::class.java, "baby.db")
                         .allowMainThreadQueries()
                         .fallbackToDestructiveMigration()
                         .build()
