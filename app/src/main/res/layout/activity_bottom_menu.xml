@@ -60,7 +60,11 @@
                 style="@style/menuItemStyle"
                 android:text="@string/resign_btn"
                 />
-
+            <TextView
+                android:id="@+id/logOutBtn"
+                style="@style/menuItemStyle"
+                android:text="로그아웃"
+                />
 
         </LinearLayout>
 

@@ -22,6 +22,7 @@ import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.databinding.MyFeedFragmentBinding
+import com.anji.babydiary.login.Login
 import com.anji.babydiary.mainFeed.feedDetail.FeedDetailArgs
 import com.anji.babydiary.myPage.myFeed.myFeedListAdapter.MyFeedListAdapter
 import com.bumptech.glide.Glide
@@ -133,6 +134,11 @@ class MyFeed : Fragment() {
                         4 -> {
                             val intent: Intent = Intent(requireActivity(), Resign::class.java)
                             intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                            startActivity(intent)
+                        }
+                        5 -> {
+                            val intent: Intent = Intent(requireActivity(), Login::class.java)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK and  Intent.FLAG_ACTIVITY_NEW_TASK)
                             startActivity(intent)
                         }
                     }

@@ -22,6 +22,7 @@ import com.anji.babydiary.dailyCheck.DailyCheckActivity
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.database.profile.Profiles
 import com.anji.babydiary.databinding.ActivityMyPageBinding
+import com.anji.babydiary.login.Login
 import com.anji.babydiary.myPage.myFeed.MyFeedDirections
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -72,7 +73,6 @@ class MyPage : BaseActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-
         if (requestCode == CommonCode.MYPAGE_ACTIVITY_RESULT) {
 
             data?.let {
@@ -95,6 +95,13 @@ class MyPage : BaseActivity() {
                         4 -> {
                             val intent: Intent = Intent(this, Resign::class.java)
                             startActivity(intent)
+                        }
+                        5 -> {
+                            Log.e("tag","activity result 5================================================")
+                            val intent: Intent = Intent(this, Login::class.java)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK and  Intent.FLAG_ACTIVITY_NEW_TASK)
+                            startActivity(intent)
+                            this.finish()
                         }
                     }
 

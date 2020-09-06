@@ -79,6 +79,10 @@ class BottomMenu : AppCompatActivity() {
             selectedItem = 4
             finishWithResult(selectedItem)
         }
+        binding.logOutBtn.setOnClickListener {
+            selectedItem = 5
+            finishWithResult(selectedItem)
+        }
 
     }
 
