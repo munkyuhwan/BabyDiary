@@ -11,6 +11,7 @@ import com.anji.babydiary.R
 import com.anji.babydiary.common.BaseActivity
 import com.anji.babydiary.dailyCheck.DailyCheckActivity
 import com.anji.babydiary.databinding.ActivityMainFeedBinding
+import kotlin.random.Random
 
 class MainFeedActivity() : BaseActivity() {
     private lateinit var binding:ActivityMainFeedBinding
@@ -49,6 +50,36 @@ class MainFeedActivity() : BaseActivity() {
             val intent: Intent = Intent(this, DailyCheckActivity::class.java)
             startActivity(intent)
         }
+        doInsert(1)
+        doInsert(2)
+        doInsert(3)
+        doInsert(4)
+        doInsert(5)
+        doInsert(6)
+        doInsert(7)
+        doInsert(8)
+        doInsert(9)
+        doInsert(10)
+
+        insertFeed(Random.nextLong(1,10))
+        insertFeed(Random.nextLong(1,10))
+        insertFeed(Random.nextLong(1,10))
+        insertFeed(Random.nextLong(1,10))
+        insertFeed(Random.nextLong(1,10))
+        insertFeed(Random.nextLong(1,10))
+        insertFeed(Random.nextLong(1,10))
+        insertFeed(Random.nextLong(1,10))
+        insertFeed(Random.nextLong(1,10))
+        insertFeed(Random.nextLong(1,10))
+        insertFeed(Random.nextLong(1,10))
+        insertFeed(Random.nextLong(1,10))
+        insertFeed(Random.nextLong(1,10))
+        insertFeed(Random.nextLong(1,10))
+        insertFeed(Random.nextLong(1,10))
+        insertFeed(Random.nextLong(1,10))
+        insertFeed(Random.nextLong(1,10))
+        insertFeed(Random.nextLong(1,10))
+        insertFeed(Random.nextLong(1,10))
 
         //supportActionBar!!.setDisplayShowCustomEnabled(false)
         //supportActionBar!!.setDisplayHomeAsUpEnabled(false)

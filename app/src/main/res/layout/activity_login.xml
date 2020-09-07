@@ -59,6 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:paddingTop="10sp"
+            android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="@+id/inputID"
             app:layout_constraintStart_toStartOf="@+id/inputID"
             app:layout_constraintTop_toBottomOf="@+id/inputID" />

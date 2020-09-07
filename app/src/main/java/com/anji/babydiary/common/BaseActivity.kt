@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
@@ -23,6 +24,12 @@ import com.anji.babydiary.R
 import com.anji.babydiary.common.bottomNavigation.BottomNavigationViewModel
 import com.anji.babydiary.common.bottomNavigation.BottomNavigationViewModelFactory
 import com.anji.babydiary.dailyCheck.DailyCheckViewModel
+import com.anji.babydiary.database.mainFeed.MainFeed
+import com.anji.babydiary.database.mainFeed.MainFeedDAO
+import com.anji.babydiary.database.mainFeed.MainFeedDatabase
+import com.anji.babydiary.database.profile.ProfileDao
+import com.anji.babydiary.database.profile.ProfileDatabase
+import com.anji.babydiary.database.profile.Profiles
 import com.anji.babydiary.event.EventActivity
 import com.anji.babydiary.gnb.main.NavViewModel
 import com.anji.babydiary.gnb.main.NavViewModelFactory
@@ -33,6 +40,8 @@ import com.anji.babydiary.tips.TipActivity
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.nav_layout.view.*
+import kotlinx.coroutines.*
+import kotlin.random.Random
 
 
 abstract class BaseActivity() : AppCompatActivity() {
@@ -41,8 +50,11 @@ abstract class BaseActivity() : AppCompatActivity() {
     lateinit var layout:CollapsingToolbarLayout;
     lateinit var navController:NavController
     lateinit var navViewModel: NavViewModel
-
-
+    lateinit var selectAll:LiveData<List<Profiles>>
+    var job = Job()
+    var uiScope = CoroutineScope(Dispatchers.Main + job)
+    lateinit var database: ProfileDao
+    lateinit var feedDatabase:MainFeedDAO
     fun setNav(nestedHost:Int):NavViewModel {
         var appBarConfiguration: AppBarConfiguration.Builder
         var navViewClosedHeight:Int = 278
@@ -87,10 +99,74 @@ abstract class BaseActivity() : AppCompatActivity() {
         })
 
 
-        Log.e("navigation icon", "icon: ${toolbar.navigationIcon}")
 
 
         return navViewModel
+    }
+
+
+    fun insertData(profile:Profiles) {
+        uiScope.launch {
+            Log.e("member", "launch")
+            insert(profile)
+        }
+    }
+
+    private suspend fun insert(profile:Profiles) {
+        withContext(Dispatchers.IO){
+            Log.e("member", "insert")
+            database.insert(profile)
+        }
+    }
+
+    fun doInsert(i:Long) {
+        database = ProfileDatabase.getInstance(this).database
+        selectAll = database.selectAll()
+        //for (i in 1..10) {
+            var profile = Profiles()
+            profile.name = "${i}회원"
+            profile.pass = "${i}${i}${i}${i}"
+            profile.introduce = "${i}회원 자기소개"
+            profile.img = imgArray[Random.nextInt(0,9)]
+            insertData(profile)
+        //}
+    }
+
+
+    val imgArray = arrayOf(
+        "content://media/external/images/media/1736",
+        "content://media/external/images/media/1671",
+        "content://media/external/images/media/1626",
+        "content://media/external/images/media/1622",
+        "content://media/external/images/media/1521",
+        "content://media/external/images/media/1474",
+        "content://media/external/images/media/1433",
+        "content://media/external/images/media/1206",
+        "content://media/external/images/media/1261",
+        "content://media/external/images/media/1058"
+    )
+
+    suspend fun insertFeed(mainFeed:MainFeed) {
+        withContext(Dispatchers.IO) {
+            feedDatabase.insert(mainFeed)
+        }
+    }
+    fun insertFeed(idx:Long){
+        feedDatabase = MainFeedDatabase.getInstance(this).database
+        var mainFeed = MainFeed()
+
+        mainFeed.title = "제목"
+        mainFeed.height = Math.random().toLong()
+        mainFeed.weight = Math.random().toLong()
+        mainFeed.head = Math.random().toLong()
+        mainFeed.location = "d"
+        mainFeed.toSpouser = "ㅇㅇ 수고했다"
+        mainFeed.imgDir = imgArray[Random.nextInt(0,9)]
+        mainFeed.userIdx = idx
+
+        uiScope.launch {
+            insertFeed(mainFeed)
+        }
     }
 
     private fun hideSystemUI() {

@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Intent
 import android.net.Uri
 import android.text.style.LineHeightSpan
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
@@ -34,6 +35,7 @@ class MyFeedWriteViewModel(val database:MainFeedDAO, application: Application) :
 
     fun onImageSelected(data: Intent?) {
         selectedImage.value = data?.data!!
+        Log.e("selectedImg","====img:${selectedImage.value}===")
     }
 
     fun complete(title:String, height:String, weight:String, head:String, location:String, toSpouser:String ) {

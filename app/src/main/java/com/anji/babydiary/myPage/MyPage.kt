@@ -55,10 +55,7 @@ class MyPage : BaseActivity() {
 
         binding.viewModel = viewModel
 
-
         navController = this.findNavController(R.id.myPageNestFragment)
-
-
 
         binding.bottomNav = setBottomNav(4)
 
@@ -66,6 +63,14 @@ class MyPage : BaseActivity() {
             val intent: Intent = Intent(this, DailyCheckActivity::class.java)
             startActivity(intent)
         }
+
+        viewModel.selectAll.observe(this, androidx.lifecycle.Observer {
+
+            Log.e("member","==================================================================")
+            Log.e("member","${it}")
+            Log.e("member","==================================================================")
+
+        })
 
     }
 

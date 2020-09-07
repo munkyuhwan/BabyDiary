@@ -18,6 +18,8 @@ class MyPageViewModel (val database: ProfileDao, val idx:Long, application: Appl
 
     val myProfile = MutableLiveData<Profiles>()
 
+    var selectAll = database.selectAll()
+
     init {
         isMain.value = View.GONE
         isSub.value = View.GONE

@@ -7,6 +7,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.anji.babydiary.common.CommonCode
+import com.anji.babydiary.database.profile.ProfileDao
+import com.anji.babydiary.database.profile.ProfileDatabase
+import com.anji.babydiary.database.profile.Profiles
 import com.anji.babydiary.databinding.ActivityMainBinding
 import com.anji.babydiary.login.Login
 import com.anji.babydiary.mainFeed.MainFeedActivity
@@ -23,13 +26,18 @@ import java.util.*
 import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
+    var job = Job()
+    var uiScope = CoroutineScope(Dispatchers.Main + job)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_main)
 
+
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
         //month -1
+        /*
         val expDate = GregorianCalendar(2020, 8, 9) // midnight
         val now = GregorianCalendar()
 
@@ -41,53 +49,19 @@ class MainActivity : AppCompatActivity() {
             finish()
             exitProcess(-1)
         }
+        */
 
-        var job = Job()
-        var uiScope = CoroutineScope(Dispatchers.Main + job)
+
+
 
         uiScope.launch {
-            delay()
+             delay()
         }
 
-
-        //getAppKeyHash();
-        FirebaseInstanceId.getInstance().instanceId
-            .addOnCompleteListener(OnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    Log.w("TAG", "getInstanceId failed", task.exception)
-                    return@OnCompleteListener
-                }
-                // Get new Instance ID token
-                val token = task.result!!.token
-                Log.e("tag", token)
-
-
-                /*
-                val client = OkHttpClient()
-                val body: RequestBody = FormBody.Builder()
-                    .add("Token", token)
-                    .build()
-
-                //request
-                val request = Request.Builder()
-                    .url("http://gba2020.cafe24.com/board/join_apush.php")
-                    .post(body)
-                    .build()
-                Thread(Runnable {
-                    try {
-                        client.newCall(request).execute()
-                    } catch (e: IOException) {
-                        e.printStackTrace()
-                    }
-                }).start()
-
-                 */
-
-                //FirebaseMessaging.getInstance().subscribeToTopic("fcm_and");
-            })
-
-
     }
+
+
+
 
     suspend fun delay() {
         withContext(Dispatchers.IO) {

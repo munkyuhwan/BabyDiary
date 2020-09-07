@@ -13,7 +13,7 @@ interface ProfileDao{
     @Query("SELECT * FROM tbl_profile ")
     fun selectAll():LiveData<List<Profiles>>
 
-    @Query("SELECT * FROM tbl_profile WHERE idx= :key")
+    @Query("SELECT * FROM tbl_profile WHERE idx= :key ORDER BY idx DESC")
     fun selectProfile(key:Long):Profiles
 
 
