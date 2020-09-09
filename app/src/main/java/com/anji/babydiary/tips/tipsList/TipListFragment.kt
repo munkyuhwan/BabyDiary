@@ -51,6 +51,10 @@ class TipListFragment : Fragment() {
             }
         })
 
+        binding.searchHospital.setOnClickListener {
+            findNavController().navigate(TipListFragmentDirections.actionTipListFragmentToMapWebview())
+        }
+
         /*
         viewmodel.dataWithProfile.observe(viewLifecycleOwner, Observer {
             it?.let{

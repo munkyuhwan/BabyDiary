@@ -12,9 +12,16 @@
         <action
             android:id="@+id/action_tipListFragment_to_writeTip"
             app:destination="@id/writeTip" />
+        <action
+            android:id="@+id/action_tipListFragment_to_mapWebview"
+            app:destination="@id/mapWebview" />
     </fragment>
     <fragment
         android:id="@+id/writeTip"
         android:name="com.anji.babydiary.tips.writeTip.WriteTip"
         android:label="WriteTip" />
+    <fragment
+        android:id="@+id/mapWebview"
+        android:name="com.anji.babydiary.tips.webview.MapWebview"
+        android:label="MapWebview" />
 </navigation>
