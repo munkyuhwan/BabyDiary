@@ -39,7 +39,9 @@ data class MainFeed(
     @ColumnInfo(name = "like_cnt")
     var likeCnt:Long = 0L,
     @ColumnInfo(name="img_dir")
-    var imgDir:String = ""
+    var imgDir:String = "",
+    @ColumnInfo(name="img_tmp_dir")
+    var imgTmpDir:String = ""
 
-)
+    )
 

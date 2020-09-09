@@ -60,7 +60,16 @@ class MyProfile : Fragment() {
 
         viewModel.data.observe(viewLifecycleOwner, Observer {
             it?.let {
-                Glide.with(application).load(it.img).into(binding.profileImg)
+
+                Log.e("profile","${it}")
+                if (!it.img.equals("")) {
+                    Glide.with(application).load(it.img).into(binding.profileImg)
+                }
+                if (!it.imgTmp.equals("")) {
+                    Glide.with(application).load(  resources.getIdentifier(it.imgTmp, "drawable", requireActivity().packageName)).into(binding.profileImg)
+                }
+
+
                 binding.profileName.setText(it.name)
                 binding.profilePass.setText(it.pass)
                 binding.profilePassCheck.setText(it.pass)

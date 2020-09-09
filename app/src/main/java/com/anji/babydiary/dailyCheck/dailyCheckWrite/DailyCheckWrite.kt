@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.common.CommonCode
+import com.anji.babydiary.common.Utils
 import com.anji.babydiary.dailyCheck.listAdapter.DailyCheckListAdapter
 import com.anji.babydiary.database.dailyCheck.DailyCheckDatabase
 import com.anji.babydiary.databinding.DailyCheckWriteFragmentBinding
@@ -28,11 +29,62 @@ class DailyCheckWrite : Fragment() {
 
         val idx = CommonCode.USER_IDX
 
-        val arg = arguments?.let { DailyCheckWriteArgs.fromBundle(it) }
-        var year = arg!!.year
-        var month = arg!!.month
-        var date = arg!!.date
-        var day = arg!!.day
+        Log.e("data","${ Utils.getDate(System.currentTimeMillis(), "YYYY - MM - d E")} ")
+
+
+        var year = "${ Utils.getDate(System.currentTimeMillis(), "YYYY")} "
+        var month = "${ Utils.getDate(System.currentTimeMillis(), "MM")} "
+        var date = "${ Utils.getDate(System.currentTimeMillis(), "dd")} "
+        var day = "${ Utils.getDate(System.currentTimeMillis(), "E")} "
+
+        when(day) {
+            "월" -> {
+                day = "MON"
+            }
+            "화" -> {
+                day = "TUE"
+
+            }
+            "수" -> {
+                day = "WED"
+
+            }
+            "목" -> {
+                day = "THU"
+
+            }
+            "금" -> {
+                day = "FRI"
+
+            }
+            "토" -> {
+                day = "SAT"
+
+            }
+            "일" -> {
+                day = "SUN"
+
+            }
+        }
+
+        Log.e("arg","${requireArguments().size()}")
+
+        if (requireArguments().size() <= 0) {
+
+        }else {
+            val arg = arguments?.let {
+                DailyCheckWriteArgs.fromBundle(it)
+            }
+
+            arg?.let {
+                year = it.year.toString()
+                month = it.month.toString()
+                date = it.date.toString()
+                day = it.day.toString()
+            }
+
+
+        }
 
         val binding = DataBindingUtil.inflate<DailyCheckWriteFragmentBinding>(
             inflater,
@@ -70,7 +122,12 @@ class DailyCheckWrite : Fragment() {
         })
 
         binding.dailyCheckBacnBtn.setOnClickListener {
-            findNavController().popBackStack()
+            //findNavController().popBackStack()
+            requireActivity().finish()
+        }
+
+        binding.dailyCheckDetailTopLayer.setOnClickListener {
+            findNavController().navigate(DailyCheckWriteDirections.actionDailyCheckWriteToDailyCheckCalendar22())
         }
 
         return binding.root

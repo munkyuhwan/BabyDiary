@@ -41,6 +41,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.nav_layout.view.*
 import kotlinx.coroutines.*
+import java.lang.Exception
 import kotlin.random.Random
 
 
@@ -115,42 +116,72 @@ abstract class BaseActivity() : AppCompatActivity() {
     private suspend fun insert(profile:Profiles) {
         withContext(Dispatchers.IO){
             Log.e("member", "insert")
-            database.insert(profile)
+            try {
+                database.insert(profile)
+            }catch (ex:Exception){
+
+            }
         }
     }
 
-    fun doInsert(i:Long) {
+    val nameArray = arrayOf(
+        "",
+        "승율아가",
+        "찬호",
+        "쥬쥬",
+        "오쑥이",
+        "선우",
+        "승현아기",
+        "말랑이",
+        "재재"
+    )
+
+    val intro= arrayOf(
+        "",
+        "승유리를 소개해요",
+        "똘망똘망한 먹보",
+        "포토그래퍼의 보물",
+        "우리집 사랑둥이",
+        "착할선 번우",
+        "이슬부부의 뮤즈",
+        "작고 소중한 우리의 천사",
+        "세상으로 나오는 날을 기다리는 중"
+    )
+
+    val imgArray = arrayOf(
+        "",
+        "mem_1",
+        "mem_2",
+        "mem_3",
+        "mem_4",
+        "mem_5",
+        "mem_6",
+        "mem_7",
+        "mem_8"
+    )
+
+    fun doInsert(i:Int) {
         database = ProfileDatabase.getInstance(this).database
         selectAll = database.selectAll()
         //for (i in 1..10) {
-            var profile = Profiles()
-            profile.name = "${i}회원"
-            profile.pass = "${i}${i}${i}${i}"
-            profile.introduce = "${i}회원 자기소개"
-            profile.img = imgArray[Random.nextInt(0,9)]
-            insertData(profile)
+        var profile = Profiles()
+        profile.idx = i.toLong()
+        profile.name = nameArray[i]
+        profile.id = i
+        profile.pass = "${i}"
+        profile.introduce = "${intro[i]}"
+        profile.imgTmp = imgArray[i]
+        insertData(profile)
         //}
     }
 
-
-    val imgArray = arrayOf(
-        "content://media/external/images/media/1736",
-        "content://media/external/images/media/1671",
-        "content://media/external/images/media/1626",
-        "content://media/external/images/media/1622",
-        "content://media/external/images/media/1521",
-        "content://media/external/images/media/1474",
-        "content://media/external/images/media/1433",
-        "content://media/external/images/media/1206",
-        "content://media/external/images/media/1261",
-        "content://media/external/images/media/1058"
-    )
 
     suspend fun insertFeed(mainFeed:MainFeed) {
         withContext(Dispatchers.IO) {
             feedDatabase.insert(mainFeed)
         }
     }
+
     fun insertFeed(idx:Long){
         feedDatabase = MainFeedDatabase.getInstance(this).database
         var mainFeed = MainFeed()

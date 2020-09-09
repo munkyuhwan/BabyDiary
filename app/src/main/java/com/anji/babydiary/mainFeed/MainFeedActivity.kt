@@ -50,7 +50,6 @@ class MainFeedActivity() : BaseActivity() {
             val intent: Intent = Intent(this, DailyCheckActivity::class.java)
             startActivity(intent)
         }
-        /*
         doInsert(1)
         doInsert(2)
         doInsert(3)
@@ -59,10 +58,10 @@ class MainFeedActivity() : BaseActivity() {
         doInsert(6)
         doInsert(7)
         doInsert(8)
-        doInsert(9)
-        doInsert(10)
 
-        insertFeed(Random.nextLong(1,10))
+
+        /*
+                insertFeed(Random.nextLong(1,10))
         insertFeed(Random.nextLong(1,10))
         insertFeed(Random.nextLong(1,10))
         insertFeed(Random.nextLong(1,10))

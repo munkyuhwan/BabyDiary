@@ -40,7 +40,6 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao,val idx:Long, applica
     var selectedData = MutableLiveData<DailyCheck>()
     val marginTop = MutableLiveData<Float>()
 
-
     var leftCounting = MutableLiveData<Int>()
     var rightCounting = MutableLiveData<Int>()
     var isLeftCountingStarted = MutableLiveData<Boolean>()
@@ -105,19 +104,11 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao,val idx:Long, applica
 
     fun saveData(memo:CharSequence) {
 
-
-        //uiScope.launch {
-        //    delete()
-        //}
-
         initializeFields()
 
-
-        //입력되었는지 확인
         uiScope.launch {
             dataCheck(memo.toString())
         }
-
 
     }
 
@@ -133,11 +124,10 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao,val idx:Long, applica
                 idx
                 )
             )
-
             insertUpdateData()
-
         }
     }
+
     fun insertUpdateData() {
 
         val currentHour = Utils.getDate(System.currentTimeMillis(), "HH")

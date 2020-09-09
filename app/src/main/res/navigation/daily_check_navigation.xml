@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/daily_check_navigation"
-    app:startDestination="@id/dailyCheckCalendar2">
+    app:startDestination="@id/dailyCheckWrite">
     <fragment
         android:id="@+id/dailyCheckCalendar2"
         android:name="com.anji.babydiary.dailyCheck.dailyCheckCalendar.DailyCheckCalendar"
@@ -26,5 +26,8 @@
         <argument
             android:name="day"
             app:argType="string" />
+        <action
+            android:id="@+id/action_dailyCheckWrite_to_dailyCheckCalendar22"
+            app:destination="@id/dailyCheckCalendar2" />
     </fragment>
 </navigation>

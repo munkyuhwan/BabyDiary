@@ -34,8 +34,8 @@ class MapWebview : Fragment() {
     }
 
     private val  REQUIRED_PERMISSIONS = arrayOf(
-        Manifest.permission.ACCESS_FINE_LOCATION,
-        Manifest.permission.ACCESS_COARSE_LOCATION
+        Manifest.permission.ACCESS_FINE_LOCATION
+        //, Manifest.permission.ACCESS_COARSE_LOCATION
     )
 
     private val PERMISSIONS_REQUEST_CODE = 8989
@@ -236,13 +236,13 @@ class MapWebview : Fragment() {
 
         Log.e("permission",
             (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED).toString()
-        );
+        )
         Log.e("permission",
             (hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED).toString()
-        );
+        )
 
-        if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED ||
-            hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED
+        if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED
+            //&& hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED
         ) {
             Log.e("myTag", "===========================================================");
             Log.e("myTag", "request location");
@@ -250,10 +250,11 @@ class MapWebview : Fragment() {
             locationManager = requireActivity().getSystemService(LOCATION_SERVICE) as LocationManager?;
             try {
                 // Request location updates
-                locationManager!!.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0L, 0f, locationListener);
+                locationManager!!.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0L, 0f, locationListener);
             } catch(ex: SecurityException) {
                 Log.e("myTag", "===========================================================");
                 Log.e("myTag", "Security Exception, no location available");
+                ex.printStackTrace()
                 Log.e("myTag", "===========================================================");
             }
 
@@ -274,11 +275,14 @@ class MapWebview : Fragment() {
             }
 
              */
+            ActivityCompat.requestPermissions(
+                requireActivity(), REQUIRED_PERMISSIONS,
+                PERMISSIONS_REQUEST_CODE)
 
-
+            /*
             if (ActivityCompat.shouldShowRequestPermissionRationale(
                     requireActivity(),
-                    REQUIRED_PERMISSIONS.get(0)
+                    REQUIRED_PERMISSIONS
                 )
             ) {
 
@@ -299,6 +303,8 @@ class MapWebview : Fragment() {
                     PERMISSIONS_REQUEST_CODE
                 )
             }
+
+             */
 
 
         }

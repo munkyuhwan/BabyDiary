@@ -93,7 +93,12 @@ class MyFeed : Fragment() {
                 binding.numFollower.text = it.follower.toString()
                 binding.numFollowing.text = it.following.toString()
 
-                Glide.with(application).load(it.img).into(binding.shapeableImageView)
+                if (!it.img.equals("")) {
+                    Glide.with(application).load(it.img).into(binding.shapeableImageView)
+                }
+                if (!it.imgTmp.equals("")) {
+                    Glide.with(application).load(  resources.getIdentifier(it.imgTmp, "drawable", requireActivity().packageName)).into(binding.shapeableImageView)
+                }
 
                 binding.introText.text = it.introduce.toString()
 
