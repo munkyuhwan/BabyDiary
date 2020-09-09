@@ -50,6 +50,7 @@ class MainFeedActivity() : BaseActivity() {
             val intent: Intent = Intent(this, DailyCheckActivity::class.java)
             startActivity(intent)
         }
+        /*
         doInsert(1)
         doInsert(2)
         doInsert(3)
@@ -80,6 +81,8 @@ class MainFeedActivity() : BaseActivity() {
         insertFeed(Random.nextLong(1,10))
         insertFeed(Random.nextLong(1,10))
         insertFeed(Random.nextLong(1,10))
+
+         */
 
         //supportActionBar!!.setDisplayShowCustomEnabled(false)
         //supportActionBar!!.setDisplayHomeAsUpEnabled(false)
