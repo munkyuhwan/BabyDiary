@@ -26,6 +26,7 @@ import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.databinding.MyFeedFragmentBinding
 import com.anji.babydiary.login.Login
 import com.anji.babydiary.mainFeed.feedDetail.FeedDetailArgs
+import com.anji.babydiary.myPage.myFeed.dateListAdpater.DateListAdapter
 import com.anji.babydiary.myPage.myFeed.myFeedListAdapter.MyFeedListAdapter
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.nav_mypage_layout.view.*
@@ -60,6 +61,8 @@ class MyFeed : Fragment() {
         binding.myFeedViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+
+        /*
         val clickAdapter = MyFeedListAdapter(MyFeedClickListener {
             it?.let {
                 findNavController().navigate(MyFeedDirections.actionMyFeedToMyFeedDetail(it))
@@ -70,6 +73,8 @@ class MyFeed : Fragment() {
         val manager = GridLayoutManager(activity,3)
         binding.myFeedList.layoutManager = manager
 
+         */
+
         binding.addMyfeed.setOnClickListener {
             findNavController().navigate(MyFeedDirections.actionMyFeedToMyFeedWrite())
         }
@@ -77,7 +82,7 @@ class MyFeed : Fragment() {
         viewModel.selectAll.observe(viewLifecycleOwner, Observer {
 
             it?.let {
-                clickAdapter.submitList(it)
+               // clickAdapter.submitList(it)
             }
         })
         binding.moreMenuBtn.setOnClickListener {
@@ -121,6 +126,21 @@ class MyFeed : Fragment() {
             }
         })
 
+
+        val dateAdapter = DateListAdapter(MyFeedClickListener {
+            it?.let {
+                findNavController().navigate(MyFeedDirections.actionMyFeedToMyFeedDetail(it))
+            }
+        }, requireActivity(), database, findNavController())
+        binding.monthList.adapter = dateAdapter
+
+
+        viewModel.selectDates.observe(viewLifecycleOwner, Observer {
+            Log.e("dates","========================================================================")
+            Log.e("dates","${it.size}")
+            Log.e("dates","========================================================================")
+            dateAdapter.submitList(it)
+        })
 
 
 

@@ -13,6 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
@@ -56,6 +57,10 @@ abstract class BaseActivity() : AppCompatActivity() {
     var uiScope = CoroutineScope(Dispatchers.Main + job)
     lateinit var database: ProfileDao
     lateinit var feedDatabase:MainFeedDAO
+
+    var finish: Boolean = false
+
+
     fun setNav(nestedHost:Int):NavViewModel {
         var appBarConfiguration: AppBarConfiguration.Builder
         var navViewClosedHeight:Int = 278
@@ -213,11 +218,12 @@ abstract class BaseActivity() : AppCompatActivity() {
         //mainFeed.timeMilli =
 
         uiScope.launch {
+            //Thread.sleep(500)
             insertFeed(mainFeed)
         }
 
         if (imgTmpDir.equals("feed_7")) {
-
+            finish = true
         }
 
         /*

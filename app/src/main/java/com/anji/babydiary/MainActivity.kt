@@ -52,6 +52,7 @@ class MainActivity : BaseActivity() {
         }
         */
 
+
         doInsert(1)
         doInsert(2)
         doInsert(3)
@@ -166,9 +167,13 @@ class MainActivity : BaseActivity() {
             12,
             3)
 
+
+
         uiScope.launch {
-             delay()
+            delay()
         }
+
+
 
     }
 

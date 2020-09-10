@@ -25,6 +25,7 @@ class MyFeedViewModel(val idx:Long,
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
     val myProfile = MutableLiveData<Profiles>()
     val selectAll = MutableLiveData<List<MainFeed>>()
+    val selectDates = MutableLiveData<List<MainFeed>>()
 
     val selectAllFollow = followDatabase.selectAll()
 
@@ -40,16 +41,24 @@ class MyFeedViewModel(val idx:Long,
 
     init {
         uiScope.launch {
-            selectByIdx()
+            //selectByIdx()
         }
-
         uiScope.launch {
             selectAll()
+        }
+        uiScope.launch {
+            getDates()
         }
         isFollowing.value = View.GONE
         getFollowerChecker()
         getFolloweeResult()
         getFollowerResult()
+    }
+
+    suspend fun getDates() {
+        withContext(Dispatchers.IO) {
+            selectDates.postValue( database.selectDates(idx) )
+        }
     }
 
     fun getFolloweeResult() {

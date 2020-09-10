@@ -29,15 +29,15 @@ class MyFeedListAdapter(val clickListener:MyFeedClickListener, val activity:Acti
     class MyFeedViewHolder private constructor(val binding:MyFeedListItemBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item:MainFeed, onClickListener:MyFeedClickListener, activity: Activity) {
+
             binding.clickListener = onClickListener
             binding.feedData = item
+
+
             if (item.imgTmpDir != "") {
                 Glide.with(binding.root.context)
                     .load(activity.resources.getIdentifier(item.imgTmpDir, "drawable", activity.packageName))
                     .into(binding.myFeedImages)
-
-
-
             }else {
                 Glide.with(binding.root.context).load(item.imgDir).into(binding.myFeedImages)
             }

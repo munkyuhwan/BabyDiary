@@ -46,9 +46,6 @@ class FeedListViewModel(
         }
         isCategoryOpen.value = false
 
-        Log.e("result","=============================================================")
-       // Log.e("result","${feedWithUser}")
-        Log.e("result","=============================================================")
         allFeeds.value = mainFeedDAO.selectWithProfileMain()
     }
 
@@ -95,8 +92,6 @@ class FeedListViewModel(
 
     private suspend fun insertMainFeed() {
         withContext(Dispatchers.IO) {
-            Log.d("query","=================insert================================")
-            Log.d("query","==========================================================")
 
             /*
             val mainFeed = MainFeed()
