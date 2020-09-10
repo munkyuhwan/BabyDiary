@@ -44,14 +44,21 @@ class MyFeedDetail : Fragment() {
 
         viewModel.select.observe(viewLifecycleOwner, Observer {
             it?.let {
-                binding.writtenDate.text = Utils.getDate(it.date, "YYYY. MM. dd")
+               // binding.writtenDate.text = Utils.getDate(it.timeMilli, "YYYY. MM. dd")
+                binding.writtenDate.text = "${it.year} ${String.format("%02d",it.month)} ${String.format("%02d", it.date)}"
                 binding.feedText.text = it.title
                 binding.toSpouser.text = it.toSpouser
                 binding.babyWeight.text = it.weight.toString()
                 binding.babyHeight.text = it.height.toString()
-                Glide.with(binding.root.context)
-                    .load(it.imgDir)
-                    .into(binding.myFeedImage)
+                if (it.imgTmpDir != "") {
+                    Glide.with(binding.root.context)
+                        .load(requireActivity().resources.getIdentifier(it.imgTmpDir, "drawable", requireActivity().packageName))
+                        .into(binding.myFeedImage)
+                }else {
+                    Glide.with(binding.root.context)
+                        .load(it.imgDir)
+                        .into(binding.myFeedImage)
+                }
             }
         })
 

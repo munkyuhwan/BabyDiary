@@ -1,5 +1,6 @@
 package com.anji.babydiary.myPage.myFeed.myFeedListAdapter
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,7 @@ import com.anji.babydiary.mainFeed.feedList.listAdapter.MainFeedListAdapter
 import com.anji.babydiary.myPage.myFeed.MyFeedClickListener
 import com.bumptech.glide.Glide
 
-class MyFeedListAdapter(val clickListener:MyFeedClickListener) :ListAdapter<MainFeed, MyFeedListAdapter.MyFeedViewHolder>(MyFeedDiffUtilCallback()) {
+class MyFeedListAdapter(val clickListener:MyFeedClickListener, val activity:Activity) :ListAdapter<MainFeed, MyFeedListAdapter.MyFeedViewHolder>(MyFeedDiffUtilCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyFeedViewHolder {
         return MyFeedViewHolder.from(parent)
@@ -22,15 +23,24 @@ class MyFeedListAdapter(val clickListener:MyFeedClickListener) :ListAdapter<Main
 
     override fun onBindViewHolder(holder: MyFeedViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, clickListener)
+        holder.bind(item, clickListener, activity)
     }
 
     class MyFeedViewHolder private constructor(val binding:MyFeedListItemBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item:MainFeed, onClickListener:MyFeedClickListener) {
+        fun bind(item:MainFeed, onClickListener:MyFeedClickListener, activity: Activity) {
             binding.clickListener = onClickListener
             binding.feedData = item
-            Glide.with(binding.root.context).load(item.imgDir).into(binding.myFeedImages)
+            if (item.imgTmpDir != "") {
+                Glide.with(binding.root.context)
+                    .load(activity.resources.getIdentifier(item.imgTmpDir, "drawable", activity.packageName))
+                    .into(binding.myFeedImages)
+
+
+
+            }else {
+                Glide.with(binding.root.context).load(item.imgDir).into(binding.myFeedImages)
+            }
             binding.executePendingBindings()
         }
 

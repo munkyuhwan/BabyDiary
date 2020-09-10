@@ -34,14 +34,27 @@ data class MainFeed(
     @ColumnInfo(name = "head")
     var head:Long = 0L,
 
-    @ColumnInfo(name="write_data")
-    var date:Long = System.currentTimeMillis(),
+    //@ColumnInfo(name="write_data")
+    //var date:Long = System.currentTimeMillis(),
+
+    @ColumnInfo(name = "year")
+    var year:Int = 0,
+    @ColumnInfo(name = "month")
+    var month:Int = 0,
+    @ColumnInfo(name = "date")
+    var date:Int = 0,
+    @ColumnInfo(name="time_milli")
+    var timeMilli:Long = 0,
+
     @ColumnInfo(name = "like_cnt")
     var likeCnt:Long = 0L,
     @ColumnInfo(name="img_dir")
     var imgDir:String = "",
     @ColumnInfo(name="img_tmp_dir")
-    var imgTmpDir:String = ""
+    var imgTmpDir:String = "",
+
+    @ColumnInfo(name = "feed_type")
+    var feedType:String = ""
 
     )
 

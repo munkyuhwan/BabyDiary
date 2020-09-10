@@ -67,10 +67,14 @@ class FeedList : Fragment() {
                     requireActivity().startActivity(intent)
                 }
             },
-            viewModel)
+            viewModel,
+        requireActivity())
         binding.feedList.adapter = adapter
 
         viewModel.allFeeds.observe(viewLifecycleOwner, Observer {
+            Log.e("feeds","======================================================================================")
+            Log.e("feeds","${it}")
+            Log.e("feeds","======================================================================================")
             it?.let {
                 adapter.submitList(it)
             }

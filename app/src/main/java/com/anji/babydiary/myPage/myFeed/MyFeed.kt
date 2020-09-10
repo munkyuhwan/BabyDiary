@@ -64,7 +64,7 @@ class MyFeed : Fragment() {
             it?.let {
                 findNavController().navigate(MyFeedDirections.actionMyFeedToMyFeedDetail(it))
             }
-        })
+        }, requireActivity())
         binding.myFeedList.adapter = clickAdapter
 
         val manager = GridLayoutManager(activity,3)

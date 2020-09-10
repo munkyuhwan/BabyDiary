@@ -182,10 +182,45 @@ abstract class BaseActivity() : AppCompatActivity() {
         }
     }
 
-    fun insertFeed(idx:Long){
+    fun insertFeed(userIdx:Long,
+                   title:String,
+                   toSpouser:String,
+                   height:Long,
+                   weight:Long,
+                   head:Long,
+                   imgTmpDir:String,
+                   type:String,
+                   year:Int,
+                   month:Int,
+                   date:Int
+    ){
         feedDatabase = MainFeedDatabase.getInstance(this).database
         var mainFeed = MainFeed()
 
+        mainFeed.userIdx = userIdx
+        mainFeed.title = title
+        mainFeed.toSpouser = toSpouser
+        mainFeed.height = height
+        mainFeed.weight = weight
+        mainFeed.head = head
+        mainFeed.imgTmpDir = imgTmpDir
+        mainFeed.feedType = type
+
+        mainFeed.year = year
+        mainFeed.month = month
+        mainFeed.date = date
+
+        //mainFeed.timeMilli =
+
+        uiScope.launch {
+            insertFeed(mainFeed)
+        }
+
+        if (imgTmpDir.equals("feed_7")) {
+
+        }
+
+        /*
         mainFeed.title = "제목"
         mainFeed.height = Math.random().toLong()
         mainFeed.weight = Math.random().toLong()
@@ -195,9 +230,8 @@ abstract class BaseActivity() : AppCompatActivity() {
         mainFeed.imgDir = imgArray[Random.nextInt(0,9)]
         mainFeed.userIdx = idx
 
-        uiScope.launch {
-            insertFeed(mainFeed)
-        }
+         */
+
     }
 
     private fun hideSystemUI() {

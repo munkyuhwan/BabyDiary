@@ -14,8 +14,6 @@ interface MainFeedDAO{
 
     @Query("SELECT * FROM tbl_main_feed")
     fun selectAll(): LiveData<List<MainFeed>>
-
-
     @Query("SELECT * FROM tbl_main_feed WHERE idx= :key")
     fun selectSingle(key:Long):MainFeed
 
@@ -33,6 +31,16 @@ interface MainFeedDAO{
     @Transaction
     @Query("SELECT * FROM tbl_main_feed")
     fun selectWithProfile(): LiveData< List<FeedWithUser> >
+
+
+    @Transaction
+    @Query("SELECT * FROM tbl_main_feed")
+    fun selectWithProfileMain(): List<FeedWithUser>
+
+
+    @Transaction
+    @Query("SELECT * FROM tbl_main_feed WHERE feed_type = :type")
+    fun selectAllByType(type:String): List<FeedWithUser>
 
 
 

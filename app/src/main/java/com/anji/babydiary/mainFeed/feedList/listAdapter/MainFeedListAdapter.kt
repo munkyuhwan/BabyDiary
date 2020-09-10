@@ -1,5 +1,6 @@
 package com.anji.babydiary.mainFeed.feedList.listAdapter
 
+import android.app.Activity
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -24,12 +25,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 
 
-class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClickListener:FeedCommentClickListener, val memberClickListener:MemberClickListener, val feedListViewModel: FeedListViewModel):ListAdapter<FeedWithUser, MainFeedListAdapter.ViewHolder>(ResultListDiffCallback()) {
+class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClickListener:FeedCommentClickListener, val memberClickListener:MemberClickListener, val feedListViewModel: FeedListViewModel, val activity:Activity):ListAdapter<FeedWithUser, MainFeedListAdapter.ViewHolder>(ResultListDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)!!
         val res = holder.itemView.context.resources
-        holder.bind(item, feedListViewModel, clickListener, commentClickListener, memberClickListener)
+        holder.bind(activity, item, feedListViewModel, clickListener, commentClickListener, memberClickListener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -38,7 +39,7 @@ class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClick
 
     class ViewHolder private constructor(val binding: MainFeedListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind (item: FeedWithUser, feedListViewModel: FeedListViewModel, clickListener: FeedClickListener, commentClickListener:FeedCommentClickListener, memberClickListener: MemberClickListener) {
+        fun bind (activity: Activity, item: FeedWithUser, feedListViewModel: FeedListViewModel, clickListener: FeedClickListener, commentClickListener:FeedCommentClickListener, memberClickListener: MemberClickListener) {
             //binding.idx = item
 
             binding.mainFeedWithUser = item
@@ -47,18 +48,34 @@ class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClick
             binding.likeCnt.text = item.feed.likeCnt.toString()
             binding.mainFeedText.text = item.feed.title.toString()
 
-            Glide.with(binding.root.context)
-                .load(item.feed.imgDir)
-                .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
-                .into(binding.feedImg)
 
+            //resources.getIdentifier(it.imgTmp, "drawable", requireActivity().packageName)
+
+            if (item.feed.imgTmpDir != "") {
+                Glide.with(binding.root.context)
+                    .load(  activity.resources.getIdentifier(item.feed.imgTmpDir, "drawable", activity.packageName))
+                    .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
+                    .into(binding.feedImg)
+            }else {
+                Glide.with(binding.root.context)
+                    .load(item.feed.imgDir)
+                    .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
+                    .into(binding.feedImg)
+            }
 
             binding.userId.text = item.userProfile.name.toString()
-            Glide.with(binding.root.context)
-                .load(item.userProfile.img)
-                .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
-                .into(binding.userIcon)
 
+            if (item.userProfile.imgTmp != "") {
+                Glide.with(binding.root.context)
+                    .load(activity.resources.getIdentifier(item.userProfile.imgTmp, "drawable", activity.packageName))
+                    .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
+                    .into(binding.userIcon)
+            }else {
+                Glide.with(binding.root.context)
+                    .load(item.userProfile.img)
+                    .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
+                    .into(binding.userIcon)
+            }
 
             binding.executePendingBindings()
             binding.clickListener = clickListener

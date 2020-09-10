@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-@Database(entities = [Profiles::class], version = 9, exportSchema = false)
+@Database(entities = [Profiles::class], version = 10, exportSchema = false)
 abstract class ProfileDatabase:RoomDatabase()  {
 
     abstract val database: ProfileDao

@@ -26,7 +26,11 @@ class FeedListViewModel(
     application: Application
 ) : AndroidViewModel(application) {
 
-    var allFeeds = mainFeedDAO.selectWithProfile()
+    val typeArea:String = "area"
+    val typeAge:String = "age"
+
+    var allFeeds = MutableLiveData<List<FeedWithUser>>()
+
     var profileData = MutableLiveData<Profiles>()
 
     private val viewModelJob = Job()
@@ -45,7 +49,19 @@ class FeedListViewModel(
         Log.e("result","=============================================================")
        // Log.e("result","${feedWithUser}")
         Log.e("result","=============================================================")
+        allFeeds.value = mainFeedDAO.selectWithProfileMain()
+    }
 
+    fun onTypeClick(type:String) {
+        uiScope.launch {
+            selectByType(type)
+        }
+    }
+
+    suspend fun selectByType(type:String) {
+        withContext(Dispatchers.IO) {
+            allFeeds.postValue(mainFeedDAO.selectAllByType(type))
+        }
     }
 
 
@@ -53,7 +69,6 @@ class FeedListViewModel(
     suspend fun selectProfile() {
         withContext(Dispatchers.IO) {
             profileData.postValue( profile.selectProfile(CommonCode.USER_IDX) )
-
         }
     }
 
