@@ -250,7 +250,7 @@ class MapWebview : Fragment() {
             locationManager = requireActivity().getSystemService(LOCATION_SERVICE) as LocationManager?;
             try {
                 // Request location updates
-                locationManager!!.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0L, 0f, locationListener);
+                locationManager!!.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0L, 0f, locationListener);
             } catch(ex: SecurityException) {
                 Log.e("myTag", "===========================================================");
                 Log.e("myTag", "Security Exception, no location available");
