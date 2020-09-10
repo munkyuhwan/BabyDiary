@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -32,10 +33,10 @@ class DailyCheckWrite : Fragment() {
         Log.e("data","${ Utils.getDate(System.currentTimeMillis(), "YYYY - MM - d E")} ")
 
 
-        var year = "${ Utils.getDate(System.currentTimeMillis(), "YYYY")} "
-        var month = "${ Utils.getDate(System.currentTimeMillis(), "MM")} "
-        var date = "${ Utils.getDate(System.currentTimeMillis(), "dd")} "
-        var day = "${ Utils.getDate(System.currentTimeMillis(), "E")} "
+        var year = "${ Utils.getDate(System.currentTimeMillis(), "YYYY")}"
+        var month = "${ Utils.getDate(System.currentTimeMillis(), "MM")}"
+        var date = "${ Utils.getDate(System.currentTimeMillis(), "dd")}"
+        var day = "${ Utils.getDate(System.currentTimeMillis(), "E")}"
 
         when(day) {
             "월" -> {
@@ -113,20 +114,22 @@ class DailyCheckWrite : Fragment() {
 
         viewModel.dataToday.observe(viewLifecycleOwner, Observer {
 
-            Log.e("dateData","==============data================================")
-            Log.e("dateData","${it}")
-            Log.e("dateData","==============data================================")
             it?.let{
                 listAdapter.submitList(it)
             }
         })
 
         binding.dailyCheckBacnBtn.setOnClickListener {
-            //findNavController().popBackStack()
             requireActivity().finish()
         }
 
-        binding.dailyCheckDetailTopLayer.setOnClickListener {
+        binding.selectedMonth.setOnClickListener {
+            findNavController().navigate(DailyCheckWriteDirections.actionDailyCheckWriteToDailyCheckCalendar22())
+        }
+        binding.selectedDate.setOnClickListener {
+            findNavController().navigate(DailyCheckWriteDirections.actionDailyCheckWriteToDailyCheckCalendar22())
+        }
+        binding.selectedDay.setOnClickListener {
             findNavController().navigate(DailyCheckWriteDirections.actionDailyCheckWriteToDailyCheckCalendar22())
         }
 

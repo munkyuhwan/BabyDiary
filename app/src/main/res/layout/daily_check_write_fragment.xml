@@ -12,6 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="18sp"
         android:background="@drawable/daily_check_nav_gradient">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,13 +21,14 @@
             android:layout_height="56sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageButton
                 android:id="@+id/dailyCheckBacnBtn"
                 style="@style/dailyCheckBackBtn"
-                android:layout_height="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="17sp"
+                android:paddingRight="10sp"
                 android:layout_marginStart="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/selectedDate"
                 app:layout_constraintStart_toStartOf="parent"
@@ -42,13 +44,14 @@
                 app:layout_constraintBottom_toBottomOf="@+id/selectedDate"
                 app:layout_constraintEnd_toStartOf="@+id/selectedDate"
                 app:layout_constraintTop_toTopOf="@+id/selectedDate" />
+
             <TextView
                 android:id="@+id/selectedDate"
                 style="@style/calendarMonth"
+                setDate="@{writeViewModel.selectedDate}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                setDate="@{writeViewModel.selectedDate}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
