@@ -1,5 +1,7 @@
 package com.anji.babydiary.common
 
+import com.google.android.material.imageview.ShapeableImageView
+import com.google.android.material.shape.CornerFamily
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -22,6 +24,31 @@ object Utils {
         var second = String.format("%02d", seconds.toInt()%minSecond)
 
         return "${min}:${second}"
+    }
+
+
+    fun setFeedListImg(view: ShapeableImageView) {
+        val radius: Float = 50f
+        // activity.getResources().getDimension(R.dimen.default_corner_radius)
+        view.setShapeAppearanceModel(
+            view.getShapeAppearanceModel()
+                .toBuilder()
+                //.setTopRightCorner(CornerFamily.ROUNDED, radius)
+                .setBottomLeftCorner(CornerFamily.ROUNDED, radius)
+                .build()
+        )
+    }
+
+    fun setMyFeedListImg(view: ShapeableImageView) {
+        val radius: Float = 50f
+        // activity.getResources().getDimension(R.dimen.default_corner_radius)
+        view.setShapeAppearanceModel(
+            view.getShapeAppearanceModel()
+                .toBuilder()
+                .setTopRightCorner(CornerFamily.ROUNDED, radius)
+                .setBottomLeftCorner(CornerFamily.ROUNDED, radius)
+                .build()
+        )
     }
 
 }

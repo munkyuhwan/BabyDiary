@@ -1,18 +1,15 @@
 package com.anji.babydiary.mainFeed.feedList.listAdapter
 
+import android.R
 import android.app.Activity
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.mainFeed.FeedWithUser
-import com.anji.babydiary.database.mainFeed.MainFeed
-import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.databinding.MainFeedListItemBinding
-import com.anji.babydiary.mainFeed.MainFeedViewModel
 import com.anji.babydiary.mainFeed.feedList.FeedClickListener
 import com.anji.babydiary.mainFeed.feedList.FeedCommentClickListener
 import com.anji.babydiary.mainFeed.feedList.FeedListViewModel
@@ -21,8 +18,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
+import com.google.android.material.shape.CornerFamily
 
 
 class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClickListener:FeedCommentClickListener, val memberClickListener:MemberClickListener, val feedListViewModel: FeedListViewModel, val activity:Activity):ListAdapter<FeedWithUser, MainFeedListAdapter.ViewHolder>(ResultListDiffCallback()) {
@@ -51,16 +47,22 @@ class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClick
 
             //resources.getIdentifier(it.imgTmp, "drawable", requireActivity().packageName)
 
+
             if (item.feed.imgTmpDir != "") {
                 Glide.with(binding.root.context)
                     .load(  activity.resources.getIdentifier(item.feed.imgTmpDir, "drawable", activity.packageName))
-                    .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
+                    //.apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
                     .into(binding.feedImg)
+
+                Utils.setFeedListImg(binding.feedImg)
+
+
             }else {
                 Glide.with(binding.root.context)
                     .load(item.feed.imgDir)
-                    .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
+                    //.apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
                     .into(binding.feedImg)
+                Utils.setFeedListImg(binding.feedImg)
             }
 
             binding.userId.text = item.userProfile.name.toString()

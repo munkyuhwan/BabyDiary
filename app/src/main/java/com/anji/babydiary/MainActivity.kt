@@ -168,31 +168,9 @@ class MainActivity : BaseActivity() {
             3)
 
 
-
-        uiScope.launch {
-            delay()
-        }
-
-
-
     }
 
 
 
-
-    suspend fun delay() {
-        withContext(Dispatchers.IO) {
-            Thread.sleep(3000)
-            goMain()
-        }
-    }
-
-    private fun goMain() {
-        //CommonCode.USER_IDX = 1
-        val intent:Intent = Intent(this, Login::class.java)
-        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
-        startActivity(intent)
-        finish()
-    }
 
 }

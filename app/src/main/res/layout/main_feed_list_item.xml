@@ -71,11 +71,9 @@
             style="@style/MainFeedImage"
             android:layout_width="157dp"
             android:layout_height="149dp"
-            android:background="@drawable/round_bottom_left"
             android:contentDescription="@string/usericon"
             android:foregroundGravity="center_horizontal"
             android:onClick="@{() -> clickListener.onClick(mainFeedWithUser) }"
-            android:radius="30sp"
             android:src="@drawable/sample_1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

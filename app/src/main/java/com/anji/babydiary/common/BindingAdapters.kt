@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anji.babydiary.R
 import com.anji.babydiary.dailyCheck.DailyCheckListObj
 import com.anji.babydiary.database.likes.Likes
+import com.google.android.material.imageview.ShapeableImageView
+import com.google.android.material.shape.CornerFamily
 import kotlinx.android.synthetic.main.daily_check_write_fragment.view.*
 
 
@@ -80,5 +82,8 @@ object BindingAdapters  {
             }
         }
     }
+
+
+
 
 }

@@ -67,8 +67,6 @@ class DateListAdapter(val clickListener:MyFeedClickListener, val activity:Activi
             Log.e("allData","===========================================================================")
             clickAdapter.submitList(allData)
 
-
-
             binding.executePendingBindings()
         }
 

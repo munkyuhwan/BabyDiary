@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.databinding.MainFeedListItemBinding
 import com.anji.babydiary.databinding.MyFeedListItemBinding
@@ -38,8 +39,10 @@ class MyFeedListAdapter(val clickListener:MyFeedClickListener, val activity:Acti
                 Glide.with(binding.root.context)
                     .load(activity.resources.getIdentifier(item.imgTmpDir, "drawable", activity.packageName))
                     .into(binding.myFeedImages)
+                Utils.setMyFeedListImg(binding.myFeedImages)
             }else {
                 Glide.with(binding.root.context).load(item.imgDir).into(binding.myFeedImages)
+                Utils.setMyFeedListImg(binding.myFeedImages)
             }
             binding.executePendingBindings()
         }

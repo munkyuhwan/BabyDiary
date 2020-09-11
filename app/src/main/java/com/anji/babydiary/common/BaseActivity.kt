@@ -34,12 +34,15 @@ import com.anji.babydiary.database.profile.Profiles
 import com.anji.babydiary.event.EventActivity
 import com.anji.babydiary.gnb.main.NavViewModel
 import com.anji.babydiary.gnb.main.NavViewModelFactory
+import com.anji.babydiary.login.Login
 import com.anji.babydiary.mainFeed.MainFeedActivity
 import com.anji.babydiary.myPage.MyPage
 import com.anji.babydiary.shopping.ShoppingActivity
 import com.anji.babydiary.tips.TipActivity
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.imageview.ShapeableImageView
+import com.google.android.material.shape.CornerFamily
 import kotlinx.android.synthetic.main.nav_layout.view.*
 import kotlinx.coroutines.*
 import java.lang.Exception
@@ -58,7 +61,6 @@ abstract class BaseActivity() : AppCompatActivity() {
     lateinit var database: ProfileDao
     lateinit var feedDatabase:MainFeedDAO
 
-    var finish: Boolean = false
 
 
     fun setNav(nestedHost:Int):NavViewModel {
@@ -223,21 +225,27 @@ abstract class BaseActivity() : AppCompatActivity() {
         }
 
         if (imgTmpDir.equals("feed_7")) {
-            finish = true
+            uiScope.launch {
+                  delay()
+            }
+
         }
 
-        /*
-        mainFeed.title = "제목"
-        mainFeed.height = Math.random().toLong()
-        mainFeed.weight = Math.random().toLong()
-        mainFeed.head = Math.random().toLong()
-        mainFeed.location = "d"
-        mainFeed.toSpouser = "ㅇㅇ 수고했다"
-        mainFeed.imgDir = imgArray[Random.nextInt(0,9)]
-        mainFeed.userIdx = idx
+    }
 
-         */
+    suspend fun delay() {
+        withContext(Dispatchers.IO) {
+            Thread.sleep(3000)
+            goMain()
+        }
+    }
 
+    private fun goMain() {
+        //CommonCode.USER_IDX = 1
+        val intent:Intent = Intent(this, Login::class.java)
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+        startActivity(intent)
+        finish()
     }
 
     private fun hideSystemUI() {
@@ -350,6 +358,8 @@ abstract class BaseActivity() : AppCompatActivity() {
          */
 
     }
+
+
 
 
 }

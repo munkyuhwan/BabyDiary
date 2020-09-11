@@ -17,6 +17,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="1sp"
+        android:paddingBottom="1sp"
+        android:paddingRight="1sp"
+        android:paddingLeft="1sp"
         android:onClick="@{() -> clickListener.onMyFeedClicked(feedData)}"
         >
 
