@@ -2,6 +2,7 @@ package com.anji.babydiary.mainFeed.feedList.listAdapter
 
 import android.R
 import android.app.Activity
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -37,20 +38,23 @@ class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClick
 
         fun bind (activity: Activity, item: FeedWithUser, feedListViewModel: FeedListViewModel, clickListener: FeedClickListener, commentClickListener:FeedCommentClickListener, memberClickListener: MemberClickListener) {
             //binding.idx = item
+            Log.e("listAdapter","======================================================================================")
+            Log.e("listAdapter","${item}")
+            Log.e("listAdapter","======================================================================================")
 
             binding.mainFeedWithUser = item
             binding.memberClickListener = memberClickListener
             binding.viewModel = feedListViewModel
-            binding.likeCnt.text = item.feed.likeCnt.toString()
-            binding.mainFeedText.text = item.feed.title.toString()
+            binding.likeCnt.text = item.feed!!.likeCnt.toString()
+            binding.mainFeedText.text = item.feed!!.title.toString()
 
 
             //resources.getIdentifier(it.imgTmp, "drawable", requireActivity().packageName)
 
 
-            if (item.feed.imgTmpDir != "") {
+            if (item.feed!!.imgTmpDir != "") {
                 Glide.with(binding.root.context)
-                    .load(  activity.resources.getIdentifier(item.feed.imgTmpDir, "drawable", activity.packageName))
+                    .load(  activity.resources.getIdentifier(item.feed!!.imgTmpDir, "drawable", activity.packageName))
                     //.apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
                     .into(binding.feedImg)
 
@@ -59,22 +63,22 @@ class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClick
 
             }else {
                 Glide.with(binding.root.context)
-                    .load(item.feed.imgDir)
+                    .load(item.feed!!.imgDir)
                     //.apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
                     .into(binding.feedImg)
                 Utils.setFeedListImg(binding.feedImg)
             }
 
-            binding.userId.text = item.userProfile.name.toString()
+            binding.userId.text = item.userProfile!!.name.toString()
 
-            if (item.userProfile.imgTmp != "") {
+            if (item.userProfile!!.imgTmp != "") {
                 Glide.with(binding.root.context)
-                    .load(activity.resources.getIdentifier(item.userProfile.imgTmp, "drawable", activity.packageName))
+                    .load(activity.resources.getIdentifier(item.userProfile!!.imgTmp, "drawable", activity.packageName))
                     .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
                     .into(binding.userIcon)
             }else {
                 Glide.with(binding.root.context)
-                    .load(item.userProfile.img)
+                    .load(item.userProfile!!.img)
                     .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
                     .into(binding.userIcon)
             }
@@ -103,7 +107,7 @@ class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClick
 
 class ResultListDiffCallback: DiffUtil.ItemCallback<FeedWithUser>() {
     override fun areItemsTheSame(oldItem: FeedWithUser, newItem: FeedWithUser): Boolean {
-        return oldItem.feed.idx == newItem.feed.idx
+        return oldItem.feed!!.idx == newItem.feed!!.idx
     }
 
     override fun areContentsTheSame(oldItem: FeedWithUser, newItem: FeedWithUser): Boolean {
@@ -117,7 +121,7 @@ sealed class DataItem {
     abstract val id:Long
 
     data class ResultItem(val gameResult:FeedWithUser):DataItem() {
-        override val id = gameResult.feed.idx
+        override val id = gameResult.feed!!.idx
     }
 
     object Header:DataItem() {

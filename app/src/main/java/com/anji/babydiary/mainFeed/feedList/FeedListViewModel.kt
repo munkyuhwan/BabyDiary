@@ -167,15 +167,15 @@ class FeedListViewModel(
 
 
 class FeedClickListener(val clickListener:(resultId:Long)->Unit ) {
-    fun onClick(result:FeedWithUser) = clickListener(result.feed.idx)
+    fun onClick(result:FeedWithUser) = clickListener(result.feed!!.idx)
 }
 
 class MemberClickListener(val clickListener:(resultId:Long)->Unit ) {
-    fun onClick(result:FeedWithUser) = clickListener(result.userProfile.idx)
+    fun onClick(result:FeedWithUser) = clickListener(result.userProfile!!.idx)
 }
 
 class FeedCommentClickListener(val commentClickListener:(resultId:Long)->Unit) {
-    fun onCommentClick(result:FeedWithUser) = commentClickListener(result.feed.idx)
+    fun onCommentClick(result:FeedWithUser) = commentClickListener(result.feed!!.idx)
 }
 
 

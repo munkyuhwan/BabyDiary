@@ -7,12 +7,12 @@ import com.anji.babydiary.database.profile.Profiles
 data class FeedWithUser (
 
     @Embedded
-    val feed:MainFeed,
+    val feed:MainFeed?,
     @Relation(
         parentColumn = "user_idx",
         entityColumn = "idx"
     )
-    val userProfile:Profiles
+    val userProfile:Profiles?
 
 
 )
