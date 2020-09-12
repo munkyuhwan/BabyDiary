@@ -1,17 +1,15 @@
 package com.anji.babydiary.tips.tipsList
 
 import android.app.Application
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.anji.babydiary.common.CommonCode
-import com.anji.babydiary.database.mainFeed.MainFeed
-import com.anji.babydiary.database.profile.ProfileDao
-import com.anji.babydiary.database.profile.Profiles
-import com.anji.babydiary.database.shopping.Tips
+import com.anji.babydiary.database.tip.TipWithUser
+import com.anji.babydiary.database.tip.Tips
 
-import com.anji.babydiary.database.shopping.TipsDao
+import com.anji.babydiary.database.tip.TipsDao
 import kotlinx.coroutines.*
 
 class TipListViewModel(
@@ -21,13 +19,15 @@ class TipListViewModel(
 
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    var dataAll = MutableLiveData<List<Tips>>()
+    //var dataAll = database.selectAll()
+    var dataAll = MutableLiveData<List<TipWithUser>>()
     var isCategoryOpen = MutableLiveData<Int>()
 
-    //var dataWithProfile =database.selectAllWithProfile()
+   // var dataWithProfile =database.selectWithUser()
 
     init {
         isCategoryOpen.value = View.GONE
+        //Log.e("dhife","data: ${dataWithProfile}")
         uiScope.launch {
             selectAll()
         }
@@ -35,13 +35,14 @@ class TipListViewModel(
 
     suspend fun selectAll() {
         withContext(Dispatchers.IO) {
-            dataAll.postValue(database.selectAll())
+            dataAll.postValue( database.selectWithUser())
         }
     }
 
     fun doSelectByCateogry(sel:Int) {
         uiScope.launch {
             if (sel == 99 ) {
+                //dataAll = database.selectWithUser()
                 selectAll()
             }else {
                 selectByCategory(CommonCode.TIP_CATEGORY.get(sel))

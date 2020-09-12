@@ -9,11 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
-import com.anji.babydiary.database.profile.ProfileDatabase
-import com.anji.babydiary.database.shopping.TipsDatabase
+import com.anji.babydiary.database.tip.TipsDatabase
 import com.anji.babydiary.databinding.TipListFragmentBinding
 import com.anji.babydiary.tips.tipsList.listAdapter.TipListAdpater
 
@@ -34,7 +32,7 @@ class TipListFragment : Fragment() {
 
         val adapter = TipListAdpater(TipClickListener {
 
-        })
+        },requireActivity())
         binding.tipList.adapter = adapter
 
         binding.lifecycleOwner = viewLifecycleOwner
@@ -45,9 +43,13 @@ class TipListFragment : Fragment() {
         }
 
         viewmodel.dataAll.observe(viewLifecycleOwner, Observer {
+            Log.e("data all","=============================")
+            Log.e("data all","${it}")
+            Log.e("data all","=============================")
             it?.let {
                 viewmodel.isCategoryOpen.value = View.GONE
                 adapter.submitList(it)
+
             }
         })
 

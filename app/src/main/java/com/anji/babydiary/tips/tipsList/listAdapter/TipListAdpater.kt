@@ -1,16 +1,20 @@
 package com.anji.babydiary.tips.tipsList.listAdapter
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.anji.babydiary.database.shopping.Tips
+import com.anji.babydiary.database.tip.TipWithUser
 import com.anji.babydiary.databinding.TipListItemBinding
 import com.anji.babydiary.tips.tipsList.TipClickListener
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 
-class TipListAdpater(val clickListener: TipClickListener): ListAdapter<Tips, TipListAdpater.ViewHolder>(TipListDiffCallback()) {
+class TipListAdpater(val clickListener: TipClickListener, val activity:Activity): ListAdapter<TipWithUser, TipListAdpater.ViewHolder>(TipListDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
@@ -18,19 +22,33 @@ class TipListAdpater(val clickListener: TipClickListener): ListAdapter<Tips, Tip
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)!!
-        holder.bind(item, clickListener)
+        holder.bind(item, clickListener, activity)
     }
 
     class ViewHolder private constructor(val binding: TipListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind (item: Tips, clickListener: TipClickListener) {
+        fun bind (item: TipWithUser, clickListener: TipClickListener, activity:Activity) {
             //binding.idx = item
 
-            binding.tipLikeCnt.text = item.cnt.toString()
-            binding.tipText.text = "${item.text.toString()} "
-            binding.tipUserId.text = item.user.toString()
+            binding.tipLikeCnt.text = item.tips!!.cnt.toString()
+            binding.tipText.text = "${item.tips!!.text.toString()} "
 
-            Glide.with(binding.root.context).load(item.imgDir).into(binding.tipImg)
+
+
+            binding.tipUserId.text = item.profile!!.name.toString()
+
+            Glide.with(binding.root.context).load(item.tips!!.imgDir).into(binding.tipImg)
+            if (item.profile!!.imgTmp != "") {
+                Glide.with(binding.root.context)
+                    .load(activity.resources.getIdentifier(item.profile!!.imgTmp, "drawable", activity.packageName))
+                    .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
+                    .into(binding.tipIcon)
+            }else {
+                Glide.with(binding.root.context)
+                    .load(item.profile!!.img)
+                    .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
+                    .into(binding.tipIcon)
+            }
 
             binding.executePendingBindings()
             binding.clickListener = clickListener
@@ -53,12 +71,12 @@ class TipListAdpater(val clickListener: TipClickListener): ListAdapter<Tips, Tip
 }
 
 
-class TipListDiffCallback: DiffUtil.ItemCallback<Tips>() {
-    override fun areItemsTheSame(oldItem: Tips, newItem: Tips): Boolean {
-        return oldItem.idx == newItem.idx
+class TipListDiffCallback: DiffUtil.ItemCallback<TipWithUser>() {
+    override fun areItemsTheSame(oldItem: TipWithUser, newItem: TipWithUser): Boolean {
+        return oldItem.tips!!.idx == newItem.tips!!.idx
     }
 
-    override fun areContentsTheSame(oldItem: Tips, newItem: Tips): Boolean {
+    override fun areContentsTheSame(oldItem: TipWithUser, newItem: TipWithUser): Boolean {
         return oldItem == newItem
     }
 
@@ -68,8 +86,8 @@ sealed class DataItem {
 
     abstract val id:Long
 
-    data class ResultItem(val tip:Tips):DataItem() {
-        override val id = tip.idx
+    data class ResultItem(val tip:TipWithUser):DataItem() {
+        override val id = tip.tips!!.idx
     }
 
     object Header:DataItem() {

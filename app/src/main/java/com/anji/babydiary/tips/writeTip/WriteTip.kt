@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.common.CommonCode
-import com.anji.babydiary.database.shopping.TipsDatabase
+import com.anji.babydiary.database.tip.TipsDatabase
 import com.anji.babydiary.databinding.WriteTipFragmentBinding
 import com.anji.babydiary.tips.writeTip.tipCategorySpinner.TipCategoryAdapter
 import com.bumptech.glide.Glide
@@ -67,6 +68,7 @@ class WriteTip : Fragment() {
                 }
             }
         })
+
         viewModel.categories.observe(viewLifecycleOwner, Observer{
             it?.let{
                 val listItemsTxt = it

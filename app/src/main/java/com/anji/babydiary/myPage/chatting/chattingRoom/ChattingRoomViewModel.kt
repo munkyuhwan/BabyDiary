@@ -15,7 +15,8 @@ import okhttp3.Dispatcher
 
 class ChattingRoomViewModel (val database: ChattingDao, val userIdxOne:Long, application: Application) : AndroidViewModel(application) {
 
-    var chatData = database.selectByReceiver(userIdxOne)
+    //var chatData = database.selectByReceiver(userIdxOne)
+    var chatData = database.selectAllWthUser(userIdxOne)
 
     var message = MutableLiveData<String>()
     val job = Job()

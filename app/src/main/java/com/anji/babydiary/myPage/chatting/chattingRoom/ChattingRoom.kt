@@ -39,7 +39,7 @@ class ChattingRoom : Fragment() {
 
         viewModel.chatData(chatIdx)
 
-        val adapter = ChattingRoomListAdapter()
+        val adapter = ChattingRoomListAdapter(requireActivity())
         binding.chatText.adapter = adapter
 
 

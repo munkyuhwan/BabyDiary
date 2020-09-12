@@ -1,16 +1,23 @@
-package com.anji.babydiary.database.shopping
+package com.anji.babydiary.database.tip
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.anji.babydiary.database.tip.TipWithUser
+import com.anji.babydiary.database.tip.Tips
 
 @Dao
 interface TipsDao {
 
     @Insert
-    fun insert(tip:Tips)
+    fun insert(tip: Tips)
 
     @Query("SELECT * FROM tbl_tips")
-    fun selectAll():List<Tips>
+    fun selectAll():LiveData<List<Tips>>
+
+
+    @Transaction
+    @Query("SELECT * FROM tbl_tips")
+    fun selectWithUser():List<TipWithUser>
 
     /*
     @Query("SELECT * " +
@@ -21,7 +28,7 @@ interface TipsDao {
      */
 
     @Query("SELECT * FROM tbl_tips WHERE tip_category= :cat")
-    fun selectByCategory(cat:String):List<Tips>
+    fun selectByCategory(cat:String):List<TipWithUser>
 
     @Query("DELETE FROM tbl_tips")
     fun deleteAll()

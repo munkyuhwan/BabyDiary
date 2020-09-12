@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Transaction
 
 @Dao
 interface ChattingDao {
@@ -22,6 +23,12 @@ interface ChattingDao {
 
     @Query ("SELECT * FROM tbl_chatting WHERE user_idx_one= :receiver ORDER BY idx ASC")
     fun selectByReceiver(receiver:Long):LiveData<List<Chatting>>
+
+
+    @Transaction
+    @Query ("SELECT * FROM tbl_chatting WHERE user_idx_one= :receiver ORDER BY idx ASC")
+    fun selectAllWthUser(receiver:Long):LiveData<List<ChattingAndUser>>
+
 
 
 }

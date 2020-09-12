@@ -1,4 +1,4 @@
-package com.anji.babydiary.database.shopping
+package com.anji.babydiary.database.tip
 
 import androidx.room.*
 
