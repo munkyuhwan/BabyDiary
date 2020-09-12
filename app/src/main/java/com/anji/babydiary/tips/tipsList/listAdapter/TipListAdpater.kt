@@ -35,17 +35,17 @@ class TipListAdpater(val clickListener: TipClickListener, val activity:Activity)
 
 
 
-            binding.tipUserId.text = item.profile!!.name.toString()
+            binding.tipUserId.text = item.prof.name.toString()
 
             Glide.with(binding.root.context).load(item.tips!!.imgDir).into(binding.tipImg)
-            if (item.profile!!.imgTmp != "") {
+            if (item.prof.imgTmp != "") {
                 Glide.with(binding.root.context)
-                    .load(activity.resources.getIdentifier(item.profile!!.imgTmp, "drawable", activity.packageName))
+                    .load(activity.resources.getIdentifier(item.prof.imgTmp, "drawable", activity.packageName))
                     .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
                     .into(binding.tipIcon)
             }else {
                 Glide.with(binding.root.context)
-                    .load(item.profile!!.img)
+                    .load(item.prof.img)
                     .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
                     .into(binding.tipIcon)
             }

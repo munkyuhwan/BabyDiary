@@ -48,7 +48,7 @@ class TipListFragment : Fragment() {
             Log.e("data all","=============================")
             it?.let {
                 viewmodel.isCategoryOpen.value = View.GONE
-                adapter.submitList(it)
+                //adapter.submitList(it)
 
             }
         })

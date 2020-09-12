@@ -43,7 +43,7 @@ class WriteTipViewModel(val database: TipsDao, application:Application) : Androi
     private suspend fun doInsert(tip: Tips) {
         withContext(Dispatchers.IO) {
             database.insert(tip)
-            //isDone.postValue(true)
+            isDone.postValue(true)
         }
     }
 

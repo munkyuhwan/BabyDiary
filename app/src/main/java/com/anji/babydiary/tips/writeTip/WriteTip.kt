@@ -36,6 +36,10 @@ class WriteTip : Fragment() {
     ): View? {
         requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
+        Log.e("loggedIn", "++++++++==============++++++++==============++++++++==============++++++++==============++++++++==============")
+        Log.e("loggedIn", "${CommonCode.USER_IDX}")
+        Log.e("loggedIn", "++++++++==============++++++++==============++++++++==============++++++++==============++++++++==============")
+
         binding = DataBindingUtil.inflate<WriteTipFragmentBinding>(inflater, R.layout.write_tip_fragment, container, false)
 
         application = requireNotNull(this.activity).application
