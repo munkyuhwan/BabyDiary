@@ -39,9 +39,14 @@ class TipListFragment : Fragment() {
             TipListAdpater(TipClickListener {
 
             },
-                TipLikeClicked {
-                    Toast.makeText(requireContext(), "like clicked: ${it}", Toast.LENGTH_SHORT).show()
-                },
+                TipLikeClicked{ resultId: Long, cnt: CharSequence ->
+
+                    viewmodel.insertLike(resultId, cnt.toString().toInt()+1 )
+
+
+                }
+
+                ,
                 TipCommentClicked {
 
                 },
@@ -60,7 +65,6 @@ class TipListFragment : Fragment() {
             it?.let {
                 viewmodel.isCategoryOpen.value = View.GONE
                 adapter.submitList(it)
-
             }
         })
 
@@ -69,12 +73,7 @@ class TipListFragment : Fragment() {
         }
 
 
-        val userData = ProfileDatabase.getInstance(application).database
-        val ddd = userData.selectAllTmp()
 
-        Log.e("userData","=========================================================")
-        Log.e("userData","${ddd}")
-        Log.e("userData","=========================================================")
 
         return binding.root
     }

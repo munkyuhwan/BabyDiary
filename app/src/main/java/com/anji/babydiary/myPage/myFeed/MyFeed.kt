@@ -43,10 +43,6 @@ class MyFeed : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        Log.e("myPageUser","========================================================")
-        Log.e("user","${MyShare.prefs.getLong("idx", 0L)}")
-        Log.e("myPageUser","========================================================")
-
         var idx = MyShare.prefs.getLong("idx", 0L)
 
         val intent = requireActivity().intent.extras

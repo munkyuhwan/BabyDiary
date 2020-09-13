@@ -67,13 +67,13 @@
             app:layout_constraintTop_toBottomOf="@+id/tip_icon" />
 
 
-
         <Button
             android:id="@+id/button"
             style="@style/LikeButton"
             android:layout_marginTop="15dp"
             android:width="14sp"
-            android:onClick="@{() -> likeClickListener.onLikeClick(tipWithUserDatabase)}"
+            android:height="14sp"
+            android:onClick="@{() -> likeClickListener.onLikeClick(tipWithUserDatabase, tipLikeCnt.getText() )}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tip_img" />
 

@@ -120,7 +120,7 @@ class MyFeedViewModel(val idx:Long,
     suspend fun selectAll() {
         withContext(Dispatchers.IO) {
             Log.e("idx:","idx: ${userIdx}")
-            myProfile.postValue(profileDatabas.selectProfile(userIdx))
+            myProfile.postValue(profileDatabas.selectProfile(idx))
         }
     }
 

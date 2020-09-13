@@ -14,6 +14,8 @@ interface TipLikesDao{
     @Query("SELECT * FROM tbl_tip_likes ")
     fun selectAll():LiveData<List<TipLikes>>
 
+    @Query("SELECT * FROM tbl_tip_likes WHERE tip_idx = :tipIdx ")
+    fun selectAllByIdx(tipIdx:Long):LiveData<List<TipLikes>>
 
 
 }

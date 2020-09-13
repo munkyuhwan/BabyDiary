@@ -54,6 +54,7 @@ class DateListAdapter(val clickListener:MyFeedClickListener, val activity:Activi
             binding.year.text = item.year.toString()
 
 
+
             val clickAdapter = MyFeedListAdapter(MyFeedClickListener {
                 it?.let {
                     navController.navigate(MyFeedDirections.actionMyFeedToMyFeedDetail(it))
@@ -62,7 +63,7 @@ class DateListAdapter(val clickListener:MyFeedClickListener, val activity:Activi
             binding.myFeedList.adapter = clickAdapter
 
 
-            val allData = database.selectByUserIdxANDDate(MyShare.prefs.getLong("idx", 0L), item.date, item.month, item.year)
+            val allData = database.selectByUserIdxANDDate(item.userIdx, item.date, item.month, item.year)
             Log.e("allData","===========================================================================")
             Log.e("allData","${allData}")
             Log.e("allData","===========================================================================")
