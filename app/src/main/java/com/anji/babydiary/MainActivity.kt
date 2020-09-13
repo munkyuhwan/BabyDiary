@@ -69,9 +69,6 @@ class MainActivity : BaseActivity() {
 
         })
         feedData?.observe(this, androidx.lifecycle.Observer {
-            Log.e("feedDataValue","======================================================")
-            Log.e("feedDataValue","${it}")
-            Log.e("feedDataValue","======================================================")
             if (it.size == 7) {
                 uiScope.launch {
                      delay()

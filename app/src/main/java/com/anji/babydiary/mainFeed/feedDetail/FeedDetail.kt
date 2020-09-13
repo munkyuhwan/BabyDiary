@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.bottomActivity.BottomMenu
 import com.anji.babydiary.common.CommonCode
+import com.anji.babydiary.common.MyShare.MyShare
 import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.likes.LikesDatabase
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
@@ -35,6 +36,8 @@ class FeedDetail : Fragment() {
         val argment = arguments?.let { FeedDetailArgs.fromBundle(it) }
 
         val idx = argment!!.feedIdx
+
+
 
         val binding = DataBindingUtil.inflate<FeedDetailFragmentBinding>(inflater, R.layout.feed_detail_fragment, container, false)
 

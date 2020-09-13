@@ -10,6 +10,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.anji.babydiary.common.CommonCode
+import com.anji.babydiary.common.MyShare.MyShare
 import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.database.mainFeed.MainFeedDAO
 import com.anji.babydiary.myPage.myFeedWriteLocation.SelectedAddress
@@ -48,7 +49,7 @@ class MyFeedWriteViewModel(val database:MainFeedDAO, application: Application) :
         mainFeed.location = location
         mainFeed.toSpouser = toSpouser
         mainFeed.imgDir = selectedImage.value.toString()
-        mainFeed.userIdx = CommonCode.USER_IDX
+        mainFeed.userIdx = MyShare.prefs.getLong("idx", 0L)
 
 
         uiScope.launch {

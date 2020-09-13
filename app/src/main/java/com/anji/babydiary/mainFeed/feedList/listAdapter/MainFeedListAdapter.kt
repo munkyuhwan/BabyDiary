@@ -38,9 +38,6 @@ class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClick
 
         fun bind (activity: Activity, item: FeedWithUser, feedListViewModel: FeedListViewModel, clickListener: FeedClickListener, commentClickListener:FeedCommentClickListener, memberClickListener: MemberClickListener) {
             //binding.idx = item
-            Log.e("listAdapter","======================================================================================")
-            Log.e("listAdapter","${item}")
-            Log.e("listAdapter","======================================================================================")
 
             binding.mainFeedWithUser = item
             binding.memberClickListener = memberClickListener

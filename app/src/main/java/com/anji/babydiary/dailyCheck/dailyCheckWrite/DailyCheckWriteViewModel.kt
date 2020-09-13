@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.common.CountUpTimer
+import com.anji.babydiary.common.MyShare.MyShare
 import com.anji.babydiary.common.Utils
 import com.anji.babydiary.dailyCheck.DailyCheckListObj
 import com.anji.babydiary.database.dailyCheck.DailyCheck
@@ -151,7 +152,7 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao,val idx:Long, applica
             data.date = selectedDate.value!!.toInt()
             data.hour = currentHour!!.toInt()
             data.minute = currentMinute!!.toInt()
-            data.user_idx = CommonCode.USER_IDX
+            data.user_idx = MyShare.prefs.getLong("idx", 0L)
 
             saveMemo(data)
 

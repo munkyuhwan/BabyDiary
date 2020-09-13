@@ -19,6 +19,8 @@ import com.anji.babydiary.R
 import com.anji.babydiary.bottomActivity.BottomMenu
 import com.anji.babydiary.bottomActivity.resign.Resign
 import com.anji.babydiary.common.CommonCode
+import com.anji.babydiary.common.MyShare.MyShare
+import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.follow.Follow
 import com.anji.babydiary.database.follow.FollowDatabase
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
@@ -41,7 +43,11 @@ class MyFeed : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        var idx = CommonCode.USER_IDX
+        Log.e("myPageUser","========================================================")
+        Log.e("user","${MyShare.prefs.getLong("idx", 0L)}")
+        Log.e("myPageUser","========================================================")
+
+        var idx = MyShare.prefs.getLong("idx", 0L)
 
         val intent = requireActivity().intent.extras
         intent?.let {
@@ -55,7 +61,8 @@ class MyFeed : Fragment() {
         val profileDatabase = ProfileDatabase.getInstance(application).database
         val followDatabase = FollowDatabase.getInstance(application).database
 
-        val viewModelFactory = MyFeedViewModelFactory(idx, database, profileDatabase, followDatabase, application)
+
+        val viewModelFactory = MyFeedViewModelFactory(idx, database, profileDatabase, followDatabase, MyShare.prefs.getLong("idx", 0L), application)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MyFeedViewModel::class.java)
 
         binding.myFeedViewModel = viewModel
@@ -136,9 +143,6 @@ class MyFeed : Fragment() {
 
 
         viewModel.selectDates.observe(viewLifecycleOwner, Observer {
-            Log.e("dates","========================================================================")
-            Log.e("dates","${it.size}")
-            Log.e("dates","========================================================================")
             dateAdapter.submitList(it)
         })
 

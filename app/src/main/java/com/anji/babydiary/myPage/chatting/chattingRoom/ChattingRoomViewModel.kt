@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.anji.babydiary.common.CommonCode
+import com.anji.babydiary.common.MyShare.MyShare
 import com.anji.babydiary.database.chatting.Chatting
 import com.anji.babydiary.database.chatting.ChattingDao
 import com.google.firebase.messaging.FirebaseMessaging
@@ -50,7 +51,7 @@ class ChattingRoomViewModel (val database: ChattingDao, val userIdxOne:Long, app
             RemoteMessage.Builder("${CommonCode.SENDER_ID}@fcm.googleapis.com")
             .setMessageId("dd-123")
             .addData("body", "${message}")
-                .addData("userIdx","${CommonCode.USER_IDX}" )
+                .addData("userIdx","${MyShare.prefs.getLong("idx", 0L)}" )
             .addData("title", "베베")
                 .addData("userName","테스트")
             .build())

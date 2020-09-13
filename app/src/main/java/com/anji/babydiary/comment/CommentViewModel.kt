@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.anji.babydiary.common.CommonCode
+import com.anji.babydiary.common.MyShare.MyShare
 import com.anji.babydiary.database.comments.Comments
 import com.anji.babydiary.database.comments.CommentsDao
 import com.anji.babydiary.database.mainFeed.MainFeed
@@ -28,7 +29,7 @@ class CommentViewModel(application: Application, val database:CommentsDao, val p
 
     suspend fun getProfile() {
         withContext(Dispatchers.IO) {
-            profile.postValue(profileDatabase.selectProfile(CommonCode.USER_IDX))
+            profile.postValue(profileDatabase.selectProfile(MyShare.prefs.getLong("idx", 0L)))
         }
     }
 
@@ -37,7 +38,7 @@ class CommentViewModel(application: Application, val database:CommentsDao, val p
 
         var comment:Comments = Comments()
 
-        comment.userIdx = CommonCode.USER_IDX
+        comment.userIdx = MyShare.prefs.getLong("idx", 0L)
         comment.depth = 0
         comment.date = System.currentTimeMillis()
         comment.commentIdx = 0

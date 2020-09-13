@@ -10,6 +10,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
+import com.anji.babydiary.common.MyShare.MyShare
+import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.follow.FollowDatabase
 import com.anji.babydiary.databinding.FollowerFragmentBinding
 import com.anji.babydiary.event.eventDetail.EventDetailArgs
@@ -31,7 +33,7 @@ class Follower : Fragment() {
         val application = requireNotNull(this.activity).application
         val database = FollowDatabase.getInstance(application).database
 
-        val viewModelFactory = FollowerViewModelFactory(database, application)
+        val viewModelFactory = FollowerViewModelFactory(database, MyShare.prefs.getLong("idx", 0L), application)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(FollowerViewModel::class.java)
 
         binding.lifecycleOwner = viewLifecycleOwner

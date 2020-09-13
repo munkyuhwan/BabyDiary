@@ -20,6 +20,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.common.CommonCode
+import com.anji.babydiary.common.MyShare.MyShare
+import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.tip.TipsDatabase
 import com.anji.babydiary.databinding.WriteTipFragmentBinding
 import com.anji.babydiary.tips.writeTip.tipCategorySpinner.TipCategoryAdapter
@@ -36,16 +38,12 @@ class WriteTip : Fragment() {
     ): View? {
         requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
-        Log.e("loggedIn", "++++++++==============++++++++==============++++++++==============++++++++==============++++++++==============")
-        Log.e("loggedIn", "${CommonCode.USER_IDX}")
-        Log.e("loggedIn", "++++++++==============++++++++==============++++++++==============++++++++==============++++++++==============")
-
         binding = DataBindingUtil.inflate<WriteTipFragmentBinding>(inflater, R.layout.write_tip_fragment, container, false)
 
         application = requireNotNull(this.activity).application
         val database = TipsDatabase.getInstance(application).database
 
-        val viewModelFactory = WriteTipViewModelFactory(database, application)
+        val viewModelFactory = WriteTipViewModelFactory(database, MyShare.prefs.getLong("idx", 0L), application)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(WriteTipViewModel::class.java)
 
         binding.lifecycleOwner = viewLifecycleOwner

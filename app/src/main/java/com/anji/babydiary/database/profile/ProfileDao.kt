@@ -13,6 +13,8 @@ interface ProfileDao{
     @Query("SELECT * FROM tbl_profile ")
     fun selectAll():LiveData<List<Profiles>>
 
+    @Query("SELECT * FROM tbl_profile ")
+    fun selectAllTmp():List<Profiles>
 
     @Query("SELECT * FROM tbl_profile ")
     fun checkUserData():LiveData<List<Profiles>>

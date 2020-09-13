@@ -11,7 +11,7 @@ import com.anji.babydiary.database.tip.Tips
 import com.anji.babydiary.database.tip.TipsDao
 import kotlinx.coroutines.*
 
-class WriteTipViewModel(val database: TipsDao, application:Application) : AndroidViewModel(application) {
+class WriteTipViewModel(val database: TipsDao, val userIdx:Long, application:Application) : AndroidViewModel(application) {
 
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -29,7 +29,7 @@ class WriteTipViewModel(val database: TipsDao, application:Application) : Androi
 
     fun insertTip(text:CharSequence) {
         var tip = Tips()
-        tip.user_idx = CommonCode.USER_IDX.toLong()
+        tip.user_idx = userIdx
         tip.category = selectedCategory
         tip.text = text.toString()
         tip.imgDir = selectedImage.value.toString()

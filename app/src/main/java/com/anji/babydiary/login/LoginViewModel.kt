@@ -4,7 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.anji.babydiary.common.CommonCode
+import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.profile.ProfileDao
+import okhttp3.internal.Util
 
 class LoginViewModel (val database: ProfileDao, application: Application):AndroidViewModel(application) {
 
@@ -18,8 +20,7 @@ class LoginViewModel (val database: ProfileDao, application: Application):Androi
 
 
     fun login(userIdx:CharSequence){
-        CommonCode.USER_IDX = userIdx.toString().toLong()
-        idx.value = CommonCode.USER_IDX
+        idx.value = userIdx.toString().toLong()
     }
 
 }

@@ -6,11 +6,11 @@ import com.anji.babydiary.database.profile.Profiles
 
 data class TipWithUser(
     @Embedded
-    val tips:Tips,
+    val tips:Tips?,
     @Relation(
         parentColumn = "user_idx",
         entityColumn = "idx"
     )
-    val prof:Profiles
+    val prof:Profiles?
 
 )

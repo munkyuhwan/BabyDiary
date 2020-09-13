@@ -20,7 +20,9 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.common.CommonCode
+import com.anji.babydiary.common.MyShare.MyShare
 import com.anji.babydiary.common.OpenGallery
+import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.profile.Profiles
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.databinding.ProfileFragmentBinding
@@ -37,7 +39,7 @@ class MyProfile : Fragment() {
     ): View? {
 
         val binding = DataBindingUtil.inflate<ProfileFragmentBinding>(inflater, R.layout.profile_fragment, container, false)
-        val idx:Long = CommonCode.USER_IDX
+        val idx:Long = MyShare.prefs.getLong("idx", 0L)
 
         application = requireNotNull(this.activity).application
         val database = ProfileDatabase.getInstance(application).database

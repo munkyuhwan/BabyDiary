@@ -39,4 +39,9 @@ class TipActivity : BaseActivity() {
     }
 
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+    }
+
+
 }

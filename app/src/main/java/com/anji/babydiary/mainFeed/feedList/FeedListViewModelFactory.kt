@@ -1,5 +1,6 @@
 package com.anji.babydiary.mainFeed.feedList
 
+import android.app.Activity
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -15,13 +16,14 @@ class FeedListViewModelFactory(
     private val mainFeedDAO: MainFeedDAO,
     private val profiles: ProfileDao,
     private val likesDao: LikesDao,
+    private val activity: Activity,
     private val application: Application
 ):ViewModelProvider.Factory {
 
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(FeedListViewModel::class.java)) {
-            return FeedListViewModel(mainFeedDAO, profiles,likesDao, application) as T
+            return FeedListViewModel(mainFeedDAO, profiles,likesDao, activity ,application) as T
         }
 
         throw IllegalArgumentException()

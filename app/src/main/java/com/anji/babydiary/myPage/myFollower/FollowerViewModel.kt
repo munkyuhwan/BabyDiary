@@ -7,11 +7,11 @@ import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.database.follow.FollowDao
 import com.anji.babydiary.database.follow.FollowDatabase
 
-class FollowerViewModel(val database: FollowDao, application: Application) : AndroidViewModel(application) {
+class FollowerViewModel(val database: FollowDao, val userIdx:Long, application: Application) : AndroidViewModel(application) {
 
 
-    val selectAllFollowee = database.selectFollowee(CommonCode.USER_IDX)
-    val selectAllFollower = database.selectFollower(CommonCode.USER_IDX)
+    val selectAllFollowee = database.selectFollowee(userIdx)
+    val selectAllFollower = database.selectFollower(userIdx)
 
 
     init {

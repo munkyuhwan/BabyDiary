@@ -42,7 +42,7 @@ class FeedList : Fragment() {
         val likeDatabase = LikesDatabase.getInstance(application).database
 
 
-        viewModelFactory = FeedListViewModelFactory(dataSource, profileData, likeDatabase, application)
+        viewModelFactory = FeedListViewModelFactory(dataSource, profileData, likeDatabase, requireActivity(), application)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(FeedListViewModel::class.java)
         viewModel.selectAll()
 
@@ -72,9 +72,6 @@ class FeedList : Fragment() {
         binding.feedList.adapter = adapter
 
         viewModel.allFeeds.observe(viewLifecycleOwner, Observer {
-            Log.e("feeds","======================================================================================")
-            Log.e("feeds","${it}")
-            Log.e("feeds","======================================================================================")
             it?.let {
                 adapter.submitList(it)
             }

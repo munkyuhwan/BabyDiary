@@ -1,6 +1,7 @@
 package com.anji.babydiary.common
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -64,6 +65,12 @@ abstract class BaseActivity() : AppCompatActivity() {
     var feedData:LiveData<List<MainFeed>>? = null
 
 
+    init {
+
+        Log.e("user","================init========================================")
+
+
+    }
 
     val nameArray = arrayOf(
         "",

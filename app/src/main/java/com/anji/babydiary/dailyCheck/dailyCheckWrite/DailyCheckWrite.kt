@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.common.CommonCode
+import com.anji.babydiary.common.MyShare.MyShare
 import com.anji.babydiary.common.Utils
 import com.anji.babydiary.dailyCheck.listAdapter.DailyCheckListAdapter
 import com.anji.babydiary.database.dailyCheck.DailyCheckDatabase
@@ -28,7 +29,7 @@ class DailyCheckWrite : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val idx = CommonCode.USER_IDX
+        val idx = MyShare.prefs.getLong("idx", 0L)
 
         Log.e("data","${ Utils.getDate(System.currentTimeMillis(), "YYYY - MM - d E")} ")
 

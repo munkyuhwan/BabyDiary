@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.anji.babydiary.common.CommonCode
+import com.anji.babydiary.common.MyShare.MyShare
 import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.database.mainFeed.MainFeedDAO
 import com.anji.babydiary.databinding.DateListItemBinding
@@ -61,7 +62,7 @@ class DateListAdapter(val clickListener:MyFeedClickListener, val activity:Activi
             binding.myFeedList.adapter = clickAdapter
 
 
-            val allData = database.selectByUserIdxANDDate(CommonCode.USER_IDX, item.date, item.month, item.year)
+            val allData = database.selectByUserIdxANDDate(MyShare.prefs.getLong("idx", 0L), item.date, item.month, item.year)
             Log.e("allData","===========================================================================")
             Log.e("allData","${allData}")
             Log.e("allData","===========================================================================")

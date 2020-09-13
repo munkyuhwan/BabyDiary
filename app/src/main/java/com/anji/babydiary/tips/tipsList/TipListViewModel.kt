@@ -14,6 +14,7 @@ import kotlinx.coroutines.*
 
 class TipListViewModel(
     var database: TipsDao,
+    val idx:Long,
     application:Application
 ) : AndroidViewModel(application) {
 
@@ -77,12 +78,17 @@ class TipListViewModel(
 
 }
 
-
-
 class TipClickListener(val clickListener:(resultId:Long)->Unit ) {
-    fun onClick(result: Tips) = clickListener(result.idx)
+    fun onClick(result: TipWithUser) = clickListener(result.tips!!.idx)
 }
 
+class TipLikeClicked(val likeClickListener:(resultId:Long)->Unit) {
+    fun onLikeClick(result:TipWithUser) = likeClickListener(result.tips!!.idx)
+}
+
+class TipCommentClicked(val commentClickListener:(resultId:Long)->Unit) {
+    fun onCommentClick(result:TipWithUser) = commentClickListener(result.tips!!.idx)
+}
 
 
 

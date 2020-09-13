@@ -7,7 +7,7 @@ import java.sql.Date
 
 @Entity(
     //foreignKeys = [
-    //    ForeignKey(entity = Profiles::class, parentColumns = ["idx"], childColumns = ["user_idx"])
+    //    ForeignKey(entity = Profiles::class, parentColumns = ["user_idx"], childColumns = ["idx"])
     //],
     tableName = "tbl_main_feed")
 data class MainFeed(

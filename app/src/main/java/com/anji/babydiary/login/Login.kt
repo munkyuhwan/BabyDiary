@@ -3,15 +3,19 @@ package com.anji.babydiary.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.anji.babydiary.R
+import com.anji.babydiary.common.BaseActivity
+import com.anji.babydiary.common.MyShare.MyShare
+import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.databinding.ActivityLoginBinding
 import com.anji.babydiary.mainFeed.MainFeedActivity
 
-class Login : AppCompatActivity() {
+class Login : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,9 +36,17 @@ class Login : AppCompatActivity() {
         viewModel.idx.observe(this, Observer {
             it?.let {
                 if (it != 0L) {
+                    MyShare.prefs.setLong("idx", it)
+
+                    // 데이터 저장
+
+                    Log.e("user","========================================================")
+                    Log.e("user","${it}")
+                    Log.e("user","${MyShare.prefs.getLong("idx", 0L)}")
+                    Log.e("user","========================================================")
                     val intent = Intent(this, MainFeedActivity::class.java)
                     startActivity(intent)
-                    //finish()
+                    finish()
                 }
             }
         })

@@ -16,7 +16,9 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:name="com.anji.babydiary.common.MyShare.MyShare"
+>
         <activity
             android:name=".login.Login"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"

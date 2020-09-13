@@ -18,6 +18,8 @@ import com.anji.babydiary.bottomActivity.BottomMenu
 import com.anji.babydiary.bottomActivity.resign.Resign
 import com.anji.babydiary.common.BaseActivity
 import com.anji.babydiary.common.CommonCode
+import com.anji.babydiary.common.MyShare.MyShare
+import com.anji.babydiary.common.Utils
 import com.anji.babydiary.dailyCheck.DailyCheckActivity
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.database.profile.Profiles
@@ -42,7 +44,9 @@ class MyPage : BaseActivity() {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_my_page)
 
-        val idx:Long = CommonCode.USER_IDX
+
+
+        val idx:Long = MyShare.prefs.getLong("idx", 0L)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_my_page)
         binding.lifecycleOwner = this

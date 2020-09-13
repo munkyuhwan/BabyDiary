@@ -8,9 +8,19 @@
 
     <data>
         <variable
+            name="vm"
+            type="com.anji.babydiary.tips.tipsList.TipListViewModel" />
+        <variable
+            name="tipWithUserDatabase"
+            type="com.anji.babydiary.database.tip.TipWithUser" />
+
+        <variable
             name="clickListener"
             type="com.anji.babydiary.tips.tipsList.TipClickListener" />
 
+        <variable
+            name="likeClickListener"
+            type="com.anji.babydiary.tips.tipsList.TipLikeClicked" />
 
     </data>
 
@@ -43,13 +53,14 @@
             app:layout_constraintTop_toTopOf="@+id/tip_icon" />
 
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/tip_img"
             style="@style/MainFeedImage"
             android:layout_marginTop="15dp"
             android:contentDescription="@string/usericon"
             android:radius="30sp"
             android:scaleType="centerCrop"
+            android:background="@drawable/feed_image"
             android:src="@drawable/sample_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,6 +73,7 @@
             style="@style/LikeButton"
             android:layout_marginTop="15dp"
             android:width="14sp"
+            android:onClick="@{() -> likeClickListener.onLikeClick(tipWithUserDatabase)}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tip_img" />
 
@@ -75,6 +87,7 @@
 
         <TextView
             android:id="@+id/tip_like_cnt"
+            style="@style/LikeCnt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"

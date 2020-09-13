@@ -6,7 +6,6 @@ import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.database.follow.Follow
 import com.anji.babydiary.database.follow.FollowDao
 import com.anji.babydiary.database.mainFeed.MainFeed
@@ -19,6 +18,7 @@ class MyFeedViewModel(val idx:Long,
                       val database:MainFeedDAO,
                       val profileDatabas: ProfileDao,
                       val followDatabase: FollowDao,
+                      val userIdx:Long,
                       application: Application) : AndroidViewModel(application) {
 
     private val job = Job()
@@ -29,7 +29,7 @@ class MyFeedViewModel(val idx:Long,
 
     val selectAllFollow = followDatabase.selectAll()
 
-    val loggedInIdx = CommonCode.USER_IDX.toLong()
+    val loggedInIdx = userIdx
     val followIdx = idx.toLong()
 
     var followeeReusult = MutableLiveData< List<Follow> >()
@@ -92,10 +92,6 @@ class MyFeedViewModel(val idx:Long,
         withContext(Dispatchers.IO) {
             followChecker.postValue( followDatabase.checkFollow(followIdx, loggedInIdx) )
 
-            Log.e("followChecker", "============================================================")
-            Log.e("followChecker", "${followChecker.value}")
-            Log.e("followChecker", "============================================================")
-
             if (followChecker.value != null) {
                 if (followChecker.value != null) {
                     if (followChecker.value!!.size <= 0) {
@@ -123,7 +119,8 @@ class MyFeedViewModel(val idx:Long,
 
     suspend fun selectAll() {
         withContext(Dispatchers.IO) {
-            myProfile.postValue(profileDatabas.selectProfile(idx))
+            Log.e("idx:","idx: ${userIdx}")
+            myProfile.postValue(profileDatabas.selectProfile(userIdx))
         }
     }
 

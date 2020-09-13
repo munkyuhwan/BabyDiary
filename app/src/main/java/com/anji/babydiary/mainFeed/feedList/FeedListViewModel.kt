@@ -1,5 +1,6 @@
 package com.anji.babydiary.mainFeed.feedList
 
+import android.app.Activity
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
@@ -8,6 +9,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.anji.babydiary.R
 import com.anji.babydiary.common.CommonCode
+import com.anji.babydiary.common.MyShare.MyShare
+import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.likes.Likes
 import com.anji.babydiary.database.likes.LikesDao
 import com.anji.babydiary.database.mainFeed.FeedWithUser
@@ -23,6 +26,7 @@ class FeedListViewModel(
     val mainFeedDAO: MainFeedDAO,
     val profile: ProfileDao,
     val likesDao: LikesDao,
+    val activity: Activity,
     application: Application
 ) : AndroidViewModel(application) {
 
@@ -65,7 +69,10 @@ class FeedListViewModel(
 
     suspend fun selectProfile() {
         withContext(Dispatchers.IO) {
-            profileData.postValue( profile.selectProfile(CommonCode.USER_IDX) )
+            Log.e("profile","****************************************************************")
+            Log.e("profile","${MyShare.prefs.getLong("idx", 0L)}")
+            Log.e("profile","****************************************************************")
+            profileData.postValue( profile.selectProfile(MyShare.prefs.getLong("idx", 0L)) )
         }
     }
 
@@ -127,7 +134,7 @@ class FeedListViewModel(
         var like: Likes = Likes()
 
         like.feed_idx = feedIdx
-        like.user_idx = CommonCode.USER_IDX
+        like.user_idx = MyShare.prefs.getLong("idx", 0L)
         like.date = System.currentTimeMillis()
 
         uiScope.launch {

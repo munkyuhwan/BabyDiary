@@ -6,15 +6,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.tip.TipWithUser
 import com.anji.babydiary.databinding.TipListItemBinding
 import com.anji.babydiary.tips.tipsList.TipClickListener
+import com.anji.babydiary.tips.tipsList.TipCommentClicked
+import com.anji.babydiary.tips.tipsList.TipLikeClicked
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 
-class TipListAdpater(val clickListener: TipClickListener, val activity:Activity): ListAdapter<TipWithUser, TipListAdpater.ViewHolder>(TipListDiffCallback()) {
+class TipListAdpater(val clickListener: TipClickListener, val tipLikeClicked: TipLikeClicked, val tipCommentClicked: TipCommentClicked, val activity:Activity): ListAdapter<TipWithUser, TipListAdpater.ViewHolder>(TipListDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
@@ -22,30 +25,34 @@ class TipListAdpater(val clickListener: TipClickListener, val activity:Activity)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)!!
-        holder.bind(item, clickListener, activity)
+        holder.bind(item, clickListener,tipLikeClicked,  tipCommentClicked, activity)
     }
 
     class ViewHolder private constructor(val binding: TipListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind (item: TipWithUser, clickListener: TipClickListener, activity:Activity) {
+        fun bind (item: TipWithUser, clickListener: TipClickListener, tipLikeClicked: TipLikeClicked,  tipCommentClicked: TipCommentClicked, activity:Activity) {
             //binding.idx = item
 
+
+            binding.tipWithUserDatabase = item
+
+            binding.likeClickListener = tipLikeClicked
             binding.tipLikeCnt.text = item.tips!!.cnt.toString()
             binding.tipText.text = "${item.tips!!.text.toString()} "
 
-
-
-            binding.tipUserId.text = item.prof.name.toString()
+            binding.tipUserId.text = item.prof!!.name.toString()
 
             Glide.with(binding.root.context).load(item.tips!!.imgDir).into(binding.tipImg)
-            if (item.prof.imgTmp != "") {
+            Utils.setMyFeedListImg(binding.tipImg)
+
+            if (item.prof!!.imgTmp != "") {
                 Glide.with(binding.root.context)
-                    .load(activity.resources.getIdentifier(item.prof.imgTmp, "drawable", activity.packageName))
+                    .load(activity.resources.getIdentifier(item.prof!!.imgTmp, "drawable", activity.packageName))
                     .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
                     .into(binding.tipIcon)
             }else {
                 Glide.with(binding.root.context)
-                    .load(item.prof.img)
+                    .load(item.prof!!.img)
                     .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
                     .into(binding.tipIcon)
             }
