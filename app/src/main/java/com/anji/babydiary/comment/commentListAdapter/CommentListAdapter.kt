@@ -7,18 +7,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.anji.babydiary.R
-import com.anji.babydiary.comment.Comment
 import com.anji.babydiary.database.comments.Comments
-import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.databinding.CommentListItemBinding
-import com.anji.babydiary.databinding.MainFeedListItemBinding
-import com.anji.babydiary.mainFeed.feedList.FeedClickListener
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.BitmapImageViewTarget
-import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.RoundedCornerTreatment
 import com.google.android.material.shape.ShapePath
 
@@ -71,7 +62,6 @@ class CommentListAdapter:ListAdapter<Comments, CommentListAdapter.ViewHolder>(Co
 
 }
 
-
 class CommentListDiffCallback: DiffUtil.ItemCallback<Comments>() {
     override fun areItemsTheSame(oldItem: Comments, newItem: Comments): Boolean {
         return oldItem.idx == newItem.idx
@@ -95,4 +85,5 @@ sealed class DataItem {
         override val id = Long.MIN_VALUE
     }
 }
+
 

@@ -14,7 +14,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".comment.Comment">
+    tools:context=".comment.TipsComment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mypage_sub_nav_layout"

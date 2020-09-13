@@ -40,15 +40,11 @@ class TipListFragment : Fragment() {
 
             },
                 TipLikeClicked{ resultId: Long, cnt: CharSequence ->
-
                     viewmodel.insertLike(resultId, cnt.toString().toInt()+1 )
-
-
                 }
-
                 ,
                 TipCommentClicked {
-
+                    findNavController().navigate(TipListFragmentDirections.actionTipListFragmentToTipsComment(it))
                 },
 
             requireActivity())

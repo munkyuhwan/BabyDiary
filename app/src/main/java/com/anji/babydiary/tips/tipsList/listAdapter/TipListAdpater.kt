@@ -59,7 +59,7 @@ class TipListAdpater(val clickListener: TipClickListener, val tipLikeClicked: Ti
 
             binding.executePendingBindings()
             binding.clickListener = clickListener
-
+            binding.commentClickListener = tipCommentClicked
         }
 
 

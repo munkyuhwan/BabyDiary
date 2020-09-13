@@ -21,6 +21,9 @@
         <variable
             name="likeClickListener"
             type="com.anji.babydiary.tips.tipsList.TipLikeClicked" />
+        <variable
+            name="commentClickListener"
+            type="com.anji.babydiary.tips.tipsList.TipCommentClicked" />
 
     </data>
 
@@ -80,6 +83,7 @@
         <Button
             android:id="@+id/button2"
             style="@style/CommentButton"
+            android:onClick="@{() -> commentClickListener.onCommentClick(tipWithUserDatabase)}"
             android:layout_marginStart="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/button"
             app:layout_constraintStart_toEndOf="@+id/button"

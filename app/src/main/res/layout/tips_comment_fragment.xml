@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable
+            name="vm"
+            type="com.anji.babydiary.tips.tipsComment.TipsCommentViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".comment.TipsComment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mypage_sub_nav_layout"
+            android:layout_width="match_parent"
+            android:layout_height="99sp"
+            android:background="@drawable/main_feed_actionbar"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/backBtn"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/back_btn"
+                app:layout_constraintBottom_toBottomOf="@+id/myfeed_write"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/myfeed_write"
+                app:layout_constraintVertical_bias="0.7" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/myfeed_write"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/myfeed_write_btn"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.73" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/commentList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="120dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingLeft="20sp"
+            android:paddingRight="20sp">
+            <ImageView
+                android:id="@+id/commentUsrIcon"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:src="@drawable/sample_2"
+                android:background="@drawable/circle"
+                />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="37sp"
+                android:background="@drawable/comment_text_layout"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="7sp"
+                android:paddingLeft="7sp"
+                >
+                <EditText
+                    android:id="@+id/commentText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="15sp"
+                    android:layout_weight="1"
+                    android:hint="댓글"
+                    android:gravity="center_vertical"
+                    android:background="#00000000"
+                    android:textColor="#000000"/>
+                <Button
+                    android:id="@+id/commentCompleteBtn"
+                    android:layout_width="match_parent"
+                    android:layout_weight="5"
+                    android:layout_height="wrap_content"
+                    android:text="게시"
+                    android:onClick="@{() -> vm.completeWrite(commentText.getText()) }"
+                    android:background="#00000000"
+                    android:textColor="@color/mainThemeOrange"
+                    />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

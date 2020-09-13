@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_tipListFragment_to_mapWebview"
             app:destination="@id/mapWebview" />
+        <action
+            android:id="@+id/action_tipListFragment_to_tipsComment"
+            app:destination="@id/tipsComment" />
     </fragment>
     <fragment
         android:id="@+id/writeTip"
@@ -24,4 +27,12 @@
         android:id="@+id/mapWebview"
         android:name="com.anji.babydiary.tips.webview.MapWebview"
         android:label="MapWebview" />
+    <fragment
+        android:id="@+id/tipsComment"
+        android:name="com.anji.babydiary.tips.tipsComment.TipsComment"
+        android:label="TipsComment" >
+        <argument
+            android:name="tipIdx"
+            app:argType="long" />
+    </fragment>
 </navigation>

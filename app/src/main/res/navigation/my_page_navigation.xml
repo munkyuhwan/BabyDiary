@@ -87,7 +87,7 @@
     </fragment>
     <fragment
         android:id="@+id/comment3"
-        android:name="com.anji.babydiary.comment.Comment"
+        android:name="com.anji.babydiary.comment.TipsComment"
         android:label="Comment" >
         <argument
             android:name="feedIdx"
