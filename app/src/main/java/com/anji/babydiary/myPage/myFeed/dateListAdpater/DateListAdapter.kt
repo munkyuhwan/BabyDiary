@@ -4,6 +4,8 @@ import android.app.Activity
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -16,9 +18,11 @@ import com.anji.babydiary.databinding.DateListItemBinding
 import com.anji.babydiary.myPage.myFeed.MyFeedClickListener
 import com.anji.babydiary.myPage.myFeed.MyFeedDirections
 import com.anji.babydiary.myPage.myFeed.myFeedListAdapter.MyFeedListAdapter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 
-class DateListAdapter(val clickListener:MyFeedClickListener, val activity:Activity, val database:MainFeedDAO, val navController: NavController) : ListAdapter<MainFeed, DateListAdapter.DateViewHolder>(MyFeedDiffUtilCallback()) {
+class DateListAdapter(val clickListener:MyFeedClickListener, val activity:Activity, val database:MainFeedDAO, val navController: NavController, val lifecycleOwner: LifecycleOwner) : ListAdapter<MainFeed, DateListAdapter.DateViewHolder>(MyFeedDiffUtilCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DateViewHolder {
         return DateViewHolder.from(parent)
@@ -26,12 +30,12 @@ class DateListAdapter(val clickListener:MyFeedClickListener, val activity:Activi
 
     override fun onBindViewHolder(holder: DateViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, clickListener, activity, database,navController)
+        holder.bind(item, clickListener, activity, database,navController, lifecycleOwner)
     }
 
     class DateViewHolder private constructor(val binding: DateListItemBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: MainFeed,  clickListener:MyFeedClickListener,  activity:Activity, database:MainFeedDAO , navController: NavController) {
+        fun bind(item: MainFeed,  clickListener:MyFeedClickListener,  activity:Activity, database:MainFeedDAO , navController: NavController, lifecycleOwner:LifecycleOwner) {
 
             val monthName = arrayOf(
                 "",
@@ -54,7 +58,6 @@ class DateListAdapter(val clickListener:MyFeedClickListener, val activity:Activi
             binding.year.text = item.year.toString()
 
 
-
             val clickAdapter = MyFeedListAdapter(MyFeedClickListener {
                 it?.let {
                     navController.navigate(MyFeedDirections.actionMyFeedToMyFeedDetail(it))
@@ -65,12 +68,16 @@ class DateListAdapter(val clickListener:MyFeedClickListener, val activity:Activi
 
             val allData = database.selectByUserIdxANDDate(item.userIdx, item.date, item.month, item.year)
             Log.e("allData","===========================================================================")
-            Log.e("allData","${allData}")
+            Log.e("allData","${allData.value}")
             Log.e("allData","===========================================================================")
-            clickAdapter.submitList(allData)
+            allData.observe(lifecycleOwner, Observer {
+                clickAdapter.submitList(it)
+            })
+
 
             binding.executePendingBindings()
         }
+
 
         companion object {
             fun from(parent: ViewGroup):DateViewHolder {

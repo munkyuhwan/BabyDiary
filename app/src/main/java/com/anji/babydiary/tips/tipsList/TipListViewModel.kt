@@ -50,20 +50,28 @@ class TipListViewModel(
         }
         tipLikeDatabase = TipLikesDatabase.getInstance(application).database
         profileDatabase = ProfileDatabase.getInstance(application).database
-        val ddd = profileDatabase.selectAllTmp()
 
-        if (ddd.size <= 0) {
-            doInsert(1, "승율아가","승유리를 소개해요","mem_1")
-            doInsert(2,"찬호","똘망똘망한 먹보","mem_2")
-            doInsert(3, "쥬쥬","포토그래퍼의 보물","mem_3")
-            doInsert(4,"오쑥이","우리집 사랑둥이","mem_4")
-            doInsert(5,"선우", "착할선 번우","mem_5")
-            doInsert(6,"승현아기","이슬부부의 뮤즈","mem_6")
-            doInsert(7, "말랑이","작고 소중한 우리의 천사","mem_7")
-            doInsert(8,"재재", "세상으로 나오는 날을 기다리는 중","mem_8")
+        uiScope.launch {
+            profileSelectAll()
         }
 
     }
+
+    suspend fun profileSelectAll() {
+        withContext(Dispatchers.IO) {
+            if ( profileDatabase.selectAllTmp().size <= 0 ){
+                doInsert(1, "승율아가","승유리를 소개해요","mem_1")
+                doInsert(2,"찬호","똘망똘망한 먹보","mem_2")
+                doInsert(3, "쥬쥬","포토그래퍼의 보물","mem_3")
+                doInsert(4,"오쑥이","우리집 사랑둥이","mem_4")
+                doInsert(5,"선우", "착할선 번우","mem_5")
+                doInsert(6,"승현아기","이슬부부의 뮤즈","mem_6")
+                doInsert(7, "말랑이","작고 소중한 우리의 천사","mem_7")
+                doInsert(8,"재재", "세상으로 나오는 날을 기다리는 중","mem_8")
+            }
+        }
+    }
+
 
 
 

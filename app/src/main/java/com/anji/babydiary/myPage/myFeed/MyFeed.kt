@@ -62,21 +62,8 @@ class MyFeed : Fragment() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MyFeedViewModel::class.java)
 
         binding.myFeedViewModel = viewModel
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding.setLifecycleOwner(this)
 
-
-        /*
-        val clickAdapter = MyFeedListAdapter(MyFeedClickListener {
-            it?.let {
-                findNavController().navigate(MyFeedDirections.actionMyFeedToMyFeedDetail(it))
-            }
-        }, requireActivity())
-        binding.myFeedList.adapter = clickAdapter
-
-        val manager = GridLayoutManager(activity,3)
-        binding.myFeedList.layoutManager = manager
-
-         */
 
         binding.addMyfeed.setOnClickListener {
             findNavController().navigate(MyFeedDirections.actionMyFeedToMyFeedWrite())
@@ -134,7 +121,7 @@ class MyFeed : Fragment() {
             it?.let {
                 findNavController().navigate(MyFeedDirections.actionMyFeedToMyFeedDetail(it))
             }
-        }, requireActivity(), database, findNavController())
+        }, requireActivity(), database, findNavController(), viewLifecycleOwner)
         binding.monthList.adapter = dateAdapter
 
 

@@ -44,6 +44,7 @@ class MyFeedDetail : Fragment() {
 
         viewModel.select.observe(viewLifecycleOwner, Observer {
             it?.let {
+               // viewModel.getWriterProfile()
                // binding.writtenDate.text = Utils.getDate(it.timeMilli, "YYYY. MM. dd")
                 binding.writtenDate.text = "${it.year} ${String.format("%02d",it.month)} ${String.format("%02d", it.date)}"
                 binding.feedText.text = it.title

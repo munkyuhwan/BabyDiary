@@ -16,7 +16,7 @@ class MyPageViewModel (val database: ProfileDao, val idx:Long, application: Appl
     val job = Job()
     val uiScope = CoroutineScope(Dispatchers.Main + job)
 
-    val myProfile = MutableLiveData<Profiles>()
+    val myProfile = database.selectProfile(idx)
 
     var selectAll = database.selectAll()
 
@@ -24,16 +24,7 @@ class MyPageViewModel (val database: ProfileDao, val idx:Long, application: Appl
         isMain.value = View.GONE
         isSub.value = View.GONE
 
-        uiScope.launch {
-            selectAll()
-        }
-
     }
 
-    suspend fun selectAll() {
-        withContext(Dispatchers.IO) {
-            myProfile.postValue(database.selectProfile(idx))
-        }
-    }
 
 }

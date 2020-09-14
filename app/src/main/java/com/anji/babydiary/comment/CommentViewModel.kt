@@ -20,18 +20,10 @@ class CommentViewModel(application: Application, val database:CommentsDao, val p
     val job = Job()
     val uiScope = CoroutineScope(Dispatchers.Main + job)
 
-    val profile = MutableLiveData<Profiles>()
+    val profile = profileDatabase.selectProfile(MyShare.prefs.getLong("idx", 0L))
     init {
-        uiScope.launch {
-            getProfile()
-        }
     }
 
-    suspend fun getProfile() {
-        withContext(Dispatchers.IO) {
-            profile.postValue(profileDatabase.selectProfile(MyShare.prefs.getLong("idx", 0L)))
-        }
-    }
 
 
     fun completeComment(text:CharSequence) {

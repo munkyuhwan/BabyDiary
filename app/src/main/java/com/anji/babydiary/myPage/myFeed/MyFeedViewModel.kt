@@ -23,7 +23,7 @@ class MyFeedViewModel(val idx:Long,
 
     private val job = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
-    val myProfile = MutableLiveData<Profiles>()
+    val myProfile = profileDatabas.selectProfile(idx)
     val selectAll = MutableLiveData<List<MainFeed>>()
     val selectDates = MutableLiveData<List<MainFeed>>()
 
@@ -42,9 +42,6 @@ class MyFeedViewModel(val idx:Long,
     init {
         uiScope.launch {
             //selectByIdx()
-        }
-        uiScope.launch {
-            selectAll()
         }
         uiScope.launch {
             getDates()
@@ -117,12 +114,6 @@ class MyFeedViewModel(val idx:Long,
         }
     }
 
-    suspend fun selectAll() {
-        withContext(Dispatchers.IO) {
-            Log.e("idx:","idx: ${userIdx}")
-            myProfile.postValue(profileDatabas.selectProfile(idx))
-        }
-    }
 
     fun onFollowClicked() {
        if (loggedInIdx != followIdx) {

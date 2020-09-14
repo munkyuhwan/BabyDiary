@@ -1,6 +1,7 @@
 package com.anji.babydiary.mainFeed.feedDetail
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.anji.babydiary.common.CommonCode
@@ -18,27 +19,28 @@ import okhttp3.Dispatcher
 
 class FeedDetailViewModel(val idx:Long, val database:MainFeedDAO, val likeDatabase:LikesDao, val profileDatabase: ProfileDao) : ViewModel() {
 
-    val select = MutableLiveData<MainFeed>()
-    val writtenDate = MutableLiveData<String>()
+    val select = database.selectSingle(idx)
 
     val likeCount = likeDatabase.selectAllByFeedIdx(idx)
-    val likeTotal = MutableLiveData<Int>()
     private val viewModelJob = Job()
     val uiScope = CoroutineScope( Dispatchers.Main + viewModelJob)
-    val writerProfile = MutableLiveData<Profiles>()
+    var writerProfile = MutableLiveData<Profiles>()
 
     init {
+
+    }
+
+    fun getWriterProfile() {
         uiScope.launch {
-            getInitialInf()
+            selectWriterProfile()
+        }
+    }
+    suspend fun selectWriterProfile() {
+        withContext(Dispatchers.IO) {
+            writerProfile.postValue( profileDatabase.selectProfile(select.value!!.userIdx).value )
         }
     }
 
-    private suspend fun getInitialInf() {
-        withContext(Dispatchers.IO ) {
-            select.postValue( database.selectSingle(idx) )
-            writerInfo()
-        }
-    }
 
     fun onLikeButtonClicked(likeCnt:CharSequence) {
         var like:Likes = Likes()
@@ -56,17 +58,6 @@ class FeedDetailViewModel(val idx:Long, val database:MainFeedDAO, val likeDataba
 
     }
 
-    private fun writerInfo() {
-        uiScope.launch {
-            getWriterInfo()
-        }
-    }
-
-    private suspend fun getWriterInfo() {
-        withContext(Dispatchers.IO) {
-            writerProfile.postValue( profileDatabase.selectProfile(select.value!!.userIdx) )
-        }
-    }
 
     private suspend fun likeInsert(like:Likes) {
         withContext(Dispatchers.IO) {

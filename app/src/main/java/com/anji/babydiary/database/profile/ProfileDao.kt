@@ -20,8 +20,10 @@ interface ProfileDao{
     fun checkUserData():LiveData<List<Profiles>>
 
     @Query("SELECT * FROM tbl_profile WHERE idx= :key ORDER BY idx DESC")
-    fun selectProfile(key:Long):Profiles
+    fun selectProfile(key:Long):LiveData<Profiles>
 
+    @Query("SELECT * FROM tbl_profile WHERE idx= :key ORDER BY idx DESC")
+    fun selectProfileData(key:Long):Profiles
 
     @Query("DELETE FROM tbl_profile")
     fun deleteAll()

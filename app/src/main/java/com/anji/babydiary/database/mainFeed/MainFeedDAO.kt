@@ -16,7 +16,7 @@ interface MainFeedDAO{
     fun selectAll(): LiveData<List<MainFeed>>
 
     @Query("SELECT * FROM tbl_main_feed WHERE idx= :key")
-    fun selectSingle(key:Long):MainFeed
+    fun selectSingle(key:Long):LiveData<MainFeed>
 
     @Query("SELECT * FROM tbl_main_feed WHERE user_idx= :key GROUP BY date, month, date ")
     fun selectDates(key:Long):List<MainFeed>
@@ -26,7 +26,7 @@ interface MainFeedDAO{
 
 
     @Query("SELECT * FROM tbl_main_feed WHERE user_idx= :key AND date = :date AND month = :month AND year = :year")
-    fun selectByUserIdxANDDate(key:Long, date:Int, month:Int, year:Int): List<MainFeed>
+    fun selectByUserIdxANDDate(key:Long, date:Int, month:Int, year:Int): LiveData<List<MainFeed>>
 
 
     @Query("UPDATE tbl_main_feed SET like_cnt = :cnt WHERE idx = :pk ")
@@ -45,7 +45,7 @@ interface MainFeedDAO{
 
     @Transaction
     @Query("SELECT * FROM tbl_main_feed")
-    fun selectWithProfileMain(): List<FeedWithUser>
+    fun selectWithProfileMain(): LiveData<List<FeedWithUser>>
 
 
     @Transaction
@@ -56,7 +56,7 @@ interface MainFeedDAO{
 
     @Transaction
     @Query("SELECT * FROM tbl_main_feed WHERE feed_type = :type")
-    fun selectAllByType(type:String): List<FeedWithUser>
+    fun selectAllByType(type:String): LiveData<List<FeedWithUser>>
 
 
 

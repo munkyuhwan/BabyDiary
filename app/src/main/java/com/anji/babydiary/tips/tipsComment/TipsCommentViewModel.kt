@@ -16,15 +16,17 @@ class TipsCommentViewModel(val database:TipsCommentDao, val tipIdx:Long,  applic
     val dataList = database.selectByTipIdx(tipIdx)
     val profileDatabase = ProfileDatabase.getInstance(application).database
 
-    val dataProfile = MutableLiveData<Profiles>()
+    val dataProfile = profileDatabase.selectProfile(MyShare.prefs.getLong("idx",0))
 
 
     val job = Job()
     val uiScope = CoroutineScope(Dispatchers.Main + job)
 
     init {
-        dataProfile.value = profileDatabase.selectProfile(MyShare.prefs.getLong("idx",0))
+
+
     }
+
 
 
     fun completeWrite(text:CharSequence) {

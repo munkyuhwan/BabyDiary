@@ -33,9 +33,9 @@ class FeedListViewModel(
     val typeArea:String = "area"
     val typeAge:String = "age"
 
-    var allFeeds = MutableLiveData<List<FeedWithUser>>()
+    var allFeeds = mainFeedDAO.selectWithProfileMain()
 
-    var profileData = MutableLiveData<Profiles>()
+    var profileData = profile.selectProfile(MyShare.prefs.getLong("idx", 0L))
 
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -45,12 +45,8 @@ class FeedListViewModel(
 
     //var feedWithUser = mainFeedDAO.getFeedWithUser()
     init {
-        uiScope.launch {
-            selectProfile()
-        }
         isCategoryOpen.value = false
 
-        allFeeds.value = mainFeedDAO.selectWithProfileMain()
     }
 
     fun onTypeClick(type:String) {
@@ -61,20 +57,10 @@ class FeedListViewModel(
 
     suspend fun selectByType(type:String) {
         withContext(Dispatchers.IO) {
-            allFeeds.postValue(mainFeedDAO.selectAllByType(type))
+            allFeeds = mainFeedDAO.selectAllByType(type)
         }
     }
 
-
-
-    suspend fun selectProfile() {
-        withContext(Dispatchers.IO) {
-            Log.e("profile","****************************************************************")
-            Log.e("profile","${MyShare.prefs.getLong("idx", 0L)}")
-            Log.e("profile","****************************************************************")
-            profileData.postValue( profile.selectProfile(MyShare.prefs.getLong("idx", 0L)) )
-        }
-    }
 
 
      fun insertInto() {

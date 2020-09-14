@@ -28,7 +28,7 @@ class MyProfileViewModel(val idx:Long, val database: ProfileDao, application: Ap
 
     private suspend fun getInitialData() {
         withContext(Dispatchers.IO) {
-            val tmpData = database.selectProfile(idx)
+            val tmpData = database.selectProfileData(idx)
             data.postValue( tmpData )
             Log.e("data","data:${data}")
             if (tmpData != null) {
