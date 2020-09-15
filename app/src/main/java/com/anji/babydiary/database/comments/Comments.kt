@@ -2,7 +2,9 @@ package com.anji.babydiary.database.comments
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.anji.babydiary.database.profile.Profiles
 
 @Entity(tableName = "tbl_comments")
 data class Comments (

@@ -8,7 +8,7 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
 
-@Database(entities = [Profiles::class], version = 11, exportSchema = false)
+@Database(entities = [Profiles::class], version = 12, exportSchema = false)
 abstract class ProfileDatabase:RoomDatabase()  {
 
     abstract val database: ProfileDao
@@ -21,9 +21,6 @@ abstract class ProfileDatabase:RoomDatabase()  {
                 var instance = INSTANCE
                 if (instance == null) {
                     instance = Room.databaseBuilder(context.applicationContext, ProfileDatabase::class.java, "baby.db")
-                        //.fallbackToDestructiveMigrationOnDowngrade()
-                        //.allowMainThreadQueries()
-                        //.addMigrations()
                         .fallbackToDestructiveMigration()
                         .build()
 

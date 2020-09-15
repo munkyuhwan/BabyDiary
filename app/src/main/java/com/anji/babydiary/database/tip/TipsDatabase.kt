@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.anji.babydiary.database.profile.Profiles
 
-@Database(entities = [Tips::class, Profiles::class], version = 3, exportSchema = false)
+@Database(entities = [Tips::class, Profiles::class], version = 4, exportSchema = false)
 abstract class TipsDatabase:RoomDatabase() {
 
     abstract val database: TipsDao
@@ -20,6 +20,7 @@ abstract class TipsDatabase:RoomDatabase() {
                 var instance = INSTANCE
                 if (instance == null) {
                     instance = Room.databaseBuilder(context.applicationContext, TipsDatabase::class.java, "baby.db")
+                        .allowMainThreadQueries()
                         .fallbackToDestructiveMigration()
                         .build()
                 }

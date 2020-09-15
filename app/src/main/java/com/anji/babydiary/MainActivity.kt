@@ -39,21 +39,8 @@ class MainActivity : BaseActivity() {
 
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
-        //month -1
-        /*
-        val expDate = GregorianCalendar(2020, 8, 9) // midnight
-        val now = GregorianCalendar()
 
-        val isExpired = now.after(expDate)
 
-        if (isExpired) {
-            Toast.makeText(this, "사용기간이 만료되었습니다.", Toast.LENGTH_SHORT).show()
-            finishAffinity()
-            finish()
-            exitProcess(-1)
-        }
-        */
-        //userData = database.checkUserData()
         initUserData()
         userData?.observe(this, androidx.lifecycle.Observer {
 
@@ -78,7 +65,31 @@ class MainActivity : BaseActivity() {
                 feedDataInitialize()
             }
         })
+
+
+        val testdatabase = ProfileDatabase.getInstance(application).database
+        val job = Job()
+        val uiScope = CoroutineScope(Dispatchers.Main + job)
+        val ddd = MutableLiveData<List<Profiles>>()
+
+        ddd.observe(this, androidx.lifecycle.Observer {
+            Log.e("profiles","=======================================================")
+            Log.e("profiles","${it}")
+            Log.e("profiles","=======================================================")
+        })
+
+        uiScope.launch {
+            getProfile(testdatabase, ddd)
+        }
     }
+
+    suspend fun getProfile(testdatabase:ProfileDao, ddd:MutableLiveData<List<Profiles>>) {
+        withContext(Dispatchers.IO) {
+             ddd.postValue( testdatabase.selectAllTest() )
+        }
+    }
+
+
     suspend fun delay() {
         withContext(Dispatchers.IO) {
             Thread.sleep(3000)

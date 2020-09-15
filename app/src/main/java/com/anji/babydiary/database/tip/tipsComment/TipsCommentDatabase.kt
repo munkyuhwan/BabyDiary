@@ -8,7 +8,7 @@ import com.anji.babydiary.database.profile.Profiles
 import com.anji.babydiary.database.tip.TipsDatabase
 
 
-@Database(entities = [TipsComment::class, Profiles::class], version = 1, exportSchema = false)
+@Database(entities = [TipsComment::class, Profiles::class], version = 2, exportSchema = false)
 abstract class TipsCommentDatabase:RoomDatabase() {
     abstract val database:TipsCommentDao
 
@@ -21,6 +21,7 @@ abstract class TipsCommentDatabase:RoomDatabase() {
                 var instance = INSTANCE
                 if (instance == null) {
                     instance = Room.databaseBuilder(context.applicationContext, TipsCommentDatabase::class.java, "baby.db")
+                        .allowMainThreadQueries()
                         .fallbackToDestructiveMigration()
                         .build()
                 }
@@ -31,7 +32,5 @@ abstract class TipsCommentDatabase:RoomDatabase() {
         }
 
     }
-
-
 
 }

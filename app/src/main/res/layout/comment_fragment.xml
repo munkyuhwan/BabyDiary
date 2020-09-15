@@ -76,7 +76,6 @@
             android:id="@+id/commentUsrIcon"
             android:layout_width="30sp"
             android:layout_height="30sp"
-            android:src="@drawable/sample_2"
             android:background="@drawable/circle"
             />
         <LinearLayout

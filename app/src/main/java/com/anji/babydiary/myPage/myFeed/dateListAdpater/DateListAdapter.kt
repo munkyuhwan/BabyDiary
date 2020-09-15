@@ -65,7 +65,6 @@ class DateListAdapter(val clickListener:MyFeedClickListener, val activity:Activi
             }, activity)
             binding.myFeedList.adapter = clickAdapter
 
-
             val allData = database.selectByUserIdxANDDate(item.userIdx, item.date, item.month, item.year)
             Log.e("allData","===========================================================================")
             Log.e("allData","${allData.value}")
@@ -73,7 +72,6 @@ class DateListAdapter(val clickListener:MyFeedClickListener, val activity:Activi
             allData.observe(lifecycleOwner, Observer {
                 clickAdapter.submitList(it)
             })
-
 
             binding.executePendingBindings()
         }

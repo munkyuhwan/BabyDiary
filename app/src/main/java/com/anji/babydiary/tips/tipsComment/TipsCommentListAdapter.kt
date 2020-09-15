@@ -1,26 +1,36 @@
 package com.anji.babydiary.tips.tipsComment
 
 import android.app.Activity
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.anji.babydiary.R
 import com.anji.babydiary.common.Utils
+import com.anji.babydiary.database.comments.Comments
+import com.anji.babydiary.database.profile.ProfileDao
+import com.anji.babydiary.database.profile.ProfileDatabase
+import com.anji.babydiary.database.profile.Profiles
+import com.anji.babydiary.database.tip.tipsComment.TipsComment
 import com.anji.babydiary.database.tip.tipsComment.TipsCommentWithUser
 import com.anji.babydiary.databinding.CommentListItemBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import kotlinx.coroutines.*
 
-class TipsCommentListAdapter(val activity:Activity): ListAdapter<TipsCommentWithUser, TipsCommentListAdapter.ViewHolder>(TipsCommentListDiffCallback())  {
+class TipsCommentListAdapter(val activity:Activity, val lifecycleOwner: LifecycleOwner): ListAdapter<TipsComment, TipsCommentListAdapter.ViewHolder>(TipsCommentListDiffCallback())  {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)!!
         val res = holder.itemView.context.resources
-        holder.bind(item, activity)
+        holder.bind(item, activity, lifecycleOwner)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,19 +39,48 @@ class TipsCommentListAdapter(val activity:Activity): ListAdapter<TipsCommentWith
 
     class ViewHolder private constructor(val binding: CommentListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind (item:TipsCommentWithUser, activity:Activity) {
+        fun bind (item:TipsComment, activity:Activity, lifecycleOwner: LifecycleOwner) {
             //binding.idx = item
+            binding.commentText.text = item.commentText.toString()
+
+            val profileDatabase = ProfileDatabase.getInstance(activity.applicationContext).database
+            val job = Job()
+            val uiScope = CoroutineScope(Dispatchers.Main + job)
+            val profileData = MutableLiveData<Profiles>()
+
+            profileData.observe(lifecycleOwner, Observer {
+                Log.e("profileData","====================================================")
+                Log.e("profileData","${it}")
+                Log.e("profileData","====================================================")
+
+                binding.userId.text = "${it.name}"
+
+                if(it.imgTmp != "") {
+                    Glide.with(binding.root.context)
+                        .load(activity.resources.getIdentifier(it.imgTmp, "drawable", activity.packageName))
+                        .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
+                        .into(binding.userIcon)
+                    binding.executePendingBindings()
+                }else {
+                    Glide.with(binding.root.context)
+                        .load(it.img)
+                        .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
+                        .into(binding.userIcon)
+                    binding.executePendingBindings()
+                }
+            })
+
+            uiScope.launch {
+                setData(profileData, profileDatabase, item)
+            }
+
+            /*
             binding.userId.text = "${item.prof!!.name}"
-            binding.commentText.text = item.tips!!.commentText.toString()
-
-
             if (item.prof!!.imgTmp != "") {
                 Glide.with(binding.root.context)
                     .load(  activity.resources.getIdentifier(item.prof!!.imgTmp, "drawable", activity.packageName))
                     .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
                     .into(binding.userIcon)
-
-
 
             }else {
                 Glide.with(binding.root.context)
@@ -50,17 +89,22 @@ class TipsCommentListAdapter(val activity:Activity): ListAdapter<TipsCommentWith
                     .into(binding.userIcon)
             }
 
-
-            Glide.with(binding.root.context)
-                .load(R.drawable.sample_1)
-                .into(binding.userIcon)
-
-
-            //binding.mainFeedText.text = item.text.toString()
+             */
 
 
             binding.executePendingBindings()
 
+        }
+
+
+        suspend fun setData(
+            profileData: MutableLiveData<Profiles>,
+            profileDatabase: ProfileDao,
+            item: TipsComment
+        ) {
+            withContext(Dispatchers.IO) {
+                profileData.postValue(profileDatabase.selectProfileData(item.userIdx))
+            }
         }
 
 
@@ -79,12 +123,12 @@ class TipsCommentListAdapter(val activity:Activity): ListAdapter<TipsCommentWith
 }
 
 
-class TipsCommentListDiffCallback: DiffUtil.ItemCallback<TipsCommentWithUser>() {
-    override fun areItemsTheSame(oldItem: TipsCommentWithUser, newItem: TipsCommentWithUser): Boolean {
-        return oldItem.tips!!.idx == newItem.tips!!.idx
+class TipsCommentListDiffCallback: DiffUtil.ItemCallback<TipsComment>() {
+    override fun areItemsTheSame(oldItem: TipsComment, newItem: TipsComment): Boolean {
+        return oldItem.idx == newItem.idx
     }
 
-    override fun areContentsTheSame(oldItem: TipsCommentWithUser, newItem: TipsCommentWithUser): Boolean {
+    override fun areContentsTheSame(oldItem: TipsComment, newItem: TipsComment): Boolean {
         return oldItem == newItem
     }
 
@@ -94,8 +138,8 @@ sealed class DataItem {
 
     abstract val id:Long
 
-    data class ResultItem(val gameResult:TipsCommentWithUser):DataItem() {
-        override val id = gameResult.tips!!.idx
+    data class ResultItem(val gameResult:TipsComment):DataItem() {
+        override val id = gameResult.idx
     }
 
     object Header:DataItem() {

@@ -16,6 +16,7 @@ import kotlinx.coroutines.*
 class CommentViewModel(application: Application, val database:CommentsDao, val profileDatabase: ProfileDao, val idx:Long) : AndroidViewModel(application) {
 
     val totalList = database.selectAllByFeedIdx(idx)
+    //val totalList = database.selectAllByFeedIdxWithProfile(idx)
 
     val job = Job()
     val uiScope = CoroutineScope(Dispatchers.Main + job)

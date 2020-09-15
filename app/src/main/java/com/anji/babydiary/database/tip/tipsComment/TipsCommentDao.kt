@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Transaction
 
 
 @Dao
@@ -17,6 +18,11 @@ interface TipsCommentDao {
 
 
     @Query("SELECT * FROM tbl_tip_comment WHERE tip_idx = :tipPk ")
-    fun selectByTipIdx(tipPk:Long):LiveData<List<TipsCommentWithUser>>
+    fun selectByTipOnlyIdx(tipPk:Long):LiveData<List<TipsComment>>
 
+/*
+    @Transaction
+    @Query("SELECT * FROM tbl_tip_comment WHERE tip_idx = :tipPk ")
+    fun selectByTipIdx(tipPk:Long):LiveData<List<TipsCommentWithUser>>
+*/
 }

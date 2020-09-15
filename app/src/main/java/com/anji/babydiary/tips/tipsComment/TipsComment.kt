@@ -42,7 +42,7 @@ class TipsComment : Fragment() {
         binding.vm = viewModel
 
 
-        val adapter = TipsCommentListAdapter(requireActivity())
+        val adapter = TipsCommentListAdapter(requireActivity(), viewLifecycleOwner)
         binding.commentList.adapter = adapter
 
         viewModel.dataList.observe(viewLifecycleOwner, Observer {

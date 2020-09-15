@@ -13,7 +13,7 @@ import kotlinx.coroutines.*
 
 class TipsCommentViewModel(val database:TipsCommentDao, val tipIdx:Long,  application: Application) : AndroidViewModel(application) {
 
-    val dataList = database.selectByTipIdx(tipIdx)
+    val dataList = database.selectByTipOnlyIdx(tipIdx)
     val profileDatabase = ProfileDatabase.getInstance(application).database
 
     val dataProfile = profileDatabase.selectProfile(MyShare.prefs.getLong("idx",0))

@@ -45,19 +45,12 @@ class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClick
             binding.likeCnt.text = item.feed!!.likeCnt.toString()
             binding.mainFeedText.text = item.feed!!.title.toString()
 
-
-            //resources.getIdentifier(it.imgTmp, "drawable", requireActivity().packageName)
-
-
             if (item.feed!!.imgTmpDir != "") {
                 Glide.with(binding.root.context)
                     .load(  activity.resources.getIdentifier(item.feed!!.imgTmpDir, "drawable", activity.packageName))
                     //.apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
                     .into(binding.feedImg)
-
                 Utils.setFeedListImg(binding.feedImg)
-
-
             }else {
                 Glide.with(binding.root.context)
                     .load(item.feed!!.imgDir)

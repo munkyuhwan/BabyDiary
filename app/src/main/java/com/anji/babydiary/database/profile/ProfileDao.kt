@@ -11,6 +11,10 @@ interface ProfileDao{
     fun insert(profile:Profiles)
 
     @Query("SELECT * FROM tbl_profile ")
+    fun selectAllTest():List<Profiles>
+
+
+    @Query("SELECT * FROM tbl_profile ")
     fun selectAll():LiveData<List<Profiles>>
 
     @Query("SELECT * FROM tbl_profile ")

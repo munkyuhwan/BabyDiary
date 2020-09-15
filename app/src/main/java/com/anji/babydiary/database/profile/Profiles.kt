@@ -1,7 +1,11 @@
 package com.anji.babydiary.database.profile
 
 import androidx.room.*
+import com.anji.babydiary.database.chatting.Chatting
+import com.anji.babydiary.database.comments.Comments
 import com.anji.babydiary.database.mainFeed.MainFeed
+import com.anji.babydiary.database.tip.Tips
+import com.anji.babydiary.database.tip.tipsComment.TipsComment
 
 @Entity(tableName = "tbl_profile")
 data class Profiles (

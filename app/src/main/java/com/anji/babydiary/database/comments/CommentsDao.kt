@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Transaction
 
 
 @Dao
@@ -14,6 +15,9 @@ interface CommentsDao {
 
     @Query("SELECT * FROM tbl_comments WHERE feed_idx= :feedIdx")
     fun selectAllByFeedIdx(feedIdx:Long):LiveData<List<Comments>>
+
+    //@Query("SELECT * FROM tbl_comments WHERE feed_idx= :feedIdx")
+    //fun selectAllByFeedIdxWithProfile(feedIdx:Long):LiveData<List<CommentWithProfile>>
 
 
 

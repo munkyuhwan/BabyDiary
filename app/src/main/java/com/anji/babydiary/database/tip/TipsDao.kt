@@ -20,6 +20,7 @@ interface TipsDao {
     fun selectWithUser():LiveData<List<TipWithUser>>
 
 
+    @Transaction
     @Query("SELECT * FROM tbl_tips WHERE tip_category= :cat")
     fun selectByCategory(cat:String):LiveData<List<TipWithUser>>
 

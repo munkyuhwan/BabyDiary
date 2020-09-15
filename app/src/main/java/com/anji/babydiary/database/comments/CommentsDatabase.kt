@@ -6,8 +6,9 @@ import androidx.room.Entity
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.anji.babydiary.database.dailyCheck.DailyCheckDatabase
+import com.anji.babydiary.database.profile.Profiles
 
-@Database(entities = [Comments::class], version = 2, exportSchema = false)
+@Database(entities = [Comments::class], version = 3, exportSchema = false)
 abstract class CommentsDatabase:RoomDatabase()  {
 
     abstract val database:CommentsDao
