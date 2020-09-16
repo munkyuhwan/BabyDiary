@@ -53,12 +53,16 @@ class FeedDetail : Fragment() {
 
         viewModel.select.observe(viewLifecycleOwner, Observer {
             it?.let {
-                //binding.writtenDate.text = Utils.getDate(it.date, "YYYY. MM. dd")
-                binding.writtenDate.text = "${it.year} ${String.format("%02d",it.month)} ${String.format("%02d",it.date)}"
 
                 Log.e("spouser","==================================================================================")
-                Log.e("spouser","tospouser: ${it.toSpouser}")
+                Log.e("spouser","tospouser: ${it}")
                 Log.e("spouser","==================================================================================")
+
+                viewModel.writerIdx = it.userIdx
+
+
+                //binding.writtenDate.text = Utils.getDate(it.date, "YYYY. MM. dd")
+                binding.writtenDate.text = "${it.year} ${String.format("%02d",it.month)} ${String.format("%02d",it.date)}"
                 binding.feedText.text = it.title
                 binding.toSpouser.text = it.toSpouser
                 binding.babyWeight.text = it.weight.toString()
@@ -102,8 +106,11 @@ class FeedDetail : Fragment() {
 
         binding.dailycheckBtn.setOnClickListener {
             it?.let {
+                Log.e("dddd","==================================================")
+                Log.e("dddd","${viewModel.writerProfile.value}")
+                Log.e("dddd","==================================================")
 
-                findNavController().navigate(FeedDetailDirections.actionFeedDetailToChattingRoom2( viewModel.writerProfile.value!!.idx ) )
+                findNavController().navigate(FeedDetailDirections.actionFeedDetailToChattingRoom2( viewModel.writerIdx ) )
 
             }
         }

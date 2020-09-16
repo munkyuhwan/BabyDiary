@@ -2,25 +2,16 @@ package com.anji.babydiary.mainFeed.feedList
 
 import android.app.Activity
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.anji.babydiary.R
-import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.common.MyShare.MyShare
-import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.likes.Likes
 import com.anji.babydiary.database.likes.LikesDao
-import com.anji.babydiary.database.mainFeed.FeedWithUser
 import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.database.mainFeed.MainFeedDAO
 import com.anji.babydiary.database.profile.ProfileDao
-import com.anji.babydiary.database.profile.Profiles
-import com.anji.babydiary.gnb.GNBSelect
 import kotlinx.coroutines.*
-import timber.log.Timber
 
 class FeedListViewModel(
     val mainFeedDAO: MainFeedDAO,
@@ -33,7 +24,7 @@ class FeedListViewModel(
     val typeArea:String = "area"
     val typeAge:String = "age"
 
-    var allFeeds = mainFeedDAO.selectWithProfileMain()
+    var allFeeds = mainFeedDAO.selectAll()
 
     var profileData = profile.selectProfile(MyShare.prefs.getLong("idx", 0L))
 
@@ -160,15 +151,15 @@ class FeedListViewModel(
 
 
 class FeedClickListener(val clickListener:(resultId:Long)->Unit ) {
-    fun onClick(result:FeedWithUser) = clickListener(result.feed!!.idx)
+    fun onClick(result:MainFeed) = clickListener(result.idx)
 }
 
 class MemberClickListener(val clickListener:(resultId:Long)->Unit ) {
-    fun onClick(result:FeedWithUser) = clickListener(result.userProfile!!.idx)
+    fun onClick(result:MainFeed) = clickListener(result.idx)
 }
 
 class FeedCommentClickListener(val commentClickListener:(resultId:Long)->Unit) {
-    fun onCommentClick(result:FeedWithUser) = commentClickListener(result.feed!!.idx)
+    fun onCommentClick(result:MainFeed) = commentClickListener(result.idx)
 }
 
 

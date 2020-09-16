@@ -47,7 +47,7 @@ class TipListFragment : Fragment() {
                     findNavController().navigate(TipListFragmentDirections.actionTipListFragmentToTipsComment(it))
                 },
 
-            requireActivity())
+            requireActivity(), viewLifecycleOwner)
         binding.tipList.adapter = adapter
 
         binding.lifecycleOwner = viewLifecycleOwner

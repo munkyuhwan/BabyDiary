@@ -2,7 +2,6 @@ package com.anji.babydiary.database.profile
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.anji.babydiary.database.mainFeed.FeedWithUser
 
 @Dao
 interface ProfileDao{
@@ -12,7 +11,6 @@ interface ProfileDao{
 
     @Query("SELECT * FROM tbl_profile ")
     fun selectAllTest():List<Profiles>
-
 
     @Query("SELECT * FROM tbl_profile ")
     fun selectAll():LiveData<List<Profiles>>
@@ -37,6 +35,7 @@ interface ProfileDao{
 
     @Query("UPDATE tbl_profile SET profile_img= :img, name= :name, pass= :pass, introduce= :introduce  WHERE idx= :pk")
     fun updateQuery(img:String, name:String, pass:String, introduce:String, pk:Long)
+
     @Update
     fun update(profile:Profiles)
 

@@ -40,10 +40,8 @@ class MainActivity : BaseActivity() {
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
 
-
         initUserData()
         userData?.observe(this, androidx.lifecycle.Observer {
-
 
             if (it.size <= 0) {
                 initializeData()

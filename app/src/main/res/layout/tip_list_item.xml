@@ -11,8 +11,8 @@
             name="vm"
             type="com.anji.babydiary.tips.tipsList.TipListViewModel" />
         <variable
-            name="tipWithUserDatabase"
-            type="com.anji.babydiary.database.tip.TipWithUser" />
+            name="tips"
+            type="com.anji.babydiary.database.tip.Tips" />
 
         <variable
             name="clickListener"
@@ -69,21 +69,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tip_icon" />
 
-
         <Button
             android:id="@+id/button"
             style="@style/LikeButton"
             android:layout_marginTop="15dp"
             android:width="14sp"
             android:height="14sp"
-            android:onClick="@{() -> likeClickListener.onLikeClick(tipWithUserDatabase, tipLikeCnt.getText() )}"
+            android:onClick="@{() -> likeClickListener.onLikeClick(tips, tipLikeCnt.getText() )}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tip_img" />
 
         <Button
             android:id="@+id/button2"
             style="@style/CommentButton"
-            android:onClick="@{() -> commentClickListener.onCommentClick(tipWithUserDatabase)}"
+            android:onClick="@{() -> commentClickListener.onCommentClick(tips)}"
             android:layout_marginStart="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/button"
             app:layout_constraintStart_toEndOf="@+id/button"

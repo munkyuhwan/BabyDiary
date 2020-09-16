@@ -1,15 +1,20 @@
 package com.anji.babydiary.mainFeed.feedList.listAdapter
 
-import android.R
 import android.app.Activity
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.anji.babydiary.common.Utils
-import com.anji.babydiary.database.mainFeed.FeedWithUser
+import com.anji.babydiary.database.comments.Comments
+import com.anji.babydiary.database.mainFeed.MainFeed
+import com.anji.babydiary.database.profile.ProfileDao
+import com.anji.babydiary.database.profile.ProfileDatabase
+import com.anji.babydiary.database.profile.Profiles
 import com.anji.babydiary.databinding.MainFeedListItemBinding
 import com.anji.babydiary.mainFeed.feedList.FeedClickListener
 import com.anji.babydiary.mainFeed.feedList.FeedCommentClickListener
@@ -19,15 +24,15 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.google.android.material.shape.CornerFamily
+import kotlinx.coroutines.*
 
 
-class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClickListener:FeedCommentClickListener, val memberClickListener:MemberClickListener, val feedListViewModel: FeedListViewModel, val activity:Activity):ListAdapter<FeedWithUser, MainFeedListAdapter.ViewHolder>(ResultListDiffCallback()) {
+class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClickListener:FeedCommentClickListener, val memberClickListener:MemberClickListener, val feedListViewModel: FeedListViewModel, val activity:Activity, val lifecycleOwner: LifecycleOwner):ListAdapter<MainFeed, MainFeedListAdapter.ViewHolder>(ResultListDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)!!
         val res = holder.itemView.context.resources
-        holder.bind(activity, item, feedListViewModel, clickListener, commentClickListener, memberClickListener)
+        holder.bind(activity, item, feedListViewModel, clickListener, commentClickListener, memberClickListener, lifecycleOwner)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,48 +41,78 @@ class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClick
 
     class ViewHolder private constructor(val binding: MainFeedListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind (activity: Activity, item: FeedWithUser, feedListViewModel: FeedListViewModel, clickListener: FeedClickListener, commentClickListener:FeedCommentClickListener, memberClickListener: MemberClickListener) {
+        fun bind (activity: Activity, item: MainFeed, feedListViewModel: FeedListViewModel, clickListener: FeedClickListener, commentClickListener:FeedCommentClickListener, memberClickListener: MemberClickListener, lifecycleOwner: LifecycleOwner) {
             //binding.idx = item
 
-            binding.mainFeedWithUser = item
+            binding.mainFeed = item
             binding.memberClickListener = memberClickListener
             binding.viewModel = feedListViewModel
-            binding.likeCnt.text = item.feed!!.likeCnt.toString()
-            binding.mainFeedText.text = item.feed!!.title.toString()
+            binding.likeCnt.text = item.likeCnt.toString()
+            binding.mainFeedText.text = item.title.toString()
 
-            if (item.feed!!.imgTmpDir != "") {
+            if (item.imgTmpDir != "") {
                 Glide.with(binding.root.context)
-                    .load(  activity.resources.getIdentifier(item.feed!!.imgTmpDir, "drawable", activity.packageName))
+                    .load(  activity.resources.getIdentifier(item.imgTmpDir, "drawable", activity.packageName))
                     //.apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
                     .into(binding.feedImg)
                 Utils.setFeedListImg(binding.feedImg)
             }else {
                 Glide.with(binding.root.context)
-                    .load(item.feed!!.imgDir)
+                    .load(item.imgDir)
                     //.apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
                     .into(binding.feedImg)
                 Utils.setFeedListImg(binding.feedImg)
             }
 
-            binding.userId.text = item.userProfile!!.name.toString()
 
-            if (item.userProfile!!.imgTmp != "") {
-                Glide.with(binding.root.context)
-                    .load(activity.resources.getIdentifier(item.userProfile!!.imgTmp, "drawable", activity.packageName))
-                    .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
-                    .into(binding.userIcon)
-            }else {
-                Glide.with(binding.root.context)
-                    .load(item.userProfile!!.img)
-                    .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
-                    .into(binding.userIcon)
+            val profileDatabase = ProfileDatabase.getInstance(activity.applicationContext).database
+            val job = Job()
+            val uiScope = CoroutineScope(Dispatchers.Main + job)
+            val profileData = MutableLiveData<Profiles>()
+
+            profileData.observe(lifecycleOwner, Observer {
+
+                binding.userId.text = it.name.toString()
+                if (it.imgTmp != "") {
+                    Glide.with(binding.root.context)
+                        .load(activity.resources.getIdentifier(it.imgTmp, "drawable", activity.packageName))
+                        .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
+                        .into(binding.userIcon)
+                }else {
+                    Glide.with(binding.root.context)
+                        .load(it.img)
+                        .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
+                        .into(binding.userIcon)
+                }
+
+
+            })
+
+            uiScope.launch {
+                setData(profileData, profileDatabase, item)
             }
+
+
 
             binding.executePendingBindings()
             binding.clickListener = clickListener
             binding.commentClickListener = commentClickListener
 
         }
+
+
+        suspend fun setData(
+            profileData: MutableLiveData<Profiles>,
+            profileDatabase: ProfileDao,
+            item: MainFeed
+        ) {
+            withContext(Dispatchers.IO) {
+                profileData.postValue(profileDatabase.selectProfileData(item.userIdx))
+            }
+        }
+
+
+
 
 
         companion object {
@@ -95,12 +130,12 @@ class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClick
 }
 
 
-class ResultListDiffCallback: DiffUtil.ItemCallback<FeedWithUser>() {
-    override fun areItemsTheSame(oldItem: FeedWithUser, newItem: FeedWithUser): Boolean {
-        return oldItem.feed!!.idx == newItem.feed!!.idx
+class ResultListDiffCallback: DiffUtil.ItemCallback<MainFeed>() {
+    override fun areItemsTheSame(oldItem: MainFeed, newItem: MainFeed): Boolean {
+        return oldItem.idx == newItem.idx
     }
 
-    override fun areContentsTheSame(oldItem: FeedWithUser, newItem: FeedWithUser): Boolean {
+    override fun areContentsTheSame(oldItem: MainFeed, newItem: MainFeed): Boolean {
         return oldItem == newItem
     }
 
@@ -110,8 +145,8 @@ sealed class DataItem {
 
     abstract val id:Long
 
-    data class ResultItem(val gameResult:FeedWithUser):DataItem() {
-        override val id = gameResult.feed!!.idx
+    data class ResultItem(val gameResult:MainFeed):DataItem() {
+        override val id = gameResult.idx
     }
 
     object Header:DataItem() {

@@ -10,7 +10,6 @@ import com.anji.babydiary.common.MyShare.MyShare
 import com.anji.babydiary.database.profile.ProfileDao
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.database.profile.Profiles
-import com.anji.babydiary.database.tip.TipWithUser
 import com.anji.babydiary.database.tip.Tips
 
 import com.anji.babydiary.database.tip.TipsDao
@@ -156,15 +155,15 @@ class TipListViewModel(
 }
 
 class TipClickListener(val clickListener:(resultId:Long)->Unit ) {
-    fun onClick(result: TipWithUser) = clickListener(result.tips!!.idx)
+    fun onClick(result: Tips) = clickListener(result.idx)
 }
 
 class TipLikeClicked(val likeClickListener:(resultId:Long, cnt:CharSequence)->Unit) {
-    fun onLikeClick(result:TipWithUser, cnt:CharSequence) = likeClickListener(result.tips!!.idx, cnt)
+    fun onLikeClick(result:Tips, cnt:CharSequence) = likeClickListener(result.idx, cnt)
 }
 
 class TipCommentClicked(val commentClickListener:(resultId:Long)->Unit) {
-    fun onCommentClick(result:TipWithUser) = commentClickListener(result.tips!!.idx)
+    fun onCommentClick(result:Tips) = commentClickListener(result.idx)
 }
 
 

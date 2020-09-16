@@ -1,5 +1,7 @@
 package com.anji.babydiary.common
 
+import androidx.lifecycle.LifecycleOwner
+
 object CommonCode {
 
     val PERMISSION_CODE = 9898

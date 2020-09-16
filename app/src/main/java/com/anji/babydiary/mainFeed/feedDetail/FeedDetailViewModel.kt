@@ -19,28 +19,33 @@ import okhttp3.Dispatcher
 
 class FeedDetailViewModel(val idx:Long, val database:MainFeedDAO, val likeDatabase:LikesDao, val profileDatabase: ProfileDao) : ViewModel() {
 
-    val select = database.selectSingle(idx)
+    var select = database.selectSingle(idx)
+
 
     val likeCount = likeDatabase.selectAllByFeedIdx(idx)
     private val viewModelJob = Job()
     val uiScope = CoroutineScope( Dispatchers.Main + viewModelJob)
     var writerProfile = MutableLiveData<Profiles>()
 
+    var writerIdx:Long = 0L
+
     init {
 
     }
-
-    fun getWriterProfile() {
+/*
+    fun startSelectWriteProfile() {
         uiScope.launch {
             selectWriterProfile()
         }
     }
+
+
     suspend fun selectWriterProfile() {
         withContext(Dispatchers.IO) {
             writerProfile.postValue( profileDatabase.selectProfile(select.value!!.userIdx).value )
         }
     }
-
+*/
 
     fun onLikeButtonClicked(likeCnt:CharSequence) {
         var like:Likes = Likes()

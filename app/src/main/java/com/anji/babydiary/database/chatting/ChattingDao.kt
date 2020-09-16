@@ -27,7 +27,7 @@ interface ChattingDao {
 
     @Transaction
     @Query ("SELECT * FROM tbl_chatting WHERE user_idx_one= :receiver ORDER BY idx ASC")
-    fun selectAllWthUser(receiver:Long):LiveData<List<ChattingAndUser>>
+    fun selectAllWthUser(receiver:Long):LiveData<List<Chatting>>
 
 
 

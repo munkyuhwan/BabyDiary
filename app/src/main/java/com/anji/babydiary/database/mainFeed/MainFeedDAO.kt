@@ -36,8 +36,10 @@ interface MainFeedDAO{
     fun deleteAll()
 
 
+    @Query("SELECT * FROM tbl_main_feed WHERE feed_type = :type")
+    fun selectAllByType(type:String): LiveData<List<MainFeed>>
 
-
+    /*
     @Transaction
     @Query("SELECT * FROM tbl_main_feed")
     fun selectWithProfile(): LiveData< List<FeedWithUser> >
@@ -57,6 +59,8 @@ interface MainFeedDAO{
     @Transaction
     @Query("SELECT * FROM tbl_main_feed WHERE feed_type = :type")
     fun selectAllByType(type:String): LiveData<List<FeedWithUser>>
+
+     */
 
 
 

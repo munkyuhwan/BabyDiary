@@ -1,7 +1,6 @@
 package com.anji.babydiary.tips.tipsComment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.anji.babydiary.R
+import com.anji.babydiary.common.BaseFragment
 import com.anji.babydiary.database.tip.tipsComment.TipsCommentDatabase
 import com.anji.babydiary.databinding.TipsCommentFragmentBinding
 import com.bumptech.glide.Glide
@@ -18,7 +18,6 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 
 class TipsComment : Fragment() {
-
 
     private lateinit var viewModel: TipsCommentViewModel
 
@@ -46,13 +45,9 @@ class TipsComment : Fragment() {
         binding.commentList.adapter = adapter
 
         viewModel.dataList.observe(viewLifecycleOwner, Observer {
-            Log.e("comments","======================================================================")
-            Log.e("comments","${it}")
-            Log.e("comments","======================================================================")
             it?.let {
                 adapter.submitList(it)
             }
-
         })
 
         viewModel.dataProfile.observe(viewLifecycleOwner, Observer {
@@ -77,3 +72,5 @@ class TipsComment : Fragment() {
 
 
 }
+
+

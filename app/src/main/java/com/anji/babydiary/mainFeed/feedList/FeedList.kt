@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
+import com.anji.babydiary.common.BaseFragment
 import com.anji.babydiary.database.likes.LikesDatabase
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
 import com.anji.babydiary.database.profile.ProfileDatabase
@@ -22,7 +23,7 @@ import com.anji.babydiary.mainFeed.feedList.listAdapter.MainFeedListAdapter
 import com.anji.babydiary.myPage.MyPage
 import com.anji.babydiary.myPage.myFeed.MyFeed
 
-class FeedList : Fragment() {
+class FeedList : BaseFragment() {
 
     private lateinit var viewModel: FeedListViewModel
     private lateinit var viewModelFactory: FeedListViewModelFactory
@@ -32,6 +33,7 @@ class FeedList : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
 
         val binding = DataBindingUtil.inflate<FeedListFragmentBinding>(inflater, R.layout.feed_list_fragment, container, false)
         //viewModel = ViewModelProviders.of(this).get(FeedListViewModel::class.java)
@@ -68,7 +70,7 @@ class FeedList : Fragment() {
                 }
             },
             viewModel,
-        requireActivity())
+        requireActivity(), viewLifecycleOwner)
         binding.feedList.adapter = adapter
 
         viewModel.allFeeds.observe(viewLifecycleOwner, Observer {
@@ -89,6 +91,7 @@ class FeedList : Fragment() {
         })
 
 
+        //checkProfile(application)
 
         return binding.root
     }

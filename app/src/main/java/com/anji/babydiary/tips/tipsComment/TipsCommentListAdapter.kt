@@ -10,14 +10,10 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.anji.babydiary.R
-import com.anji.babydiary.common.Utils
-import com.anji.babydiary.database.comments.Comments
 import com.anji.babydiary.database.profile.ProfileDao
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.database.profile.Profiles
 import com.anji.babydiary.database.tip.tipsComment.TipsComment
-import com.anji.babydiary.database.tip.tipsComment.TipsCommentWithUser
 import com.anji.babydiary.databinding.CommentListItemBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -38,7 +34,6 @@ class TipsCommentListAdapter(val activity:Activity, val lifecycleOwner: Lifecycl
     }
 
     class ViewHolder private constructor(val binding: CommentListItemBinding) : RecyclerView.ViewHolder(binding.root) {
-
         fun bind (item:TipsComment, activity:Activity, lifecycleOwner: LifecycleOwner) {
             //binding.idx = item
             binding.commentText.text = item.commentText.toString()
@@ -73,24 +68,6 @@ class TipsCommentListAdapter(val activity:Activity, val lifecycleOwner: Lifecycl
             uiScope.launch {
                 setData(profileData, profileDatabase, item)
             }
-
-            /*
-            binding.userId.text = "${item.prof!!.name}"
-            if (item.prof!!.imgTmp != "") {
-                Glide.with(binding.root.context)
-                    .load(  activity.resources.getIdentifier(item.prof!!.imgTmp, "drawable", activity.packageName))
-                    .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
-                    .into(binding.userIcon)
-
-            }else {
-                Glide.with(binding.root.context)
-                    .load(item.prof!!.img)
-                    .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
-                    .into(binding.userIcon)
-            }
-
-             */
-
 
             binding.executePendingBindings()
 
