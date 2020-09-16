@@ -17,34 +17,72 @@
     android:layout_height="wrap_content"
     tools:context=".myPage.myFeedWrite.MyFeedWrite">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/myFeedImage"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/myFeedImageLayout"
         android:layout_width="match_parent"
         android:layout_height="325sp"
-        android:layout_marginTop="120sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout11">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/myFeedImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/testTextBox"
+            android:layout_width="200sp"
+            android:layout_height="56sp"
+            android:layout_marginTop="150dp"
+            android:background="@color/mainThemeOrange"
+            android:textColor="#000000"
+            android:textSize="40sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/myFeedImageLayout" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <EditText
+        android:id="@+id/textInsertField"
+        style="@style/InputStyle"
+        android:textColor="@color/calendarTextColor"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myFeedImageLayout" />
+
+
+
+
 
     <ImageButton
         android:id="@+id/add_btn"
         style="@style/editBtn"
-        android:layout_width="24sp"
-        android:layout_height="24sp"
+        android:layout_width="16dp"
+        android:layout_height="17dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/myFeedImage"
-        app:layout_constraintEnd_toEndOf="@+id/myFeedImage" />
+        app:layout_constraintBottom_toBottomOf="@+id/myFeedImageLayout"
+        app:layout_constraintEnd_toEndOf="@+id/myFeedImageLayout" />
 
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="20sp"
         android:paddingRight="20sp"
-        android:layout_marginBottom="57sp"
-        app:layout_constraintTop_toBottomOf="@+id/myFeedImage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInsertField">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -61,9 +99,9 @@
                 <EditText
                     android:id="@+id/title_input"
                     style="@style/InputStyle"
-                    android:textColor="@color/calendarTextColor"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:textColor="@color/calendarTextColor" />
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -113,10 +151,10 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/heightInputEditText"
+                        style="@style/infoInputStyle"
                         android:layout_width="30sp"
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
-                        style="@style/infoInputStyle"
                         app:layout_constraintBottom_toBottomOf="@+id/height_label"
                         app:layout_constraintStart_toEndOf="@+id/height_label"
                         app:layout_constraintTop_toTopOf="@+id/height_label" />
@@ -144,10 +182,10 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/weightInputEditText"
+                        style="@style/infoInputStyle"
                         android:layout_width="30sp"
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
-                        style="@style/infoInputStyle"
                         app:layout_constraintBottom_toBottomOf="@+id/weight_label"
                         app:layout_constraintStart_toEndOf="@+id/weight_label"
                         app:layout_constraintTop_toTopOf="@+id/weight_label" />
@@ -175,10 +213,10 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/headInputEditText"
+                        style="@style/infoInputStyle"
                         android:layout_width="30sp"
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
-                        style="@style/infoInputStyle"
                         app:layout_constraintBottom_toBottomOf="@+id/head_size_label"
                         app:layout_constraintStart_toEndOf="@+id/head_size_label"
                         app:layout_constraintTop_toTopOf="@+id/head_size_label" />
@@ -232,10 +270,10 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/toWife"
                     style="@style/InputStyle"
-                    android:textColor="@color/calendarTextColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:textColor="@color/calendarTextColor"
                     android:textSize="13sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -280,12 +318,13 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout11"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/main_feed_actionbar"

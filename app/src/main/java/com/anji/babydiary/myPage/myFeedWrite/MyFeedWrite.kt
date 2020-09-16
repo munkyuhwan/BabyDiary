@@ -5,27 +5,26 @@ import android.app.Application
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
 import com.anji.babydiary.databinding.MyFeedWriteFragmentBinding
-import com.anji.babydiary.myPage.myFeed.MyFeedDirections
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.nav_mypage_layout.*
 
-class MyFeedWrite : Fragment() {
+class MyFeedWrite : Fragment(), View.OnTouchListener {
 
     private lateinit var viewModel: MyFeedWriteViewModel
     private lateinit var binding:MyFeedWriteFragmentBinding
@@ -75,7 +74,7 @@ class MyFeedWrite : Fragment() {
 
 
         binding.myFeedImage.setOnClickListener{
-            permissionCheck()
+            //permissionCheck()
         }
         binding.addBtn.setOnClickListener{
             permissionCheck()
@@ -94,6 +93,12 @@ class MyFeedWrite : Fragment() {
                 Glide.with(application).load(url).into(binding.myFeedImage)
             }
         })
+
+        binding.textInsertField.doOnTextChanged { text, start, before, count ->
+            binding.testTextBox.text = text
+        }
+
+        binding.testTextBox.setOnTouchListener(this)
 
         return binding.root
     }
@@ -140,6 +145,59 @@ class MyFeedWrite : Fragment() {
             //system OS is < Marshmallow
             pickImageFromGallery();
         }
+    }
+
+    var oldXvalue = 0f
+    var oldYvalue = 0f
+    override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+        val width = (binding.myFeedImageLayout as ViewGroup).width
+        val height = (binding.myFeedImageLayout as ViewGroup).height
+
+
+        if (event!!.action === MotionEvent.ACTION_DOWN) {
+            oldXvalue = event!!.x
+            oldYvalue = event.y
+            //  Log.i("Tag1", "Action Down X" + event.getX() + "," + event.getY());
+            Log.i(
+                "Tag1",
+                "Action Down rX " + event.rawX.toString() + "," + event.rawY
+            )
+        } else if (event!!.action === MotionEvent.ACTION_MOVE) {
+            v!!.x = event!!.rawX - v!!.width/2
+            v.y = event.rawY - (oldYvalue + v.height+(v.height/2))
+            //  Log.i("Tag2", "Action Down " + me.getRawX() + "," + me.getRawY());
+        } else if (event!!.action === MotionEvent.ACTION_UP) {
+            if (v!!.x > width && v.y > height) {
+                v.x = width.toFloat()
+                v.y = height.toFloat()
+            } else if (v.x < 0 && v.y > height) {
+                v.setX(0f)
+                v.y = height.toFloat()
+            } else if (v.x > width && v.y < 0) {
+                v.x = width.toFloat()
+                v.setY(0f)
+            } else if (v.x < 0 && v.y < 0) {
+                v.setX(0f)
+                v.setY(0f)
+            } else if (v.x < 0 || v.x > width) {
+                if (v.x < 0) {
+                    v.setX(0f)
+                    v.y = event!!.rawY - oldYvalue - v.height
+                } else {
+                    v.x = width.toFloat()
+                    v.y = event!!.rawY - oldYvalue - v.height
+                }
+            } else if (v.y < 0 || v.y > height) {
+                if (v.y < 0) {
+                    v.x = event!!.rawX - oldXvalue
+                    v.setY(0f)
+                } else {
+                    v.x = event!!.rawX - oldXvalue
+                    v.y = height.toFloat()
+                }
+            }
+        }
+        return true
     }
 
 
