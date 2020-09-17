@@ -113,15 +113,19 @@
         <item name="android:button">@drawable/bottom_nav_mypage</item>
     </style>
 
-    <style name="InputStyle" >
+    <style name="InputBase">
+        <item name="borderWidth">1sp</item>
+        <item name="android:background">@drawable/bottom_border_layout</item>
+    </style>
+    <style name="InputStyle" parent="InputBase" >
         <item name="android:paddingTop">10sp</item>
         <item name="android:paddingBottom">10sp</item>
         <item name="android:paddingLeft">10sp</item>
         <item name="android:paddingRight">10sp</item>
         <item name="android:layout_marginTop">15sp</item>
-        <item name="borderWidth">1sp</item>
-        <item name="android:background">@drawable/bottom_border_layout</item>
     </style>
+
+
     <style name="infoInputStyle">
         <item name="android:textColor">@color/calendarTextColor</item>
         <item name="android:background">@drawable/info_inptu_background</item>

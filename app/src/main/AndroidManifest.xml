@@ -17,8 +17,9 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:requestLegacyExternalStorage="true"
         android:name="com.anji.babydiary.common.MyShare.MyShare"
->
+        >
         <activity
             android:name=".login.Login"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"

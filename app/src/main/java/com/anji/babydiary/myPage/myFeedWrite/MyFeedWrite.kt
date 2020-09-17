@@ -2,15 +2,18 @@ package com.anji.babydiary.myPage.myFeedWrite
 
 import android.Manifest
 import android.app.Application
+import android.content.ContentResolver
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
@@ -20,6 +23,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.common.CommonCode
+import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
 import com.anji.babydiary.databinding.MyFeedWriteFragmentBinding
 import com.bumptech.glide.Glide
@@ -64,7 +68,11 @@ class MyFeedWrite : Fragment(), View.OnTouchListener {
 
 
         binding.completeButton.setOnClickListener {
-            viewModel.complete(binding.titleInput.text.toString(),  binding.heightInputEditText.text.toString(), binding.weightInputEditText.text.toString(), binding.headInputEditText.text.toString(), binding.selectedAddress.text.toString(), binding.toWife.text.toString() )
+           // permissionCheckForCapture()
+
+            val bitmap = Utils.getScreenShotFromView(binding.myFeedImageLayout)
+            Glide.with(application).load(bitmap).into(binding.myFeedImage)
+            //viewModel.complete(binding.titleInput.text.toString(),  binding.heightInputEditText.text.toString(), binding.weightInputEditText.text.toString(), binding.headInputEditText.text.toString(), binding.selectedAddress.text.toString(), binding.toWife.text.toString() )
         }
 
         binding.backBtn.setOnClickListener {
@@ -94,11 +102,17 @@ class MyFeedWrite : Fragment(), View.OnTouchListener {
             }
         })
 
+        binding.addTextBox.setOnClickListener {
+
+        }
+
+
+        binding.testTextBox.setOnTouchListener(this)
+
+
         binding.textInsertField.doOnTextChanged { text, start, before, count ->
             binding.testTextBox.text = text
         }
-
-        binding.testTextBox.setOnTouchListener(this)
 
         return binding.root
     }
@@ -144,6 +158,30 @@ class MyFeedWrite : Fragment(), View.OnTouchListener {
         else{
             //system OS is < Marshmallow
             pickImageFromGallery();
+        }
+    }
+    fun permissionCheckForCapture() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if (ContextCompat.checkSelfPermission(
+                    application,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ) ==
+                PackageManager.PERMISSION_DENIED){
+                //permission denied
+                val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE);
+                //show popup to request runtime permission
+                requestPermissions(permissions, CommonCode.PERMISSION_CODE);
+            }
+            else{
+                //permission already granted
+                val savedURI = Utils.saveBitmap( Utils.getScreenShotFromView(binding.myFeedImageLayout),  requireActivity().contentResolver)
+                Log.e("savedURI", "savedURI: ${savedURI}")
+            }
+        }
+        else{
+            //system OS is < Marshmallow
+            val savedURI = Utils.saveBitmap( Utils.getScreenShotFromView(binding.myFeedImageLayout),  requireActivity().contentResolver)
+            Log.e("savedURI", "savedURI: ${savedURI}")
         }
     }
 
