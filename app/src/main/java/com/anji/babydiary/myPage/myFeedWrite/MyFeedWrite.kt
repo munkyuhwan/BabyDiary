@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -26,7 +27,7 @@ import com.anji.babydiary.databinding.MyFeedWriteFragmentBinding
 import com.bumptech.glide.Glide
 
 
-class MyFeedWrite : Fragment(), View.OnTouchListener, View.OnFocusChangeListener {
+class MyFeedWrite : Fragment(), View.OnTouchListener {
 
     private lateinit var viewModel: MyFeedWriteViewModel
     private lateinit var binding:MyFeedWriteFragmentBinding
@@ -72,9 +73,13 @@ class MyFeedWrite : Fragment(), View.OnTouchListener, View.OnFocusChangeListener
         binding.completeButton.setOnClickListener {
            // permissionCheckForCapture()
 
+            requireActivity().getExternalFilesDir("${Environment.DIRECTORY_DCIM}/babyDiary")
+
             val bitmap = Utils.getScreenShotFromView(binding.myFeedImageLayout)
-            Glide.with(application).load(bitmap).into(binding.myFeedImage)
-            //viewModel.complete(binding.titleInput.text.toString(),  binding.heightInputEditText.text.toString(), binding.weightInputEditText.text.toString(), binding.headInputEditText.text.toString(), binding.selectedAddress.text.toString(), binding.toWife.text.toString() )
+            viewModel.selectedImage.value = Utils.saveBitmapToJpeg(bitmap!!, "${System.currentTimeMillis()}", requireActivity().getExternalFilesDir("${Environment.DIRECTORY_DCIM}/babyDiary")!! )
+            //Glide.with(application).load(bitmap).into(binding.myFeedImage)
+
+            viewModel.complete(binding.titleInput.text.toString(),  binding.heightInputEditText.text.toString(), binding.weightInputEditText.text.toString(), binding.headInputEditText.text.toString(), binding.selectedAddress.text.toString(), binding.toWife.text.toString() )
         }
 
         binding.backBtn.setOnClickListener {
@@ -103,8 +108,6 @@ class MyFeedWrite : Fragment(), View.OnTouchListener, View.OnFocusChangeListener
              finalScaleX = focusX
              finalScaleY = focusY
              finalScaleFactor = scaleFactor
-             Log.e("scale","x: ${finalScaleX}")
-             Log.e("scale","y: ${finalScaleY}")
          }
 
 
@@ -112,10 +115,8 @@ class MyFeedWrite : Fragment(), View.OnTouchListener, View.OnFocusChangeListener
             it?.let { url ->
                 Glide.with(application).load(url).into(binding.myFeedImage)
                // binding.myFeedImage.setImageURI(url)
-
             }
         })
-
 
         binding.addTextBox.setOnClickListener {
 
@@ -127,12 +128,6 @@ class MyFeedWrite : Fragment(), View.OnTouchListener, View.OnFocusChangeListener
             binding.testTextBox.text = text
         }
 
-        binding.headInputEditText.setOnFocusChangeListener(this)
-        binding.weightInputEditText.setOnFocusChangeListener(this)
-        binding.heightInputEditText.setOnFocusChangeListener(this)
-        binding.textInsertField.setOnFocusChangeListener(this)
-        binding.titleInput.setOnFocusChangeListener(this)
-        binding.toWife.setOnFocusChangeListener(this)
 
         return binding.root
     }
@@ -260,15 +255,6 @@ class MyFeedWrite : Fragment(), View.OnTouchListener, View.OnFocusChangeListener
         return true
     }
 
-    override fun onFocusChange(v: View?, hasFocus: Boolean) {
-
-        Log.e("ffffff","onfocus changed ===================================================")
-        //binding.myFeedImage.scale = finalScaleFactor
-        //binding.myFeedImage.scaleX = finalScaleX
-        //binding.myFeedImage.scaleY = finalScaleY
-       // binding.myFeedImage.setScale(finalScaleFactor, finalScaleX, finalScaleY, false)
-
-    }
 
 
 }

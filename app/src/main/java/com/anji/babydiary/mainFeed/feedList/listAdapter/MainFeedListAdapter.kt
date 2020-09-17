@@ -1,6 +1,7 @@
 package com.anji.babydiary.mainFeed.feedList.listAdapter
 
 import android.app.Activity
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
@@ -25,6 +26,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.coroutines.*
+import java.io.File
 
 
 class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClickListener:FeedCommentClickListener, val memberClickListener:MemberClickListener, val feedListViewModel: FeedListViewModel, val activity:Activity, val lifecycleOwner: LifecycleOwner):ListAdapter<MainFeed, MainFeedListAdapter.ViewHolder>(ResultListDiffCallback()) {
@@ -49,6 +51,11 @@ class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClick
             binding.viewModel = feedListViewModel
             binding.likeCnt.text = item.likeCnt.toString()
             binding.mainFeedText.text = item.title.toString()
+
+
+            Log.e("img","imgdir============================================================")
+            Log.e("img","${item.imgDir}")
+            Log.e("img","imgdir============================================================")
 
             if (item.imgTmpDir != "") {
                 Glide.with(binding.root.context)
