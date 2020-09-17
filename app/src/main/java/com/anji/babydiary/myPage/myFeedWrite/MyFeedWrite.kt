@@ -2,18 +2,15 @@ package com.anji.babydiary.myPage.myFeedWrite
 
 import android.Manifest
 import android.app.Application
-import android.content.ContentResolver
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
@@ -28,11 +25,16 @@ import com.anji.babydiary.database.mainFeed.MainFeedDatabase
 import com.anji.babydiary.databinding.MyFeedWriteFragmentBinding
 import com.bumptech.glide.Glide
 
-class MyFeedWrite : Fragment(), View.OnTouchListener {
+
+class MyFeedWrite : Fragment(), View.OnTouchListener, View.OnFocusChangeListener {
 
     private lateinit var viewModel: MyFeedWriteViewModel
     private lateinit var binding:MyFeedWriteFragmentBinding
     private lateinit var application:Application
+
+    var finalScaleX = 0F
+    var finalScaleY = 0F
+    var finalScaleFactor = 0F
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -96,26 +98,46 @@ class MyFeedWrite : Fragment(), View.OnTouchListener {
             }
         })
 
+
+         binding.myFeedImage.setOnScaleChangeListener { scaleFactor, focusX, focusY ->
+             finalScaleX = focusX
+             finalScaleY = focusY
+             finalScaleFactor = scaleFactor
+             Log.e("scale","x: ${finalScaleX}")
+             Log.e("scale","y: ${finalScaleY}")
+         }
+
+
         viewModel.selectedImage.observe(viewLifecycleOwner, Observer {
             it?.let { url ->
                 Glide.with(application).load(url).into(binding.myFeedImage)
+               // binding.myFeedImage.setImageURI(url)
+
             }
         })
+
 
         binding.addTextBox.setOnClickListener {
 
         }
 
-
         binding.testTextBox.setOnTouchListener(this)
-
 
         binding.textInsertField.doOnTextChanged { text, start, before, count ->
             binding.testTextBox.text = text
         }
 
+        binding.headInputEditText.setOnFocusChangeListener(this)
+        binding.weightInputEditText.setOnFocusChangeListener(this)
+        binding.heightInputEditText.setOnFocusChangeListener(this)
+        binding.textInsertField.setOnFocusChangeListener(this)
+        binding.titleInput.setOnFocusChangeListener(this)
+        binding.toWife.setOnFocusChangeListener(this)
+
         return binding.root
     }
+
+
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -236,6 +258,16 @@ class MyFeedWrite : Fragment(), View.OnTouchListener {
             }
         }
         return true
+    }
+
+    override fun onFocusChange(v: View?, hasFocus: Boolean) {
+
+        Log.e("ffffff","onfocus changed ===================================================")
+        //binding.myFeedImage.scale = finalScaleFactor
+        //binding.myFeedImage.scaleX = finalScaleX
+        //binding.myFeedImage.scaleY = finalScaleY
+       // binding.myFeedImage.setScale(finalScaleFactor, finalScaleX, finalScaleY, false)
+
     }
 
 
