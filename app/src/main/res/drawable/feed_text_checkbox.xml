@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- item android:bottom="-2sp" android:left="-2sp" android:top="-2sp" android:right="2sp">
+        <shape android:shape="rectangle" >
+            <stroke android:color="@color/calendarTextColor" android:width="1sp">
+            </stroke>
+        </shape>
+    </item -->
+    <item>
+        <selector>
+            <item android:state_checked="true" android:drawable="@color/mainThemeOrange" ></item>
+            <item android:state_checked="false" android:drawable="@color/transparency"></item>
+        </selector>
+    </item>
+</layer-list>

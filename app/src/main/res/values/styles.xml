@@ -600,4 +600,21 @@
         <item name="android:textColor">#C7C7C7</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="feedTextStyler">
+        <item name="android:text">T</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:foregroundGravity">center_vertical</item>
+        <item name="android:background">@drawable/feed_text_checkbox</item>
+        <item name="android:button">@color/transparency</item>
+        <item name="android:paddingRight">10sp</item>
+        <item name="android:paddingLeft">10sp</item>
+    </style>
+    <style name="feedTextBold" parent="feedTextStyler">
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

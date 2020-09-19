@@ -4,6 +4,9 @@ import android.Manifest
 import android.app.Application
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -12,6 +15,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
@@ -24,7 +28,9 @@ import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
 import com.anji.babydiary.databinding.MyFeedWriteFragmentBinding
+import com.anji.babydiary.tips.writeTip.tipCategorySpinner.TipCategoryAdapter
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.my_feed_write_fragment.view.*
 
 
 class MyFeedWrite : Fragment(), View.OnTouchListener {
@@ -86,10 +92,8 @@ class MyFeedWrite : Fragment(), View.OnTouchListener {
             findNavController().popBackStack()
         }
 
-
-
         binding.myFeedImage.setOnClickListener{
-            //permissionCheck()
+            permissionCheck()
         }
         binding.addBtn.setOnClickListener{
             permissionCheck()
@@ -122,10 +126,60 @@ class MyFeedWrite : Fragment(), View.OnTouchListener {
 
         }
 
-        binding.testTextBox.setOnTouchListener(this)
+        binding.testTextBoxLayer.setOnTouchListener(this)
+        //binding.testTextBox.setOnTouchListener(this)
 
         binding.textInsertField.doOnTextChanged { text, start, before, count ->
             binding.testTextBox.text = text
+        }
+
+        var spinnerAdapter: MyFeedSpinner = MyFeedSpinner(application, viewModel.textSizes)
+        binding.textSizeSel.adapter = spinnerAdapter
+        binding.textSizeSel.setSelection(10)
+
+        var colorSpinner:MyFeedColorSpinner = MyFeedColorSpinner(application, viewModel.textColor)
+        binding.textColorSel.adapter = colorSpinner
+        binding.textColorSel.setSelection(0)
+
+        binding.textColorSel.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                Log.e("selected color", "${viewModel.textColor[position]}")
+                binding.textColorSel.setBackgroundColor(Color.parseColor(viewModel.textColor[position]))
+                binding.testTextBox.setTextColor(Color.parseColor(viewModel.textColor[position]))
+            }
+
+        }
+
+        binding.textSizeSel.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                //print("onItemSelected position = $position id = $id")
+                Log.e("selectedSize", "${viewModel.textSizes[position]}")
+                binding.testTextBox.textSize = viewModel.textSizes[position].toFloat()
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+
+            }
+        }
+
+
+        binding.isBold.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                binding.testTextBox.setTypeface(null, Typeface.BOLD)
+            }else {
+                binding.testTextBox.setTypeface(null, Typeface.NORMAL)
+            }
         }
 
 
@@ -138,12 +192,11 @@ class MyFeedWrite : Fragment(), View.OnTouchListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CommonCode.IMAGE_PICK_CODE) {
-
             if (data != null) {
                 viewModel.onImageSelected(data)
             }
-
         }
+
 
     }
 

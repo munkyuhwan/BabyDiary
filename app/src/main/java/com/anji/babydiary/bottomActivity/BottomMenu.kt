@@ -24,25 +24,6 @@ import kotlinx.coroutines.selects.select
 
 class BottomMenu : AppCompatActivity() {
 
-
-    /*
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val binding = DataBindingUtil.inflate<ActivityBottomMenuBinding>(inflater, R.layout.activity_bottom_menu, container, false)
-
-        val application = requireNotNull(this.activity).application
-
-        val viewModelFactory = BottomMenuViewModelFactory(application)
-        val viewModel = ViewModelProviders.of(this, viewModelFactory).get(BottomMenuViewModel::class.java)
-
-        return binding.root
-    }
-    */
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

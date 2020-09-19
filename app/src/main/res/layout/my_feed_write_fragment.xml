@@ -29,28 +29,67 @@
             android:id="@+id/myFeedImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/feedDetailDateTextColor"
+            android:src="@drawable/default_feed_img"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/testTextBox"
+        <LinearLayout
+            android:id="@+id/testTextBoxLayer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="200sp"
-            android:minHeight="50sp"
-            android:layout_marginTop="148dp"
-            android:background="@color/mainThemeOrange"
-            android:textColor="#000000"
-            android:textSize="40sp"
+            android:orientation="horizontal"
+            android:layout_marginTop="264dp"
+            android:background="@drawable/textbox_background"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/myFeedImageLayout" />
+            app:layout_constraintTop_toTopOf="@+id/myFeedImageLayout">
 
+            <TextView
+                android:id="@+id/testTextBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="200sp"
+                android:minHeight="50sp"
+                android:textColor="#000000" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="5sp"
+        android:paddingLeft="5sp"
+        android:gravity="center"
+        android:foregroundGravity="center"
+        app:layout_constraintLeft_toLeftOf="@+id/myFeedImageLayout"
+        app:layout_constraintTop_toTopOf="@+id/myFeedImageLayout" >
+
+        <Spinner
+            android:id="@+id/textSizeSel"
+            android:layout_width="25sp"
+            android:layout_height="25sp"
+            android:padding="0sp"
+            android:spinnerMode="dropdown" />
+
+        <CheckBox
+            android:id="@+id/isBold"
+            style="@style/feedTextBold"/>
+
+        <Spinner
+            android:id="@+id/textColorSel"
+            android:layout_width="25sp"
+            android:layout_height="25sp"
+            android:padding="1sp"
+            android:background="@color/mainThemeRed"
+            />
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/textInsertField"

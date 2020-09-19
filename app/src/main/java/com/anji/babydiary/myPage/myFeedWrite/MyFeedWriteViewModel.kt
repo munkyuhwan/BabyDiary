@@ -27,6 +27,35 @@ class MyFeedWriteViewModel(val database:MainFeedDAO, application: Application) :
     var job = Job()
     var uiScope = CoroutineScope(Dispatchers.Main + job)
 
+    var textColor = arrayOf(
+        "BLACK",
+        "BLUE",
+        "RED",
+        "YELLOW",
+        "WHITE",
+        "GREEN"
+    )
+
+    var textSizes = arrayOf(
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "13",
+        "15",
+        "16",
+        "17",
+        "20",
+        "30",
+        "40",
+        "50"
+    )
 
     init {
         isShown.value = View.GONE
