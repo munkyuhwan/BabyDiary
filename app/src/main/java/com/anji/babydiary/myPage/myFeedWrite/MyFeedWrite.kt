@@ -78,6 +78,7 @@ class MyFeedWrite : Fragment(), View.OnTouchListener {
 
         binding.completeButton.setOnClickListener {
            // permissionCheckForCapture()
+            binding.testTextBoxLayer.background = ContextCompat.getDrawable(requireContext(),R.drawable.actionbar_transparent)
 
             requireActivity().getExternalFilesDir("${Environment.DIRECTORY_DCIM}/babyDiary")
 

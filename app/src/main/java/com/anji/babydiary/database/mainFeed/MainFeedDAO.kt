@@ -12,7 +12,7 @@ interface MainFeedDAO{
     @Insert
     fun insert(mainFeed: MainFeed)
 
-    @Query("SELECT * FROM tbl_main_feed")
+    @Query("SELECT * FROM tbl_main_feed ORDER BY idx DESC")
     fun selectAll(): LiveData<List<MainFeed>>
 
     @Query("SELECT * FROM tbl_main_feed WHERE idx= :key")

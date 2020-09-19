@@ -34,7 +34,6 @@ class MyFeedListAdapter(val clickListener:MyFeedClickListener, val activity:Acti
             binding.clickListener = onClickListener
             binding.feedData = item
 
-
             if (item.imgTmpDir != "") {
                 Glide.with(binding.root.context)
                     .load(activity.resources.getIdentifier(item.imgTmpDir, "drawable", activity.packageName))

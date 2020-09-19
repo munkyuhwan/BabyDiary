@@ -94,6 +94,7 @@
     <EditText
         android:id="@+id/textInsertField"
         style="@style/InputStyle"
+        android:inputType="textVisiblePassword|textNoSuggestions"
         android:textColor="@color/calendarTextColor"
         android:layout_width="match_parent"
         android:layout_height="50sp"

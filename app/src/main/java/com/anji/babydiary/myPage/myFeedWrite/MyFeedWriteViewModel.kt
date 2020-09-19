@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.common.MyShare.MyShare
+import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.database.mainFeed.MainFeedDAO
 import com.anji.babydiary.myPage.myFeedWriteLocation.SelectedAddress
@@ -80,11 +81,27 @@ class MyFeedWriteViewModel(val database:MainFeedDAO, application: Application) :
         mainFeed.imgDir = selectedImage.value.toString()
         mainFeed.userIdx = MyShare.prefs.getLong("idx", 0L)
 
+        val year = Utils.getDate(System.currentTimeMillis(), "YYYY")
+        val month = Utils.getDate(System.currentTimeMillis(), "M")
+        val date = Utils.getDate(System.currentTimeMillis(), "d")
+
+        Log.e("date","================================================================")
+        Log.e("date","${year} ${month} ${date}")
+        Log.e("date","================================================================")
+
+
+        mainFeed.year = year!!.toInt()
+        mainFeed.month = month!!.toInt()
+        mainFeed.date = date!!.toInt()
+        mainFeed.timeMilli = System.currentTimeMillis()
+
 
         uiScope.launch {
             insert(mainFeed)
             isDone.value = true
         }
+
+
     }
 
     suspend fun insert(mainFeed:MainFeed) {
