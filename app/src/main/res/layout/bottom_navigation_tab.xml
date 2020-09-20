@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
@@ -13,8 +13,8 @@
         android:background="@drawable/actionbar_transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:paddingTop="20sp"
         app:layout_constraintStart_toStartOf="parent">
-
 
         <RadioGroup
             android:id="@+id/radioGroup"
@@ -26,56 +26,126 @@
             android:foregroundGravity="center|right"
             android:gravity="center|right"
             android:orientation="horizontal"
-            android:paddingLeft="40sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent">
 
             <RadioButton
                 android:id="@+id/tabPopBtn"
                 style="@style/GNBPoplular"
-                android:onClick="@{() -> bottomNav.goEvent()}"
-                android:checked = "@{bottomNav.eventRadioChecked}"
-                android:layout_width="match_parent"
+                android:layout_width="0sp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:foregroundGravity="center"
+                android:checked="@{bottomNav.eventRadioChecked}"
+                android:onClick="@{() -> bottomNav.goEvent()}" />
 
             <RadioButton
                 android:id="@+id/tabShopBtn"
                 style="@style/GNBShopping"
-                android:checked = "@{bottomNav.shoppingRadioChecked}"
-                android:onClick="@{() -> bottomNav.goShopping()}"
-                android:layout_width="match_parent"
+                android:layout_width="0sp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:foregroundGravity="center"
+                android:checked="@{bottomNav.shoppingRadioChecked}"
+                android:onClick="@{() -> bottomNav.goShopping()}" />
 
             <RadioButton
                 android:id="@+id/tabMainBtn"
                 style="@style/GNBMain"
-                android:checked = "@{bottomNav.mainRadioChecked}"
-                android:onClick="@{() -> bottomNav.goMain()}"
-                android:layout_width="match_parent"
+                android:layout_width="0sp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:foregroundGravity="center"
+                android:layout_weight="1"
+                android:checked="@{bottomNav.mainRadioChecked}"
+                android:onClick="@{() -> bottomNav.goMain()}"
+
+            />
 
             <RadioButton
                 android:id="@+id/tabTipBtn"
                 style="@style/GNBTip"
-                android:checked = "@{bottomNav.tipRadioChecked}"
-                android:onClick="@{() -> bottomNav.goTip()}"
-                android:layout_width="match_parent"
+                android:layout_width="0sp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:foregroundGravity="center"
+                android:checked="@{bottomNav.tipRadioChecked}"
+                android:onClick="@{() -> bottomNav.goTip()}" />
 
             <RadioButton
                 android:id="@+id/tabMyPageBtn"
                 style="@style/GNBMyPage"
-                android:checked = "@{bottomNav.myPageRadioChecked}"
-                android:onClick="@{() -> bottomNav.goMyPage()}"
-                android:layout_width="match_parent"
+                android:layout_width="0sp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:foregroundGravity="center"
+                android:checked="@{bottomNav.myPageRadioChecked}"
+                android:onClick="@{() -> bottomNav.goMyPage()}" />
+
         </RadioGroup>
+
+        <ImageView
+            android:id="@+id/eventDot"
+            android:layout_width="10sp"
+            android:layout_height="10sp"
+            android:layout_marginStart="35dp"
+            android:src="@drawable/circle"
+            android:visibility="@{bottomNav.eventDot}"
+            app:layout_constraintStart_toStartOf="@+id/radioGroup"
+            app:layout_constraintTop_toTopOf="@+id/radioGroup" />
+
+        <ImageView
+            android:id="@+id/shoppingDot"
+            android:layout_width="10sp"
+            android:layout_height="10sp"
+            android:layout_marginStart="110dp"
+            android:src="@drawable/circle"
+            android:visibility="@{bottomNav.shoppingDot}"
+            app:layout_constraintStart_toStartOf="@+id/radioGroup"
+            app:layout_constraintTop_toTopOf="@+id/radioGroup" />
+
+        <ImageView
+            android:id="@+id/mainDot"
+            android:layout_width="10sp"
+            android:layout_height="10sp"
+            android:src="@drawable/circle"
+            android:visibility="@{bottomNav.mainDot}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/radioGroup"
+            app:layout_constraintTop_toTopOf="@+id/radioGroup" />
+
+        <ImageView
+            android:id="@+id/tipDot"
+            android:layout_width="10sp"
+            android:layout_height="10sp"
+            android:layout_marginEnd="110dp"
+            android:src="@drawable/circle"
+            android:visibility="@{bottomNav.tipDot}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/radioGroup" />
+
+        <ImageView
+            android:id="@+id/mypageDot"
+            android:layout_width="10sp"
+            android:layout_height="10sp"
+            android:layout_marginEnd="35dp"
+            android:src="@drawable/circle"
+            android:visibility="@{bottomNav.myPageDot}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/radioGroup" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

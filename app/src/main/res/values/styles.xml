@@ -96,21 +96,23 @@
     <style name="BottomGNB">
         <item name="android:gravity">center</item>
         <item name="android:button">@android:color/transparent</item>
+        <item name="android:paddingTop">15sp</item>
     </style>
     <style name="GNBPoplular" parent="BottomGNB">
-        <item name="android:button">@drawable/bottom_nav_popular</item>
+        <item name="android:drawableTop">@drawable/bottom_nav_popular</item>
+        <item name="android:button">@drawable/circle</item>
     </style>
     <style name="GNBShopping" parent="BottomGNB">
-        <item name="android:button">@drawable/bottom_nav_shopping</item>
+        <item name="android:drawableTop">@drawable/bottom_nav_shopping</item>
     </style>
     <style name="GNBMain" parent="BottomGNB">
-        <item name="android:button">@drawable/bottom_nav_main</item>
+        <item name="android:drawableTop">@drawable/bottom_nav_main</item>
     </style>
     <style name="GNBTip" parent="BottomGNB">
-        <item name="android:button">@drawable/bottom_nav_tip</item>
+        <item name="android:drawableTop">@drawable/bottom_nav_tip</item>
     </style>
     <style name="GNBMyPage" parent="BottomGNB">
-        <item name="android:button">@drawable/bottom_nav_mypage</item>
+        <item name="android:drawableTop">@drawable/bottom_nav_mypage</item>
     </style>
 
     <style name="InputBase">

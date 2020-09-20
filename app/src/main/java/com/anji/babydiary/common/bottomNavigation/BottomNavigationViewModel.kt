@@ -1,6 +1,7 @@
 package com.anji.babydiary.common.bottomNavigation
 
 import android.content.Intent
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,22 +20,54 @@ class BottomNavigationViewModel(val activity:BaseActivity, val idx: Int) :ViewMo
     var tipRadioChecked =  MutableLiveData<Boolean>()
     var myPageRadioChecked =  MutableLiveData<Boolean>()
 
+
+    var eventDot = MutableLiveData<Int>()
+    var shoppingDot =  MutableLiveData<Int>()
+    var mainDot =  MutableLiveData<Int>()
+    var tipDot =  MutableLiveData<Int>()
+    var myPageDot =  MutableLiveData<Int>()
+
     init {
         when(idx) {
             0 -> {
                 eventRadioChecked.value = true
+                eventDot.value = View.VISIBLE
+                shoppingDot.value = View.GONE
+                mainDot.value = View.GONE
+                tipDot.value = View.GONE
+                myPageDot.value = View.GONE
             }
             1 -> {
                 shoppingRadioChecked.value = true
+                eventDot.value = View.GONE
+                shoppingDot.value = View.VISIBLE
+                mainDot.value = View.GONE
+                tipDot.value = View.GONE
+                myPageDot.value = View.GONE
             }
             2 -> {
                 mainRadioChecked.value = true
+                eventDot.value = View.GONE
+                shoppingDot.value = View.GONE
+                mainDot.value = View.VISIBLE
+                tipDot.value = View.GONE
+                myPageDot.value = View.GONE
             }
             3 -> {
                 tipRadioChecked.value = true
+                eventDot.value = View.GONE
+                shoppingDot.value = View.GONE
+                mainDot.value = View.GONE
+                tipDot.value = View.VISIBLE
+                myPageDot.value = View.GONE
             }
             4 -> {
                 myPageRadioChecked.value = true
+                eventDot.value = View.GONE
+                shoppingDot.value = View.GONE
+                mainDot.value = View.GONE
+                tipDot.value = View.GONE
+                myPageDot.value = View.VISIBLE
             }
         }
     }
