@@ -84,6 +84,4 @@ object BindingAdapters  {
     }
 
 
-
-
 }

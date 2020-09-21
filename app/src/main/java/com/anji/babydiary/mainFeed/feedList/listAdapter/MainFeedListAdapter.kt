@@ -17,10 +17,7 @@ import com.anji.babydiary.database.profile.ProfileDao
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.database.profile.Profiles
 import com.anji.babydiary.databinding.MainFeedListItemBinding
-import com.anji.babydiary.mainFeed.feedList.FeedClickListener
-import com.anji.babydiary.mainFeed.feedList.FeedCommentClickListener
-import com.anji.babydiary.mainFeed.feedList.FeedListViewModel
-import com.anji.babydiary.mainFeed.feedList.MemberClickListener
+import com.anji.babydiary.mainFeed.feedList.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -29,12 +26,12 @@ import kotlinx.coroutines.*
 import java.io.File
 
 
-class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClickListener:FeedCommentClickListener, val memberClickListener:MemberClickListener, val feedListViewModel: FeedListViewModel, val activity:Activity, val lifecycleOwner: LifecycleOwner):ListAdapter<MainFeed, MainFeedListAdapter.ViewHolder>(ResultListDiffCallback()) {
+class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClickListener:FeedCommentClickListener, val memberClickListener:MemberClickListener, val bookMarkClickListener: BookMarkClickListener, val feedListViewModel: FeedListViewModel, val activity:Activity, val lifecycleOwner: LifecycleOwner):ListAdapter<MainFeed, MainFeedListAdapter.ViewHolder>(ResultListDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)!!
         val res = holder.itemView.context.resources
-        holder.bind(activity, item, feedListViewModel, clickListener, commentClickListener, memberClickListener, lifecycleOwner)
+        holder.bind(activity, item, feedListViewModel, clickListener, commentClickListener, memberClickListener, bookMarkClickListener, lifecycleOwner)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -43,7 +40,7 @@ class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClick
 
     class ViewHolder private constructor(val binding: MainFeedListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind (activity: Activity, item: MainFeed, feedListViewModel: FeedListViewModel, clickListener: FeedClickListener, commentClickListener:FeedCommentClickListener, memberClickListener: MemberClickListener, lifecycleOwner: LifecycleOwner) {
+        fun bind (activity: Activity, item: MainFeed, feedListViewModel: FeedListViewModel, clickListener: FeedClickListener, commentClickListener:FeedCommentClickListener, memberClickListener: MemberClickListener, bookMarkClickListener: BookMarkClickListener, lifecycleOwner: LifecycleOwner) {
             //binding.idx = item
 
             binding.mainFeed = item
@@ -51,11 +48,14 @@ class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClick
             binding.viewModel = feedListViewModel
             binding.likeCnt.text = item.likeCnt.toString()
             binding.mainFeedText.text = item.title.toString()
+            
+            val currentTimeMille = System.currentTimeMillis()
 
 
-            Log.e("img","imgdir============================================================")
-            Log.e("img","${item.imgDir}")
-            Log.e("img","imgdir============================================================")
+            val hour = (currentTimeMille - item.timeMilli)/3600000
+
+            binding.textTime.text = "${hour.toString()} 시간 전"
+
 
             if (item.imgTmpDir != "") {
                 Glide.with(binding.root.context)
@@ -99,11 +99,13 @@ class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClick
                 setData(profileData, profileDatabase, item)
             }
 
-
-
             binding.executePendingBindings()
             binding.clickListener = clickListener
             binding.commentClickListener = commentClickListener
+            binding.bookmarkClickListener = bookMarkClickListener
+
+
+
 
         }
 

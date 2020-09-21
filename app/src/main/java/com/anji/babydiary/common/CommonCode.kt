@@ -7,7 +7,7 @@ object CommonCode {
     val PERMISSION_CODE = 9898
     val IMAGE_PICK_CODE = 1000
     val MYPAGE_ACTIVITY_RESULT = 1100
-
+    val SEARCH_KEYWORD = 9999
 
     val SENDER_ID = "367403351297"
 
@@ -16,6 +16,8 @@ object CommonCode {
         "놀이",
         "교육",
         "기타"
-
     )
+
+
+
 }

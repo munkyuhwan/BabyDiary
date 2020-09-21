@@ -44,7 +44,7 @@ data class MainFeed(
     @ColumnInfo(name = "date")
     var date:Int = 0,
     @ColumnInfo(name="time_milli")
-    var timeMilli:Long = 0,
+    var timeMilli:Long = System.currentTimeMillis(),
 
     @ColumnInfo(name = "like_cnt")
     var likeCnt:Long = 0L,

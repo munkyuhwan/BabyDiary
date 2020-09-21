@@ -16,12 +16,22 @@
         tools:context=".mainFeed.feedList.FeedList"
         android:background="#ffffff">
 
+        <ImageButton
+            android:id="@+id/myBookMark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="#00000000"
+            android:onClick="@{() -> mainFeed.selectBookmark()}"
+            android:src="@drawable/bookmark_btn"
+            app:layout_constraintBottom_toTopOf="@+id/feed_list"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/feed_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="99sp"
+            android:layout_marginTop="150sp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -44,11 +54,22 @@
                 android:orientation="vertical"
                 android:paddingTop="50sp"
                 android:paddingBottom="10sp"
-                android:visibility="@{mainFeed.isCategoryOpen}"
+                android:visibility="@{mainFeed.isCategoryOpen()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/main_nav_layout">
+
+
+                <TextView
+                    android:id="@+id/all"
+                    style="@style/MainFeedCatAll"
+                    android:onClick="@{() -> mainFeed.allFeeds() }"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:paddingTop="10sp"
+                    android:paddingBottom="10sp"
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/myarea"
@@ -74,8 +95,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/main_nav_layout"
-                android:layout_width="match_parent"
-                android:layout_height="99sp"
+                android:layout_width="404dp"
+                android:layout_height="99dp"
                 android:background="@drawable/main_feed_actionbar"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -99,6 +120,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:onClick="@{() -> mainFeed.onCategorySelectClicked()}"
+                    android:text="@{mainFeed.selectedItem}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"
                     app:layout_constraintHorizontal_bias="0.508"
@@ -112,8 +134,8 @@
                     android:layout_height="50sp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
-                    android:rotation="@{mainFeed.arrowRotation}"
                     android:onClick="@{() -> mainFeed.onCategorySelectClicked()}"
+                    android:rotation="@{mainFeed.arrowRotation}"
                     android:src="@drawable/main_feed_open_icon"
                     app:layout_constraintBottom_toBottomOf="@+id/name_kid"
                     app:layout_constraintStart_toEndOf="@+id/name_kid"

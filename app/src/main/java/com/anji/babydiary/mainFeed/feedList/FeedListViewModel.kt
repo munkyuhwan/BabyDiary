@@ -8,25 +8,32 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.anji.babydiary.common.MyShare.MyShare
+import com.anji.babydiary.database.bookmark.BookMark
+import com.anji.babydiary.database.bookmark.BookMarkDao
 import com.anji.babydiary.database.likes.Likes
 import com.anji.babydiary.database.likes.LikesDao
 import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.database.mainFeed.MainFeedDAO
 import com.anji.babydiary.database.profile.ProfileDao
 import kotlinx.coroutines.*
+import okhttp3.Dispatcher
 
 class FeedListViewModel(
     val mainFeedDAO: MainFeedDAO,
     val profile: ProfileDao,
     val likesDao: LikesDao,
+    val bookMarkDao: BookMarkDao,
     val activity: Activity,
     application: Application
 ) : AndroidViewModel(application) {
 
+    var selectedItem = MutableLiveData<String>()
+
     val typeArea:String = "area"
     val typeAge:String = "age"
-    var allFeeds = MutableLiveData<List<MainFeed>>()
 
+    var allFeeds = MutableLiveData<List<MainFeed>>()
+    var singleFeed = ArrayList<MainFeed>()
     var arrowRotation = MutableLiveData<Float>()
 
     var profileData = profile.selectProfile(MyShare.prefs.getLong("idx", 0L))
@@ -38,13 +45,19 @@ class FeedListViewModel(
     var isCategoryOpen = MutableLiveData<Int>()
     //var feedWithUser = mainFeedDAO.selectWithProfile()
 
+    var bookMarks = MutableLiveData<List<BookMark>>()
+
     //var feedWithUser = mainFeedDAO.getFeedWithUser()
     init {
         isCategoryOpen.value = View.VISIBLE
+        allFeeds()
+        arrowRotation.value = 0F
+    }
+
+    fun allFeeds() {
         uiScope.launch {
             getAllfeed()
         }
-        arrowRotation.value = 0F
     }
 
     suspend fun getAllfeed() {
@@ -52,6 +65,7 @@ class FeedListViewModel(
             allFeeds.postValue( mainFeedDAO.selectAllMutable() )
             arrowRotation.postValue(0F)
             isCategoryOpen.postValue(View.GONE)
+            selectedItem.postValue("전체보기")
         }
     }
 
@@ -68,6 +82,11 @@ class FeedListViewModel(
               allFeeds.postValue( mainFeedDAO.selectAllByTypeMutable(type) )
             arrowRotation.postValue(0F)
             isCategoryOpen.postValue(View.GONE)
+            if (type.equals("age")) {
+                selectedItem.postValue("비슷한 연령")
+            }else {
+                selectedItem.postValue("내 주변")
+            }
         }
     }
 
@@ -167,6 +186,57 @@ class FeedListViewModel(
 
     }
 
+    fun selectByKeyword(keyword:String) {
+        Log.e("keyword","${keyword}")
+        uiScope.launch {
+            queryByKeyword(keyword)
+        }
+    }
+    suspend fun queryByKeyword(keyword:String) {
+        withContext(Dispatchers.IO) {
+            allFeeds.postValue(mainFeedDAO.selectAllByKeyword(keyword))
+        }
+    }
+
+    fun insertBookMark(idx:Long) {
+        var bookMark = BookMark()
+        bookMark.user_idx = MyShare.prefs.getLong("idx",0)
+        bookMark.feed_idx = idx
+
+        uiScope.launch {
+            queryBookMark(bookMark)
+        }
+    }
+
+    suspend fun queryBookMark(bookMark: BookMark) {
+        withContext(Dispatchers.IO) {
+            bookMarkDao.insert(bookMark)
+        }
+    }
+
+    fun selectBookmark() {
+        uiScope.launch {
+            querySelectBookmark()
+        }
+    }
+    suspend fun querySelectBookmark() {
+        withContext(Dispatchers.IO) {
+            bookMarks.postValue( bookMarkDao.selectAllByUserIdx(MyShare.prefs.getLong("idx", 0)) )
+        }
+    }
+
+    fun selectBookmarkedFeed(idx:Long) {
+        uiScope.launch {
+            querySelectBookmarkedFeed(idx)
+        }
+    }
+    suspend fun querySelectBookmarkedFeed(idx:Long) {
+        withContext(Dispatchers.IO) {
+            singleFeed.add(mainFeedDAO.selectSingleMut(idx))
+            allFeeds.postValue(singleFeed)
+        }
+    }
+
 }
 
 
@@ -180,6 +250,10 @@ class MemberClickListener(val clickListener:(resultId:Long)->Unit ) {
 
 class FeedCommentClickListener(val commentClickListener:(resultId:Long)->Unit) {
     fun onCommentClick(result:MainFeed) = commentClickListener(result.idx)
+}
+
+class BookMarkClickListener(val bookMarkClickListener:(idx:Long)->Unit) {
+    fun onBookMarkClick(result:MainFeed) = bookMarkClickListener(result.idx)
 }
 
 

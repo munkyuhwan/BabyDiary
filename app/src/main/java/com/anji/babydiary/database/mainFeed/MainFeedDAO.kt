@@ -18,9 +18,16 @@ interface MainFeedDAO{
     @Query("SELECT * FROM tbl_main_feed ORDER BY idx DESC")
     fun selectAllMutable(): List<MainFeed>
 
+    @Query ("SELECT * FROM tbl_main_feed WHERE feed_title LIKE '%' || :keyword || '%' OR feed_text LIKE '%' || :keyword || '%' ORDER BY idx DESC")
+    fun selectAllByKeyword(keyword:String):List<MainFeed>
+
 
     @Query("SELECT * FROM tbl_main_feed WHERE idx= :key")
     fun selectSingle(key:Long):LiveData<MainFeed>
+
+
+    @Query("SELECT * FROM tbl_main_feed WHERE idx= :key")
+    fun selectSingleMut(key:Long):MainFeed
 
     @Query("SELECT * FROM tbl_main_feed WHERE user_idx= :key GROUP BY date, month, date ")
     fun selectDates(key:Long):List<MainFeed>

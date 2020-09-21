@@ -22,7 +22,9 @@
         <variable
             name="viewModel"
             type="com.anji.babydiary.mainFeed.feedList.FeedListViewModel" />
-
+        <variable
+            name="bookmarkClickListener"
+            type="com.anji.babydiary.mainFeed.feedList.BookMarkClickListener" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -58,6 +60,7 @@
         android:onClick="@{() -> memberClickListener.onClick(mainFeed) }" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout12"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -80,8 +83,6 @@
         <Button
             android:id="@+id/button"
             style="@style/LikeButton"
-            android:layout_width="15dp"
-            android:layout_height="16dp"
             android:layout_marginStart="10dp"
             android:onClick="@{() -> viewModel.onLikeButtonClicked(likeCnt.getText(), mainFeed.idx) }"
             app:layout_constraintBottom_toBottomOf="@+id/like_cnt"
@@ -110,24 +111,43 @@
         <TextView
             android:id="@+id/main_feed_text"
             style="@style/MainFeedTextStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="167dp"
             android:layout_marginTop="15dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:maxLines="3"
             android:onClick="@{() -> clickListener.onClick(mainFeed) }"
             android:text="text"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/feed_img"
             app:layout_constraintTop_toBottomOf="@+id/text_time" />
 
         <TextView
             android:id="@+id/text_time"
+            style="@style/MainFeedTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
             android:onClick="@{() -> clickListener.onClick(mainFeed) }"
-            android:text="TextView"
+            android:textSize="13sp"
             app:layout_constraintStart_toStartOf="@+id/main_feed_text"
             app:layout_constraintTop_toTopOf="@+id/feed_img" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/bookMark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:background="#00000000"
+        android:src="@drawable/bookmark_btn"
+        app:layout_constraintBottom_toBottomOf="@+id/user_icon"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout12"
+        app:layout_constraintTop_toTopOf="@+id/user_icon"
+        app:layout_constraintVertical_bias="0.428"
+        android:onClick="@{() -> bookmarkClickListener.onBookMarkClick(mainFeed)}"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

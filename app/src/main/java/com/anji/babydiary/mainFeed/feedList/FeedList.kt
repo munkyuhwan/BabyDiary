@@ -1,5 +1,6 @@
 package com.anji.babydiary.mainFeed.feedList
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -15,13 +16,17 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.common.BaseFragment
+import com.anji.babydiary.common.CommonCode
+import com.anji.babydiary.database.bookmark.BookMarkDatabase
 import com.anji.babydiary.database.likes.LikesDatabase
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.databinding.FeedListFragmentBinding
+import com.anji.babydiary.login.Login
 import com.anji.babydiary.mainFeed.feedList.listAdapter.MainFeedListAdapter
 import com.anji.babydiary.myPage.MyPage
 import com.anji.babydiary.myPage.myFeed.MyFeed
+import com.anji.babydiary.search.SearchActivity
 
 class FeedList : BaseFragment() {
 
@@ -42,9 +47,10 @@ class FeedList : BaseFragment() {
         val dataSource = MainFeedDatabase.getInstance(application).database
         val profileData = ProfileDatabase.getInstance(application).database
         val likeDatabase = LikesDatabase.getInstance(application).database
+        val bookMark = BookMarkDatabase.getInstance(application).database
 
 
-        viewModelFactory = FeedListViewModelFactory(dataSource, profileData, likeDatabase, requireActivity(), application)
+        viewModelFactory = FeedListViewModelFactory(dataSource, profileData, likeDatabase, bookMark, requireActivity(), application)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(FeedListViewModel::class.java)
         viewModel.selectAll()
 
@@ -69,14 +75,15 @@ class FeedList : BaseFragment() {
                     requireActivity().startActivity(intent)
                 }
             },
+            BookMarkClickListener {
+                //Toast.makeText(requireContext(), "${it}", Toast.LENGTH_SHORT).show()
+                viewModel.insertBookMark(it)
+            },
             viewModel,
         requireActivity(), viewLifecycleOwner)
         binding.feedList.adapter = adapter
 
         viewModel.allFeeds.observe(viewLifecycleOwner, Observer {
-            Log.e("allFeed","=============================================================")
-            Log.e("allFeed","${it}")
-            Log.e("allFeed","=============================================================")
             it?.let {
                 adapter.submitList(it)
             }
@@ -96,9 +103,42 @@ class FeedList : BaseFragment() {
             }
         })
 
+        binding.appCompatImageView.setOnClickListener {
+            val intent: Intent = Intent(requireActivity(), SearchActivity::class.java)
+            startActivityForResult(intent, CommonCode.SEARCH_KEYWORD)
+        }
+
+        viewModel.bookMarks.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                for (i in it.iterator()) {
+                    Log.e("bookmars", "=======================================================")
+                    Log.e("bookmars", "${i.feed_idx}")
+                    Log.e("bookmars", "=======================================================")
+
+                    viewModel.selectBookmarkedFeed(i.feed_idx)
+                }
+            }
+        })
+
         //checkProfile(application)
 
         return binding.root
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == CommonCode.SEARCH_KEYWORD && resultCode == Activity.RESULT_OK) {
+
+            data?.let {
+
+                it.extras?.let {
+                    viewModel.selectByKeyword(it.get("keyword").toString())
+                }
+            }
+
+        }
+
     }
 
 

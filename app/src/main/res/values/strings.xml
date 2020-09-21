@@ -2,6 +2,7 @@
     <string name="app_name">육아일기</string>
     <string name="usericon">userIcon</string>
 
+    <string name="main_menu_all">전체보기</string>
     <string name="main_menu_1">내 주변</string>
     <string name="main_menu_2">비슷한 연령</string>
     <string name="price_text">가격</string>
