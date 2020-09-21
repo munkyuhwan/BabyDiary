@@ -16,6 +16,7 @@ import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.database.mainFeed.MainFeedDAO
 import com.anji.babydiary.myPage.myFeedWriteLocation.SelectedAddress
 import kotlinx.coroutines.*
+import kotlin.math.roundToInt
 
 class MyFeedWriteViewModel(val database:MainFeedDAO, application: Application) : AndroidViewModel(application) {
 
@@ -58,6 +59,11 @@ class MyFeedWriteViewModel(val database:MainFeedDAO, application: Application) :
         "50"
     )
 
+    var feedType = arrayOf(
+        "area",
+        "age"
+    )
+
     init {
         isShown.value = View.GONE
         selectedAddress.value = SelectedAddress.address
@@ -94,6 +100,8 @@ class MyFeedWriteViewModel(val database:MainFeedDAO, application: Application) :
         mainFeed.month = month!!.toInt()
         mainFeed.date = date!!.toInt()
         mainFeed.timeMilli = System.currentTimeMillis()
+        mainFeed.feedType = feedType[(Math.random()%2).roundToInt()]
+
 
 
         uiScope.launch {

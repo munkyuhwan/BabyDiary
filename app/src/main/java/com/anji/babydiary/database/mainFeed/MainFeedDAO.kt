@@ -15,6 +15,10 @@ interface MainFeedDAO{
     @Query("SELECT * FROM tbl_main_feed ORDER BY idx DESC")
     fun selectAll(): LiveData<List<MainFeed>>
 
+    @Query("SELECT * FROM tbl_main_feed ORDER BY idx DESC")
+    fun selectAllMutable(): List<MainFeed>
+
+
     @Query("SELECT * FROM tbl_main_feed WHERE idx= :key")
     fun selectSingle(key:Long):LiveData<MainFeed>
 
@@ -38,6 +42,9 @@ interface MainFeedDAO{
 
     @Query("SELECT * FROM tbl_main_feed WHERE feed_type = :type")
     fun selectAllByType(type:String): LiveData<List<MainFeed>>
+
+    @Query("SELECT * FROM tbl_main_feed WHERE feed_type = :type")
+    fun selectAllByTypeMutable(type:String): List<MainFeed>
 
     /*
     @Transaction

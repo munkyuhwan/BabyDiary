@@ -2,6 +2,8 @@ package com.anji.babydiary.mainFeed.feedList
 
 import android.app.Activity
 import android.app.Application
+import android.util.Log
+import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -23,24 +25,38 @@ class FeedListViewModel(
 
     val typeArea:String = "area"
     val typeAge:String = "age"
+    var allFeeds = MutableLiveData<List<MainFeed>>()
 
-    var allFeeds = mainFeedDAO.selectAll()
+    var arrowRotation = MutableLiveData<Float>()
 
     var profileData = profile.selectProfile(MyShare.prefs.getLong("idx", 0L))
+
 
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    var isCategoryOpen = MutableLiveData<Boolean>()
+    var isCategoryOpen = MutableLiveData<Int>()
     //var feedWithUser = mainFeedDAO.selectWithProfile()
 
     //var feedWithUser = mainFeedDAO.getFeedWithUser()
     init {
-        isCategoryOpen.value = false
+        isCategoryOpen.value = View.VISIBLE
+        uiScope.launch {
+            getAllfeed()
+        }
+        arrowRotation.value = 0F
+    }
 
+    suspend fun getAllfeed() {
+        withContext(Dispatchers.IO) {
+            allFeeds.postValue( mainFeedDAO.selectAllMutable() )
+            arrowRotation.postValue(0F)
+            isCategoryOpen.postValue(View.GONE)
+        }
     }
 
     fun onTypeClick(type:String) {
+        Log.e("click","categoryclicked")
         uiScope.launch {
             selectByType(type)
         }
@@ -48,7 +64,10 @@ class FeedListViewModel(
 
     suspend fun selectByType(type:String) {
         withContext(Dispatchers.IO) {
-            allFeeds = mainFeedDAO.selectAllByType(type)
+          //  allFeeds = mainFeedDAO.selectAllByType(type)
+              allFeeds.postValue( mainFeedDAO.selectAllByTypeMutable(type) )
+            arrowRotation.postValue(0F)
+            isCategoryOpen.postValue(View.GONE)
         }
     }
 
@@ -139,11 +158,12 @@ class FeedListViewModel(
     }
 
     fun onCategorySelectClicked() {
-        if (isCategoryOpen.value!! ) {
-            isCategoryOpen.value = false
+        if (isCategoryOpen.value == View.GONE ) {
+            isCategoryOpen.value = View.VISIBLE
         }else {
-            isCategoryOpen.value = true
+            isCategoryOpen.value = View.GONE
         }
+        arrowRotation.value = 180F
 
     }
 

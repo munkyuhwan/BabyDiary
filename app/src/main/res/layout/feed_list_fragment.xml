@@ -27,6 +27,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,23 +44,31 @@
                 android:orientation="vertical"
                 android:paddingTop="50sp"
                 android:paddingBottom="10sp"
+                android:visibility="@{mainFeed.isCategoryOpen}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/main_nav_layout">
 
                 <TextView
+                    android:id="@+id/myarea"
                     style="@style/MainFeedCatOne"
                     android:onClick="@{() -> mainFeed.onTypeClick(mainFeed.typeArea) }"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:paddingTop="10sp"
+                    android:paddingBottom="10sp"
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/myage"
                     style="@style/MainFeedCatTwo"
-                    android:onClick="@{() -> mainFeed.onTypeClick(mainFeed.typeAge) }"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20sp" />
+                    android:gravity="center"
+                    android:onClick="@{() -> mainFeed.onTypeClick(mainFeed.typeAge) }"
+                    android:paddingTop="10sp"
+                    android:paddingBottom="10sp" />
 
             </LinearLayout>
 
@@ -103,6 +112,7 @@
                     android:layout_height="50sp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
+                    android:rotation="@{mainFeed.arrowRotation}"
                     android:onClick="@{() -> mainFeed.onCategorySelectClicked()}"
                     android:src="@drawable/main_feed_open_icon"
                     app:layout_constraintBottom_toBottomOf="@+id/name_kid"
@@ -119,6 +129,11 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/name_kid" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
