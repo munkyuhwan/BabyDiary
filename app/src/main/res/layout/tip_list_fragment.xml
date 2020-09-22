@@ -62,13 +62,13 @@
         <LinearLayout
             android:id="@+id/nav_category"
             style="@style/MainAppBarSelect"
+            android:visibility="@{tipListViewModel.isCategoryOpen}"
             android:layout_marginTop="60sp"
             android:animateLayoutChanges="true"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:paddingTop="50sp"
             android:paddingBottom="10sp"
-            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -76,40 +76,51 @@
 
             <TextView
                 style="@style/MainFeedCatOne"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingTop="10sp"
+                android:paddingBottom="10sp"
+                android:gravity="center"
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> tipListViewModel.doSelectByCateogry(99)}"
                 android:text="전체보기" />
 
             <TextView
                 style="@style/MainFeedCatOne"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingTop="10sp"
+                android:paddingBottom="10sp"
+                android:gravity="center"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20sp"
                 android:onClick="@{() -> tipListViewModel.doSelectByCateogry(0)}"
                 android:text="건강" />
 
             <TextView
                 style="@style/MainFeedCatTwo"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingTop="10sp"
+                android:paddingBottom="10sp"
+                android:gravity="center"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20sp"
                 android:onClick="@{() -> tipListViewModel.doSelectByCateogry(1)}"
                 android:text="놀이" />
 
             <TextView
                 style="@style/MainFeedCatTwo"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingTop="10sp"
+                android:paddingBottom="10sp"
+                android:gravity="center"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20sp"
                 android:onClick="@{() -> tipListViewModel.doSelectByCateogry(2)}"
                 android:text="교육" />
 
             <TextView
                 style="@style/MainFeedCatTwo"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingTop="10sp"
+                android:paddingBottom="10sp"
+                android:gravity="center"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20sp"
                 android:onClick="@{() -> tipListViewModel.doSelectByCateogry(3)}"
                 android:text="기타" />
 
@@ -145,6 +156,7 @@
                 android:layout_height="60sp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="10dp"
+                android:rotation="@{tipListViewModel.arrowRotate}"
                 android:onClick="@{() -> tipListViewModel.onCategorySelectClicked()}"
                 android:src="@drawable/main_feed_open_icon"
                 app:layout_constraintBottom_toBottomOf="@+id/name_kid"

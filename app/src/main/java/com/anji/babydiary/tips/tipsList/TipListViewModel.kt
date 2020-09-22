@@ -28,7 +28,7 @@ class TipListViewModel(
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     //var dataAll = database.selectAll()
-    var dataAll = database.selectWithUser()
+    var dataAll = MutableLiveData<List<Tips>>()
 
 
 
@@ -37,10 +37,12 @@ class TipListViewModel(
     var tipLikeDatabase: TipLikesDao
 
     var tipLikeCnt:Long
+    var arrowRotate = MutableLiveData<Float>()
 
    // var dataWithProfile =database.selectWithUser()
 
     init {
+        arrowRotate.value = 0f
         tipLikeCnt = 0
         isCategoryOpen.value = View.GONE
         //Log.e("dhife","data: ${dataWithProfile}")
@@ -54,6 +56,17 @@ class TipListViewModel(
             profileSelectAll()
         }
 
+        uiScope.launch {
+            getAll()
+        }
+
+    }
+
+    suspend fun getAll() {
+        withContext(Dispatchers.IO) {
+            dataAll.postValue(database.selectWithUser())
+
+        }
     }
 
     suspend fun profileSelectAll() {
@@ -100,11 +113,12 @@ class TipListViewModel(
 
     suspend fun selectAll() {
         withContext(Dispatchers.IO) {
-            //dataAll.postValue( database.selectWithUser())
+            dataAll.postValue(database.selectWithUser())
         }
     }
 
     fun doSelectByCateogry(sel:Int) {
+        arrowRotate.value = 0f
         uiScope.launch {
             if (sel == 99 ) {
                 //dataAll = database.selectWithUser()
@@ -116,17 +130,18 @@ class TipListViewModel(
     }
     suspend fun selectByCategory(sel:String) {
         withContext(Dispatchers.IO) {
-            dataAll = database.selectByCategory(sel)
+            dataAll.postValue(database.selectByCategory(sel))
         }
     }
 
     fun onCategorySelectClicked() {
         if (isCategoryOpen.value == View.VISIBLE ) {
             isCategoryOpen.value = View.GONE
+            arrowRotate.value = 0f
         }else {
             isCategoryOpen.value = View.VISIBLE
+            arrowRotate.value = 180f
         }
-
     }
 
     fun insertLike(tipIdx:Long, cnt:Int) {
@@ -149,6 +164,17 @@ class TipListViewModel(
     suspend fun updateLike(cnt:Int) {
         withContext(Dispatchers.IO) {
             database.updateLike(cnt)
+        }
+    }
+
+    fun selectSearch(text:String) {
+        uiScope.launch {
+            querylSearch(text)
+        }
+    }
+    suspend fun querylSearch(text:String) {
+        withContext(Dispatchers.IO) {
+            dataAll.postValue(database.search(text))
         }
     }
 

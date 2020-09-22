@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.anji.babydiary.database.profile.Profiles
 
-@Database(entities = [Tips::class, Profiles::class], version = 4, exportSchema = false)
+@Database(entities = [Tips::class, Profiles::class], version = 5, exportSchema = false)
 abstract class TipsDatabase:RoomDatabase() {
 
     abstract val database: TipsDao

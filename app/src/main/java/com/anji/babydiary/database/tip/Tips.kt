@@ -16,6 +16,8 @@ data class Tips(
     var cnt:Int = 0,
     @ColumnInfo(name = "tip_image")
     var imgDir: String = "",
+    @ColumnInfo(name = "tip_image_tmp")
+    var imgDirTmp: String = "",
     @ColumnInfo(name="tip_category")
     var category:String = ""
 )

@@ -36,9 +36,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_main)
 
-
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-
 
         initUserData()
         userData?.observe(this, androidx.lifecycle.Observer {

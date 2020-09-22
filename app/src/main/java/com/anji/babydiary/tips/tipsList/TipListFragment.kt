@@ -1,5 +1,7 @@
 package com.anji.babydiary.tips.tipsList
 
+import android.app.Activity
+import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
@@ -19,9 +21,13 @@ import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.database.tip.TipsDatabase
 import com.anji.babydiary.databinding.TipListFragmentBinding
+import com.anji.babydiary.search.SearchActivity
 import com.anji.babydiary.tips.tipsList.listAdapter.TipListAdpater
 
 class TipListFragment : Fragment() {
+
+
+    lateinit var viewmodel:TipListViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +39,7 @@ class TipListFragment : Fragment() {
         val database = TipsDatabase.getInstance(application).database
 
         val viewModelFactory = TipListViewModelFactory(database, MyShare.prefs.getLong("idx", 0L), application)
-        val viewmodel = ViewModelProviders.of(this, viewModelFactory).get(TipListViewModel::class.java)
+        viewmodel = ViewModelProviders.of(this, viewModelFactory).get(TipListViewModel::class.java)
 
         val adapter =
             TipListAdpater(TipClickListener {
@@ -58,6 +64,9 @@ class TipListFragment : Fragment() {
         }
 
         viewmodel.dataAll.observe(viewLifecycleOwner, Observer {
+            Log.e("data","===========================================================================")
+            Log.e("data","${it}")
+            Log.e("data","===========================================================================")
             it?.let {
                 viewmodel.isCategoryOpen.value = View.GONE
                 adapter.submitList(it)
@@ -68,12 +77,29 @@ class TipListFragment : Fragment() {
             findNavController().navigate(TipListFragmentDirections.actionTipListFragmentToMapWebview())
         }
 
-
-
+        binding.appCompatImageView.setOnClickListener {
+            val intent: Intent = Intent(requireActivity(), SearchActivity::class.java)
+            startActivityForResult(intent, CommonCode.SEARCH_KEYWORD)
+        }
 
         return binding.root
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == CommonCode.SEARCH_KEYWORD && resultCode == Activity.RESULT_OK) {
+
+            data?.let {
+
+                it.extras?.let {
+                    viewmodel.selectSearch(it.get("keyword").toString())
+                }
+            }
+
+        }
+
+    }
 
 
 

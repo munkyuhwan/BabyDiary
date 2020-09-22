@@ -32,6 +32,9 @@ import com.anji.babydiary.database.mainFeed.MainFeedDatabase
 import com.anji.babydiary.database.profile.ProfileDao
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.database.profile.Profiles
+import com.anji.babydiary.database.tip.Tips
+import com.anji.babydiary.database.tip.TipsDao
+import com.anji.babydiary.database.tip.TipsDatabase
 import com.anji.babydiary.event.EventActivity
 import com.anji.babydiary.gnb.main.NavViewModel
 import com.anji.babydiary.gnb.main.NavViewModelFactory
@@ -40,6 +43,7 @@ import com.anji.babydiary.mainFeed.MainFeedActivity
 import com.anji.babydiary.myPage.MyPage
 import com.anji.babydiary.shopping.ShoppingActivity
 import com.anji.babydiary.tips.TipActivity
+import com.google.android.gms.common.internal.service.Common
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.imageview.ShapeableImageView
@@ -63,6 +67,7 @@ abstract class BaseActivity() : AppCompatActivity() {
     var uiScope = CoroutineScope(Dispatchers.Main + job)
     lateinit var database: ProfileDao
     lateinit var feedDatabase:MainFeedDAO
+    lateinit var tipDatabase:TipsDao
     var userData:LiveData<List<Profiles>>? = null
     var feedData:LiveData<List<MainFeed>>? = null
 
@@ -70,6 +75,11 @@ abstract class BaseActivity() : AppCompatActivity() {
     init {
 
         Log.e("user","================init========================================")
+
+
+
+
+
 
 
     }
@@ -138,7 +148,6 @@ abstract class BaseActivity() : AppCompatActivity() {
         withContext(Dispatchers.IO) {
             Log.e("dataInsert", "feed insert")
             feedDatabase.insert(mainFeed)
-
         }
     }
 
@@ -185,17 +194,18 @@ abstract class BaseActivity() : AppCompatActivity() {
     fun initUserData () {
         database = ProfileDatabase.getInstance(this).database
         feedDatabase = MainFeedDatabase.getInstance(this).database
+        tipDatabase = TipsDatabase.getInstance(this).database
         userData = database.checkUserData()
         feedData = feedDatabase.selectAll()
     }
 
     fun initializeData() {
         userDataInitialize()
+        tipInitialize()
     }
 
 
     fun userDataInitialize() {
-
             doInsert(1)
             doInsert(2)
             doInsert(3)
@@ -204,7 +214,45 @@ abstract class BaseActivity() : AppCompatActivity() {
             doInsert(6)
             doInsert(7)
             doInsert(8)
+    }
 
+    fun tipInitialize() {
+        insertTip(0)
+        insertTip(1)
+        insertTip(2)
+        insertTip(3)
+        insertTip(4)
+        insertTip(5)
+        insertTip(6)
+        insertTip(7)
+        insertTip(8)
+        insertTip(9)
+        insertTip(10)
+        insertTip(11)
+        insertTip(12)
+        insertTip(13)
+        insertTip(14)
+        insertTip(15)
+        insertTip(16)
+        insertTip(17)
+    }
+
+    fun insertTip(i:Int) {
+        var tip = Tips()
+        tip.user_idx = CommonCode.TIP_DATA_USER[i]
+        tip.category = "${CommonCode.TIP_DATA_CAT[i]}"
+        tip.text = "${CommonCode.TIP_DATA_TXT[i]}"
+        tip.imgDirTmp = "${CommonCode.TIP_DATA_IMG[i]}"
+        uiScope.launch {
+            doInsertTip(tip)
+        }
+
+    }
+
+    private suspend fun doInsertTip(tip: Tips) {
+        withContext(Dispatchers.IO) {
+            tipDatabase.insert(tip)
+        }
     }
 
     fun feedDataCheck() {

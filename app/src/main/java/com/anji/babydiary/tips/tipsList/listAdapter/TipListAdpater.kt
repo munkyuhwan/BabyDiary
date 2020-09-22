@@ -1,6 +1,7 @@
 package com.anji.babydiary.tips.tipsList.listAdapter
 
 import android.app.Activity
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
@@ -47,8 +48,21 @@ class TipListAdpater(val clickListener: TipClickListener, val tipLikeClicked: Ti
             binding.tipLikeCnt.text = item.cnt.toString()
             binding.tipText.text = "${item.text.toString()} "
 
-            Glide.with(binding.root.context).load(item.imgDir).into(binding.tipImg)
-            Utils.setMyFeedListImg(binding.tipImg)
+            Log.e("img","==============================================================================")
+            Log.e("img","imgdirtmp: ${item.imgDirTmp}")
+            Log.e("img","imgdir: ${item.imgDir}")
+            Log.e("img","==============================================================================")
+
+            if(!item.imgDirTmp.equals("")) {
+                Glide.with(binding.root.context).load(activity.resources.getIdentifier(item.imgDirTmp, "drawable", activity.packageName)).into(binding.tipImg)
+                Utils.setMyFeedListImg(binding.tipImg)
+
+            }else {
+
+                Glide.with(binding.root.context).load(item.imgDir).into(binding.tipImg)
+                Utils.setMyFeedListImg(binding.tipImg)
+
+            }
 
 
 
