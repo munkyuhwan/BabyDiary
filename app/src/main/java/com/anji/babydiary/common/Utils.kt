@@ -1,6 +1,5 @@
 package com.anji.babydiary.common
 
-import android.app.Activity
 import android.content.ContentResolver
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -9,7 +8,6 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import androidx.annotation.Nullable
 import androidx.core.net.toUri
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
@@ -18,11 +16,22 @@ import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.io.IOException
 import java.net.URI
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
 object Utils {
-
+    fun getMilliFromDate(dateFormat: String?): Long {
+        var date = Date()
+        val formatter = SimpleDateFormat("yyyy MM dd HH:mm")
+        try {
+            date = formatter.parse(dateFormat)
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+        println("Today is $date")
+        return date.time
+    }
 
     fun getDate(milliSeconds: Long, dateFormat: String?): String? {
         // Create a DateFormatter object for displaying date in specified format.

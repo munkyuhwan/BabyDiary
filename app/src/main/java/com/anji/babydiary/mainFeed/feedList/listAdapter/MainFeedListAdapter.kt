@@ -54,7 +54,7 @@ class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClick
 
             val hour = (currentTimeMille - item.timeMilli)/3600000
 
-            binding.textTime.text = "${hour.toString()} 시간 전"
+            //binding.textTime.text = "${hour.toString()} 시간 전"
 
 
             if (item.imgTmpDir != "") {

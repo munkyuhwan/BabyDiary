@@ -21,6 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="10dp"
             android:background="#00000000"
             android:onClick="@{() -> mainFeed.selectBookmark()}"
             android:src="@drawable/bookmark_btn"

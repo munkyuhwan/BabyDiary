@@ -89,20 +89,6 @@ class FeedList : BaseFragment() {
             }
         })
 
-        viewModel.isCategoryOpen.observe(viewLifecycleOwner, Observer {
-            Log.e("isCateogry", "is category open: ${it}")
-            it?.let {
-                /*
-                if (it) {
-                    binding.navCategory.visibility = View.VISIBLE
-                }else {
-                    binding.navCategory.visibility = View.GONE
-                }
-
-                 */
-            }
-        })
-
         binding.appCompatImageView.setOnClickListener {
             val intent: Intent = Intent(requireActivity(), SearchActivity::class.java)
             startActivityForResult(intent, CommonCode.SEARCH_KEYWORD)
@@ -111,9 +97,6 @@ class FeedList : BaseFragment() {
         viewModel.bookMarks.observe(viewLifecycleOwner, Observer {
             it?.let {
                 for (i in it.iterator()) {
-                    Log.e("bookmars", "=======================================================")
-                    Log.e("bookmars", "${i.feed_idx}")
-                    Log.e("bookmars", "=======================================================")
 
                     viewModel.selectBookmarkedFeed(i.feed_idx)
                 }

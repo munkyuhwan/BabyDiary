@@ -47,6 +47,8 @@ import com.google.android.material.shape.CornerFamily
 import kotlinx.android.synthetic.main.nav_layout.view.*
 import kotlinx.coroutines.*
 import java.lang.Exception
+import java.sql.Date
+import java.text.SimpleDateFormat
 import kotlin.random.Random
 
 
@@ -150,7 +152,9 @@ abstract class BaseActivity() : AppCompatActivity() {
                    type:String,
                    year:Int,
                    month:Int,
-                   date:Int
+                   date:Int,
+                   hour:Int,
+                   min:Int
     ){
         var mainFeed = MainFeed()
 
@@ -167,7 +171,14 @@ abstract class BaseActivity() : AppCompatActivity() {
         mainFeed.month = month
         mainFeed.date = date
 
-        //mainFeed.timeMilli =
+        Log.e("time", "================================================================================================================")
+        Log.e("time", "time: ${Utils.getMilliFromDate("${year} ${month} ${date} ${hour}:${min}")}")
+        Log.e("time", "system time: ${System.currentTimeMillis()}")
+        Log.e("time", "================================================================================================================")
+
+        mainFeed.timeMilli = Utils.getMilliFromDate("${year} ${month} ${date} ${hour}:${min}")
+
+
 
         uiScope.launch {
             insertFeed(mainFeed)
@@ -228,7 +239,9 @@ abstract class BaseActivity() : AppCompatActivity() {
             "area",
             2019,
             9,
-            1)
+            1,
+            10,10
+        )
         insertFeed(1,
             "ㅡㅡ^ ..? 우리 아들 응가하는 중! 눈썹이 아직 옅어서 모나리자 같지만 너무 귀엽다 너♥\n" +
                     "힘주니 콧구멍이 동그래지는구나 어쩜이리 사랑스러울까ㅎㅎ\n" +
@@ -242,7 +255,9 @@ abstract class BaseActivity() : AppCompatActivity() {
             "area",
             2019,
             11,
-            15)
+            15,
+            13,10
+        )
         insertFeed(1,
             "오잉? 잠들기 전 자장가 불러주니 재롱부리는 끼쟁이 ><♥\n" +
                     "애교가 많은 걸 보니 아빠를 닮았구나! ㅋㅋㅋ \n" +
@@ -260,7 +275,9 @@ abstract class BaseActivity() : AppCompatActivity() {
             "area",
             2019,
             1,
-            5)
+            5,
+            15,0
+        )
 
         insertFeed(1,
             "승율아 엄마가 늘 너는 아빠의 판박이라고 했는데 정말이였구나? 아빠를 닮았으니 늠름하고 멋있는 싸나이가 될 것이 분명해!! 오늘 처음 엄마 없이 아빠랑만 있었는데도 낯설어하지 않고 이렇게 쌔근쌔근 예쁘게 낮잠도 자줘서 아빠는 너무 고맙단다! 엄마랑 있을 때 보다 더 편안히 자는 것 같은 생각은 기분탓인거니..? ㅎㅎ 우리 조금 더 지나면 더 멋있는 남자가 되어서 엄마를 지켜주자! 우리아들 파이팅- ",
@@ -272,7 +289,9 @@ abstract class BaseActivity() : AppCompatActivity() {
             "age",
             2020,
             3,
-            1)
+            1,
+            14,30
+        )
         insertFeed(1,
             "잠을 잘자서 우리아가가 이렇게 쑥쑥 크고있는 건가? \n" +
                     "하루하루 지날수록 살이 붙어 어느새 포동포동해졌네ㅎㅎ \n" +
@@ -287,7 +306,9 @@ abstract class BaseActivity() : AppCompatActivity() {
             "age",
             2020,
             5,
-            30)
+            30,
+            17,10
+        )
 
         insertFeed(1,
             "귀여운 우리아들! 요즘은 왜이렇게 잠자는걸 싫어하는 거니~ \n" +
@@ -302,7 +323,9 @@ abstract class BaseActivity() : AppCompatActivity() {
             "age",
             2020,
             8,
-            28)
+            28,
+            9,43
+        )
 
         insertFeed(1,
             "우리 모찌모찌 승율이! 오늘은 아빠랑 엄마랑 나들이 하고 온 날! 오랜만에 바깥바람 쐰다고 예쁘게 꾸미니 너의 큐티함이 한껏 업그레이드 되는구나! ㅋㅋㅋ 엄마를 닮은거니?\n" +
@@ -317,7 +340,9 @@ abstract class BaseActivity() : AppCompatActivity() {
             "age",
             2020,
             12,
-            3)
+            3,
+            10,20
+        )
 
     }
 
