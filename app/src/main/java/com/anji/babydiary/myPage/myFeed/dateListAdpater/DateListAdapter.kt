@@ -8,6 +8,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.anji.babydiary.common.CommonCode
@@ -64,6 +65,8 @@ class DateListAdapter(val clickListener:MyFeedClickListener, val activity:Activi
                 }
             }, activity)
             binding.myFeedList.adapter = clickAdapter
+            val manager = GridLayoutManager(activity,3)
+            binding.myFeedList.layoutManager = manager
 
             val allData = database.selectByUserIdxANDDate(item.userIdx, item.date, item.month, item.year)
             Log.e("allData","===========================================================================")

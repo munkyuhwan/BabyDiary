@@ -237,6 +237,7 @@
             <Button
                 android:id="@+id/myfeed_bookmark"
                 style="@style/addBookMark"
+                android:visibility="gone"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 app:layout_constraintEnd_toStartOf="@+id/add_myfeed"
@@ -246,9 +247,9 @@
                 android:id="@+id/add_myfeed"
                 style="@style/addMyFeed"
                 android:layout_marginEnd="20dp"
-                app:layout_constraintBottom_toBottomOf="@+id/myfeed_bookmark"
+                app:layout_constraintBottom_toTopOf="@+id/monthList"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/myfeed_bookmark" />
+                app:layout_constraintTop_toBottomOf="@+id/main_nav_layout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
