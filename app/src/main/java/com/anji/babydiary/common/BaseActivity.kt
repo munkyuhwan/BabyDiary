@@ -171,13 +171,8 @@ abstract class BaseActivity() : AppCompatActivity() {
         mainFeed.month = month
         mainFeed.date = date
 
-        Log.e("time", "================================================================================================================")
-        Log.e("time", "time: ${Utils.getMilliFromDate("${year} ${month} ${date} ${hour}:${min}")}")
-        Log.e("time", "system time: ${System.currentTimeMillis()}")
-        Log.e("time", "================================================================================================================")
 
         mainFeed.timeMilli = Utils.getMilliFromDate("${year} ${month} ${date} ${hour}:${min}")
-
 
 
         uiScope.launch {

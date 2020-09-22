@@ -245,7 +245,7 @@ class FeedClickListener(val clickListener:(resultId:Long)->Unit ) {
 }
 
 class MemberClickListener(val clickListener:(resultId:Long)->Unit ) {
-    fun onClick(result:MainFeed) = clickListener(result.idx)
+    fun onClick(result:MainFeed) = clickListener(result.userIdx)
 }
 
 class FeedCommentClickListener(val commentClickListener:(resultId:Long)->Unit) {

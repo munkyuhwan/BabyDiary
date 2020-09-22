@@ -2,6 +2,7 @@ package com.anji.babydiary.myPage.myFollower
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -39,14 +40,25 @@ class Follower : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.followerViewModel = viewModel
 
-        val adapter = FollowListAdapter()
-
-        binding.followList.adapter = adapter
 
         val argument = arguments?.let { FollowerArgs.fromBundle(it) }
+        val type = argument!!.type
 
-/*
-        if (argument!!.equals("follower")) {
+
+        val adapter = FollowListAdapter(requireActivity(), type, viewLifecycleOwner)
+        binding.followList.adapter = adapter
+
+        if (type.equals("follower")) {
+            binding.completeButton.text = "팔로워"
+            viewModel.selectAllFollower.observe(viewLifecycleOwner, Observer {
+                it?.let {
+                    adapter.submitList(it)
+                }
+            })
+        }
+
+        if (type.equals("following")) {
+            binding.completeButton.text = "팔로잉"
             viewModel.selectAllFollowee.observe(viewLifecycleOwner, Observer {
                 it?.let {
                     adapter.submitList(it)
@@ -54,19 +66,16 @@ class Follower : Fragment() {
             })
         }
 
-        if (argument!!.equals("followeee")) {
-            viewModel.selectAllFollower.observe(viewLifecycleOwner, Observer {
-                it?.let {
-                    adapter.submitList(it)
-                }
-            })
-        }
-*/
 
         binding.backBtn.setOnClickListener {
             findNavController().popBackStack()
         }
 
+        viewModel.selectAll.observe(viewLifecycleOwner, Observer {
+            Log.e("selectAll","======================================================")
+            Log.e("selectAll","${it}")
+            Log.e("selectAll","======================================================")
+        })
 
         return binding.root
 

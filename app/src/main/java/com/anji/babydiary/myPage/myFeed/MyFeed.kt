@@ -130,6 +130,20 @@ class MyFeed : Fragment() {
         })
 
 
+        binding.followerLabel.setOnClickListener {
+            findNavController().navigate(MyFeedDirections.actionMyFeedToFollower("follower"))
+        }
+        binding.numFollower.setOnClickListener {
+            findNavController().navigate(MyFeedDirections.actionMyFeedToFollower("follower"))
+        }
+
+        binding.followingLabel.setOnClickListener {
+            findNavController().navigate(MyFeedDirections.actionMyFeedToFollower("following"))
+        }
+        binding.numFollowing.setOnClickListener {
+            findNavController().navigate(MyFeedDirections.actionMyFeedToFollower("following"))
+        }
+
 
         return binding.root
     }

@@ -23,16 +23,21 @@
         android:id="@+id/user_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="jions"
+        style="@style/feedTextBold"
+        android:textSize="13sp"
+        android:textColor="@color/calendarTextColor"
         app:layout_constraintStart_toEndOf="@+id/follow_img"
         app:layout_constraintTop_toTopOf="@+id/follow_img"
         android:layout_marginLeft="13sp"/>
 
     <TextView
         android:id="@+id/user_intro"
+        style="@style/feedTextStyler"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="13sp"
         android:text="intro"
+        android:textColor="@color/calendarTextColor"
         app:layout_constraintBottom_toBottomOf="@+id/follow_img"
         app:layout_constraintStart_toStartOf="@+id/user_id"
         app:layout_constraintTop_toBottomOf="@+id/user_id" />
