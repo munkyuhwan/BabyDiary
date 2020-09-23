@@ -19,14 +19,15 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.chauthai.swipereveallayout.ViewBinderHelper
 import kotlinx.coroutines.*
 
-class TipsCommentListAdapter(val activity:Activity, val lifecycleOwner: LifecycleOwner): ListAdapter<TipsComment, TipsCommentListAdapter.ViewHolder>(TipsCommentListDiffCallback())  {
+class TipsCommentListAdapter(val activity:Activity, val lifecycleOwner: LifecycleOwner, val editClicked: TipEditClicked, val deleteClicked: TipDeleteClicked): ListAdapter<TipsComment, TipsCommentListAdapter.ViewHolder>(TipsCommentListDiffCallback())  {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)!!
         val res = holder.itemView.context.resources
-        holder.bind(item, activity, lifecycleOwner)
+        holder.bind(item, activity, lifecycleOwner, editClicked, deleteClicked)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,8 +35,14 @@ class TipsCommentListAdapter(val activity:Activity, val lifecycleOwner: Lifecycl
     }
 
     class ViewHolder private constructor(val binding: CommentListItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind (item:TipsComment, activity:Activity, lifecycleOwner: LifecycleOwner) {
+
+
+        fun bind (item:TipsComment, activity:Activity, lifecycleOwner: LifecycleOwner, editClicked: TipEditClicked, deleteClicked: TipDeleteClicked) {
             //binding.idx = item
+            binding.tipsComment = item
+            binding.editClick = editClicked
+            binding.deleteClick = deleteClicked
+
             binding.commentText.text = item.commentText.toString()
 
             val profileDatabase = ProfileDatabase.getInstance(activity.applicationContext).database
@@ -43,10 +50,8 @@ class TipsCommentListAdapter(val activity:Activity, val lifecycleOwner: Lifecycl
             val uiScope = CoroutineScope(Dispatchers.Main + job)
             val profileData = MutableLiveData<Profiles>()
 
+
             profileData.observe(lifecycleOwner, Observer {
-                Log.e("profileData","====================================================")
-                Log.e("profileData","${it}")
-                Log.e("profileData","====================================================")
 
                 binding.userId.text = "${it.name}"
 
@@ -94,6 +99,9 @@ class TipsCommentListAdapter(val activity:Activity, val lifecycleOwner: Lifecycl
             }
 
         }
+
+
+
 
     }
 

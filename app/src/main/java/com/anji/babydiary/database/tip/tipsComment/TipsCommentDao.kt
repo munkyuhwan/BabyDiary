@@ -20,6 +20,13 @@ interface TipsCommentDao {
     @Query("SELECT * FROM tbl_tip_comment WHERE tip_idx = :tipPk ")
     fun selectByTipOnlyIdx(tipPk:Long):LiveData<List<TipsComment>>
 
+
+    @Query("UPDATE tbl_tip_comment SET comment_text= :text WHERE idx = :idx ")
+    fun updateTipComment(idx:Long, text:String)
+
+    @Query("DELETE FROM tbl_tip_comment WHERE idx=:idx")
+    fun deleteTipComment(idx:Long)
+
 /*
     @Transaction
     @Query("SELECT * FROM tbl_tip_comment WHERE tip_idx = :tipPk ")

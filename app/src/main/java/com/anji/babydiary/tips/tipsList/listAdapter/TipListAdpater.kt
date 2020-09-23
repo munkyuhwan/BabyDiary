@@ -41,7 +41,6 @@ class TipListAdpater(val clickListener: TipClickListener, val tipLikeClicked: Ti
         fun bind (item: Tips, clickListener: TipClickListener, tipLikeClicked: TipLikeClicked,  tipCommentClicked: TipCommentClicked, activity:Activity, lifecycleOwner: LifecycleOwner) {
             //binding.idx = item
 
-
             binding.tips = item
 
             binding.likeClickListener = tipLikeClicked

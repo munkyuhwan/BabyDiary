@@ -1,6 +1,7 @@
 package com.anji.babydiary.tips.tipsComment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,14 +9,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.anji.babydiary.R
-import com.anji.babydiary.common.BaseFragment
 import com.anji.babydiary.database.tip.tipsComment.TipsCommentDatabase
 import com.anji.babydiary.databinding.TipsCommentFragmentBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+
 
 class TipsComment : Fragment() {
 
@@ -41,7 +44,22 @@ class TipsComment : Fragment() {
         binding.vm = viewModel
 
 
-        val adapter = TipsCommentListAdapter(requireActivity(), viewLifecycleOwner)
+        val adapter = TipsCommentListAdapter(
+            requireActivity(),
+            viewLifecycleOwner,
+            TipEditClicked(editClickListener = {resultId, newText ->
+                Log.e("editText","=========================================================")
+                Log.e("editText","${resultId}: ${newText}")
+                Log.e("editText","=========================================================")
+                viewModel.updateTipComment(resultId, newText.toString())
+            }),
+            TipDeleteClicked {
+                viewModel.deleteTipCOmment(it)
+            }
+            )
+
+
+
         binding.commentList.adapter = adapter
 
         viewModel.dataList.observe(viewLifecycleOwner, Observer {
@@ -65,6 +83,9 @@ class TipsComment : Fragment() {
 
         })
 
+        binding.backBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
 
         return binding.root

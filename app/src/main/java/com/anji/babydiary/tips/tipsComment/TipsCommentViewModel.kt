@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.anji.babydiary.common.MyShare.MyShare
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.database.profile.Profiles
+import com.anji.babydiary.database.tip.Tips
 import com.anji.babydiary.database.tip.tipsComment.TipsComment
 import com.anji.babydiary.database.tip.tipsComment.TipsCommentDao
 import kotlinx.coroutines.*
@@ -34,6 +35,7 @@ class TipsCommentViewModel(val database:TipsCommentDao, val tipIdx:Long,  applic
         var tipComment = TipsComment()
         tipComment.tipIdx = tipIdx
         tipComment.userIdx = MyShare.prefs.getLong("idx",0)
+        tipComment.commentText = text.toString()
 
         uiScope.launch {
             insertTipComment(tipComment)
@@ -48,4 +50,35 @@ class TipsCommentViewModel(val database:TipsCommentDao, val tipIdx:Long,  applic
 
     }
 
+    fun updateTipComment(idx:Long, newText:String) {
+        uiScope.launch{
+            queryUpdateTipComment(idx, newText)
+        }
+    }
+    suspend fun queryUpdateTipComment(commentIdx:Long, newText:String) {
+        withContext(Dispatchers.IO) {
+            database.updateTipComment(commentIdx, newText)
+        }
+    }
+
+    fun deleteTipCOmment(idx:Long) {
+        uiScope.launch{
+            queryDeleteTipComment(idx)
+        }
+    }
+    suspend fun queryDeleteTipComment(idx:Long) {
+        withContext(Dispatchers.IO) {
+            database.deleteTipComment(idx)
+        }
+    }
+
 }
+
+class TipEditClicked(val editClickListener:(resultId:Long, newText:CharSequence?)->Unit) {
+    fun onEditCLick(result: TipsComment, newText:CharSequence?) = editClickListener(result.idx, newText)
+}
+
+class TipDeleteClicked(val deleteClickListener:(resultId:Long)->Unit) {
+    fun onDeleteCLick(result: TipsComment) = deleteClickListener(result.idx)
+}
+
