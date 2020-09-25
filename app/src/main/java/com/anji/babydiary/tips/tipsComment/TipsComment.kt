@@ -1,7 +1,6 @@
 package com.anji.babydiary.tips.tipsComment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.anji.babydiary.R
+import com.anji.babydiary.common.itemAction.ItemTouchHelperCallback
 import com.anji.babydiary.database.tip.tipsComment.TipsCommentDatabase
 import com.anji.babydiary.databinding.TipsCommentFragmentBinding
 import com.bumptech.glide.Glide
@@ -48,19 +48,15 @@ class TipsComment : Fragment() {
             requireActivity(),
             viewLifecycleOwner,
             TipEditClicked(editClickListener = {resultId, newText ->
-                Log.e("editText","=========================================================")
-                Log.e("editText","${resultId}: ${newText}")
-                Log.e("editText","=========================================================")
                 viewModel.updateTipComment(resultId, newText.toString())
             }),
             TipDeleteClicked {
                 viewModel.deleteTipCOmment(it)
             }
-            )
-
-
+        )
 
         binding.commentList.adapter = adapter
+
 
         viewModel.dataList.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -90,6 +86,7 @@ class TipsComment : Fragment() {
 
         return binding.root
     }
+
 
 
 }

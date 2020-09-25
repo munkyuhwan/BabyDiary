@@ -80,108 +80,106 @@
             android:id="@+id/iconScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="20sp"
             android:paddingTop="10sp"
             android:paddingBottom="10sp"
-            android:paddingLeft="20sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dailyCheckDetailTopLayer">
+
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/weightBtn"
                     style="@style/weightIcon"
-                    android:onClick="@{() -> writeViewModel.onItemClicked(0) }"
-                    />
+                    android:onClick="@{() -> writeViewModel.onItemClicked(0) }" />
+
                 <ImageButton
                     android:id="@+id/heightBtn"
                     style="@style/heightIcon"
-                    android:onClick="@{() -> writeViewModel.onItemClicked(1) }"
-                    />
+                    android:onClick="@{() -> writeViewModel.onItemClicked(1) }" />
+
                 <ImageButton
                     android:id="@+id/headBtn"
                     style="@style/headIcon"
-                    android:onClick="@{() -> writeViewModel.onItemClicked(2) }"
-                    />
+                    android:onClick="@{() -> writeViewModel.onItemClicked(2) }" />
 
                 <!-- green -->
                 <ImageButton
                     android:id="@+id/breastFeedBtn"
                     style="@style/breastFeedIcon"
-                    android:onClick="@{() -> writeViewModel.onItemClicked(3) }"
-                    />
+                    android:onClick="@{() -> writeViewModel.onItemClicked(3) }" />
+
                 <ImageButton
                     android:id="@+id/breastPumpFeedBtn"
                     style="@style/breastPumpFeedIcon"
-                    android:onClick="@{() -> writeViewModel.onItemClicked(4) }"
-                    />
+                    android:onClick="@{() -> writeViewModel.onItemClicked(4) }" />
+
                 <ImageButton
                     android:id="@+id/breastPumpSaveBtn"
                     style="@style/breastPumpSaveIcon"
-                    android:onClick="@{() -> writeViewModel.onItemClicked(5) }"
-                    />
+                    android:onClick="@{() -> writeViewModel.onItemClicked(5) }" />
+
                 <ImageButton
                     android:id="@+id/powerFeedBtn"
                     style="@style/powerFeedIcon"
-                    android:onClick="@{() -> writeViewModel.onItemClicked(6) }"
-                    />
+                    android:onClick="@{() -> writeViewModel.onItemClicked(6) }" />
+
                 <ImageButton
                     android:id="@+id/foodFeedBtn"
                     style="@style/foodIcon"
-                    android:onClick="@{() -> writeViewModel.onItemClicked(7) }"
-                    />
+                    android:onClick="@{() -> writeViewModel.onItemClicked(7) }" />
+
                 <ImageButton
                     android:id="@+id/sideFoodBtn"
                     style="@style/sideFoodIcon"
-                    android:onClick="@{() -> writeViewModel.onItemClicked(8) }"
-                    />
+                    android:onClick="@{() -> writeViewModel.onItemClicked(8) }" />
 
                 <!-- blue -->
                 <ImageButton
                     android:id="@+id/diaperBtn"
                     style="@style/diaperIcon"
-                    android:onClick="@{() -> writeViewModel.onItemClicked(9) }"
-                    />
+                    android:onClick="@{() -> writeViewModel.onItemClicked(9) }" />
+
                 <ImageButton
                     android:id="@+id/sleepBtn"
                     style="@style/sleepIcon"
-                    android:onClick="@{() -> writeViewModel.onItemClicked(10) }"
-                    />
+                    android:onClick="@{() -> writeViewModel.onItemClicked(10) }" />
+
                 <ImageButton
                     android:id="@+id/bathBtn"
                     style="@style/bathIcon"
-                    android:onClick="@{() -> writeViewModel.onItemClicked(11) }"
-                    />
+                    android:onClick="@{() -> writeViewModel.onItemClicked(11) }" />
+
                 <ImageButton
                     android:id="@+id/playBtn"
                     style="@style/playIcon"
-                    android:onClick="@{() -> writeViewModel.onItemClicked(12) }"
-                    />
+                    android:onClick="@{() -> writeViewModel.onItemClicked(12) }" />
 
                 <!-- purple -->
                 <ImageButton
                     android:id="@+id/hospitalBtn"
                     style="@style/hospitalIcon"
-                    android:onClick="@{() -> writeViewModel.onItemClicked(13) }"
-                    />
+                    android:onClick="@{() -> writeViewModel.onItemClicked(13) }" />
+
                 <ImageButton
                     android:id="@+id/temperatureBtn"
                     style="@style/temparatureIcon"
-                    android:onClick="@{() -> writeViewModel.onItemClicked(14) }"
-                    />
+                    android:onClick="@{() -> writeViewModel.onItemClicked(14) }" />
+
                 <ImageButton
                     android:id="@+id/pillBtn"
                     style="@style/pillIcon"
-                    android:onClick="@{() -> writeViewModel.onItemClicked(15) }"
-                    />
+                    android:onClick="@{() -> writeViewModel.onItemClicked(15) }" />
+
                 <ImageButton
                     android:id="@+id/injectionBtn"
                     style="@style/injectionIcon"
-                    android:onClick="@{() -> writeViewModel.onItemClicked(16) }"
-                    />
+                    android:onClick="@{() -> writeViewModel.onItemClicked(16) }" />
             </LinearLayout>
         </HorizontalScrollView>
 

@@ -1,5 +1,7 @@
 package com.anji.babydiary.dailyCheck.dailyCheckWrite
 
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
@@ -69,7 +71,6 @@ class DailyCheckWrite : Fragment() {
             }
         }
 
-        Log.e("arg","${requireArguments().size()}")
 
         if (requireArguments().size() <= 0) {
 
@@ -117,6 +118,10 @@ class DailyCheckWrite : Fragment() {
 
             it?.let{
                 listAdapter.submitList(it)
+                if (it.size > 0) {
+                    binding.recordList.background = resources.getDrawable(R.drawable.top_left_corner_white)
+                }
+
             }
         })
 

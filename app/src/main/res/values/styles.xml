@@ -503,7 +503,7 @@
         <item name="android:background">@drawable/daily_check_complete</item>
     </style>
     <style name="dailyCheckList">
-        <item name="android:background">@drawable/top_left_corner_white</item>
+        <item name="android:background">@drawable/top_left_corner_purple</item>
         <item name="android:paddingTop">20sp</item>
         <item name="android:paddingRight">20sp</item>
         <item name="android:paddingLeft">20sp</item>

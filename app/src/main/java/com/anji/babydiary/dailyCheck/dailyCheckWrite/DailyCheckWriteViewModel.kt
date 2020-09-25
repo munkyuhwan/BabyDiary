@@ -1,6 +1,7 @@
 package com.anji.babydiary.dailyCheck.dailyCheckWrite
 
 import android.app.Application
+import android.graphics.Color
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
@@ -48,6 +49,7 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao,val idx:Long, applica
 
     val initText = MutableLiveData<String>()
 
+
     init {
         calendarVisibility.value = View.VISIBLE
         detailVisibility.value = View.GONE
@@ -64,6 +66,7 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao,val idx:Long, applica
         uiScope.launch {
             selecteByDate()
         }
+
 
     }
 
