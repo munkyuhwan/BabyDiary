@@ -6,12 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.dailyCheck.DailyCheckViewModel
 import com.anji.babydiary.dailyCheck.DailyCheckViewModelFactory
+import com.anji.babydiary.dailyCheck.dailyCheckWrite.EditClickListener
 import com.anji.babydiary.dailyCheck.listAdapter.DailyCheckListAdapter
 import com.anji.babydiary.database.dailyCheck.DailyCheckDatabase
 import com.anji.babydiary.databinding.ActivityDailyCheckBinding
@@ -43,7 +45,12 @@ class DailyCheckCalendar : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.calendarViewModel = viewModel
 
-        val listAdapter = DailyCheckListAdapter(false)
+        val listAdapter = DailyCheckListAdapter(false,
+            EditClickListener {
+                //Toast.makeText(requireContext(), "${it}", Toast.LENGTH_SHORT).show()
+            },
+            requireParentFragment()
+            )
         binding.calendarRecordList.adapter = listAdapter
 
 

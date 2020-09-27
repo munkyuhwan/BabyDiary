@@ -17,7 +17,10 @@ import com.anji.babydiary.R
 import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.common.MyShare.MyShare
 import com.anji.babydiary.common.Utils
+import com.anji.babydiary.dailyCheck.DailyCheckViewModel
+import com.anji.babydiary.dailyCheck.DailyCheckViewModelFactory
 import com.anji.babydiary.dailyCheck.listAdapter.DailyCheckListAdapter
+import com.anji.babydiary.dailyCheck.listAdapter.DailyCheckListAdapterViewModelFactory
 import com.anji.babydiary.database.dailyCheck.DailyCheckDatabase
 import com.anji.babydiary.databinding.DailyCheckWriteFragmentBinding
 
@@ -111,7 +114,12 @@ class DailyCheckWrite : Fragment() {
         viewModel.selectedDay.value = day
 
 
-        val listAdapter = DailyCheckListAdapter(true)
+        val listAdapter = DailyCheckListAdapter(true,
+            EditClickListener {
+                Toast.makeText(requireContext(), "${it}", Toast.LENGTH_SHORT).show()
+            },
+            requireParentFragment()
+            )
         binding.recordList.adapter = listAdapter
 
         viewModel.dataToday.observe(viewLifecycleOwner, Observer {

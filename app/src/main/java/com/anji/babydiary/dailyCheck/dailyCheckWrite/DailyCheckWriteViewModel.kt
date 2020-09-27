@@ -15,6 +15,7 @@ import com.anji.babydiary.common.Utils
 import com.anji.babydiary.dailyCheck.DailyCheckListObj
 import com.anji.babydiary.database.dailyCheck.DailyCheck
 import com.anji.babydiary.database.dailyCheck.DailyCheckDao
+import com.anji.babydiary.database.mainFeed.MainFeed
 import kotlinx.coroutines.*
 import okhttp3.Dispatcher
 
@@ -260,5 +261,10 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao,val idx:Long, applica
 
     }
 
-
 }
+
+
+class EditClickListener(val clickListener:(resultId:Long)->Unit ) {
+    fun onClick(result: DailyCheck) = clickListener(result.idx)
+}
+

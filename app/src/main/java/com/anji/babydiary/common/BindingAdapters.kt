@@ -1,7 +1,9 @@
 package com.anji.babydiary.common
 
+import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
@@ -63,6 +65,16 @@ object BindingAdapters  {
             val p = view.layoutParams as MarginLayoutParams
             p.setMargins(marginTop.toInt(), 0, 0, 0)
             view.requestLayout()
+        }
+    }
+
+    @BindingAdapter("android:isVisible")
+    @JvmStatic
+    fun isVisible(view:ImageView, boolean: Boolean) {
+        if(boolean) {
+            view.visibility = View.VISIBLE
+        }else {
+            view.visibility = View.GONE
         }
     }
 
