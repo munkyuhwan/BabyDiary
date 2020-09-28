@@ -58,12 +58,11 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/tip_img"
-            style="@style/MainFeedImage"
-            android:layout_marginTop="15dp"
+            style="@style/TipImage"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/feed_image"
             android:contentDescription="@string/usericon"
             android:radius="30sp"
-            android:scaleType="centerCrop"
-            android:background="@drawable/feed_image"
             android:src="@drawable/sample_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -80,9 +80,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <CheckBox
             android:id="@+id/button"
-            style="@style/LikeButton"
+            style="@style/likeStyle"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_marginStart="10dp"

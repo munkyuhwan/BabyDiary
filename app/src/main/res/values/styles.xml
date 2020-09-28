@@ -62,6 +62,14 @@
         <item name="android:scaleType">centerCrop</item >
     </style>
 
+    <style name="TipImage" >
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/feed_image</item>
+        <item name="android:windowClipToOutline">true</item>
+        <item name="android:scaleType">fitStart</item >
+    </style>
+
     <style name="MainThumb">
         <item name="android:radius">30sp</item>
     </style>
