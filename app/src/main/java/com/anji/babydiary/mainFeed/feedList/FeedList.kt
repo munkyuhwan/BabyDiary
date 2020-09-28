@@ -76,7 +76,7 @@ class FeedList : BaseFragment() {
                 }
             },
             BookMarkClickListener {
-                //Toast.makeText(requireContext(), "${it}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "북마크되었습니다.", Toast.LENGTH_SHORT).show()
                 viewModel.insertBookMark(it)
             },
             viewModel,

@@ -160,6 +160,8 @@ class FeedListViewModel(
             updateLike(likeCnt, feedIdx)
         }
 
+        allFeeds()
+
     }
 
     private suspend fun likeInsert(like: Likes) {

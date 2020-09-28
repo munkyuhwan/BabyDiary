@@ -2,6 +2,7 @@ package com.anji.babydiary.mainFeed.feedDetail
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -44,7 +45,7 @@ class MyFeedDetail : Fragment() {
 
         viewModel.select.observe(viewLifecycleOwner, Observer {
             it?.let {
-               // viewModel.getWriterProfile()
+                viewModel.startSelectWriteProfile(it.userIdx)
                // binding.writtenDate.text = Utils.getDate(it.timeMilli, "YYYY. MM. dd")
                 binding.writtenDate.text = "${it.year} ${String.format("%02d",it.month)} ${String.format("%02d", it.date)}"
                 binding.feedText.text = it.title
@@ -71,13 +72,21 @@ class MyFeedDetail : Fragment() {
         })
 
         binding.commentBtn.setOnClickListener {
-            findNavController().navigate(MyFeedDetailDirections.actionMyFeedDetailToComment3(idx) )
+            findNavController().navigate(MyFeedDetailDirections.actionMyFeedDetailToComment(idx))
         }
 
         binding.dailycheckBtn.setOnClickListener {
 
         }
+        viewModel.writerProfile.observe(viewLifecycleOwner, Observer {
+            Log.e("writerProfile","==================================================")
+            Log.e("writerProfile","${it}")
+            Log.e("writerProfile","==================================================")
 
+            it?.let {
+                binding.nameKid.text = it.name
+            }
+        })
         return binding.root
     }
 

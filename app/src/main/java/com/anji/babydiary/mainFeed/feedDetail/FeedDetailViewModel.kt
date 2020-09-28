@@ -32,20 +32,20 @@ class FeedDetailViewModel(val idx:Long, val database:MainFeedDAO, val likeDataba
     init {
 
     }
-/*
-    fun startSelectWriteProfile() {
+
+    fun startSelectWriteProfile(userIdx:Long) {
         uiScope.launch {
-            selectWriterProfile()
+            selectWriterProfile(userIdx)
         }
     }
 
 
-    suspend fun selectWriterProfile() {
+    suspend fun selectWriterProfile(userIdx:Long) {
         withContext(Dispatchers.IO) {
-            writerProfile.postValue( profileDatabase.selectProfile(select.value!!.userIdx).value )
+            writerProfile.postValue( profileDatabase.selectProfileData(userIdx) )
         }
     }
-*/
+
 
     fun onLikeButtonClicked(likeCnt:CharSequence) {
         var like:Likes = Likes()

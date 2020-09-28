@@ -82,12 +82,12 @@
             android:name="feedIdx"
             app:argType="long" />
         <action
-            android:id="@+id/action_myFeedDetail_to_comment3"
-            app:destination="@id/comment3" />
+            android:id="@+id/action_myFeedDetail_to_comment"
+            app:destination="@id/comment" />
     </fragment>
     <fragment
-        android:id="@+id/comment3"
-        android:name="com.anji.babydiary.comment.TipsComment"
+        android:id="@+id/comment"
+        android:name="com.anji.babydiary.comment.Comment"
         android:label="Comment" >
         <argument
             android:name="feedIdx"

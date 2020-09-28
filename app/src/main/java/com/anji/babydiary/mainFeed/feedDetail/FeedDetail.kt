@@ -60,7 +60,7 @@ class FeedDetail : Fragment() {
 
                 viewModel.writerIdx = it.userIdx
 
-
+                viewModel.startSelectWriteProfile(it.userIdx)
                 //binding.writtenDate.text = Utils.getDate(it.date, "YYYY. MM. dd")
                 binding.writtenDate.text = "${it.year} ${String.format("%02d",it.month)} ${String.format("%02d",it.date)}"
                 binding.feedText.text = it.title
@@ -91,6 +91,10 @@ class FeedDetail : Fragment() {
         }
 
         viewModel.writerProfile.observe(viewLifecycleOwner, Observer {
+            Log.e("writerProfile","==================================================")
+            Log.e("writerProfile","${it}")
+            Log.e("writerProfile","==================================================")
+
             it?.let {
                 binding.nameKid.text = it.name
             }

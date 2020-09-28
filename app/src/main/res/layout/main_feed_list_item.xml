@@ -83,6 +83,8 @@
         <Button
             android:id="@+id/button"
             style="@style/LikeButton"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:layout_marginStart="10dp"
             android:onClick="@{() -> viewModel.onLikeButtonClicked(likeCnt.getText(), mainFeed.idx) }"
             app:layout_constraintBottom_toBottomOf="@+id/like_cnt"
@@ -92,6 +94,8 @@
         <Button
             android:id="@+id/toComment"
             style="@style/CommentButton"
+            android:layout_width="15sp"
+            android:layout_height="15sp"
             android:layout_marginStart="10dp"
             android:onClick="@{() -> commentClickListener.onCommentClick(mainFeed)}"
             app:layout_constraintBottom_toBottomOf="@+id/button"
