@@ -71,7 +71,7 @@
             app:layout_constraintTop_toTopOf="@+id/checkIcon" />
 
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/inputDataWrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
             android:foregroundGravity="center_vertical"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/checkIcon"
             app:layout_constraintTop_toTopOf="parent">
@@ -89,13 +89,11 @@
                 style="@style/timeCount"
                 android:layout_width="51sp"
                 android:layout_height="25sp"
-                android:layout_marginTop="15sp"
-                android:layout_marginRight="5sp"
-                android:layout_marginBottom="15sp"
+                android:layout_marginEnd="20dp"
                 android:hint="왼쪽"
-                android:onClick="@{() -> viewModel.startCounting(true)}"
-                android:visibility="@{viewModel.isCountDown}"
-                app:setCountingText="@{viewModel.leftCounting}" />
+                app:layout_constraintBottom_toBottomOf="@+id/rightTime"
+                app:layout_constraintEnd_toStartOf="@+id/rightTime"
+                app:layout_constraintTop_toTopOf="@+id/rightTime" />
 
             <TextView
                 android:id="@+id/rightTime"
@@ -104,20 +102,23 @@
                 android:layout_height="25sp"
                 android:layout_marginLeft="5sp"
                 android:hint="오른쪽"
-                android:onClick="@{() -> viewModel.startCounting(false)}"
-                android:visibility="@{viewModel.isCountDown}"
-                app:setCountingText="@{viewModel.rightCounting}" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/completeBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"  />
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/checkMemo"
                 style="@style/InputStyle"
                 android:layout_width="160sp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14sp"
-                android:layout_marginBottom="14sp"
                 android:padding="2sp"
                 android:textColor="@color/calendarTextColor"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/completeBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                 android:id="@+id/completeBtn"
@@ -126,7 +127,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/inputDataWrapper"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/inputDataWrapper" />
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

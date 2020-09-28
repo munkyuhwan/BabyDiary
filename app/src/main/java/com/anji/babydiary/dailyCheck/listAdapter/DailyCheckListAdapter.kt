@@ -18,18 +18,11 @@ import com.anji.babydiary.dailyCheck.DailyCheckViewModel
 import com.anji.babydiary.dailyCheck.DailyCheckViewModelFactory
 import com.anji.babydiary.dailyCheck.dailyCheckWrite.EditClickListener
 import com.anji.babydiary.database.dailyCheck.DailyCheck
+import com.anji.babydiary.database.dailyCheck.DailyCheckDatabase
 import com.anji.babydiary.databinding.DailyCheckListAdapterBinding
 import kotlinx.coroutines.*
 
 class DailyCheckListAdapter(val isDetail:Boolean, val editClickListener:EditClickListener, val fragment:Fragment):ListAdapter<DailyCheck, DailyCheckListAdapter.DailyCheckViewHolder>(DailyCHeckListDiffCallback()) {
-
-    var leftCounting:Int = 0
-    var rightCounting:Int = 0
-    var isLeftCountingStarted:Boolean = true
-    var isRightCountingStarted:Boolean = true
-
-    val job = Job()
-    val uiScope = CoroutineScope(Dispatchers.Main + job)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyCheckViewHolder {
         return DailyCheckListAdapter.DailyCheckViewHolder.from(parent)
@@ -47,8 +40,9 @@ class DailyCheckListAdapter(val isDetail:Boolean, val editClickListener:EditClic
             binding.checkCategory.text = DailyCheckListObj.itemName[item.category]
             binding.editClick = editClickListener
 
+            val database = DailyCheckDatabase.getInstance(fragment.requireContext()).database
 
-            val viewModelFactory = DailyCheckListAdapterViewModelFactory()
+            val viewModelFactory = DailyCheckListAdapterViewModelFactory(database, fragment.requireActivity().application)
             val vm = ViewModelProviders.of(fragment, viewModelFactory).get(DailyCheckListAdapterViewModel::class.java)
             binding.viewModel = vm
 
@@ -72,17 +66,36 @@ class DailyCheckListAdapter(val isDetail:Boolean, val editClickListener:EditClic
                 binding.checkCategory.visibility = View.GONE
                 binding.checkText.visibility = View.GONE
                 binding.checkTime.visibility = View.GONE
+                if (item.valueTwo!="") {
+                    binding.rightTime.visibility = View.VISIBLE
+                    binding.leftTime.visibility = View.VISIBLE
+                    binding.checkMemo.visibility = View.GONE
+                }else {
+                    binding.rightTime.visibility = View.GONE
+                    binding.leftTime.visibility = View.GONE
+                    binding.checkMemo.visibility = View.VISIBLE
+                }
                 binding.inputDataWrapper.visibility = View.VISIBLE
             }
+
             binding.completeBtn.setOnClickListener {
                 binding.checkCategory.visibility = View.VISIBLE
                 binding.checkText.visibility = View.VISIBLE
                 binding.checkTime.visibility = View.VISIBLE
                 binding.inputDataWrapper.visibility = View.GONE
+                if (item.valueTwo!="") {
+                    vm.completeEdit(item.idx, binding.leftTime.text.toString(),binding.rightTime.text.toString())
+                }else {
+                    vm.completeEdit(item.idx, binding.checkMemo.text.toString(),"")
+                }
             }
 
             binding.leftTime.setOnClickListener {
-                startCounting(true)
+                startCounting(true, fragment)
+            }
+
+            binding.rightTime.setOnClickListener {
+                startCounting(false, fragment)
             }
 
             binding.executePendingBindings()
@@ -95,10 +108,19 @@ class DailyCheckListAdapter(val isDetail:Boolean, val editClickListener:EditClic
                 val binding = DailyCheckListAdapterBinding.inflate(layoutInflater, parent, false)
                 return DailyCheckViewHolder(binding)
             }
+
+            var leftCounting:Int = 0
+            var rightCounting:Int = 0
+            var isLeftCountingStarted:Boolean = true
+            var isRightCountingStarted:Boolean = true
+
+            val job = Job()
+            val uiScope = CoroutineScope(Dispatchers.Main + job)
+
         }
 
 
-        fun startCounting(isLeft:Boolean) {
+        fun startCounting(isLeft:Boolean, fragment: Fragment) {
             if (isLeft && leftCounting!! > 0 ) {
                 Log.e("is left couting:" ,"${isLeftCountingStarted!!}")
                 if (isLeftCountingStarted!!) {
@@ -106,12 +128,12 @@ class DailyCheckListAdapter(val isDetail:Boolean, val editClickListener:EditClic
                 }else {
                     isLeftCountingStarted = true
                     uiScope.launch {
-                        count(isLeft)
+                        count(isLeft,fragment)
                     }
                 }
             }else {
                 uiScope.launch {
-                    count(isLeft)
+                    count(isLeft,fragment)
                 }
             }
 
@@ -121,22 +143,25 @@ class DailyCheckListAdapter(val isDetail:Boolean, val editClickListener:EditClic
                 }else {
                     isRightCountingStarted = true
                     uiScope.launch {
-                        count(isLeft)
+                        count(isLeft,fragment)
                     }
                 }
             }else {
                 uiScope.launch {
-                    count(isLeft)
+                    count(isLeft,fragment)
                 }
             }
         }
 
-        suspend fun count(isLeft:Boolean) {
+        suspend fun count(isLeft:Boolean, fragment: Fragment) {
             withContext(Dispatchers.IO) {
                 if (isLeft) {
                     while (isLeftCountingStarted!!) {
                         Thread.sleep(1000)
                         leftCounting = leftCounting + 1
+                        fragment.requireActivity().runOnUiThread {
+                            binding.leftTime.text = leftCounting.toString()
+                        }
                         Log.e("count","================================================================================")
                         Log.e("count","count: ${leftCounting}")
                         Log.e("count","================================================================================")
@@ -145,6 +170,9 @@ class DailyCheckListAdapter(val isDetail:Boolean, val editClickListener:EditClic
                     while (isRightCountingStarted) {
                         Thread.sleep(1000)
                         rightCounting = (rightCounting + 1)
+                        fragment.requireActivity().runOnUiThread {
+                            binding.rightTime.text = rightCounting.toString()
+                        }
                     }
                 }
             }

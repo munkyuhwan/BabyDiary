@@ -24,6 +24,10 @@ interface DailyCheckDao  {
     @Query("UPDATE tbl_daily_check SET value_one= :valueOne, value_two= :valueTwo  WHERE  user_idx= :idx AND category= :category AND insert_year= :year AND insert_month= :month AND insert_date = :date")
     fun update(valueOne:String, valueTwo:String, category:Int, year: Int, month: Int, date: Int, idx:Long)
 
+
+    @Query("UPDATE tbl_daily_check SET value_one= :valueOne, value_two= :valueTwo  WHERE  idx = :idx")
+    fun updateByIdx(valueOne:String, valueTwo:String, idx:Long)
+
     @Query("DELETE FROM tbl_daily_check")
     fun delete();
 }
