@@ -54,6 +54,13 @@ class WriteProductViewModel(val database:ShoppingDao, application: Application) 
         }
     }
 
+    private suspend fun insertData(shopdata:Shopping) {
+        withContext(Dispatchers.IO) {
+            database.insert(shopdata)
+
+        }
+    }
+
     fun setURLTag(url:CharSequence) {
 
         if (url.toString().equals("")) {
@@ -86,12 +93,6 @@ class WriteProductViewModel(val database:ShoppingDao, application: Application) 
         return isValid
     }
 
-    private suspend fun insertData(shopdata:Shopping) {
-        withContext(Dispatchers.IO) {
-            database.insert(shopdata)
-
-        }
-    }
 
 
 }

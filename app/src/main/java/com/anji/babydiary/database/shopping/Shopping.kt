@@ -16,5 +16,7 @@ data class Shopping(
     @ColumnInfo(name = "product_url")
     var url:String = "",
     @ColumnInfo(name = "product_image")
-    var imgDir: String = ""
+    var imgDir: String = "",
+    @ColumnInfo(name = "product_type")
+    var productType: String = ""
 )
