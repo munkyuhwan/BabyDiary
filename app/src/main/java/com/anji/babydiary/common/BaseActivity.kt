@@ -73,14 +73,7 @@ abstract class BaseActivity() : AppCompatActivity() {
 
 
     init {
-
         Log.e("user","================init========================================")
-
-
-
-
-
-
 
     }
 
@@ -182,7 +175,6 @@ abstract class BaseActivity() : AppCompatActivity() {
 
 
         mainFeed.timeMilli = Utils.getMilliFromDate("${year} ${month} ${date} ${hour}:${min}")
-
 
         uiScope.launch {
             insertFeed(mainFeed)

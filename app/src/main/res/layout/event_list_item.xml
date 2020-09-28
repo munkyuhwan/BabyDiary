@@ -19,7 +19,7 @@
         android:onClick="@{() -> clickListener.onEventClick(event)}"
         android:foregroundGravity="center_vertical|fill_vertical|center_horizontal">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/event_list_img"
             android:layout_width="match_parent"
             android:layout_height="300sp"

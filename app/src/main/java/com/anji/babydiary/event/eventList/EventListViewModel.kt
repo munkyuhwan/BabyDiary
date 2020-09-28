@@ -22,16 +22,16 @@ class EventListViewModel(val database:EventDao, application: Application) : Andr
     }
 
 
-    fun insertData() {
+    fun insertData(image:String, title:String, text:String ) {
         Log.e("insert","======================================================")
         Log.e("insert","insert")
         Log.e("insert","======================================================")
 
         uiScope.launch {
             var event = Event()
-            event.title = "여름 이벤트!!!"
-            event.text = "여름 이벤트 시작!!"
-            event.imgDir = selectedImage.value.toString()
+            event.title = "${title}"
+            event.text = "${text}"
+            event.imgDir = "${image}"
             insert(event)
         }
     }
@@ -55,7 +55,7 @@ class EventListViewModel(val database:EventDao, application: Application) : Andr
 
     fun onImageSelected(data: Intent?) {
         selectedImage.value = data?.data!!
-        insertData()
+        //insertData()
     }
 
 }

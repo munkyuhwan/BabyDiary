@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
+import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.event.Event
 import com.anji.babydiary.database.event.EventDatabase
 import com.anji.babydiary.databinding.EventDetailFragmentBinding
@@ -37,7 +38,13 @@ class EventDetail : Fragment() {
 
         viewModel.eventDetail.observe(viewLifecycleOwner, Observer {
             it?.let {
-                Glide.with(binding.root.context).load(it.imgDir).into(binding.eventDetailImage)
+                //Glide.with(binding.root.context).load(it.imgDir).into(binding.eventDetailImage)
+                Glide.with(binding.root.context)
+                    .load(  resources.getIdentifier(it.imgDir, "drawable", requireActivity().packageName))
+                    //.apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
+                    .into(binding.eventDetailImage)
+                Utils.setMyFeedListImg(binding.eventDetailImage)
+
                 binding.eventDetailTitle.text = it.title.toString()
                 binding.eventDetailText.text = it.text.toString()
             }
