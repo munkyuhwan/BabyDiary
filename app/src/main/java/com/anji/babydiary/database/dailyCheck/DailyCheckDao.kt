@@ -18,6 +18,9 @@ interface DailyCheckDao  {
     @Query("SELECT * FROM tbl_daily_check WHERE user_idx= :idx AND insert_year = :year AND insert_month = :month AND insert_date = :date ORDER BY insert_hour, insert_min")
     fun selectByDate(year:Int, month:Int, date:Int, idx:Long):List<DailyCheck>
 
+    @Query("SELECT * FROM tbl_daily_check WHERE user_idx= :idx AND insert_year = :year AND insert_month = :month AND insert_date = :date ORDER BY insert_hour, insert_min")
+    fun selectByDateLiveData(year:Int, month:Int, date:Int, idx:Long):LiveData<List<DailyCheck>>
+
     @Query("SELECT * FROM tbl_daily_check WHERE user_idx= :idx AND category= :category AND insert_year= :year AND insert_month= :month AND insert_date = :date")
     fun selectByCategory(category:Int, year: Int, month: Int, date: Int, idx: Long):DailyCheck
 

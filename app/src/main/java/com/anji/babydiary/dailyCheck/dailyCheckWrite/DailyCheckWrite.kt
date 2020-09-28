@@ -98,6 +98,8 @@ class DailyCheckWrite : Fragment() {
             container,
             false
         )
+        binding.lifecycleOwner = viewLifecycleOwner
+
 
         val application = requireNotNull(this.activity).application
         val database = DailyCheckDatabase.getInstance(application).database
@@ -105,7 +107,6 @@ class DailyCheckWrite : Fragment() {
         val viewModelFactory = DailyCheckWriteViewModelFactory(database, idx, application)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(DailyCheckWriteViewModel::class.java)
 
-        binding.lifecycleOwner = viewLifecycleOwner
         binding.writeViewModel = viewModel
 
         viewModel.selectedYear.value = year

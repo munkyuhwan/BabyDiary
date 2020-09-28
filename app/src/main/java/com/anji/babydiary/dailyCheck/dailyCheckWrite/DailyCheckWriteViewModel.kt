@@ -39,7 +39,11 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao,val idx:Long, applica
     val job = Job()
     val uiScope = CoroutineScope(Dispatchers.Main + job)
 
-    var dataToday = MutableLiveData<List<DailyCheck>>()
+    //var dataToday = MutableLiveData<List<DailyCheck>>()
+    var _dataToday = MutableLiveData<List<DailyCheck>>()
+    var dataToday:LiveData<List<DailyCheck>>
+        get() = _dataToday
+        set(value) {}
     var selectedData = MutableLiveData<DailyCheck>()
     val marginTop = MutableLiveData<Float>()
 
@@ -73,7 +77,9 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao,val idx:Long, applica
 
     suspend fun selecteByDate() {
         withContext(Dispatchers.IO) {
-            dataToday.postValue(database.selectByDate(selectedYear.value!!.toInt(), selectedMonth.value!!.toInt(), selectedDate.value!!.toInt(), idx) )
+            _dataToday.postValue(database.selectByDate(selectedYear.value!!.toInt(), selectedMonth.value!!.toInt(), selectedDate.value!!.toInt(), idx) )
+            dataToday = database.selectByDateLiveData(selectedYear.value!!.toInt(), selectedMonth.value!!.toInt(), selectedDate.value!!.toInt(), idx)
+
         }
     }
 
