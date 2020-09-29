@@ -13,6 +13,7 @@ import com.anji.babydiary.database.profile.ProfileDao
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.database.profile.Profiles
 import com.anji.babydiary.databinding.ActivityMainBinding
+import com.anji.babydiary.introduction.IntroductionActivity
 import com.anji.babydiary.login.Login
 import com.anji.babydiary.mainFeed.MainFeedActivity
 import com.google.android.gms.tasks.OnCompleteListener
@@ -95,7 +96,7 @@ class MainActivity : BaseActivity() {
 
     private fun goMain() {
         //CommonCode.USER_IDX = 1
-        val intent:Intent = Intent(this, Login::class.java)
+        val intent:Intent = Intent(this, IntroductionActivity::class.java)
         overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
         startActivity(intent)
         finish()

@@ -19,9 +19,15 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".search.SearchActivity"
+        <activity
+            android:name=".introduction.IntroductionActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
-            android:windowSoftInputMode="adjustPan" ></activity>
+            >
+        </activity>
+        <activity
+            android:name=".search.SearchActivity"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".login.Login"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
@@ -64,7 +70,6 @@
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
