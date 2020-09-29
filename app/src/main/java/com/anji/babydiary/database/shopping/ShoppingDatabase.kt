@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Shopping::class], version = 5, exportSchema = false)
+@Database(entities = [Shopping::class], version = 6, exportSchema = false)
 abstract class ShoppingDatabase:RoomDatabase() {
 
     abstract val database:ShoppingDao
@@ -31,3 +31,5 @@ abstract class ShoppingDatabase:RoomDatabase() {
     }
 
 }
+
+
