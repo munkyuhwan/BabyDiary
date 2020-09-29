@@ -1,5 +1,7 @@
 package com.anji.babydiary.shopping.listFragment
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
@@ -15,8 +17,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.anji.babydiary.R
+import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.database.shopping.ShoppingDatabase
 import com.anji.babydiary.databinding.ShopListFragmentBinding
+import com.anji.babydiary.search.SearchActivity
 import com.anji.babydiary.shopping.listFragment.listAdapter.ShoppingListAdapter
 
 
@@ -50,9 +54,18 @@ class ShopListFragment : Fragment() {
 
         binding.setLifecycleOwner(this)
 
-        viewModel.selectAll()
         viewModel.allProduct.observe(viewLifecycleOwner, Observer {
 
+            it?.let {
+                Log.e("products", "===============================================")
+                Log.e("products", "${it}")
+                Log.e("products", "===============================================")
+                adapter.submitList(it)
+            }
+
+        })
+
+        viewModel.allProductCheck.observe(viewLifecycleOwner, Observer {
             if (it.size <= 0) {
                 viewModel.saveData(
                     "사이즈 120의 남자아이 신발입니다\n" +
@@ -227,18 +240,18 @@ class ShopListFragment : Fragment() {
                             "클레이도 잘 떨어지고 물감놀이에도 사용할 수 있는 건 꿀팁입니당ㅎㅎㅎㅎㅎ \n" +
                             "링크 걸어둘게요~",
                     "4,000원",
-                                         "https://smartstore.naver.com/bo/products/2429185121",
+                    "https://smartstore.naver.com/bo/products/2429185121",
                     "recomm_5",
                     "recomm")
-            }else {
-                it?.let {
-                    Log.e("products", "===============================================")
-                    Log.e("products", "${it}")
-                    Log.e("products", "===============================================")
-                    adapter.submitList(it)
-                }
             }
         })
+
+
+        binding.appCompatImageView.setOnClickListener {
+
+            val intent: Intent = Intent(requireActivity(), SearchActivity::class.java)
+            startActivityForResult(intent, CommonCode.SEARCH_KEYWORD)
+        }
 
         val manager = GridLayoutManager(activity,2)
         binding.productList.layoutManager = manager
@@ -254,6 +267,26 @@ class ShopListFragment : Fragment() {
 
         return binding.root
     }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == CommonCode.SEARCH_KEYWORD && resultCode == Activity.RESULT_OK) {
+
+            data?.let {
+                it.extras?.let {
+                    viewModel.selectByKeyword(it.get("keyword").toString())
+                }
+            }
+
+        }
+
+
+
+    }
+
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

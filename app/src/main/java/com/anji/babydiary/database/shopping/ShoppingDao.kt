@@ -13,11 +13,16 @@ interface ShoppingDao {
     fun insert(shopping:Shopping)
 
     @Query("SELECT * FROM tbl_product")
-    fun selectAll():LiveData<List<Shopping>>
+    fun selectAll():List<Shopping>
 
 
     @Query("SELECT * FROM tbl_product WHERE product_title LIKE '%' || :keyword || '%'")
-    fun selectAllByKeyword(keyword:String):LiveData<List<Shopping>>
+    fun selectAllByKeyword(keyword:String):List<Shopping>
+
+    @Query("SELECT * FROM tbl_product WHERE product_type =  :keyword ")
+    fun selectAllByType(keyword:String):List<Shopping>
+
+
 
 
     @Query("DELETE FROM tbl_product")
