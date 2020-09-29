@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.common.BaseFragment
 import com.anji.babydiary.common.CommonCode
+import com.anji.babydiary.dailyCheck.dailyCheckWrite.DailyCheckWrite
 import com.anji.babydiary.database.bookmark.BookMarkDatabase
 import com.anji.babydiary.database.likes.LikesDatabase
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
@@ -102,6 +103,11 @@ class FeedList : BaseFragment() {
                 }
             }
         })
+
+        binding.dailycheckBtn.setOnClickListener {
+            val intent: Intent = Intent(requireActivity(), DailyCheckWrite::class.java)
+            startActivity(intent)
+        }
 
         //checkProfile(application)
 

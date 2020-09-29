@@ -18,9 +18,10 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/myFeedImage"
             android:layout_width="match_parent"
-            android:layout_height="325sp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="50sp"
-            android:scaleType="centerCrop"
+            android:src="@drawable/sample_2"
+            android:scaleType="fitStart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

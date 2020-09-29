@@ -140,13 +140,13 @@
             app:layout_constraintTop_toTopOf="@+id/feed_img" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageButton
+    <CheckBox
         android:id="@+id/bookMark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
-        android:background="#00000000"
-        android:src="@drawable/bookmark_btn"
+        android:background="@drawable/bookmark_check"
+        android:button="@null"
         app:layout_constraintBottom_toBottomOf="@+id/user_icon"
         app:layout_constraintEnd_toEndOf="@+id/constraintLayout12"
         app:layout_constraintTop_toTopOf="@+id/user_icon"
