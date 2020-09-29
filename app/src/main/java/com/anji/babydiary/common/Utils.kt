@@ -1,6 +1,9 @@
 package com.anji.babydiary.common
 
+import android.R
 import android.content.ContentResolver
+import android.content.Context
+import android.content.DialogInterface
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.net.Uri
@@ -8,7 +11,12 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.net.toUri
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
 import java.io.File
@@ -20,6 +28,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 object Utils {
     fun getMilliFromDate(dateFormat: String?): Long {
         var date = Date()
@@ -29,7 +38,7 @@ object Utils {
         } catch (e: ParseException) {
             e.printStackTrace()
         }
-        println("Today is $date")
+
         return date.time
     }
 
@@ -170,5 +179,25 @@ object Utils {
         }
     }
 
+    fun showAlert(context:Context, title:String ,msg:String, navController: NavController) {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(
+            ContextThemeWrapper(
+                context,
+                R.style.Theme_Material_Light_Dialog_NoActionBar
+            )
+        )
+        builder.setTitle("${title}")
+        builder.setMessage("${msg}")
+        builder.setPositiveButton("확인",
+            DialogInterface.OnClickListener { dialog, id ->
+
+                navController.popBackStack()
+
+            })
+
+        builder.setNegativeButton("취소",
+            DialogInterface.OnClickListener { dialog, id -> })
+        builder.show()
+    }
 
 }

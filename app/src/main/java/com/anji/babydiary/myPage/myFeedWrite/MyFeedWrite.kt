@@ -90,7 +90,7 @@ class MyFeedWrite : Fragment(), View.OnTouchListener {
         }
 
         binding.backBtn.setOnClickListener {
-            findNavController().popBackStack()
+            Utils.showAlert(requireContext(),"알림","피드작성을 취소하시겠습니까?\n작성중인 피드는 저장되지 않습니다.", findNavController())
         }
 
         binding.myFeedImage.setOnClickListener{

@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.common.OpenGallery
+import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.shopping.ShoppingDatabase
 import com.anji.babydiary.databinding.WriteProductFragmentBinding
 import com.anji.babydiary.shopping.listFragment.ShopListFragmentDirections
@@ -80,7 +81,7 @@ class WriteProduct : Fragment() {
         })
 
         binding.backBtn.setOnClickListener {
-            findNavController().popBackStack()
+            Utils.showAlert(requireContext(),"알림","제품작성을 취소하시겠습니까?\n작성중인 글은 저장되지 않습니다.", findNavController())
         }
 
         return binding.root

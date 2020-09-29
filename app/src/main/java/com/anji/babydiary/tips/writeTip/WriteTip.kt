@@ -92,6 +92,10 @@ class WriteTip : Fragment() {
             }
         }
 
+        binding.backBtn.setOnClickListener {
+            Utils.showAlert(requireContext(),"알림","팁작성을 취소하시겠습니까?\n작성중인 팁은 저장되지 않습니다.", findNavController())
+        }
+
 
 
 
