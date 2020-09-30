@@ -52,9 +52,9 @@ class MainFeedListAdapter(val clickListener: FeedClickListener, val commentClick
             val currentTimeMille = System.currentTimeMillis()
 
 
-            val hour = (currentTimeMille - item.timeMilli)/3600000
+            //val hour = (currentTimeMille - item.timeMilli)/3600000
 
-            //binding.textTime.text = "${hour.toString()} 시간 전"
+            binding.textTime.text = "${Utils.getDate(item.timeMilli, "yyyy.MM.dd HH:mm")}"
 
 
             if (item.imgTmpDir != "") {

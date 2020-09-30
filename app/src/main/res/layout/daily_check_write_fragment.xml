@@ -51,7 +51,7 @@
                 setDate="@{writeViewModel.selectedDate}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -59,13 +59,13 @@
             <TextView
                 android:id="@+id/selectedDay"
                 style="@style/calendarMonth"
-                android:layout_width="0dp"
-                android:layout_height="19dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:text="@{writeViewModel.selectedDay}"
-                app:layout_constraintBottom_toBottomOf="@+id/selectedDate"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/selectedDate"
-                app:layout_constraintTop_toTopOf="@+id/selectedDate" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/dailyCheckEdit"
@@ -180,6 +180,10 @@
                     android:id="@+id/injectionBtn"
                     style="@style/injectionIcon"
                     android:onClick="@{() -> writeViewModel.onItemClicked(16) }" />
+                <ImageButton
+                    android:id="@+id/etcBtn"
+                    style="@style/etcIcon"
+                    android:onClick="@{() -> writeViewModel.onItemClicked(17) }" />
             </LinearLayout>
         </HorizontalScrollView>
 

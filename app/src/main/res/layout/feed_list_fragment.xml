@@ -96,7 +96,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/main_nav_layout"
-                android:layout_width="404dp"
+                android:layout_width="match_parent"
                 android:layout_height="99dp"
                 android:background="@drawable/main_feed_actionbar"
                 android:orientation="horizontal"
@@ -125,7 +125,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"
                     app:layout_constraintHorizontal_bias="0.508"
-                    app:layout_constraintStart_toEndOf="@+id/dailycheck_btn"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.7" />
 

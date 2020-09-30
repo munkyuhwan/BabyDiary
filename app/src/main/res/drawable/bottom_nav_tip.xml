@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_checked="false" android:drawable="@drawable/bottom_nav_tip_off"></item>
-    <item android:state_checked="true" android:drawable="@drawable/bottom_nav_tip_on"></item>
+    <item android:state_checked="false" >
+        <layer-list>
+            <item android:drawable="@drawable/bottom_nav_tip_off" android:width="24sp" android:height="24sp">
+            </item>
+        </layer-list>
+    </item>
+    <item android:state_checked="true"  >
+        <layer-list>
+            <item android:drawable="@drawable/bottom_nav_tip_on" android:width="30sp" android:height="30sp">
+            </item>
+        </layer-list>
+    </item>
 </selector>

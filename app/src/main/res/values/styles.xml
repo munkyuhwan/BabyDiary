@@ -493,6 +493,11 @@
         <item name="android:src">@drawable/injection_icon</item>
     </style>
 
+    <style name="etcIcon" parent="iconSize">
+        <item name="android:background">@drawable/circle_purple</item>
+        <item name="android:src">@drawable/etc_icon</item>
+    </style>
+
     <!-- time count layout -->
 
     <style name="measurementWrapper">

@@ -6,7 +6,7 @@ import androidx.room.Entity
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Follow::class], version = 5, exportSchema = false)
+@Database(entities = [Follow::class], version = 6, exportSchema = false)
 abstract class FollowDatabase():RoomDatabase() {
 
     abstract val database:FollowDao

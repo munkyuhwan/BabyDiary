@@ -337,6 +337,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/tolocationLayer"
+                android:visibility="gone"
                 style="@style/InputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

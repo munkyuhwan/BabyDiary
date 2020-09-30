@@ -96,7 +96,7 @@ class MainActivity : BaseActivity() {
 
     private fun goMain() {
         //CommonCode.USER_IDX = 1
-        val intent:Intent = Intent(this, IntroductionActivity::class.java)
+        val intent:Intent = Intent(this, Login::class.java)
         overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
         startActivity(intent)
         finish()

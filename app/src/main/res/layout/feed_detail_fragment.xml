@@ -18,21 +18,22 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/myFeedImage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50sp"
-            android:src="@drawable/sample_2"
-            android:scaleType="fitStart"
+            android:layout_height="350sp"
+            android:layout_marginTop="68dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/sample_4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <CheckBox
             android:id="@+id/like_checkbox"
             style="@style/likeStyle"
             android:layout_width="20sp"
             android:layout_height="20sp"
             android:layout_marginStart="20dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/myFeedImage"
             app:layout_constraintStart_toStartOf="parent"
             android:onClick="@{() -> feedViewModel.onLikeButtonClicked(vibe.getText()) }"
@@ -44,7 +45,7 @@
             android:layout_width="20sp"
             android:layout_height="20sp"
             android:layout_marginStart="10dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/myFeedImage"
             app:layout_constraintStart_toEndOf="@+id/like_checkbox" />
 
@@ -55,14 +56,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="공감 0개"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/like_checkbox"
             app:layout_constraintTop_toBottomOf="@+id/like_checkbox" />
 
         <ScrollView
             android:id="@+id/scrollView2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="420dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +74,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20sp"
-                android:paddingRight="20sp">
+                android:paddingRight="20sp"
+                android:paddingBottom="20sp">
 
                 <TextView
                     android:id="@+id/written_date"

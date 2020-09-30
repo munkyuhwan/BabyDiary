@@ -1,23 +1,17 @@
 package com.anji.babydiary.dailyCheck.dailyCheckWrite
 
 import android.app.Application
-import android.graphics.Color
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.anji.babydiary.common.CommonCode
-import com.anji.babydiary.common.CountUpTimer
 import com.anji.babydiary.common.MyShare.MyShare
 import com.anji.babydiary.common.Utils
 import com.anji.babydiary.dailyCheck.DailyCheckListObj
 import com.anji.babydiary.database.dailyCheck.DailyCheck
 import com.anji.babydiary.database.dailyCheck.DailyCheckDao
-import com.anji.babydiary.database.mainFeed.MainFeed
 import kotlinx.coroutines.*
-import okhttp3.Dispatcher
 
 class DailyCheckWriteViewModel(val database: DailyCheckDao,val idx:Long, application: Application) : AndroidViewModel(application) {
 

@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
+import com.anji.babydiary.MainActivity
 import com.anji.babydiary.R
 import com.anji.babydiary.databinding.ActivityIntroductionBinding
 import com.anji.babydiary.login.Login
+import com.anji.babydiary.mainFeed.MainFeedActivity
 
 class IntroductionActivity : AppCompatActivity() {
 
@@ -32,7 +34,7 @@ class IntroductionActivity : AppCompatActivity() {
 
 
         binding.toNext.setOnClickListener {
-            val intent: Intent = Intent(this, Login::class.java)
+            val intent: Intent = Intent(this, MainFeedActivity::class.java)
             overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
             startActivity(intent)
             finish()

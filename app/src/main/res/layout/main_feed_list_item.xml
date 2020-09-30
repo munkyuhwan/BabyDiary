@@ -86,10 +86,10 @@
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_marginStart="10dp"
+            android:layout_marginBottom="5dp"
             android:onClick="@{() -> viewModel.onLikeButtonClicked(likeCnt.getText(), mainFeed.idx) }"
-            app:layout_constraintBottom_toBottomOf="@+id/like_cnt"
-            app:layout_constraintStart_toEndOf="@+id/like_cnt"
-            app:layout_constraintTop_toTopOf="@+id/like_cnt" />
+            app:layout_constraintBottom_toBottomOf="@+id/feed_img"
+            app:layout_constraintStart_toEndOf="@+id/feed_img" />
 
         <Button
             android:id="@+id/toComment"
@@ -108,8 +108,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginBottom="10sp"
-            app:layout_constraintBottom_toBottomOf="@+id/feed_img"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/feed_img" />
 
         <TextView

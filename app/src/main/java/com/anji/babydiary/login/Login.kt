@@ -13,6 +13,7 @@ import com.anji.babydiary.common.MyShare.MyShare
 import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.databinding.ActivityLoginBinding
+import com.anji.babydiary.introduction.IntroductionActivity
 import com.anji.babydiary.mainFeed.MainFeedActivity
 
 class Login : BaseActivity() {
@@ -44,7 +45,7 @@ class Login : BaseActivity() {
                     Log.e("user","${it}")
                     Log.e("user","${MyShare.prefs.getLong("idx", 0L)}")
                     Log.e("user","========================================================")
-                    val intent = Intent(this, MainFeedActivity::class.java)
+                    val intent = Intent(this, IntroductionActivity::class.java)
                     startActivity(intent)
                     finish()
                 }

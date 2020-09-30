@@ -3,8 +3,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <selector>
-            <item android:state_checked="false" android:drawable="@drawable/bottom_naigation_star_off"></item>
-            <item android:state_checked="true"  android:drawable="@drawable/bottom_nav_star_on">
+            <item android:state_checked="true" >
+                <layer-list>
+                    <item android:drawable="@drawable/bottom_nav_star_on" android:width="30sp" android:height="30sp">
+                    </item>
+                </layer-list>
+            </item>
+            <item android:state_checked="false"  >
+                <layer-list>
+                    <item android:drawable="@drawable/bottom_naigation_star_off" android:width="24sp" android:height="24sp">
+                    </item>
+                </layer-list>
             </item>
         </selector>
     </item>
