@@ -9,11 +9,12 @@ import com.anji.babydiary.common.MyShare.MyShare
 import com.anji.babydiary.database.comments.Comments
 import com.anji.babydiary.database.comments.CommentsDao
 import com.anji.babydiary.database.mainFeed.MainFeed
+import com.anji.babydiary.database.mainFeed.MainFeedDAO
 import com.anji.babydiary.database.profile.ProfileDao
 import com.anji.babydiary.database.profile.Profiles
 import kotlinx.coroutines.*
 
-class CommentViewModel(application: Application, val database:CommentsDao, val profileDatabase: ProfileDao, val idx:Long) : AndroidViewModel(application) {
+class CommentViewModel(application: Application, val database:CommentsDao, val profileDatabase: ProfileDao, val feedDatabase:MainFeedDAO, val idx:Long) : AndroidViewModel(application) {
 
     val totalList = database.selectAllByFeedIdx(idx)
     //val totalList = database.selectAllByFeedIdxWithProfile(idx)
@@ -22,6 +23,8 @@ class CommentViewModel(application: Application, val database:CommentsDao, val p
     val uiScope = CoroutineScope(Dispatchers.Main + job)
 
     val profile = profileDatabase.selectProfile(MyShare.prefs.getLong("idx", 0L))
+    val feed = feedDatabase.selectSingle(idx)
+    var feedWriterProfile = MutableLiveData<Profiles>()
     init {
     }
 
@@ -52,9 +55,24 @@ class CommentViewModel(application: Application, val database:CommentsDao, val p
 
     }
 
-
+    fun getProfile(userIdx:Long) {
+        uiScope.launch {
+            queryProfile(userIdx)
+        }
+    }
+    suspend fun queryProfile(userIdx: Long) {
+        withContext(Dispatchers.IO) {
+            feedWriterProfile.postValue(profileDatabase.selectProfileData(userIdx))
+        }
+    }
 
 }
+
+
+class CommentIdClick(val clickListener:(name:String)->Unit) {
+    fun onIdClick(name:String) = clickListener(name)
+}
+
 
 
 

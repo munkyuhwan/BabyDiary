@@ -38,8 +38,10 @@
             app:layout_constraintTop_toTopOf="@+id/myfeed_write"
             app:layout_constraintVertical_bias="0.7" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <TextView
             android:id="@+id/myfeed_write"
+            style="@style/MainFeedCategory"
+            android:text="댓글"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -53,15 +55,72 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/wholeLayer"
+        style="@style/LikeCnt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25sp"
+        android:layout_marginTop="120dp"
+        android:background="@drawable/bottom_border_layout"
+        android:paddingTop="15sp"
+        android:paddingBottom="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/userIcon"
+            android:layout_width="27sp"
+            android:layout_height="27sp"
+            android:contentDescription="@string/usericon"
+            android:src="@mipmap/ic_launcher"
+            android:theme="@style/MainFeedMemberThumbnail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/userId"
+            style="@style/MainFeedMemberAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            app:layout_constraintBottom_toBottomOf="@+id/userIcon"
+            app:layout_constraintStart_toEndOf="@+id/userIcon"
+            app:layout_constraintTop_toTopOf="@+id/userIcon" />
+
+        <TextView
+            android:id="@+id/feedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9sp"
+            android:text="afjiaoshdfaiushduofhas"
+            android:textColor="#636363"
+            app:layout_constraintStart_toStartOf="@+id/userIcon"
+            app:layout_constraintTop_toBottomOf="@+id/userIcon" />
+
+        <TextView
+            android:id="@+id/feedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4sp"
+            android:text="afjiaoshdfaiushduofhas"
+            android:textColor="#636363"
+            android:textSize="8sp"
+            app:layout_constraintStart_toStartOf="@+id/feedText"
+            app:layout_constraintTop_toBottomOf="@+id/feedText" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/commentList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/wholeLayer" />
 
     <LinearLayout
         android:orientation="horizontal"
