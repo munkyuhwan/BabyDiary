@@ -109,7 +109,6 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao,val idx:Long, applica
 
     fun saveData(memo:CharSequence) {
 
-        initializeFields()
 
         uiScope.launch {
             dataCheck(memo.toString())
@@ -181,6 +180,7 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao,val idx:Long, applica
             database.update(valueOne, valueTwo, selectedIndex.value!!, selectedYear.value!!.toInt(), selectedMonth.value!!.toInt(), selectedDate.value!!.toInt(), idx)
             uiScope.launch {
                 selecteByDate()
+                initializeFields()
             }
         }
     }
@@ -188,6 +188,7 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao,val idx:Long, applica
     fun saveMemo(dailyCheck:DailyCheck) {
         uiScope.launch {
             insertData(dailyCheck)
+            initializeFields()
         }
     }
 
