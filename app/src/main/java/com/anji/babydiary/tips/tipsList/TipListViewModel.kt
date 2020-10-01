@@ -192,6 +192,9 @@ class TipCommentClicked(val commentClickListener:(resultId:Long)->Unit) {
     fun onCommentClick(result:Tips) = commentClickListener(result.idx)
 }
 
+class TipUserClicked(val userClickListener:(resultId:Long)->Unit) {
+    fun onUserClick(result:Tips) = userClickListener(result.user_idx)
+}
 
 
 

@@ -24,6 +24,9 @@
         <variable
             name="commentClickListener"
             type="com.anji.babydiary.tips.tipsList.TipCommentClicked" />
+        <variable
+            name="userClicked"
+            type="com.anji.babydiary.tips.tipsList.TipUserClicked" />
 
     </data>
 
@@ -43,7 +46,9 @@
             android:theme="@style/MainFeedMemberThumbnail"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/usericon" />
+            android:contentDescription="@string/usericon"
+            android:onClick="@{() -> userClicked.onUserClick(tips)}"
+            />
 
         <TextView
             android:id="@+id/tip_user_id"
@@ -53,7 +58,9 @@
             android:layout_marginStart="5dp"
             app:layout_constraintBottom_toBottomOf="@+id/tip_icon"
             app:layout_constraintStart_toEndOf="@+id/tip_icon"
-            app:layout_constraintTop_toTopOf="@+id/tip_icon" />
+            app:layout_constraintTop_toTopOf="@+id/tip_icon"
+            android:onClick="@{() -> userClicked.onUserClick(tips)}"
+            />
 
 
         <com.google.android.material.imageview.ShapeableImageView

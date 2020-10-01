@@ -21,6 +21,7 @@ import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.database.tip.TipsDatabase
 import com.anji.babydiary.databinding.TipListFragmentBinding
+import com.anji.babydiary.myPage.MyPage
 import com.anji.babydiary.search.SearchActivity
 import com.anji.babydiary.tips.tipsList.listAdapter.TipListAdpater
 
@@ -51,6 +52,13 @@ class TipListFragment : Fragment() {
                 ,
                 TipCommentClicked {
                     findNavController().navigate(TipListFragmentDirections.actionTipListFragmentToTipsComment(it))
+                },
+                TipUserClicked {
+                    it?.let {
+                        var intent = Intent(activity, MyPage::class.java)
+                        intent.putExtra("userIdx",it)
+                        requireActivity().startActivity(intent)
+                    }
                 },
 
             requireActivity(), viewLifecycleOwner)
