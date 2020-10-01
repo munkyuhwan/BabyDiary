@@ -19,6 +19,7 @@
     android:layout_height="wrap_content"
     android:paddingBottom="5sp"
     android:paddingTop="5sp"
+    android:onClick="@{() -> clickListener.onClick(productList)}"
     >
 
     <com.google.android.material.imageview.ShapeableImageView

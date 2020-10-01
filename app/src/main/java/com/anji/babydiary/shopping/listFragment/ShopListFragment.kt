@@ -48,6 +48,7 @@ class ShopListFragment : Fragment() {
         val adapter = ShoppingListAdapter(ProductClickListener {
             Log.e("click", "view clicked")
             //Toast.makeText(application,"${it}", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(ShopListFragmentDirections.actionShopListFragmentToShoppingDetail(it))
         },
         requireActivity())
         binding.productList.adapter = adapter

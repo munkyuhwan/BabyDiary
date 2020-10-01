@@ -32,6 +32,8 @@ class ShoppingListAdapter(val clickListener: ProductClickListener, val activity:
             //binding.idx = item
             //binding.productImage.setImageResource(item.imgDir)
             //Glide.with(binding.root.context).load(item.imgDir).into(binding.productImage)
+            binding.productList = item
+            binding.clickListener = clickListener
 
             if (item.imgDir.startsWith("second") || item.imgDir.startsWith("recomm")) {
                 Glide.with(binding.root.context)
@@ -50,7 +52,6 @@ class ShoppingListAdapter(val clickListener: ProductClickListener, val activity:
             binding.productPrice.text = item.price.toString()
 
             binding.executePendingBindings()
-            binding.clickListener = clickListener
 
         }
 

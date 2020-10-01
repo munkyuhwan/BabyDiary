@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.anji.babydiary.shopping.detailFragment.ShoppingDetailViewModel"/>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".shopping.writeFragment.WriteProduct">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mypage_sub_nav_layout"
+            android:layout_width="match_parent"
+            android:layout_height="99sp"
+            android:background="@drawable/main_feed_actionbar"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/backBtn"
+                android:layout_width="16sp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/back_btn"
+                app:layout_constraintBottom_toBottomOf="@+id/myfeed_write"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/myfeed_write"
+                app:layout_constraintVertical_bias="0.7" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/myfeed_write"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/myfeed_write_btn"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.73" />
+
+            <Button
+                android:id="@+id/complete_button"
+                style="@style/completeBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/main_feed_search_icon"
+                android:text="@string/complete_btn"
+                app:layout_constraintBottom_toBottomOf="@+id/myfeed_write"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/myfeed_write" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="110sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingLeft="20sp"
+            android:paddingRight="20sp">
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="300sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+
+            <Button
+                android:id="@+id/toLink"
+                android:layout_width="74sp"
+                android:layout_height="37sp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="30dp"
+                style="@style/URLBtn"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_marginRight="20sp"
+            android:layout_marginLeft="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+            <TextView
+                android:id="@+id/productInput"
+                style="@style/InputStyle"
+                android:textColor="@color/calendarTextColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            style="@style/InputStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20sp"
+            android:layout_marginLeft="20sp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+            <TextView
+                android:id="@+id/price_tag"
+                style="@style/WriteProductLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/price_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/product_price"
+                style="@style/feedTextBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/price_tag"
+                app:layout_constraintStart_toEndOf="@+id/price_tag"
+                app:layout_constraintTop_toTopOf="@+id/price_tag" />
+
+            <TextView
+                android:id="@+id/price_unit"
+                style="@style/WriteProductLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/price_unit"
+                app:layout_constraintBottom_toBottomOf="@+id/product_price"
+                app:layout_constraintStart_toEndOf="@+id/product_price"
+                app:layout_constraintTop_toTopOf="@+id/product_price"
+                app:layout_constraintVertical_bias="0.761" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/textLayout"
+            style="@style/InputStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20sp"
+            android:layout_marginLeft="20sp"
+            android:foregroundGravity="center_vertical"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+            <TextView
+                android:id="@+id/url_text"
+                style="@style/WriteProductLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/url_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/product_url"
+                style="@style/PriceInput"
+                android:layout_width="200sp"
+                android:layout_height="40sp"
+                app:layout_constraintBottom_toBottomOf="@+id/url_text"
+                app:layout_constraintStart_toEndOf="@+id/url_text"
+                app:layout_constraintTop_toTopOf="@+id/url_text" />
+
+            <TextView
+                android:id="@+id/button3"
+                style="@style/WriteProductLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="입력"
+                android:onClick="@{() -> writeViewModel.setURLTag(productUrl.getText())}"
+                app:layout_constraintBottom_toBottomOf="@+id/product_url"
+                app:layout_constraintStart_toEndOf="@+id/product_url"
+                app:layout_constraintTop_toTopOf="@+id/url_text"
+                app:layout_constraintVertical_bias="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout -->
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
