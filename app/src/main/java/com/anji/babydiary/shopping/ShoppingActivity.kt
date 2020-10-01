@@ -1,6 +1,7 @@
 package com.anji.babydiary.shopping
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -12,6 +13,7 @@ import com.anji.babydiary.common.BaseActivity
 import com.anji.babydiary.R
 import com.anji.babydiary.dailyCheck.DailyCheckActivity
 import com.anji.babydiary.databinding.ActivityShoppingBinding
+import kotlinx.android.synthetic.main.write_product_fragment.view.*
 import java.util.*
 
 class ShoppingActivity() : BaseActivity() {
