@@ -16,6 +16,9 @@ interface CommentsDao {
     @Query("SELECT * FROM tbl_comments WHERE feed_idx= :feedIdx")
     fun selectAllByFeedIdx(feedIdx:Long):LiveData<List<Comments>>
 
+    @Query ("DELETE FROM tbl_comments WHERE idx=:idx")
+    fun deleteByIdx(idx:Long)
+
     //@Query("SELECT * FROM tbl_comments WHERE feed_idx= :feedIdx")
     //fun selectAllByFeedIdxWithProfile(feedIdx:Long):LiveData<List<CommentWithProfile>>
 

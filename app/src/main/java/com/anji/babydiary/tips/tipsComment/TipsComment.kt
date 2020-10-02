@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.anji.babydiary.R
 import com.anji.babydiary.common.itemAction.ItemTouchHelperCallback
 import com.anji.babydiary.database.tip.tipsComment.TipsCommentDatabase
@@ -18,6 +20,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import kotlinx.android.synthetic.main.comment_list_item.view.*
 
 
 class TipsComment : Fragment() {
@@ -57,6 +60,33 @@ class TipsComment : Fragment() {
 
         binding.commentList.adapter = adapter
 
+        val simpleCallback: ItemTouchHelper.SimpleCallback = object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                //mList.remove(viewHolder.layoutPosition)
+                //Toast.makeText(requireContext(),"${viewHolder.layoutPosition}", Toast.LENGTH_SHORT).show()
+                //viewModel.deleteTipCOmment(viewModel.dataList.value!!.get(viewHolder.layoutPosition).idx)
+                if (direction == ItemTouchHelper.LEFT) {
+                    viewHolder.itemView.editLayer.visibility = View.VISIBLE
+                }else {
+                    viewHolder.itemView.editLayer.visibility = View.GONE
+                }
+                viewHolder.itemView.deleteBtn.setOnClickListener {
+                    viewModel.deleteTipCOmment(viewModel.dataList.value!!.get(viewHolder.layoutPosition).idx)
+                }
+                adapter.notifyItemRemoved(viewHolder.layoutPosition)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(simpleCallback)
+        itemTouchHelper.attachToRecyclerView(binding.commentList)
 
         viewModel.dataList.observe(viewLifecycleOwner, Observer {
             it?.let {

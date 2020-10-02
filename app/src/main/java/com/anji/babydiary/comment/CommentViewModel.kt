@@ -66,6 +66,18 @@ class CommentViewModel(application: Application, val database:CommentsDao, val p
         }
     }
 
+    fun deleteComment(idx:Long) {
+        uiScope.launch {
+            queryDelete(idx)
+        }
+    }
+
+    suspend fun queryDelete(idx:Long) {
+        withContext(Dispatchers.IO) {
+            database.deleteByIdx(idx)
+        }
+    }
+
 }
 
 
@@ -73,6 +85,9 @@ class CommentIdClick(val clickListener:(name:String)->Unit) {
     fun onIdClick(name:String) = clickListener(name)
 }
 
+class CommentDeleteClick(val clickListener:(idx:Long)->Unit) {
+    fun onDeleteClick(comm:Comments) = clickListener(comm.idx)
+}
 
 
 

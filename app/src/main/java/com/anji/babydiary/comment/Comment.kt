@@ -1,17 +1,18 @@
 package com.anji.babydiary.comment
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.anji.babydiary.R
 import com.anji.babydiary.comment.commentListAdapter.CommentListAdapter
 import com.anji.babydiary.common.Utils
@@ -19,11 +20,12 @@ import com.anji.babydiary.database.comments.CommentsDatabase
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.databinding.CommentFragmentBinding
-import com.anji.babydiary.myPage.profile.MyProfileViewModelFactory
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import kotlinx.android.synthetic.main.comment_list_item.view.*
+
 
 class Comment : Fragment() {
 
@@ -63,9 +65,43 @@ class Comment : Fragment() {
                 it?.let {
                     binding.commentText.append("@${it}")
                 }
+            },
+            CommentDeleteClick {
+                it?.let {
+                    viewModel.deleteComment(it)
+                }
             }
         )
         binding.commentList.adapter = adapter
+
+        val simpleCallback: ItemTouchHelper.SimpleCallback = object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                //mList.remove(viewHolder.layoutPosition)
+                //Toast.makeText(requireContext(),"${viewHolder.layoutPosition}", Toast.LENGTH_SHORT).show()
+                if (direction == ItemTouchHelper.LEFT) {
+                    viewHolder.itemView.editLayer.visibility = View.VISIBLE
+                }else {
+                    viewHolder.itemView.editLayer.visibility = View.GONE
+                }
+                //viewModel.deleteComment(viewModel.totalList.value!!.get(viewHolder.layoutPosition).idx)
+                adapter.notifyItemRemoved(viewHolder.layoutPosition)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(simpleCallback)
+        itemTouchHelper.attachToRecyclerView(binding.commentList)
+
+
+
+
 
         viewModel.totalList.observe(viewLifecycleOwner, Observer {
             it?.let {

@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.anji.babydiary.comment.CommentDeleteClick
 import com.anji.babydiary.comment.CommentIdClick
 import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.comments.Comments
@@ -25,12 +26,12 @@ import com.bumptech.glide.request.RequestOptions
 import kotlinx.coroutines.*
 
 
-class CommentListAdapter(val activity: Activity, val lifecycleOwner: LifecycleOwner, val onIdClick: CommentIdClick):ListAdapter<Comments, CommentListAdapter.ViewHolder>(CommentListDiffCallback()) {
+class CommentListAdapter(val activity: Activity, val lifecycleOwner: LifecycleOwner, val onIdClick: CommentIdClick, val onDeleteClick:CommentDeleteClick):ListAdapter<Comments, CommentListAdapter.ViewHolder>(CommentListDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)!!
         val res = holder.itemView.context.resources
-        holder.bind(item,activity, lifecycleOwner, onIdClick)
+        holder.bind(item,activity, lifecycleOwner, onIdClick, onDeleteClick)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -39,11 +40,12 @@ class CommentListAdapter(val activity: Activity, val lifecycleOwner: LifecycleOw
 
     class ViewHolder private constructor(val binding: CommentListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind (item:Comments, activity:Activity, lifecycleOwner: LifecycleOwner, onIdClick: CommentIdClick) {
+        fun bind (item:Comments, activity:Activity, lifecycleOwner: LifecycleOwner, onIdClick: CommentIdClick, onDeleteClick:CommentDeleteClick) {
             //binding.idx = item
             Log.e("profile","====================================================")
             Log.e("profile","${item}")
             Log.e("profile","====================================================")
+            binding.commentDelete = onDeleteClick
             binding.comment = item
             binding.idClick = onIdClick
             binding.commentText.text = item.commentText.toString()
@@ -80,6 +82,8 @@ class CommentListAdapter(val activity: Activity, val lifecycleOwner: LifecycleOw
             }
 
             binding.commentDate.text = "${Utils.getDate(item.date,"yyyy.mm.dd HH:mm" )}"
+
+
 
             binding.executePendingBindings()
 
