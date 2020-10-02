@@ -72,8 +72,8 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/moreMenuBtn"
-                    android:layout_width="20sp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="12dp"
+                    android:layout_height="13dp"
                     android:layout_marginEnd="15dp"
                     android:src="@drawable/mypage_menu"
                     app:layout_constraintBottom_toBottomOf="@+id/more_category"

@@ -16,6 +16,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.anji.babydiary.R
+import com.anji.babydiary.addBaby.AddBaby
 import com.anji.babydiary.bottomActivity.BottomMenu
 import com.anji.babydiary.bottomActivity.resign.Resign
 import com.anji.babydiary.common.CommonCode
@@ -142,6 +143,18 @@ class MyFeed : Fragment() {
         }
         binding.numFollowing.setOnClickListener {
             findNavController().navigate(MyFeedDirections.actionMyFeedToFollower("following"))
+        }
+
+
+        binding.nameKid.setOnClickListener {
+            val intent: Intent = Intent(requireActivity(), AddBaby::class.java)
+            intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+            startActivity(intent)
+        }
+        binding.moreCategory.setOnClickListener {
+            val intent: Intent = Intent(requireActivity(), AddBaby::class.java)
+            intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+            startActivity(intent)
         }
 
 
