@@ -20,6 +20,7 @@ import com.anji.babydiary.common.MyShare.MyShare
 import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.database.tip.TipsDatabase
+import com.anji.babydiary.database.tip.tipsBookmark.TipBookMarkDatabase
 import com.anji.babydiary.databinding.TipListFragmentBinding
 import com.anji.babydiary.myPage.MyPage
 import com.anji.babydiary.search.SearchActivity
@@ -38,8 +39,9 @@ class TipListFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
         val database = TipsDatabase.getInstance(application).database
+        val bookMarkDatabase = TipBookMarkDatabase.getInstance(application).database
 
-        val viewModelFactory = TipListViewModelFactory(database, MyShare.prefs.getLong("idx", 0L), application)
+        val viewModelFactory = TipListViewModelFactory(database, bookMarkDatabase, MyShare.prefs.getLong("idx", 0L), application)
         viewmodel = ViewModelProviders.of(this, viewModelFactory).get(TipListViewModel::class.java)
 
         val adapter =
@@ -60,7 +62,9 @@ class TipListFragment : Fragment() {
                         requireActivity().startActivity(intent)
                     }
                 },
-
+                TipBookMarkClickListener {
+                    viewmodel.selectBookmark(it)
+                },
             requireActivity(), viewLifecycleOwner)
         binding.tipList.adapter = adapter
 
@@ -89,6 +93,26 @@ class TipListFragment : Fragment() {
             val intent: Intent = Intent(requireActivity(), SearchActivity::class.java)
             startActivityForResult(intent, CommonCode.SEARCH_KEYWORD)
         }
+
+        viewmodel.seletBookMark.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if (it.size <= 0) {
+                    viewmodel.addBookmark(viewmodel.bookmarkTipIdx)
+                }else {
+                    viewmodel.deleteBookmark(viewmodel.bookmarkTipIdx)
+                }
+
+            }
+        })
+
+        viewmodel.bookMarks.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                for (i in it.iterator()) {
+                    viewmodel.selectBookmarkedFeed(i.tipIdx)
+                }
+            }
+        })
+
 
         return binding.root
     }

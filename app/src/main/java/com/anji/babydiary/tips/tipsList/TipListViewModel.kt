@@ -5,14 +5,19 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.common.MyShare.MyShare
+import com.anji.babydiary.database.bookmark.BookMark
+import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.database.profile.ProfileDao
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.database.profile.Profiles
 import com.anji.babydiary.database.tip.Tips
 
 import com.anji.babydiary.database.tip.TipsDao
+import com.anji.babydiary.database.tip.tipsBookmark.TipBookMark
+import com.anji.babydiary.database.tip.tipsBookmark.TipBookMarkDao
 import com.anji.babydiary.database.tipLikes.TipLikes
 import com.anji.babydiary.database.tipLikes.TipLikesDao
 import com.anji.babydiary.database.tipLikes.TipLikesDatabase
@@ -21,6 +26,7 @@ import okhttp3.Dispatcher
 
 class TipListViewModel(
     var database: TipsDao,
+    var bookMarkDatabase: TipBookMarkDao,
     val idx:Long,
     application:Application
 ) : AndroidViewModel(application) {
@@ -30,7 +36,9 @@ class TipListViewModel(
     //var dataAll = database.selectAll()
     var dataAll = MutableLiveData<List<Tips>>()
 
+    var seletBookMark = MutableLiveData<List<TipBookMark>>()
 
+    var bookMarks = MutableLiveData<List<TipBookMark>>()
 
     var isCategoryOpen = MutableLiveData<Int>()
     var profileDatabase: ProfileDao
@@ -39,7 +47,11 @@ class TipListViewModel(
     var tipLikeCnt:Long
     var arrowRotate = MutableLiveData<Float>()
 
-   // var dataWithProfile =database.selectWithUser()
+    var bookmarkTipIdx:Long = 0
+
+    //var allFeeds = MutableLiveData<List<Tips>>()
+    var singleFeed = ArrayList<Tips>()
+    // var dataWithProfile =database.selectWithUser()
 
     init {
         arrowRotate.value = 0f
@@ -59,6 +71,7 @@ class TipListViewModel(
         uiScope.launch {
             getAll()
         }
+
 
     }
 
@@ -178,6 +191,72 @@ class TipListViewModel(
         }
     }
 
+    fun addBookmark(tipIdx:Long) {
+
+        var tipBookmark = TipBookMark()
+        tipBookmark.tipIdx = tipIdx
+        tipBookmark.userIdx = MyShare.prefs.getLong("idx", 0)
+
+        uiScope.launch {
+            queryAddBookmark(tipBookmark)
+        }
+    }
+    fun deleteBookmark(tipIdx: Long) {
+        uiScope.launch {
+            queryDeleteBookmark(tipIdx)
+        }
+    }
+    suspend fun queryDeleteBookmark(tipIdx: Long) {
+        withContext(Dispatchers.IO) {
+            bookMarkDatabase.deleteBookmark(MyShare.prefs.getLong("idx", 0), tipIdx)
+        }
+    }
+
+    fun selectBookmark(tipIdx:Long) {
+        bookmarkTipIdx = tipIdx
+        uiScope.launch {
+            querySelectBookmark(tipIdx)
+        }
+    }
+
+    suspend fun querySelectBookmark(tipIdx:Long){
+        withContext(Dispatchers.IO) {
+            seletBookMark.postValue( bookMarkDatabase.selectByTipAndUser(MyShare.prefs.getLong("idx", 0), tipIdx) )
+        }
+    }
+
+    suspend fun queryAddBookmark(tipBookMark: TipBookMark) {
+        withContext(Dispatchers.IO) {
+            bookMarkDatabase.insert(tipBookMark)
+        }
+    }
+
+
+
+    fun selectBookmark() {
+        uiScope.launch {
+            querySelectBookmark()
+        }
+    }
+    suspend fun querySelectBookmark() {
+        withContext(Dispatchers.IO) {
+            bookMarks.postValue( bookMarkDatabase.selectByUserIdx(MyShare.prefs.getLong("idx", 0)) )
+        }
+    }
+
+
+    fun selectBookmarkedFeed(idx:Long) {
+        uiScope.launch {
+            querySelectBookmarkedFeed(idx)
+        }
+    }
+    suspend fun querySelectBookmarkedFeed(idx:Long) {
+        withContext(Dispatchers.IO) {
+            singleFeed.add(database.selectSingle(idx))
+            dataAll.postValue(singleFeed)
+        }
+    }
+
 }
 
 class TipClickListener(val clickListener:(resultId:Long)->Unit ) {
@@ -195,6 +274,11 @@ class TipCommentClicked(val commentClickListener:(resultId:Long)->Unit) {
 class TipUserClicked(val userClickListener:(resultId:Long)->Unit) {
     fun onUserClick(result:Tips) = userClickListener(result.user_idx)
 }
+
+class TipBookMarkClickListener(val bookMarkClickListener:(idx:Long)->Unit) {
+    fun onBookMarkClick(result: Tips) = bookMarkClickListener(result.idx)
+}
+
 
 
 

@@ -16,17 +16,14 @@ import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.database.profile.Profiles
 import com.anji.babydiary.database.tip.Tips
 import com.anji.babydiary.databinding.TipListItemBinding
-import com.anji.babydiary.tips.tipsList.TipClickListener
-import com.anji.babydiary.tips.tipsList.TipCommentClicked
-import com.anji.babydiary.tips.tipsList.TipLikeClicked
-import com.anji.babydiary.tips.tipsList.TipUserClicked
+import com.anji.babydiary.tips.tipsList.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.coroutines.*
 
-class TipListAdpater(val clickListener: TipClickListener, val tipLikeClicked: TipLikeClicked, val tipCommentClicked: TipCommentClicked, val tipUserClicked: TipUserClicked ,val activity:Activity, val lifecycleOwner: LifecycleOwner): ListAdapter<Tips, TipListAdpater.ViewHolder>(TipListDiffCallback()) {
+class TipListAdpater(val clickListener: TipClickListener, val tipLikeClicked: TipLikeClicked, val tipCommentClicked: TipCommentClicked, val tipUserClicked: TipUserClicked, val bookmarkClicked:TipBookMarkClickListener ,val activity:Activity, val lifecycleOwner: LifecycleOwner): ListAdapter<Tips, TipListAdpater.ViewHolder>(TipListDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
@@ -34,17 +31,18 @@ class TipListAdpater(val clickListener: TipClickListener, val tipLikeClicked: Ti
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)!!
-        holder.bind(item, clickListener,tipLikeClicked,  tipCommentClicked, tipUserClicked, activity, lifecycleOwner)
+        holder.bind(item, clickListener,tipLikeClicked,  tipCommentClicked, tipUserClicked, bookmarkClicked, activity, lifecycleOwner)
     }
 
     class ViewHolder private constructor(val binding: TipListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind (item: Tips, clickListener: TipClickListener, tipLikeClicked: TipLikeClicked,  tipCommentClicked: TipCommentClicked, tipUserClicked: TipUserClicked, activity:Activity, lifecycleOwner: LifecycleOwner) {
+        fun bind (item: Tips, clickListener: TipClickListener, tipLikeClicked: TipLikeClicked,  tipCommentClicked: TipCommentClicked, tipUserClicked: TipUserClicked, bookmarkClicked:TipBookMarkClickListener, activity:Activity, lifecycleOwner: LifecycleOwner) {
             //binding.idx = item
 
             binding.tips = item
 
             binding.likeClickListener = tipLikeClicked
+            binding.bookmarkClicked = bookmarkClicked
             binding.userClicked = tipUserClicked
             binding.tipLikeCnt.text = item.cnt.toString()
             binding.tipText.text = "${item.text.toString()} "

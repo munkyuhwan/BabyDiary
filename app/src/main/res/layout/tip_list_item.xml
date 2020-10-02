@@ -27,6 +27,9 @@
         <variable
             name="userClicked"
             type="com.anji.babydiary.tips.tipsList.TipUserClicked" />
+        <variable
+            name="bookmarkClicked"
+            type="com.anji.babydiary.tips.tipsList.TipBookMarkClickListener" />
 
     </data>
 
@@ -112,6 +115,18 @@
             android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tip_like_cnt" />
+
+        <CheckBox
+            android:id="@+id/bookMark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bookmark_check"
+            android:button="@null"
+            android:onClick="@{() -> bookmarkClicked.onBookMarkClick(tips)}"
+            app:layout_constraintBottom_toBottomOf="@+id/user_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/user_icon"
+            app:layout_constraintVertical_bias="0.428" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

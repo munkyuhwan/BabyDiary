@@ -27,4 +27,7 @@ interface TipsDao {
     @Query("SELECT * FROM tbl_tips WHERE tip_text LIKE '%'||:keyword||'%' ")
     fun search(keyword:String):List<Tips>
 
+    @Query("SELECT * FROM tbl_tips WHERE idx= :idx")
+    fun selectSingle(idx:Long):Tips
+
 }
