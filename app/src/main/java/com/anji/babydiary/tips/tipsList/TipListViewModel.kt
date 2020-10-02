@@ -53,6 +53,9 @@ class TipListViewModel(
     var singleFeed = ArrayList<Tips>()
     // var dataWithProfile =database.selectWithUser()
 
+    var categoryName = MutableLiveData<String>()
+
+
     init {
         arrowRotate.value = 0f
         tipLikeCnt = 0
@@ -71,6 +74,7 @@ class TipListViewModel(
         uiScope.launch {
             getAll()
         }
+        categoryName.value = "전체보기"
 
 
     }
@@ -131,6 +135,12 @@ class TipListViewModel(
     }
 
     fun doSelectByCateogry(sel:Int) {
+        if (sel == 99) {
+            categoryName.value = "전체보기"
+        }else {
+            categoryName.value = CommonCode.TIP_CATEGORY[sel]
+        }
+
         arrowRotate.value = 0f
         uiScope.launch {
             if (sel == 99 ) {

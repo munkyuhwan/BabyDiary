@@ -4,6 +4,7 @@ import android.app.Application
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.common.MyShare.MyShare
 import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.database.shopping.Shopping
@@ -33,6 +34,8 @@ class ShopListViewModel(
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     var seletBookMark = MutableLiveData<List<ShoppingBookMark>>()
 
+    var selectedCategory = MutableLiveData<String>()
+
     init {
         isCategoryOpen.value = View.GONE
         uiScope.launch {
@@ -42,7 +45,7 @@ class ShopListViewModel(
             queryAllCheck()
         }
         arrowRotation.value = 0F
-
+        selectedCategory.value = "전체보기"
     }
 
     suspend fun queryAll(){
@@ -75,6 +78,15 @@ class ShopListViewModel(
 
 
     fun selectByCat(type:Int) {
+
+        if (type == 0) {
+            selectedCategory.value = "추천용품"
+        }else if (type == 1) {
+            selectedCategory.value = "중고용품"
+
+        }else {
+            selectedCategory.value = "전체보기"
+        }
 
         if (type == 0 ) {
             uiScope.launch {

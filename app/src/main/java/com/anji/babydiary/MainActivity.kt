@@ -53,7 +53,7 @@ class MainActivity : BaseActivity() {
 
         })
         feedData?.observe(this, androidx.lifecycle.Observer {
-            if (it.size == 7) {
+            if (it.size == 34) {
                 uiScope.launch {
                      delay()
                 }
