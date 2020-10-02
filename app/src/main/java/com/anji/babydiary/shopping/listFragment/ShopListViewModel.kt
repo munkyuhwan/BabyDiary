@@ -93,10 +93,15 @@ class ShopListViewModel(
                 onCategorySelectClicked()
                 query("recomm")
             }
-        }else {
+        }else if (type == 1) {
             uiScope.launch {
                 onCategorySelectClicked()
                 query("second")
+            }
+        }else {
+            uiScope.launch {
+                onCategorySelectClicked()
+                queryAll()
             }
         }
 
