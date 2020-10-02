@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="160dp"
+            android:layout_marginTop="200dp"
             android:layout_marginEnd="15dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -44,10 +44,24 @@
         <Button
             android:id="@+id/write_product"
             style="@style/addMyFeed"
+            android:layout_width="20sp"
+            android:layout_height="20sp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout7" />
+
+        <ImageButton
+            android:id="@+id/myBookMark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="#00000000"
+            android:src="@drawable/bookmark_btn"
+            android:onClick="@{() -> shopModelView.selectBookmark()}"
+            app:layout_constraintTop_toTopOf="@+id/write_product"
+            app:layout_constraintBottom_toBottomOf="@+id/write_product"
+            app:layout_constraintRight_toLeftOf="@+id/write_product"/>
 
 
         <androidx.constraintlayout.widget.ConstraintLayout

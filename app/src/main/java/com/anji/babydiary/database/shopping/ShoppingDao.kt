@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import com.anji.babydiary.database.mainFeed.MainFeed
 
 @Dao
 interface ShoppingDao {
@@ -27,6 +28,8 @@ interface ShoppingDao {
 
 
 
+    @Query("SELECT * FROM tbl_product WHERE idx= :key")
+    fun selectSingleMut(key:Long): Shopping
 
 
     @Query("DELETE FROM tbl_product")

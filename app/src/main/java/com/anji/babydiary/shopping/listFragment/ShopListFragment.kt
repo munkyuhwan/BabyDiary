@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.anji.babydiary.R
 import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.database.shopping.ShoppingDatabase
+import com.anji.babydiary.database.shopping.shoppingBookmark.ShoppingBookMarkDatabase
 import com.anji.babydiary.databinding.ShopListFragmentBinding
 import com.anji.babydiary.search.SearchActivity
 import com.anji.babydiary.shopping.listFragment.listAdapter.ShoppingListAdapter
@@ -39,8 +40,9 @@ class ShopListFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
         val dataSource = ShoppingDatabase.getInstance(application).database
+        val bookmarkDatabase = ShoppingBookMarkDatabase.getInstance(application).database
 
-        viewModelFactory = ShopListViewModelFactory(dataSource, application)
+        viewModelFactory = ShopListViewModelFactory(dataSource, bookmarkDatabase, application)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(ShopListViewModel::class.java)
 
         binding.shopModelView = viewModel
@@ -50,6 +52,10 @@ class ShopListFragment : Fragment() {
             //Toast.makeText(application,"${it}", Toast.LENGTH_SHORT).show()
             findNavController().navigate(ShopListFragmentDirections.actionShopListFragmentToShoppingDetail(it))
         },
+            ShoppingBookMarkClickListener {
+                viewModel.selectBookmark(it)
+
+            },
         requireActivity())
         binding.productList.adapter = adapter
 
@@ -265,6 +271,26 @@ class ShopListFragment : Fragment() {
             
             findNavController().navigate(ShopListFragmentDirections.actionShopListFragmentToWriteProduct(1))
         }
+
+        viewModel.bookMarks.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                for (i in it.iterator()) {
+
+                    viewModel.selectBookmarkedFeed(i.shoppingIdx)
+                }
+            }
+        })
+
+        viewModel.seletBookMark.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if (it.size <= 0) {
+                    viewModel.addBookmark(viewModel.bookmarkTipIdx)
+                }else {
+                    viewModel.deleteBookmark(viewModel.bookmarkTipIdx)
+                }
+
+            }
+        })
 
         return binding.root
     }

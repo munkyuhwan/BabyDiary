@@ -1,32 +1,37 @@
 package com.anji.babydiary.shopping.listFragment
 
 import android.app.Application
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.anji.babydiary.R
+import com.anji.babydiary.common.MyShare.MyShare
 import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.database.shopping.Shopping
 import com.anji.babydiary.database.shopping.ShoppingDao
-import com.anji.babydiary.database.shopping.ShoppingDatabase
+import com.anji.babydiary.database.shopping.shoppingBookmark.ShoppingBookMark
+import com.anji.babydiary.database.shopping.shoppingBookmark.ShoppingBookMarkDao
+import com.anji.babydiary.database.tip.tipsBookmark.TipBookMark
 import kotlinx.coroutines.*
 
 class ShopListViewModel(
     val database:ShoppingDao,
+    val bookmarkDatabase:ShoppingBookMarkDao,
     application: Application
     ) : AndroidViewModel(application) {
 
+    var bookmarkTipIdx:Long = 0
 
+    var bookMarks = MutableLiveData<List<ShoppingBookMark>>()
     var allProduct = MutableLiveData<List<Shopping>>()
     var allProductCheck = MutableLiveData<List<Shopping>>()
 
     var isCategoryOpen = MutableLiveData<Int>()
     var arrowRotation = MutableLiveData<Float>()
+    var singleFeed = ArrayList<Shopping>()
 
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    var seletBookMark = MutableLiveData<List<ShoppingBookMark>>()
 
     init {
         isCategoryOpen.value = View.GONE
@@ -130,11 +135,84 @@ class ShopListViewModel(
             isCategoryOpen.value = View.GONE
             arrowRotation.value = 0F
         }
-
     }
+
+
+
+    fun selectBookmark() {
+        uiScope.launch {
+            querySelectBookmark()
+        }
+    }
+    suspend fun querySelectBookmark() {
+        withContext(Dispatchers.IO) {
+            bookMarks.postValue( bookmarkDatabase.selectByUserIdx(MyShare.prefs.getLong("idx", 0)) )
+        }
+    }
+
+    fun selectBookmarkedFeed(idx:Long) {
+        uiScope.launch {
+            querySelectBookmarkedFeed(idx)
+        }
+    }
+    suspend fun querySelectBookmarkedFeed(idx:Long) {
+        withContext(Dispatchers.IO) {
+            singleFeed.add(database.selectSingleMut(idx))
+            allProduct.postValue(singleFeed)
+        }
+    }
+
+    fun selectBookmark(tipIdx:Long) {
+        bookmarkTipIdx = tipIdx
+        uiScope.launch {
+            querySelectBookmark(tipIdx)
+        }
+    }
+
+    suspend fun querySelectBookmark(tipIdx:Long){
+        withContext(Dispatchers.IO) {
+            seletBookMark.postValue( bookmarkDatabase.selectByShoppingAndUser(MyShare.prefs.getLong("idx", 0), tipIdx) )
+        }
+    }
+
+    fun addBookmark(shoppingIdx:Long) {
+
+        var shoppingBookmark = ShoppingBookMark()
+        shoppingBookmark.shoppingIdx = shoppingIdx
+        shoppingBookmark.userIdx = MyShare.prefs.getLong("idx", 0)
+
+        uiScope.launch {
+            queryAddBookmark(shoppingBookmark)
+        }
+    }
+
+    suspend fun queryAddBookmark(shoppingBookmark: ShoppingBookMark) {
+        withContext(Dispatchers.IO) {
+            bookmarkDatabase.insert(shoppingBookmark)
+        }
+    }
+
+
+    fun deleteBookmark(tipIdx: Long) {
+        uiScope.launch {
+            queryDeleteBookmark(tipIdx)
+        }
+    }
+    suspend fun queryDeleteBookmark(tipIdx: Long) {
+        withContext(Dispatchers.IO) {
+            bookmarkDatabase.deleteBookmark(MyShare.prefs.getLong("idx", 0), tipIdx)
+        }
+    }
+
+
 }
 
 class ProductClickListener(val clickListener:(resultId:Long)->Unit ) {
     fun onClick(result: Shopping) = clickListener(result.idx)
+}
+
+
+class ShoppingBookMarkClickListener(val shoppingBookMarkClickListener:(idx:Long)->Unit) {
+    fun onShoppingBookMarkClick(result:Shopping) = shoppingBookMarkClickListener(result.idx)
 }
 

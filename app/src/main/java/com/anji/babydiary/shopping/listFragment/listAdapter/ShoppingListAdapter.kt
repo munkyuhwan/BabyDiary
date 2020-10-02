@@ -11,15 +11,17 @@ import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.database.shopping.Shopping
 import com.anji.babydiary.databinding.ProductItemBinding
 import com.anji.babydiary.databinding.ShopListFragmentBinding
+import com.anji.babydiary.mainFeed.feedList.BookMarkClickListener
 import com.anji.babydiary.shopping.listFragment.ProductClickListener
+import com.anji.babydiary.shopping.listFragment.ShoppingBookMarkClickListener
 import com.bumptech.glide.Glide
 
-class ShoppingListAdapter(val clickListener: ProductClickListener, val activity: Activity):ListAdapter<Shopping, ShoppingListAdapter.ViewHolder>(ShoppingListDiffCallback()) {
+class ShoppingListAdapter(val clickListener: ProductClickListener, val bookMarkClickListener: ShoppingBookMarkClickListener, val activity: Activity):ListAdapter<Shopping, ShoppingListAdapter.ViewHolder>(ShoppingListDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var item = getItem(position!!)
 
-        holder.bind(item, clickListener, activity)
+        holder.bind(item, clickListener, bookMarkClickListener, activity)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,10 +30,11 @@ class ShoppingListAdapter(val clickListener: ProductClickListener, val activity:
 
     class ViewHolder private constructor(val binding: ProductItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind (item: Shopping, clickListener: ProductClickListener, activity: Activity) {
+        fun bind (item: Shopping, clickListener: ProductClickListener,bookMarkClickListener: ShoppingBookMarkClickListener, activity: Activity) {
             //binding.idx = item
             //binding.productImage.setImageResource(item.imgDir)
             //Glide.with(binding.root.context).load(item.imgDir).into(binding.productImage)
+            binding.bookmarkClickListener = bookMarkClickListener
             binding.productList = item
             binding.clickListener = clickListener
 
