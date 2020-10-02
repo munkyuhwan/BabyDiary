@@ -17,6 +17,7 @@ import com.anji.babydiary.database.mainFeed.MainFeedDatabase
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.databinding.FeedDetailFragmentBinding
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.activity_main_feed.*
 
 class MyFeedDetail : Fragment() {
 
@@ -26,6 +27,7 @@ class MyFeedDetail : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        requireActivity().fab.visibility = View.GONE
 
         val argment = arguments?.let { MyFeedDetailArgs.fromBundle(it) }
 

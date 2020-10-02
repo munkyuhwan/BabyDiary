@@ -23,6 +23,7 @@ import com.anji.babydiary.database.event.EventDatabase
 import com.anji.babydiary.databinding.EventListFragmentBinding
 import com.anji.babydiary.event.eventList.listAdapter.EventListAdapter
 import com.anji.babydiary.search.SearchActivity
+import kotlinx.android.synthetic.main.activity_event.*
 
 class EventList : Fragment() {
 
@@ -32,6 +33,7 @@ class EventList : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        requireActivity().fab.visibility = View.VISIBLE
 
         val binding = DataBindingUtil.inflate<EventListFragmentBinding>(inflater, R.layout.event_list_fragment, container, false)
 

@@ -23,6 +23,7 @@ import com.anji.babydiary.database.shopping.shoppingBookmark.ShoppingBookMarkDat
 import com.anji.babydiary.databinding.ShopListFragmentBinding
 import com.anji.babydiary.search.SearchActivity
 import com.anji.babydiary.shopping.listFragment.listAdapter.ShoppingListAdapter
+import kotlinx.android.synthetic.main.activity_event.*
 
 
 class ShopListFragment : Fragment() {
@@ -35,6 +36,7 @@ class ShopListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        requireActivity().fab.visibility = View.VISIBLE
 
         binding = DataBindingUtil.inflate<ShopListFragmentBinding>(inflater, R.layout.shop_list_fragment, container, false)
 

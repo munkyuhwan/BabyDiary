@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import kotlinx.android.synthetic.main.activity_main_feed.*
 import kotlinx.android.synthetic.main.comment_list_item.view.*
 
 
@@ -31,6 +32,7 @@ class TipsComment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        requireActivity().fab.visibility = View.GONE
 
         val argment = arguments?.let { TipsCommentArgs.fromBundle(it) }
         val idx = argment!!.tipIdx

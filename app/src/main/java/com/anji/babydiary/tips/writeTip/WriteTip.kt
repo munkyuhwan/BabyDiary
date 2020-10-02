@@ -26,6 +26,7 @@ import com.anji.babydiary.database.tip.TipsDatabase
 import com.anji.babydiary.databinding.WriteTipFragmentBinding
 import com.anji.babydiary.tips.writeTip.tipCategorySpinner.TipCategoryAdapter
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.activity_main_feed.*
 
 class WriteTip : Fragment() {
 
@@ -36,6 +37,8 @@ class WriteTip : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        requireActivity().fab.visibility = View.GONE
+
         requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         binding = DataBindingUtil.inflate<WriteTipFragmentBinding>(inflater, R.layout.write_tip_fragment, container, false)

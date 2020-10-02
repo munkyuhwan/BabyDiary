@@ -28,6 +28,9 @@ import com.anji.babydiary.mainFeed.feedList.listAdapter.MainFeedListAdapter
 import com.anji.babydiary.myPage.MyPage
 import com.anji.babydiary.myPage.myFeed.MyFeed
 import com.anji.babydiary.search.SearchActivity
+import kotlinx.android.synthetic.main.activity_event.*
+import kotlinx.android.synthetic.main.activity_main_feed.*
+import kotlinx.android.synthetic.main.activity_main_feed.fab
 
 class FeedList : BaseFragment() {
 
@@ -40,6 +43,7 @@ class FeedList : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        requireActivity().fab.visibility = View.VISIBLE
 
         val binding = DataBindingUtil.inflate<FeedListFragmentBinding>(inflater, R.layout.feed_list_fragment, container, false)
         //viewModel = ViewModelProviders.of(this).get(FeedListViewModel::class.java)

@@ -32,6 +32,7 @@ import com.anji.babydiary.mainFeed.feedDetail.FeedDetailArgs
 import com.anji.babydiary.myPage.myFeed.dateListAdpater.DateListAdapter
 import com.anji.babydiary.myPage.myFeed.myFeedListAdapter.MyFeedListAdapter
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.activity_event.*
 import kotlinx.android.synthetic.main.nav_mypage_layout.view.*
 
 class MyFeed : Fragment() {
@@ -43,6 +44,7 @@ class MyFeed : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        requireActivity().fab.visibility = View.VISIBLE
 
         var idx = MyShare.prefs.getLong("idx", 0L)
 

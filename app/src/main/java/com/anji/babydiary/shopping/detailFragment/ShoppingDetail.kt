@@ -18,6 +18,7 @@ import com.anji.babydiary.databinding.ShoppingDetailFragmentBinding
 import com.anji.babydiary.mainFeed.feedDetail.FeedDetailArgs
 import com.anji.babydiary.shopping.ShoppingActivity
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.activity_main_feed.*
 import kotlinx.android.synthetic.main.write_product_fragment.view.*
 
 class ShoppingDetail : Fragment() {
@@ -30,6 +31,7 @@ class ShoppingDetail : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        requireActivity().fab.visibility = View.GONE
 
         val argment = arguments?.let {ShoppingDetailArgs.fromBundle(it) }
         val idx = argment!!.shoppingIdx

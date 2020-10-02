@@ -24,6 +24,7 @@ import com.anji.babydiary.database.shopping.ShoppingDatabase
 import com.anji.babydiary.databinding.WriteProductFragmentBinding
 import com.anji.babydiary.shopping.listFragment.ShopListFragmentDirections
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.activity_main_feed.*
 
 
 class WriteProduct : Fragment() {
@@ -42,6 +43,7 @@ class WriteProduct : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        requireActivity().fab.visibility = View.GONE
 
         binding = DataBindingUtil.inflate(inflater, R.layout.write_product_fragment, container, false)
 

@@ -57,7 +57,7 @@
                 android:layout_marginEnd="30dp"
                 android:layout_marginBottom="20dp"
                 android:background="@color/mainThemeRed"
-                android:src="@drawable/add_btn"
+                android:src="@drawable/daily_check_icon"
                 app:layout_constraintBottom_toBottomOf="@+id/shoppingNestedHost"
                 app:layout_constraintEnd_toEndOf="@+id/naviTop" />
 

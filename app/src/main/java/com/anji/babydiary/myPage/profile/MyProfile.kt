@@ -27,6 +27,7 @@ import com.anji.babydiary.database.profile.Profiles
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.databinding.ProfileFragmentBinding
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.activity_main_feed.*
 
 class MyProfile : Fragment() {
 

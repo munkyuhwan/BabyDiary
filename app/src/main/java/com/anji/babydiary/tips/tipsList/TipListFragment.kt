@@ -25,6 +25,7 @@ import com.anji.babydiary.databinding.TipListFragmentBinding
 import com.anji.babydiary.myPage.MyPage
 import com.anji.babydiary.search.SearchActivity
 import com.anji.babydiary.tips.tipsList.listAdapter.TipListAdpater
+import kotlinx.android.synthetic.main.activity_event.*
 
 class TipListFragment : Fragment() {
 
@@ -35,6 +36,8 @@ class TipListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        requireActivity().fab.visibility = View.VISIBLE
+
         val binding = DataBindingUtil.inflate<TipListFragmentBinding>(inflater, R.layout.tip_list_fragment, container, false)
 
         val application = requireNotNull(this.activity).application

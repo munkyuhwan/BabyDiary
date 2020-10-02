@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.databinding.MapWebviewFragmentBinding
+import kotlinx.android.synthetic.main.activity_main_feed.*
 
 
 class MapWebview : Fragment() {
@@ -50,6 +51,7 @@ class MapWebview : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        requireActivity().fab.visibility = View.GONE
 
 
         binding = DataBindingUtil.inflate<MapWebviewFragmentBinding>(inflater, R.layout.map_webview_fragment, container, false)

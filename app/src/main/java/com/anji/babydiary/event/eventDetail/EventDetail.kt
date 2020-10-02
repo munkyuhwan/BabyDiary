@@ -15,6 +15,7 @@ import com.anji.babydiary.database.event.Event
 import com.anji.babydiary.database.event.EventDatabase
 import com.anji.babydiary.databinding.EventDetailFragmentBinding
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.activity_event.*
 
 class EventDetail : Fragment() {
 
@@ -23,6 +24,7 @@ class EventDetail : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
+        requireActivity().fab.visibility = View.GONE
         val argument = arguments?.let { EventDetailArgs.fromBundle(it) }
 
         val binding = DataBindingUtil.inflate<EventDetailFragmentBinding>(inflater, R.layout.event_detail_fragment, container, false)

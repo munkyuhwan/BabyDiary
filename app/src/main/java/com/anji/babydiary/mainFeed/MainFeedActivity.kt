@@ -36,15 +36,7 @@ class MainFeedActivity() : BaseActivity() {
         binding.lifecycleOwner = this
         binding.feedMain = viewModel
 
-       // val navViewModel = setNav(R.id.feedNestedHost)
-       // binding.navController = navViewModel
-
-        //navViewModel.isMain.value = true
-
-        //setOnclickMenu()
         binding.bottomNav = setBottomNav(2)
-
-
 
         binding.fab.setOnClickListener {
             val intent: Intent = Intent(this, DailyCheckActivity::class.java)
