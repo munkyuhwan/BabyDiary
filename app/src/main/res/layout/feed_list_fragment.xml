@@ -61,7 +61,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/main_nav_layout">
 
-
                 <TextView
                     android:id="@+id/all"
                     style="@style/MainFeedCatAll"
@@ -88,9 +87,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:onClick="@{() -> mainFeed.onTypeClick(mainFeed.typeAge) }"
                     android:paddingTop="10sp"
-                    android:paddingBottom="10sp" />
+                    android:paddingBottom="10sp"
+                    android:onClick="@{() -> mainFeed.onTypeClick(mainFeed.typeAge) }"
+                    />
+
+                <LinearLayout
+                    android:layout_width="119sp"
+                    android:layout_height="4sp"
+                    android:background="#ffffff"
+                    android:alpha="0.7"
+                    android:layout_marginTop="15sp"
+                    />
 
             </LinearLayout>
 
@@ -123,8 +131,7 @@
                     android:onClick="@{() -> mainFeed.onCategorySelectClicked()}"
                     android:text="@{mainFeed.selectedItem}"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"
-                    app:layout_constraintHorizontal_bias="0.508"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.7" />

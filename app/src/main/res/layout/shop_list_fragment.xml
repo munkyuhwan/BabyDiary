@@ -89,17 +89,29 @@
                     style="@style/MainFeedCatOne"
                     android:text="추천용품"
                     android:onClick="@{() -> shopModelView.selectByCat(0)}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="10sp"
+                    android:paddingBottom="10sp" />
 
                 <TextView
                     style="@style/MainFeedCatTwo"
                     android:text="중고용품"
                     android:onClick="@{() -> shopModelView.selectByCat(1)}"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20sp" />
+                    android:gravity="center"
+                    android:paddingTop="10sp"
+                    android:paddingBottom="10sp" />
 
+                <LinearLayout
+                    android:layout_width="119sp"
+                    android:layout_height="4sp"
+                    android:background="#ffffff"
+                    android:alpha="0.7"
+                    android:layout_marginTop="15sp"
+                    />
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -120,7 +132,7 @@
                     android:gravity="center_vertical"
                     android:onClick="@{() -> shopModelView.onCategorySelectClicked()}"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/appCompatImageView"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.7" />
