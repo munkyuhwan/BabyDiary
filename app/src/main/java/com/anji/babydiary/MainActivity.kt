@@ -36,6 +36,22 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_main)
+        /*
+        val expDate = GregorianCalendar(2020, 10, 3) // midnight
+        val now = GregorianCalendar()
+
+        val isExpired = now.after(expDate)
+
+        if (isExpired) {
+            Toast.makeText(this, "사용기간이 만료되었습니다.", Toast.LENGTH_SHORT).show()
+            finishAffinity()
+            finish()
+            exitProcess(-1)
+        }
+
+         */
+
+
 
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 

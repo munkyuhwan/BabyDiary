@@ -180,6 +180,7 @@ object Utils {
     }
 
     fun showAlert(context:Context, title:String ,msg:String, navController: NavController) {
+        /*
         val builder: AlertDialog.Builder = AlertDialog.Builder(
             ContextThemeWrapper(
                 context,
@@ -198,6 +199,21 @@ object Utils {
         builder.setNegativeButton("취소",
             DialogInterface.OnClickListener { dialog, id -> })
         builder.show()
+
+         */
+
+
+        val alert = AlertDialog.Builder(context)
+        alert.setTitle("${title}")
+            .setMessage("${msg}")
+            .setNegativeButton(
+                "취소"
+            ) { dialog, which -> }
+            .setPositiveButton("확인" ) {dialog, which ->
+                navController.popBackStack()
+
+            }.show()
+
     }
 
 }

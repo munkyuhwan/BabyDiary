@@ -89,6 +89,7 @@ class WriteProduct : Fragment() {
         return binding.root
     }
 
+
     fun openGallery() {
         //activity?.let {
         //    OpenGallery.getInstance().permissionCheck(this.application, it)
