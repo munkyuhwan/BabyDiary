@@ -173,13 +173,11 @@ abstract class BaseActivity() : AppCompatActivity() {
         mainFeed.month = month
         mainFeed.date = date
 
-
         mainFeed.timeMilli = Utils.getMilliFromDate("${year} ${month} ${date} ${hour}:${min}")
 
         uiScope.launch {
             insertFeed(mainFeed)
         }
-
 
     }
 

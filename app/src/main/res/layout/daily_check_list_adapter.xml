@@ -14,6 +14,12 @@
         <variable
             name="viewModel"
             type="com.anji.babydiary.dailyCheck.listAdapter.DailyCheckListAdapterViewModel" />
+        <variable
+            name="deleteClick"
+            type="com.anji.babydiary.dailyCheck.dailyCheckWrite.DailyCheckDeleteClick" />
+        <variable
+            name="completeClicked"
+            type="com.anji.babydiary.dailyCheck.dailyCheckWrite.EditCompleteClickListener" />
     </data>
     
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -64,8 +70,8 @@
         <ImageButton
             android:id="@+id/editRecordBtn"
             style="@style/checkEditBtn"
-            android:layout_width="13dp"
-            android:layout_height="12dp"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/checkIcon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/checkIcon" />
@@ -129,6 +135,26 @@
                 app:layout_constraintTop_toTopOf="@+id/inputDataWrapper" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/editLayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="20dp">
+
+            <Button
+                android:id="@+id/deleteBtn"
+                style="@style/editDeleteStyle"
+                android:background="#FF4600"
+                android:onClick="@{() -> deleteClick.onDeleteClick(dailyCheck)}"
+                android:text="@string/btn_delete_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

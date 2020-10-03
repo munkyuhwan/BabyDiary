@@ -20,13 +20,14 @@ import com.anji.babydiary.database.profile.Profiles
 import com.anji.babydiary.databinding.FollowListItemBinding
 import com.anji.babydiary.databinding.FollowerFragmentBinding
 import com.anji.babydiary.databinding.MyFeedListItemBinding
+import com.anji.babydiary.myPage.myFollower.FollowMemberClickListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.coroutines.*
 
-class FollowListAdapter(val activity:Activity, val type:String, val lifecycleOwner: LifecycleOwner) :ListAdapter<Follow, FollowListAdapter.FollowViewHolder>(FollowDiffUtilCallback()) {
+class FollowListAdapter(val activity:Activity, val type:String, val lifecycleOwner: LifecycleOwner, val FollowerClicked:FollowMemberClickListener) :ListAdapter<Follow, FollowListAdapter.FollowViewHolder>(FollowDiffUtilCallback()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FollowViewHolder {
@@ -35,13 +36,15 @@ class FollowListAdapter(val activity:Activity, val type:String, val lifecycleOwn
 
     override fun onBindViewHolder(holder: FollowViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, activity, type, lifecycleOwner)
+        holder.bind(item, activity, type, lifecycleOwner, FollowerClicked)
     }
 
     class FollowViewHolder private constructor(val binding:FollowListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item:Follow, activity: Activity, type:String, lifecycleOwner: LifecycleOwner) {
+        fun bind(item:Follow, activity: Activity, type:String, lifecycleOwner: LifecycleOwner, followerClicked:FollowMemberClickListener) {
 
+            binding.folower = item
+            binding.followerCLicked = followerClicked
             val profileDatabase = ProfileDatabase.getInstance(activity.applicationContext).database
             val job = Job()
             val uiScope = CoroutineScope(Dispatchers.Main + job)
@@ -57,11 +60,6 @@ class FollowListAdapter(val activity:Activity, val type:String, val lifecycleOwn
 
             profileData.observe(lifecycleOwner, Observer {
 
-                Log.e("profile","=================================================================")
-                Log.e("profile","${it}")
-                Log.e("profile","${it.name}")
-                Log.e("profile","${it.introduce}")
-                Log.e("profile","=================================================================")
                 binding.userId.text = "${it.name}"
                 binding.userIntro.text = "${it.introduce}"
 

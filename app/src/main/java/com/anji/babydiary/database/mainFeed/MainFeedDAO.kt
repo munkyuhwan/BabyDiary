@@ -15,7 +15,7 @@ interface MainFeedDAO{
     @Query("SELECT * FROM tbl_main_feed ORDER BY idx DESC")
     fun selectAll(): LiveData<List<MainFeed>>
 
-    @Query("SELECT * FROM tbl_main_feed ORDER BY idx DESC")
+    @Query("SELECT * FROM tbl_main_feed ORDER BY time_milli DESC")
     fun selectAllMutable(): List<MainFeed>
 
     @Query ("SELECT * FROM tbl_main_feed WHERE feed_title LIKE '%' || :keyword || '%' OR feed_text LIKE '%' || :keyword || '%' ORDER BY idx DESC")

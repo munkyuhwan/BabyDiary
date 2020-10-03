@@ -88,18 +88,13 @@ class MyFeedViewModel(val idx:Long,
     suspend fun selectFollowChecker() {
         withContext(Dispatchers.IO) {
             followChecker.postValue( followDatabase.checkFollow(followIdx, loggedInIdx) )
-
+            Log.e("followchecker","${followChecker.value}")
             if (followChecker.value != null) {
-                if (followChecker.value != null) {
-                    if (followChecker.value!!.size <= 0) {
-                        isFollowing.postValue(View.GONE)
-                    } else {
-                        isFollowing.postValue(View.VISIBLE)
-                    }
-                } else {
+                if (followChecker.value!!.size <= 0) {
                     isFollowing.postValue(View.GONE)
+                } else {
+                    isFollowing.postValue(View.VISIBLE)
                 }
-
             }else {
                 isFollowing.postValue(View.GONE)
 
@@ -117,7 +112,9 @@ class MyFeedViewModel(val idx:Long,
 
     fun onFollowClicked() {
        if (loggedInIdx != followIdx) {
-            if (followChecker.value!!.size <= 0) {
+           Log.e("followcheckerOnfollowclick","${followChecker.value}")
+           if (followChecker.value!!.size <= 0) {
+
                 var follow = Follow()
                 follow.followee_idx = followIdx
                 follow.follower_idx = loggedInIdx
@@ -125,11 +122,11 @@ class MyFeedViewModel(val idx:Long,
                 uiScope.launch {
                     insertFollow(follow)
                 }
-            }else {
+           }else {
                 uiScope.launch {
                     deleteFollow()
                 }
-            }
+           }
 
         }
     }

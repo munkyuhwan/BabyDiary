@@ -70,6 +70,7 @@
             <Button
                 android:id="@+id/dailyCheckEdit"
                 style="@style/dailyCheckEditBtnText"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/selectedDate"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/selectedDate" />

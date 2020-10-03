@@ -4,13 +4,24 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
+    <data>
+        <variable
+            name="folower"
+            type="com.anji.babydiary.database.follow.Follow" />
+        <variable
+            name="followerCLicked"
+            type="com.anji.babydiary.myPage.myFollower.FollowMemberClickListener" />
+    </data>
+
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="10sp"
     android:paddingBottom="10sp"
     android:paddingLeft="15sp"
-    android:paddingRight="15sp">
+    android:paddingRight="15sp"
+    android:onClick="@{() -> followerCLicked.onClick(folower)}"
+    >
 
     <ImageView
         android:id="@+id/follow_img"

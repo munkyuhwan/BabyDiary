@@ -13,7 +13,9 @@ import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.dailyCheck.DailyCheckViewModel
 import com.anji.babydiary.dailyCheck.DailyCheckViewModelFactory
+import com.anji.babydiary.dailyCheck.dailyCheckWrite.DailyCheckDeleteClick
 import com.anji.babydiary.dailyCheck.dailyCheckWrite.EditClickListener
+import com.anji.babydiary.dailyCheck.dailyCheckWrite.EditCompleteClickListener
 import com.anji.babydiary.dailyCheck.listAdapter.DailyCheckListAdapter
 import com.anji.babydiary.database.dailyCheck.DailyCheckDatabase
 import com.anji.babydiary.databinding.ActivityDailyCheckBinding
@@ -48,6 +50,12 @@ class DailyCheckCalendar : Fragment() {
         val listAdapter = DailyCheckListAdapter(false,
             EditClickListener {
                 //Toast.makeText(requireContext(), "${it}", Toast.LENGTH_SHORT).show()
+            },
+            DailyCheckDeleteClick {
+
+            },
+            EditCompleteClickListener {
+
             },
             requireParentFragment()
             )

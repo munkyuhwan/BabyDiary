@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import com.anji.babydiary.common.MyShare.MyShare
 import com.anji.babydiary.common.Utils
 import com.anji.babydiary.dailyCheck.DailyCheckListObj
+import com.anji.babydiary.database.comments.Comments
 import com.anji.babydiary.database.dailyCheck.DailyCheck
 import com.anji.babydiary.database.dailyCheck.DailyCheckDao
 import kotlinx.coroutines.*
@@ -38,6 +39,8 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao,val idx:Long, applica
     var dataToday:LiveData<List<DailyCheck>>
         get() = _dataToday
         set(value) {}
+
+
     var selectedData = MutableLiveData<DailyCheck>()
     val marginTop = MutableLiveData<Float>()
 
@@ -262,10 +265,53 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao,val idx:Long, applica
 
     }
 
+    fun deleteComment(idx:Long) {
+        uiScope.launch {
+            queryDelete(idx)
+        }
+    }
+
+    suspend fun queryDelete(idx:Long) {
+        withContext(Dispatchers.IO) {
+            database.deleteByIdx(idx)
+            _dataToday.postValue(database.selectByDate(selectedYear.value!!.toInt(), selectedMonth.value!!.toInt(), selectedDate.value!!.toInt(), idx) )
+        }
+    }
+
+    fun donTrigger(idx:Long) {
+        uiScope.launch{
+            trigger(idx)
+        }
+    }
+
+    suspend fun trigger(idx:Long) {
+        withContext(Dispatchers.IO) {
+            _dataToday.postValue(
+                database.selectByDate(
+                    selectedYear.value!!.toInt(),
+                    selectedMonth.value!!.toInt(),
+                    selectedDate.value!!.toInt(),
+                    idx
+                )
+            )
+        }
+    }
+
 }
 
 
 class EditClickListener(val clickListener:(resultId:Long)->Unit ) {
     fun onClick(result: DailyCheck) = clickListener(result.idx)
 }
+
+class EditCompleteClickListener(val clickListener:(resultId:Long)->Unit ) {
+    fun onClick(result: DailyCheck) = clickListener(result.idx)
+}
+
+
+
+class DailyCheckDeleteClick(val clickListener:(idx:Long)->Unit) {
+    fun onDeleteClick(chk: DailyCheck) = clickListener(chk.idx)
+}
+
 

@@ -134,17 +134,25 @@ class MyFeed : Fragment() {
 
 
         binding.followerLabel.setOnClickListener {
-            findNavController().navigate(MyFeedDirections.actionMyFeedToFollower("follower"))
+            if (idx == MyShare.prefs.getLong("idx", 0L)) {
+                findNavController().navigate(MyFeedDirections.actionMyFeedToFollower("follower"))
+            }
         }
         binding.numFollower.setOnClickListener {
-            findNavController().navigate(MyFeedDirections.actionMyFeedToFollower("follower"))
+            if (idx == MyShare.prefs.getLong("idx", 0L)) {
+                findNavController().navigate(MyFeedDirections.actionMyFeedToFollower("follower"))
+            }
         }
 
         binding.followingLabel.setOnClickListener {
-            findNavController().navigate(MyFeedDirections.actionMyFeedToFollower("following"))
+            if (idx == MyShare.prefs.getLong("idx", 0L)) {
+                findNavController().navigate(MyFeedDirections.actionMyFeedToFollower("following"))
+            }
         }
         binding.numFollowing.setOnClickListener {
-            findNavController().navigate(MyFeedDirections.actionMyFeedToFollower("following"))
+            if (idx == MyShare.prefs.getLong("idx", 0L)) {
+                findNavController().navigate(MyFeedDirections.actionMyFeedToFollower("following"))
+            }
         }
 
 

@@ -13,6 +13,8 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.anji.babydiary.R
 import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.common.MyShare.MyShare
@@ -23,6 +25,7 @@ import com.anji.babydiary.dailyCheck.listAdapter.DailyCheckListAdapter
 import com.anji.babydiary.dailyCheck.listAdapter.DailyCheckListAdapterViewModelFactory
 import com.anji.babydiary.database.dailyCheck.DailyCheckDatabase
 import com.anji.babydiary.databinding.DailyCheckWriteFragmentBinding
+import kotlinx.android.synthetic.main.comment_list_item.view.*
 
 class DailyCheckWrite : Fragment() {
 
@@ -117,7 +120,13 @@ class DailyCheckWrite : Fragment() {
 
         val listAdapter = DailyCheckListAdapter(true,
             EditClickListener {
-                Toast.makeText(requireContext(), "${it}", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(requireContext(), "${it}", Toast.LENGTH_SHORT).show()
+            },
+            DailyCheckDeleteClick {
+                viewModel.deleteComment(it)
+            },
+            EditCompleteClickListener {
+                viewModel.donTrigger(it)
             },
             requireParentFragment()
             )
@@ -133,6 +142,33 @@ class DailyCheckWrite : Fragment() {
 
             }
         })
+
+        val simpleCallback: ItemTouchHelper.SimpleCallback = object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                //mList.remove(viewHolder.layoutPosition)
+                //Toast.makeText(requireContext(),"${viewHolder.layoutPosition}", Toast.LENGTH_SHORT).show()
+                if (direction == ItemTouchHelper.LEFT) {
+                    viewHolder.itemView.editLayer.visibility = View.VISIBLE
+                }else {
+                    viewHolder.itemView.editLayer.visibility = View.GONE
+                }
+                //viewModel.deleteComment(viewModel.totalList.value!!.get(viewHolder.layoutPosition).idx)
+                listAdapter.notifyItemRemoved(viewHolder.layoutPosition)
+            }
+        }
+
+        val itemTouchHelper = ItemTouchHelper(simpleCallback)
+        itemTouchHelper.attachToRecyclerView(binding.recordList)
+
 
         binding.dailyCheckBacnBtn.setOnClickListener {
             requireActivity().finish()

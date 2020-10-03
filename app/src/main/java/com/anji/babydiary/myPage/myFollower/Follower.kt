@@ -1,5 +1,6 @@
 package com.anji.babydiary.myPage.myFollower
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
@@ -13,9 +14,12 @@ import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.common.MyShare.MyShare
 import com.anji.babydiary.common.Utils
+import com.anji.babydiary.database.follow.Follow
 import com.anji.babydiary.database.follow.FollowDatabase
+import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.databinding.FollowerFragmentBinding
 import com.anji.babydiary.event.eventDetail.EventDetailArgs
+import com.anji.babydiary.myPage.MyPage
 import com.anji.babydiary.myPage.myFollower.listAdapter.FollowListAdapter
 
 class Follower : Fragment() {
@@ -45,7 +49,13 @@ class Follower : Fragment() {
         val type = argument!!.type
 
 
-        val adapter = FollowListAdapter(requireActivity(), type, viewLifecycleOwner)
+        val adapter = FollowListAdapter(requireActivity(), type, viewLifecycleOwner, FollowMemberClickListener {
+            it?.let {
+                var intent = Intent(activity, MyPage::class.java)
+                intent.putExtra("userIdx",it)
+                requireActivity().startActivity(intent)
+            }
+        })
         binding.followList.adapter = adapter
 
         if (type.equals("follower")) {
@@ -82,3 +92,14 @@ class Follower : Fragment() {
     }
 
 }
+
+
+class FollowMemberClickListener(val clickListener:(resultId:Long)->Unit ) {
+    fun onClick(result: Follow) = clickListener(result.follower_idx)
+}
+
+
+
+
+
+

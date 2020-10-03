@@ -12,17 +12,21 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.anji.babydiary.comment.CommentDeleteClick
 import com.anji.babydiary.common.Utils
 import com.anji.babydiary.dailyCheck.DailyCheckListObj
 import com.anji.babydiary.dailyCheck.DailyCheckViewModel
 import com.anji.babydiary.dailyCheck.DailyCheckViewModelFactory
+import com.anji.babydiary.dailyCheck.dailyCheckWrite.DailyCheckDeleteClick
 import com.anji.babydiary.dailyCheck.dailyCheckWrite.EditClickListener
+import com.anji.babydiary.dailyCheck.dailyCheckWrite.EditCompleteClickListener
 import com.anji.babydiary.database.dailyCheck.DailyCheck
 import com.anji.babydiary.database.dailyCheck.DailyCheckDatabase
 import com.anji.babydiary.databinding.DailyCheckListAdapterBinding
 import kotlinx.coroutines.*
 
-class DailyCheckListAdapter(val isDetail:Boolean, val editClickListener:EditClickListener, val fragment:Fragment):ListAdapter<DailyCheck, DailyCheckListAdapter.DailyCheckViewHolder>(DailyCHeckListDiffCallback()) {
+class DailyCheckListAdapter(val isDetail:Boolean, val editClickListener:EditClickListener, val onDeleteClick: DailyCheckDeleteClick, val editCompleteClickListener: EditCompleteClickListener,
+                            val fragment:Fragment):ListAdapter<DailyCheck, DailyCheckListAdapter.DailyCheckViewHolder>(DailyCHeckListDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyCheckViewHolder {
         return DailyCheckListAdapter.DailyCheckViewHolder.from(parent)
@@ -30,12 +34,14 @@ class DailyCheckListAdapter(val isDetail:Boolean, val editClickListener:EditClic
 
     override fun onBindViewHolder(holder: DailyCheckViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, isDetail, editClickListener, fragment)
+        holder.bind(item, isDetail, editClickListener, onDeleteClick,editCompleteClickListener, fragment)
     }
 
     class DailyCheckViewHolder private constructor(val binding:DailyCheckListAdapterBinding):RecyclerView.ViewHolder(binding.root) {
-        fun bind(item:DailyCheck, isDetail: Boolean, editClickListener:EditClickListener, fragment:Fragment){
+        fun bind(item:DailyCheck, isDetail: Boolean, editClickListener:EditClickListener, onDeleteClick: DailyCheckDeleteClick,editCompleteClickListener: EditCompleteClickListener, fragment:Fragment){
 
+            binding.completeClicked = editCompleteClickListener
+            binding.deleteClick = onDeleteClick
             binding.dailyCheck = item
             binding.checkCategory.text = DailyCheckListObj.itemName[item.category]
             binding.editClick = editClickListener
@@ -66,6 +72,7 @@ class DailyCheckListAdapter(val isDetail:Boolean, val editClickListener:EditClic
                 binding.checkCategory.visibility = View.GONE
                 binding.checkText.visibility = View.GONE
                 binding.checkTime.visibility = View.GONE
+                binding.editRecordBtn.visibility = View.GONE
                 if (item.valueTwo!="") {
                     binding.rightTime.visibility = View.VISIBLE
                     binding.leftTime.visibility = View.VISIBLE
@@ -82,12 +89,14 @@ class DailyCheckListAdapter(val isDetail:Boolean, val editClickListener:EditClic
                 binding.checkCategory.visibility = View.VISIBLE
                 binding.checkText.visibility = View.VISIBLE
                 binding.checkTime.visibility = View.VISIBLE
+                binding.editRecordBtn.visibility = View.VISIBLE
                 binding.inputDataWrapper.visibility = View.GONE
                 if (item.valueTwo!="") {
                     vm.completeEdit(item.idx, binding.leftTime.text.toString(),binding.rightTime.text.toString())
                 }else {
                     vm.completeEdit(item.idx, binding.checkMemo.text.toString(),"")
                 }
+                editCompleteClickListener.onClick(item)
             }
 
             binding.leftTime.setOnClickListener {
@@ -162,9 +171,6 @@ class DailyCheckListAdapter(val isDetail:Boolean, val editClickListener:EditClic
                         fragment.requireActivity().runOnUiThread {
                             binding.leftTime.text = leftCounting.toString()
                         }
-                        Log.e("count","================================================================================")
-                        Log.e("count","count: ${leftCounting}")
-                        Log.e("count","================================================================================")
                     }
                 }else {
                     while (isRightCountingStarted) {

@@ -144,7 +144,6 @@ class FeedListViewModel(
         return mainFeedDAO.selectAll()
     }
 
-
     fun onLikeButtonClicked(likeCnt:CharSequence, feedIdx:Long) {
         var like: Likes = Likes()
 

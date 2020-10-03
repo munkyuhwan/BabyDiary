@@ -33,4 +33,7 @@ interface DailyCheckDao  {
 
     @Query("DELETE FROM tbl_daily_check")
     fun delete();
+
+    @Query("DELETE FROM tbl_daily_check WHERE idx= :idx")
+    fun deleteByIdx(idx:Long)
 }

@@ -48,6 +48,20 @@ class ShoppingDetail : Fragment() {
         binding.viewModel = viewModel
 
 
+        val nameArray = arrayOf(
+            "승율아가",
+            "찬호",
+            "쥬쥬",
+            "오쑥이",
+            "선우",
+            "승현아기",
+            "말랑이",
+            "재재"
+        )
+
+
+        binding.writer.text = nameArray[ idx.toInt()%nameArray.size ]
+
         binding.toLink.setOnClickListener {
             //if (!viewModel.url.value.equals("")) {
                 showInBrowser(viewModel.url.value!!)

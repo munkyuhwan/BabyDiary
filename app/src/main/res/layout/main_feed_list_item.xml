@@ -87,7 +87,6 @@
             android:layout_height="15dp"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="5dp"
-            android:onClick="@{() -> viewModel.onLikeButtonClicked(likeCnt.getText(), mainFeed.idx) }"
             app:layout_constraintBottom_toBottomOf="@+id/feed_img"
             app:layout_constraintStart_toEndOf="@+id/feed_img" />
 
