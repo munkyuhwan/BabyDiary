@@ -16,6 +16,7 @@ import com.anji.babydiary.R
 import com.anji.babydiary.database.shopping.ShoppingDatabase
 import com.anji.babydiary.databinding.ShoppingDetailFragmentBinding
 import com.anji.babydiary.mainFeed.feedDetail.FeedDetailArgs
+import com.anji.babydiary.myPage.MyPage
 import com.anji.babydiary.shopping.ShoppingActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -63,7 +64,6 @@ class ShoppingDetail : Fragment() {
         )
 
         val imgArray = arrayOf(
-            "",
             "mem_1",
             "mem_2",
             "mem_3",
@@ -73,6 +73,10 @@ class ShoppingDetail : Fragment() {
             "mem_7",
             "mem_8"
         )
+        val idxs = arrayOf(
+            1,2,3,4,5,6,7,8
+        )
+
         binding.writer.text = nameArray[ idx.toInt()%nameArray.size ]
 
         binding.toLink.setOnClickListener {
@@ -114,9 +118,6 @@ class ShoppingDetail : Fragment() {
                     //Utils.setFeedListImg(binding.productImage)
                 }
 
-
-
-
             }
 
         })
@@ -125,6 +126,19 @@ class ShoppingDetail : Fragment() {
             findNavController().popBackStack()
         }
 
+        binding.userIcon.setOnClickListener {
+            Log.e("idx","${idxs[idx.toInt()%nameArray.size]}")
+            var intent = Intent(activity, MyPage::class.java)
+            intent.putExtra("userIdx", idxs[idx.toInt()%nameArray.size].toLong() )
+            requireActivity().startActivity(intent)
+        }
+        binding.writer.setOnClickListener {
+            Log.e("idx","${idxs[idx.toInt()%nameArray.size]}")
+
+            var intent = Intent(activity, MyPage::class.java)
+            intent.putExtra("userIdx", idxs[idx.toInt()%nameArray.size].toLong())
+            requireActivity().startActivity(intent)
+        }
 
         return binding.root
     }

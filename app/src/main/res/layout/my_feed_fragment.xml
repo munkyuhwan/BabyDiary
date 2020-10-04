@@ -247,6 +247,7 @@
             <Button
                 android:id="@+id/add_myfeed"
                 style="@style/addMyFeed"
+                android:visibility="@{myFeedViewModel.addVisibility}"
                 android:layout_marginEnd="20dp"
                 app:layout_constraintBottom_toTopOf="@+id/monthList"
                 app:layout_constraintEnd_toEndOf="parent"

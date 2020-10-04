@@ -3,13 +3,11 @@ package com.anji.babydiary.mainFeed.feedList
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavOptions
@@ -17,20 +15,17 @@ import androidx.navigation.fragment.findNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.common.BaseFragment
 import com.anji.babydiary.common.CommonCode
+import com.anji.babydiary.dailyCheck.DailyCheckActivity
 import com.anji.babydiary.dailyCheck.dailyCheckWrite.DailyCheckWrite
 import com.anji.babydiary.database.bookmark.BookMarkDatabase
 import com.anji.babydiary.database.likes.LikesDatabase
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.databinding.FeedListFragmentBinding
-import com.anji.babydiary.login.Login
 import com.anji.babydiary.mainFeed.feedList.listAdapter.MainFeedListAdapter
 import com.anji.babydiary.myPage.MyPage
-import com.anji.babydiary.myPage.myFeed.MyFeed
 import com.anji.babydiary.search.SearchActivity
-import kotlinx.android.synthetic.main.activity_event.*
 import kotlinx.android.synthetic.main.activity_main_feed.*
-import kotlinx.android.synthetic.main.activity_main_feed.fab
 
 class FeedList : BaseFragment() {
 
@@ -102,15 +97,14 @@ class FeedList : BaseFragment() {
         viewModel.bookMarks.observe(viewLifecycleOwner, Observer {
             it?.let {
                 for (i in it.iterator()) {
-
                     viewModel.selectBookmarkedFeed(i.feed_idx)
                 }
             }
         })
 
         binding.dailycheckBtn.setOnClickListener {
-            val intent: Intent = Intent(requireActivity(), DailyCheckWrite::class.java)
-            startActivity(intent)
+            val intent: Intent = Intent(requireActivity(), DailyCheckActivity::class.java)
+            requireActivity().startActivity(intent)
         }
 
         //checkProfile(application)

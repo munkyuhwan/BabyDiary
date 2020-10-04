@@ -1,31 +1,18 @@
 package com.anji.babydiary.common
 
 import android.content.Intent
-import android.content.SharedPreferences
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.LinearLayout
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.anji.babydiary.R
 import com.anji.babydiary.common.bottomNavigation.BottomNavigationViewModel
 import com.anji.babydiary.common.bottomNavigation.BottomNavigationViewModelFactory
-import com.anji.babydiary.dailyCheck.DailyCheckViewModel
 import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.database.mainFeed.MainFeedDAO
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
@@ -37,23 +24,12 @@ import com.anji.babydiary.database.tip.TipsDao
 import com.anji.babydiary.database.tip.TipsDatabase
 import com.anji.babydiary.event.EventActivity
 import com.anji.babydiary.gnb.main.NavViewModel
-import com.anji.babydiary.gnb.main.NavViewModelFactory
-import com.anji.babydiary.login.Login
 import com.anji.babydiary.mainFeed.MainFeedActivity
 import com.anji.babydiary.myPage.MyPage
 import com.anji.babydiary.shopping.ShoppingActivity
 import com.anji.babydiary.tips.TipActivity
-import com.google.android.gms.common.internal.service.Common
 import com.google.android.material.appbar.CollapsingToolbarLayout
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.imageview.ShapeableImageView
-import com.google.android.material.shape.CornerFamily
-import kotlinx.android.synthetic.main.nav_layout.view.*
 import kotlinx.coroutines.*
-import java.lang.Exception
-import java.sql.Date
-import java.text.SimpleDateFormat
-import kotlin.random.Random
 
 
 abstract class BaseActivity() : AppCompatActivity() {
@@ -376,7 +352,6 @@ abstract class BaseActivity() : AppCompatActivity() {
             3,
             10,20
         )
-
 
         /////idx:2
         insertFeed(2,

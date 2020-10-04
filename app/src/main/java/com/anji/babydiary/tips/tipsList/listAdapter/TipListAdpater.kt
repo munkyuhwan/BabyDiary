@@ -88,12 +88,9 @@ class TipListAdpater(val clickListener: TipClickListener, val tipLikeClicked: Ti
 
             })
 
-
             uiScope.launch {
                 setData(profileData, profileDatabase, item)
             }
-
-
 
             binding.executePendingBindings()
             binding.clickListener = clickListener

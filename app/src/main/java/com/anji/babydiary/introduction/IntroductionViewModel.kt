@@ -1,6 +1,7 @@
 package com.anji.babydiary.introduction
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import com.anji.babydiary.common.CommonCode
 
@@ -9,10 +10,9 @@ class IntroductionViewModel(application: Application): AndroidViewModel(applicat
     var selectedSentence:String = ""
 
     init {
-        var rnd = Math.random()%CommonCode.INTRODUCTION.size
-
+        var rnd = Math.abs( (Math.random()%CommonCode.INTRODUCTION.size)*10 )
+        Log.e("dddd","randnum: ${rnd}")
         selectedSentence = CommonCode.INTRODUCTION[rnd.toInt()]
-
     }
 
 }

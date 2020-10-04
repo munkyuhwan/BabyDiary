@@ -90,7 +90,7 @@ class MyFeed : Fragment() {
                 binding.nameKid.text = it.name.toString()
                 //binding.numFollower.text = it.follower.toString()
 
-                binding.numFollowing.text = it.following.toString()
+                //binding.numFollowing.text = it.following.toString()
 
                 if (!it.img.equals("")) {
                     Glide.with(application).load(it.img).into(binding.shapeableImageView)
@@ -117,6 +117,9 @@ class MyFeed : Fragment() {
         })
         viewModel.followeeReusult.observe(viewLifecycleOwner, Observer {
             it?.let {
+                Log.e("followee","================================================================================")
+                Log.e("followee","${it}")
+                Log.e("followee","================================================================================")
                 binding.numFollowing.text = it.size.toString()
             }
         })

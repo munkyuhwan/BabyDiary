@@ -4,14 +4,11 @@ import android.app.Application
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.common.MyShare.MyShare
-import com.anji.babydiary.database.mainFeed.MainFeed
 import com.anji.babydiary.database.shopping.Shopping
 import com.anji.babydiary.database.shopping.ShoppingDao
 import com.anji.babydiary.database.shopping.shoppingBookmark.ShoppingBookMark
 import com.anji.babydiary.database.shopping.shoppingBookmark.ShoppingBookMarkDao
-import com.anji.babydiary.database.tip.tipsBookmark.TipBookMark
 import kotlinx.coroutines.*
 
 class ShopListViewModel(
@@ -52,6 +49,7 @@ class ShopListViewModel(
         withContext(Dispatchers.IO) {
             allProduct.postValue(database.selectAll())
             arrowRotation.postValue(0F)
+
         }
     }
 
@@ -72,6 +70,7 @@ class ShopListViewModel(
     private suspend fun deleteAll() {
         withContext(Dispatchers.IO) {
             database.deleteAll()
+
         }
     }
 
@@ -141,6 +140,9 @@ class ShopListViewModel(
     private suspend fun insertData(shopdata:Shopping) {
         withContext(Dispatchers.IO) {
             database.insert(shopdata)
+            uiScope.launch {
+                queryAll()
+            }
         }
     }
 

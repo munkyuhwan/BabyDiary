@@ -47,7 +47,8 @@ class EventListViewModel(val database:EventDao, application: Application) : Andr
                     "게시물작성 시, ‘#100일일기챌린지_0일’을 태그해주세요!\n" +
                     "\n" +
                     "- 참여방법 : 게시물 작성시 ‘#100일일기챌린지_0일’을 태그해주세요! (ex. #100일일기챌린지_3일)\n" +
-                    "- 상품 : 100일 일기 챌린지를 달성하"
+                    "- 상품 : 100일 일기 챌린지를 달성하신 분들 중 10분을 추첨해 포토북을 만들어드려요><\n" +
+                    "- 이벤트기간 : ~2020.12월까지"
         )
 
         insertData(
@@ -92,6 +93,9 @@ class EventListViewModel(val database:EventDao, application: Application) : Andr
     suspend fun insert(event:Event) {
         withContext(Dispatchers.IO) {
             database.insert(event)
+            uiScope.launch {
+                queryAll()
+            }
         }
     }
 

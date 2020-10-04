@@ -6,6 +6,7 @@ import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.anji.babydiary.common.MyShare.MyShare
 import com.anji.babydiary.database.follow.Follow
 import com.anji.babydiary.database.follow.FollowDao
 import com.anji.babydiary.database.mainFeed.MainFeed
@@ -36,6 +37,7 @@ class MyFeedViewModel(val idx:Long,
     var followerResult = MutableLiveData< List<Follow> >()
     var followChecker = MutableLiveData<List<Follow>>()
 
+    var addVisibility = MutableLiveData<Int>()
 
     var isFollowing = MutableLiveData<Int>()
 
@@ -50,6 +52,11 @@ class MyFeedViewModel(val idx:Long,
         getFollowerChecker()
         getFolloweeResult()
         getFollowerResult()
+        if (idx == userIdx) {
+            addVisibility.value = View.VISIBLE
+        }else {
+            addVisibility.value = View.GONE
+        }
     }
 
     fun loadDates() {
@@ -72,7 +79,7 @@ class MyFeedViewModel(val idx:Long,
     }
     suspend fun selectFolloweeResult() {
         withContext(Dispatchers.IO) {
-            followeeReusult.postValue(followDatabase.selectFollowee(followIdx))
+            followeeReusult.postValue(followDatabase.selectFollowee(userIdx))
         }
     }
 
