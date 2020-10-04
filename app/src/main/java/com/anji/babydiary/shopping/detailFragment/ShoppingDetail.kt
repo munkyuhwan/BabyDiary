@@ -18,6 +18,9 @@ import com.anji.babydiary.databinding.ShoppingDetailFragmentBinding
 import com.anji.babydiary.mainFeed.feedDetail.FeedDetailArgs
 import com.anji.babydiary.shopping.ShoppingActivity
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_main_feed.*
 import kotlinx.android.synthetic.main.write_product_fragment.view.*
 
@@ -59,7 +62,17 @@ class ShoppingDetail : Fragment() {
             "재재"
         )
 
-
+        val imgArray = arrayOf(
+            "",
+            "mem_1",
+            "mem_2",
+            "mem_3",
+            "mem_4",
+            "mem_5",
+            "mem_6",
+            "mem_7",
+            "mem_8"
+        )
         binding.writer.text = nameArray[ idx.toInt()%nameArray.size ]
 
         binding.toLink.setOnClickListener {
@@ -71,6 +84,7 @@ class ShoppingDetail : Fragment() {
         viewModel.data.observe(viewLifecycleOwner, Observer {
 
             it?.let {
+
                 binding.productInput.text = it.title
                 binding.productPrice.text = it.price
 
@@ -80,6 +94,11 @@ class ShoppingDetail : Fragment() {
 
                 val url = it.url
                 viewModel.url.value = url
+
+                Glide.with(binding.root.context)
+                    .load(resources.getIdentifier(imgArray[ idx.toInt()%imgArray.size ], "drawable", requireActivity().packageName))
+                    .apply(RequestOptions().transforms(CenterCrop(), RoundedCorners(50)))
+                    .into(binding.userIcon)
 
                 if (it.imgDir.startsWith("second") || it.imgDir.startsWith("recomm")) {
                     Glide.with(binding.root.context)
@@ -94,6 +113,9 @@ class ShoppingDetail : Fragment() {
                         .into(binding.imageView)
                     //Utils.setFeedListImg(binding.productImage)
                 }
+
+
+
 
             }
 

@@ -88,7 +88,8 @@ class MyFeed : Fragment() {
 
             it?.let {
                 binding.nameKid.text = it.name.toString()
-                binding.numFollower.text = it.follower.toString()
+                //binding.numFollower.text = it.follower.toString()
+
                 binding.numFollowing.text = it.following.toString()
 
                 if (!it.img.equals("")) {
@@ -110,6 +111,7 @@ class MyFeed : Fragment() {
 
         viewModel.followerResult.observe(viewLifecycleOwner, Observer {
             it?.let {
+                Log.e("followers","${it}")
                 binding.numFollower.text = it.size.toString()
             }
         })
@@ -217,6 +219,11 @@ class MyFeed : Fragment() {
         }
 
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadDates()
     }
 
 

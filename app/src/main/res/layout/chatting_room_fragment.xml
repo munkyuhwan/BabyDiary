@@ -36,7 +36,7 @@
 
                 <ImageButton
                     android:id="@+id/back_btn"
-                    android:layout_width="16dp"
+                    android:layout_width="12dp"
                     android:layout_height="20sp"
                     android:layout_marginStart="15dp"
                     android:background="@drawable/back_btn"
@@ -57,6 +57,17 @@
                     app:layout_constraintStart_toStartOf="@+id/back_btn"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.7" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/appCompatImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/main_feed_search_icon"
+                    app:layout_constraintBottom_toBottomOf="@+id/myfeed_write"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/myfeed_write" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -77,27 +88,27 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginLeft="25sp"
             android:layout_marginRight="25sp"
-            android:layout_marginBottom="12sp"
-            android:paddingLeft="9sp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/comment_text_layout"
+            android:orientation="horizontal"
+            android:paddingLeft="9sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" >
+            app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/msgText"
+                style="@style/editTextStyleWhite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="100dp"
+                android:paddingTop="1sp"
+                android:paddingBottom="1sp"
+                android:text="@{chatViewModel.message}"
                 android:textColor="@color/calendarTextColor"
                 android:textSize="15sp"
-                android:paddingBottom="1sp"
-                android:paddingTop="1sp"
-                android:text="@{chatViewModel.message}"
-                style="@style/editTextStyleWhite"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

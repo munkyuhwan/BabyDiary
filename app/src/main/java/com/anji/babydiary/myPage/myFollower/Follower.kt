@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.size
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -60,14 +61,16 @@ class Follower : Fragment() {
 
         if (type.equals("follower")) {
             binding.completeButton.text = "팔로워"
+            Log.e("follower","follower======================================================")
             viewModel.selectAllFollower.observe(viewLifecycleOwner, Observer {
                 it?.let {
                     adapter.submitList(it)
+
                 }
             })
         }
 
-        if (type.equals("following")) {
+        else if (type.equals("following")) {
             binding.completeButton.text = "팔로잉"
             viewModel.selectAllFollowee.observe(viewLifecycleOwner, Observer {
                 it?.let {
@@ -82,10 +85,8 @@ class Follower : Fragment() {
         }
 
         viewModel.selectAll.observe(viewLifecycleOwner, Observer {
-            Log.e("selectAll","======================================================")
-            Log.e("selectAll","${it}")
-            Log.e("selectAll","======================================================")
-        })
+
+          })
 
         return binding.root
 

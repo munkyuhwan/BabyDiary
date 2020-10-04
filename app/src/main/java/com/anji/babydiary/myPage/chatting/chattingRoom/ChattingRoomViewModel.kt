@@ -17,13 +17,25 @@ import okhttp3.Dispatcher
 class ChattingRoomViewModel (val database: ChattingDao, val userIdxOne:Long, application: Application) : AndroidViewModel(application) {
 
     //var chatData = database.selectByReceiver(userIdxOne)
-    var chatData = database.selectAllWthUser(userIdxOne)
+    //var chatData = database.selectAllWthUser(userIdxOne)
+    var chatData = MutableLiveData<List<Chatting>>()
 
     var message = MutableLiveData<String>()
     val job = Job()
     val uiScope = CoroutineScope(Dispatchers.Main + job)
     init {
+        initData()
+    }
 
+    fun initData() {
+        uiScope.launch {
+            getChatData()
+        }
+    }
+    suspend fun getChatData() {
+        withContext(Dispatchers.IO) {
+            chatData.postValue(database.selectAllWthUser(userIdxOne))
+        }
     }
 
     fun chatData(receiverIdx:Long) {
@@ -41,6 +53,7 @@ class ChattingRoomViewModel (val database: ChattingDao, val userIdxOne:Long, app
         withContext(Dispatchers.IO) {
             database.insert(chat)
             message.postValue("")
+            initData()
         }
 
     }
@@ -67,6 +80,18 @@ class ChattingRoomViewModel (val database: ChattingDao, val userIdxOne:Long, app
         sendFCM(msg.toString())
         uiScope.launch {
             insertData(chat)
+        }
+    }
+
+    fun selectByKeyword( keyword:String ) {
+        uiScope.launch {
+            queryKeyword(keyword)
+        }
+    }
+
+    suspend fun queryKeyword(keyword: String) {
+        withContext(Dispatchers.IO) {
+            chatData.postValue( database.searchByChattingRoom(userIdxOne, keyword) )
         }
     }
 

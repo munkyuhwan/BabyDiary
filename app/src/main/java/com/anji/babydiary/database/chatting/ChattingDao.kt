@@ -18,6 +18,10 @@ interface ChattingDao {
     @Query("SELECT * FROM tbl_chatting WHERE chatting_room= :key")
     fun selectByChattingRoom(key:Long):List<Chatting>
 
+    @Query("SELECT * FROM tbl_chatting WHERE user_idx_one= :userIdxOne AND text LIKE '%' || :key || '%' ")
+    fun searchByChattingRoom(userIdxOne:Long, key:String):List<Chatting>
+
+
     @Query("DELETE FROM tbl_chatting")
     fun deleteAll()
 
@@ -25,9 +29,8 @@ interface ChattingDao {
     fun selectByReceiver(receiver:Long):LiveData<List<Chatting>>
 
 
-    @Transaction
     @Query ("SELECT * FROM tbl_chatting WHERE user_idx_one= :receiver ORDER BY idx ASC")
-    fun selectAllWthUser(receiver:Long):LiveData<List<Chatting>>
+    fun selectAllWthUser(receiver:Long):List<Chatting>
 
 
 

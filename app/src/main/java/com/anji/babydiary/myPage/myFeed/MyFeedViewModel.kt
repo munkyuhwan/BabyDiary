@@ -52,6 +52,13 @@ class MyFeedViewModel(val idx:Long,
         getFollowerResult()
     }
 
+    fun loadDates() {
+
+        uiScope.launch {
+            getDates()
+        }
+    }
+
     suspend fun getDates() {
         withContext(Dispatchers.IO) {
             selectDates.postValue( database.selectDates(idx) )

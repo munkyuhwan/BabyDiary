@@ -16,14 +16,15 @@
         android:layout_height="match_parent"
         android:background="@color/mainThemeBackgroundLight"
         tools:context=".event.eventDetail.EventDetail"
-        android:paddingBottom="99sp"
         >
 
         <ScrollView
             android:id="@+id/scrollView2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="99dp"
+            android:layout_marginBottom="74sp"
+            android:paddingBottom="10sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

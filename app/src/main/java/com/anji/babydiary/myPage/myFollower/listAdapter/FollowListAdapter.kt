@@ -49,6 +49,15 @@ class FollowListAdapter(val activity:Activity, val type:String, val lifecycleOwn
             val job = Job()
             val uiScope = CoroutineScope(Dispatchers.Main + job)
             val profileData = MutableLiveData<Profiles>()
+
+
+            Log.e("follower","======================================================")
+            Log.e("follower","${item}")
+            Log.e("follower","======================================================")
+
+
+
+
             uiScope.launch {
                 if (type.equals("follower")) {
                     setData(profileData, profileDatabase, item.follower_idx)
@@ -75,10 +84,14 @@ class FollowListAdapter(val activity:Activity, val type:String, val lifecycleOwn
                         .into(binding.followImg)
                 }
 
+                binding.executePendingBindings()
 
                 //Glide.with(binding.root.context).load(it.).into(binding.followImg)
 
             })
+
+            binding.executePendingBindings()
+
 
         }
 

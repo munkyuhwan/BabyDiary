@@ -265,8 +265,8 @@ class ShopListFragment : Fragment() {
         val manager = GridLayoutManager(activity,2)
         binding.productList.layoutManager = manager
 
-        val spacingInPixels = resources.getDimensionPixelSize(R.dimen.recycler_view_item_width)
-        binding.productList.addItemDecoration(SpacesItemDecoration(spacingInPixels))
+        //val spacingInPixels = resources.getDimensionPixelSize(R.dimen.recycler_view_item_width)
+        //binding.productList.addItemDecoration(SpacesItemDecoration(spacingInPixels))
 
 
         binding.writeProduct.setOnClickListener {

@@ -36,8 +36,8 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_main)
-        /*
-        val expDate = GregorianCalendar(2020, 10, 3) // midnight
+
+        val expDate = GregorianCalendar(2020, 10, 5) // midnight
         val now = GregorianCalendar()
 
         val isExpired = now.after(expDate)
@@ -49,7 +49,7 @@ class MainActivity : BaseActivity() {
             exitProcess(-1)
         }
 
-         */
+
 
 
 
@@ -62,14 +62,14 @@ class MainActivity : BaseActivity() {
                 initializeData()
             }
 
-            if (it.size == 8 ) {
+            if (it.size >= 8 ) {
                 //feedDataInitialize()
                 feedDataCheck()
             }
 
         })
         feedData?.observe(this, androidx.lifecycle.Observer {
-            if (it.size == 34) {
+            if (it.size >= 34) {
                 uiScope.launch {
                      delay()
                 }
