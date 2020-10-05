@@ -79,7 +79,7 @@ class MyFeedViewModel(val idx:Long,
     }
     suspend fun selectFolloweeResult() {
         withContext(Dispatchers.IO) {
-            followeeReusult.postValue(followDatabase.selectFollowee(userIdx))
+            followeeReusult.postValue(followDatabase.selectFollowee(idx))
         }
     }
 

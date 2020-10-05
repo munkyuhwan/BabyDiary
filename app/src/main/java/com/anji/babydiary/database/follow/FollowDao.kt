@@ -24,7 +24,7 @@ interface FollowDao{
     @Query("SELECT  * FROM tbl_follow WHERE followee_idx= :key")
     fun selectFollowerLive(key:Long):LiveData<List<Follow>>
 
-    @Query("SELECT  * FROM tbl_follow WHERE followee_idx= :key")
+    @Query("SELECT  * FROM tbl_follow WHERE follower_idx= :key")
     fun selectFollowee(key:Long):List<Follow>
 
     @Query("SELECT  * FROM tbl_follow WHERE follower_idx= :key")
