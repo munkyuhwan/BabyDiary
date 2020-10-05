@@ -28,6 +28,7 @@ class BottomNavigationViewModel(val activity:BaseActivity, val idx: Int) :ViewMo
     var myPageDot =  MutableLiveData<Int>()
 
     init {
+
         when(idx) {
             0 -> {
                 eventRadioChecked.value = true
@@ -70,6 +71,8 @@ class BottomNavigationViewModel(val activity:BaseActivity, val idx: Int) :ViewMo
                 myPageDot.value = View.VISIBLE
             }
         }
+
+
     }
 
     fun goEvent() {

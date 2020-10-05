@@ -44,8 +44,6 @@ class MyPage : BaseActivity() {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_my_page)
 
-
-
         val idx:Long = MyShare.prefs.getLong("idx", 0L)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_my_page)
@@ -61,7 +59,28 @@ class MyPage : BaseActivity() {
 
         navController = this.findNavController(R.id.myPageNestFragment)
 
-        binding.bottomNav = setBottomNav(4)
+        val intent = intent.extras
+
+        var intentIdx = 0L
+        intent?.let {
+            Log.e("intentData","================================================================================")
+            Log.e("intentData","${it.getLong("userIdx")}")
+            Log.e("intentData","================================================================================")
+            intentIdx = it.getLong("userIdx")
+            //idx = it.getLong("userIdx")
+        }
+
+        if (intentIdx == 0L) {
+            binding.bottomNav = setBottomNav(4)
+        }else {
+            if (intentIdx == idx) {
+                binding.bottomNav = setBottomNav(4)
+
+            }else {
+                binding.bottomNav = setBottomNav(2)
+
+            }
+        }
 
         binding.fab.setOnClickListener {
             val intent: Intent = Intent(this, DailyCheckActivity::class.java)

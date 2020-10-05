@@ -21,4 +21,5 @@ class IntroductionViewModel(application: Application): AndroidViewModel(applicat
     fun rand(from: Int, to: Int) : Int {
         return random.nextInt(to - from) + from
     }
+
 }
