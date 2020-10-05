@@ -123,6 +123,7 @@ class DailyCheckWrite : Fragment() {
                 //Toast.makeText(requireContext(), "${it}", Toast.LENGTH_SHORT).show()
             },
             DailyCheckDeleteClick {
+                Log.e("tag","delete idx: ${it}")
                 viewModel.deleteComment(it)
             },
             EditCompleteClickListener {
@@ -132,7 +133,7 @@ class DailyCheckWrite : Fragment() {
             )
         binding.recordList.adapter = listAdapter
 
-        viewModel.dataToday.observe(viewLifecycleOwner, Observer {
+        viewModel._dataToday.observe(viewLifecycleOwner, Observer {
 
             it?.let{
                 listAdapter.submitList(it)

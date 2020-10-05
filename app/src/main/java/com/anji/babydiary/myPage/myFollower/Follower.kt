@@ -53,7 +53,11 @@ class Follower : Fragment() {
         val adapter = FollowListAdapter(requireActivity(), type, viewLifecycleOwner, FollowMemberClickListener {
             it?.let {
                 var intent = Intent(activity, MyPage::class.java)
-                intent.putExtra("userIdx",it)
+                if (type.equals("following")) {
+                    intent.putExtra("userIdx",it.followee_idx)
+                }else {
+                    intent.putExtra("userIdx",it.follower_idx)
+                }
                 requireActivity().startActivity(intent)
             }
         })
@@ -65,7 +69,6 @@ class Follower : Fragment() {
             viewModel.selectAllFollower.observe(viewLifecycleOwner, Observer {
                 it?.let {
                     adapter.submitList(it)
-
                 }
             })
         }
@@ -95,8 +98,8 @@ class Follower : Fragment() {
 }
 
 
-class FollowMemberClickListener(val clickListener:(resultId:Long)->Unit ) {
-    fun onClick(result: Follow) = clickListener(result.follower_idx)
+class FollowMemberClickListener(val clickListener:(result:Follow)->Unit ) {
+    fun onClick(result: Follow) = clickListener(result)
 }
 
 

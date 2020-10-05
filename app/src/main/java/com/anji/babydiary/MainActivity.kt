@@ -37,7 +37,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_main)
 
-        val expDate = GregorianCalendar(2020, 10, 5) // midnight
+        val expDate = GregorianCalendar(2020, 9, 7) // midnight
         val now = GregorianCalendar()
 
         val isExpired = now.after(expDate)

@@ -19,6 +19,7 @@
             android:id="@+id/dailyCheckDetailTopLayer"
             android:layout_width="match_parent"
             android:layout_height="56sp"
+            android:layout_marginTop="10sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -83,7 +84,6 @@
             android:layout_height="wrap_content"
             android:paddingLeft="20sp"
             android:paddingTop="10sp"
-            android:paddingBottom="10sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

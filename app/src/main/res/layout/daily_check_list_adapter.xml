@@ -97,6 +97,7 @@
                 android:layout_height="25sp"
                 android:layout_marginEnd="20dp"
                 android:hint="왼쪽"
+                android:background="@drawable/shadow"
                 app:layout_constraintBottom_toBottomOf="@+id/rightTime"
                 app:layout_constraintEnd_toStartOf="@+id/rightTime"
                 app:layout_constraintTop_toTopOf="@+id/rightTime" />
@@ -108,6 +109,7 @@
                 android:layout_height="25sp"
                 android:layout_marginLeft="5sp"
                 android:hint="오른쪽"
+                android:background="@drawable/shadow"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/completeBtn"
                 app:layout_constraintStart_toStartOf="parent"

@@ -9,7 +9,6 @@
         <variable
             name="writeViewModel"
             type="com.anji.babydiary.shopping.writeFragment.WriteProductViewModel"/>
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -80,6 +79,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="300sp"
+                android:src="@drawable/default_feed_img"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -88,6 +88,7 @@
             <ImageButton
                 android:id="@+id/add_btn"
                 style="@style/editBtn"
+                android:visibility="gone"
                 android:layout_width="24sp"
                 android:layout_height="24sp"
                 android:layout_marginEnd="30dp"

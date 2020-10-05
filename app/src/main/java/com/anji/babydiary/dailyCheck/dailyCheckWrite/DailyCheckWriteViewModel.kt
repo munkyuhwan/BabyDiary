@@ -271,10 +271,11 @@ class DailyCheckWriteViewModel(val database: DailyCheckDao,val idx:Long, applica
         }
     }
 
-    suspend fun queryDelete(idx:Long) {
+    suspend fun queryDelete(deleteIdx:Long) {
         withContext(Dispatchers.IO) {
-            database.deleteByIdx(idx)
+            database.deleteByIdx(deleteIdx)
             _dataToday.postValue(database.selectByDate(selectedYear.value!!.toInt(), selectedMonth.value!!.toInt(), selectedDate.value!!.toInt(), idx) )
+
         }
     }
 

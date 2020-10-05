@@ -2,13 +2,13 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_checked="false" >
         <layer-list>
-            <item android:drawable="@drawable/bottom_nav_tip_off" android:width="22sp" android:height="24sp">
+            <item android:drawable="@drawable/bottom_nav_tip_off" android:width="20sp" android:height="24sp">
             </item>
         </layer-list>
     </item>
     <item android:state_checked="true"  >
         <layer-list>
-            <item android:drawable="@drawable/bottom_nav_tip_on" android:width="28sp" android:height="30sp">
+            <item android:drawable="@drawable/bottom_nav_tip_on" android:width="26sp" android:height="30sp">
             </item>
         </layer-list>
     </item>

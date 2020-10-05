@@ -267,7 +267,6 @@ class ShopListFragment : Fragment() {
                 }else {
                     viewModel.deleteBookmark(viewModel.bookmarkTipIdx)
                 }
-
             }
         })
 
@@ -285,14 +284,14 @@ class ShopListFragment : Fragment() {
                     viewModel.selectByKeyword(it.get("keyword").toString())
                 }
             }
-
         }
-
-
 
     }
 
-
+    override fun onResume() {
+        super.onResume()
+        viewModel.getAll()
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -300,6 +299,7 @@ class ShopListFragment : Fragment() {
     }
 
 }
+
 
 class SpacesItemDecoration(private val space: Int) : ItemDecoration() {
     override fun getItemOffsets(

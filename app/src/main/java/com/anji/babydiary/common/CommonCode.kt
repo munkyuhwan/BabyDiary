@@ -27,6 +27,7 @@ object CommonCode {
     )
     val TIP_DATA_CAT = arrayOf(
         "건강",
+        "건강",
         "교육",
         "교육",
         "교육",
@@ -47,23 +48,23 @@ object CommonCode {
     )
     val TIP_DATA_IMG = arrayOf(
         "tip_01",
-        "tip_02",
-        "tip_03",
-        "tip_04",
-        "tip_05",
+        "tip_09",
         "tip_06",
         "tip_07",
         "tip_08",
-        "tip_09",
-        "tip_10",
-        "tip_11",
-        "tip_12",
-        "tip_13",
         "tip_14",
-        "tip_15",
+        "tip_10",
+        "tip_12",
+        "tip_11",
+        "tip_13",
         "tip_16",
         "tip_17",
-        "tip_18"
+        "tip_05",
+        "tip_04",
+        "tip_18",
+        "tip_02",
+        "tip_03",
+        "tip_15"
     )
     val TIP_DATA_TXT = arrayOf(
         "0~6개월 신생아 노란딱지 관리법!\n" +

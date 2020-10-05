@@ -59,7 +59,7 @@ class EventListViewModel(val database:EventDao, application: Application) : Andr
                     "\n" +
                     "- 참여방법 : 어떤 상황인지 자유롭게 유추해서 말풍선에 들어갈 아이의 말을 댓글로 남겨주세요!\n" +
                     "- 상품 : 추첨을 통해 10분에게 스*벅스 기프티콘을 드려요~\n" +
-                    "이벤트기간 : ~ 9.30까지"
+                    "- 이벤트기간 : ~ 9.30까지"
         )
 
         insertData(

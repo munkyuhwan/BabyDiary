@@ -45,6 +45,12 @@ class ShopListViewModel(
         selectedCategory.value = "전체보기"
     }
 
+    fun getAll() {
+        uiScope.launch {
+            queryAll()
+        }
+    }
+
     suspend fun queryAll(){
         withContext(Dispatchers.IO) {
             allProduct.postValue(database.selectAll())

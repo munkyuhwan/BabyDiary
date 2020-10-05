@@ -102,9 +102,9 @@ class FeedDetail : Fragment() {
 
 
         binding.moreMenuBtn.setOnClickListener{
-            //val intent: Intent = Intent(activity, BottomMenu::class.java)
-            //intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
-            //startActivityForResult(intent, CommonCode.MYPAGE_ACTIVITY_RESULT)
+            val intent: Intent = Intent(activity, BottomMenu::class.java)
+            intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+            startActivityForResult(intent, CommonCode.MYPAGE_ACTIVITY_RESULT)
         }
 
 

@@ -38,7 +38,6 @@ class WriteProduct : Fragment() {
 
     private lateinit var application:Application
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
