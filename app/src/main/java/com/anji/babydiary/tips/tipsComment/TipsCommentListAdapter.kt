@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.anji.babydiary.common.Utils
 import com.anji.babydiary.common.itemAction.ItemActionListener
 import com.anji.babydiary.common.itemAction.ItemTouchHelperCallback
 import com.anji.babydiary.database.profile.ProfileDao
@@ -55,12 +56,12 @@ class TipsCommentListAdapter(val activity:Activity, val lifecycleOwner: Lifecycl
         fun bind (item:TipsComment, activity:Activity, lifecycleOwner: LifecycleOwner, editClicked: TipEditClicked, deleteClicked: TipDeleteClicked) {
             //binding.idx = item
 
-
             binding.tipsComment = item
             binding.editClick = editClicked
             binding.deleteClick = deleteClicked
 
             binding.commentText.text = item.commentText.toString()
+            binding.commentDate.text = Utils.getDate(item.regiDate, "yyyy.MM.dd HH:mm")
 
             val profileDatabase = ProfileDatabase.getInstance(activity.applicationContext).database
             val job = Job()

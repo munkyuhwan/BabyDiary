@@ -8,7 +8,7 @@ import com.anji.babydiary.database.profile.Profiles
 import com.anji.babydiary.database.tip.TipsDatabase
 
 
-@Database(entities = [TipsComment::class, Profiles::class], version = 2, exportSchema = false)
+@Database(entities = [TipsComment::class, Profiles::class], version = 3, exportSchema = false)
 abstract class TipsCommentDatabase:RoomDatabase() {
     abstract val database:TipsCommentDao
 

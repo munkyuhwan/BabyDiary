@@ -172,14 +172,14 @@ abstract class BaseActivity() : AppCompatActivity() {
 
 
     fun userDataInitialize() {
-            doInsert(1)
-            doInsert(2)
-            doInsert(3)
-            doInsert(4)
-            doInsert(5)
-            doInsert(6)
-            doInsert(7)
-            doInsert(8)
+        doInsert(1)
+        doInsert(2)
+        doInsert(3)
+        doInsert(4)
+        doInsert(5)
+        doInsert(6)
+        doInsert(7)
+        doInsert(8)
     }
 
     fun tipInitialize() {

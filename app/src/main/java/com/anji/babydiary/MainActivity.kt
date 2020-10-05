@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
 import com.anji.babydiary.common.BaseActivity
 import com.anji.babydiary.common.CommonCode
+import com.anji.babydiary.common.MyShare.MyShare
 import com.anji.babydiary.database.profile.ProfileDao
 import com.anji.babydiary.database.profile.ProfileDatabase
 import com.anji.babydiary.database.profile.Profiles
@@ -37,6 +38,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_main)
 
+        /*
         val expDate = GregorianCalendar(2020, 9, 7) // midnight
         val now = GregorianCalendar()
 
@@ -48,6 +50,8 @@ class MainActivity : BaseActivity() {
             finish()
             exitProcess(-1)
         }
+
+         */
 
 
 
@@ -112,10 +116,14 @@ class MainActivity : BaseActivity() {
 
     private fun goMain() {
         //CommonCode.USER_IDX = 1
+
+        //MyShare.prefs.setLong("idx", 1)
+
         val intent:Intent = Intent(this, Login::class.java)
         overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
         startActivity(intent)
         finish()
+
     }
 
 

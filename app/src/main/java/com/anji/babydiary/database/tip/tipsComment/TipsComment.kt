@@ -13,5 +13,7 @@ data class TipsComment(
     @ColumnInfo(name = "user_idx")
     var userIdx:Long = 0L,
     @ColumnInfo(name="comment_text")
-    var commentText:String = ""
+    var commentText:String = "",
+    @ColumnInfo(name="regi_date")
+    var regiDate:Long = System.currentTimeMillis()
 )
