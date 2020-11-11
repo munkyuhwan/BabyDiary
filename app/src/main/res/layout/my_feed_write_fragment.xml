@@ -10,6 +10,7 @@
         <variable
             name="writeViewModel"
             type="com.anji.babydiary.myPage.myFeedWrite.MyFeedWriteViewModel" />
+        <import type="android.view.View"/>
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,8 +27,8 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout11">
 
         <com.github.chrisbanes.photoview.PhotoView
-
             android:id="@+id/myFeedImage"
+            android:visibility="@{writeViewModel.selectedTemplate==1 ? View.VISIBLE:View.GONE}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/feedDetailDateTextColor"
@@ -36,6 +37,167 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:id="@+id/myFeedImageLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{writeViewModel.selectedTemplate==2 ? View.VISIBLE:View.GONE}"
+            android:background="@color/feedDetailDateTextColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <com.github.chrisbanes.photoview.PhotoView
+                android:id="@+id/myFeedImage2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/feedDetailDateTextColor"
+                android:src="@drawable/default_feed_img"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+
+
+        <GridLayout
+            android:id="@+id/myFeedImageLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:visibility="@{writeViewModel.selectedTemplate==3 ? View.VISIBLE:View.GONE}"
+            android:alignmentMode="alignBounds"
+            android:columnCount="3"
+            android:rowOrderPreserved="false"
+            android:useDefaultMargins="true"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.github.chrisbanes.photoview.PhotoView
+                android:id="@+id/myFeedImageGrid1"
+                style="@style/feedWriteGridStyle"
+                android:src="@drawable/default_feed_img"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.github.chrisbanes.photoview.PhotoView
+                android:id="@+id/myFeedImageGrid2"
+                style="@style/feedWriteGridStyle"
+                android:src="@drawable/default_feed_img"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.github.chrisbanes.photoview.PhotoView
+                android:id="@+id/myFeedImageGrid3"
+                style="@style/feedWriteGridStyle"
+                android:src="@drawable/default_feed_img"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.github.chrisbanes.photoview.PhotoView
+                android:id="@+id/myFeedImageGrid4"
+                style="@style/feedWriteGridStyle"
+                android:src="@drawable/default_feed_img"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.github.chrisbanes.photoview.PhotoView
+                android:id="@+id/myFeedImageGrid5"
+                style="@style/feedWriteGridStyle"
+                android:src="@drawable/default_feed_img"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.github.chrisbanes.photoview.PhotoView
+                android:id="@+id/myFeedImageGrid6"
+                style="@style/feedWriteGridStyle"
+                android:src="@drawable/default_feed_img"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.github.chrisbanes.photoview.PhotoView
+                android:id="@+id/myFeedImageGrid7"
+                style="@style/feedWriteGridStyle"
+                android:src="@drawable/default_feed_img"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.github.chrisbanes.photoview.PhotoView
+                android:id="@+id/myFeedImageGrid8"
+                style="@style/feedWriteGridStyle"
+                android:src="@drawable/default_feed_img"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.github.chrisbanes.photoview.PhotoView
+                android:id="@+id/myFeedImageGrid9"
+                style="@style/feedWriteGridStyle"
+                android:src="@drawable/default_feed_img"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </GridLayout>
+
+        <LinearLayout
+            android:id="@+id/myFeedImageLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:visibility="@{writeViewModel.selectedTemplate==4 ? View.VISIBLE:View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingLeft="20sp"
+            android:paddingRight="20sp"
+            android:paddingTop="20sp"
+            android:paddingBottom="20sp"
+            app:layout_constraintTop_toTopOf="parent">
+            <com.github.chrisbanes.photoview.PhotoView
+                android:id="@+id/myFeedImageHorizontal1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10sp"
+                android:layout_weight="1"
+                android:background="@color/feedDetailDateTextColor"
+                android:src="@drawable/default_feed_img"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <com.github.chrisbanes.photoview.PhotoView
+                android:id="@+id/myFeedImageHorizontal2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"
+                android:layout_weight="1"
+                android:background="@color/feedDetailDateTextColor"
+                android:src="@drawable/default_feed_img"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/testTextBoxLayer"

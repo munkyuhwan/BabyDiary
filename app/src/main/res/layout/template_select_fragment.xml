@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.anji.babydiary.myPage.myFeedWrite.templateSelect.TemplateSelectViewModel" />
+        <import type="android.view.View"/>
+        <import type="android.graphics.Color"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".myPage.myFeedWrite.templateSelect.TemplateSelect">
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:columnCount="3"
+            android:foregroundGravity="center_horizontal"
+            android:paddingTop="15sp"
+            android:paddingBottom="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout11">
+
+            <ImageView
+                android:id="@+id/template_one"
+                style="@style/templateSelectStyle"
+                android:src="@drawable/template_one" />
+
+            <ImageView
+                android:id="@+id/template_two"
+                style="@style/templateSelectStyle"
+                android:src="@drawable/template_two" />
+
+            <ImageView
+                android:id="@+id/template_three"
+                style="@style/templateSelectStyle"
+                android:src="@drawable/template_three" />
+
+            <ImageView
+                android:id="@+id/template_four"
+                style="@style/templateSelectStyle"
+                android:src="@drawable/template_four" />
+        </GridLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/main_feed_actionbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mypage_sub_nav_layout"
+                android:layout_width="match_parent"
+                android:layout_height="99sp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.68">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/backBtn"
+                    android:layout_width="16sp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="15dp"
+                    android:src="@drawable/back_btn"
+                    app:layout_constraintBottom_toBottomOf="@+id/myfeed_write"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/myfeed_write"
+                    app:layout_constraintVertical_bias="0.7" />
+
+                <TextView
+                    android:id="@+id/myfeed_write"
+                    style="@style/completeBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="15dp"
+                    android:text="템플릿 선택"
+                    android:src="@drawable/myfeed_write_btn"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.73" />
+
+                <Button
+                    android:id="@+id/next_button"
+                    style="@style/completeBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/main_feed_search_icon"
+                    android:text="다음"
+                    app:layout_constraintBottom_toBottomOf="@+id/myfeed_write"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/myfeed_write" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

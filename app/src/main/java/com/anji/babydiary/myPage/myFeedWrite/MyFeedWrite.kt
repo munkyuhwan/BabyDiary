@@ -28,8 +28,10 @@ import com.anji.babydiary.common.CommonCode
 import com.anji.babydiary.common.Utils
 import com.anji.babydiary.database.mainFeed.MainFeedDatabase
 import com.anji.babydiary.databinding.MyFeedWriteFragmentBinding
+import com.anji.babydiary.myPage.myFollower.FollowerArgs
 import com.anji.babydiary.tips.writeTip.tipCategorySpinner.TipCategoryAdapter
 import com.bumptech.glide.Glide
+import com.github.chrisbanes.photoview.PhotoView
 import kotlinx.android.synthetic.main.activity_main_feed.*
 import kotlinx.android.synthetic.main.my_feed_write_fragment.view.*
 
@@ -44,10 +46,19 @@ class MyFeedWrite : Fragment(), View.OnTouchListener {
     var finalScaleY = 0F
     var finalScaleFactor = 0F
 
+    private lateinit var currentImageview: PhotoView
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
+        val argument = arguments?.let { MyFeedWriteArgs.fromBundle(it) }
+        var selectedTemplate = argument!!.selectedTemplate
+
+        Log.e("selected","selected bundle: ${selectedTemplate}")
+
         requireActivity().fab.visibility = View.GONE
 
         binding = DataBindingUtil.inflate<MyFeedWriteFragmentBinding>(inflater, R.layout.my_feed_write_fragment, container, false)
@@ -60,6 +71,8 @@ class MyFeedWrite : Fragment(), View.OnTouchListener {
 
         binding.writeViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        viewModel.selectedTemplate.value = selectedTemplate
 
         binding.openKidInfo.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
@@ -95,9 +108,67 @@ class MyFeedWrite : Fragment(), View.OnTouchListener {
             Utils.showAlert(requireContext(),"알림","피드작성을 취소하시겠습니까?\n작성중인 피드는 저장되지 않습니다.", findNavController())
         }
 
+        //한장
         binding.myFeedImage.setOnClickListener{
             permissionCheck()
+            currentImageview = binding.myFeedImage
         }
+
+        //한장
+        binding.myFeedImage2.setOnClickListener{
+            permissionCheck()
+            currentImageview = binding.myFeedImage2
+        }
+
+        //9장
+        binding.myFeedImageGrid1.setOnClickListener{
+            permissionCheck()
+            currentImageview = binding.myFeedImageGrid1
+        }
+        binding.myFeedImageGrid2.setOnClickListener{
+            permissionCheck()
+            currentImageview = binding.myFeedImageGrid2
+        }
+        binding.myFeedImageGrid3.setOnClickListener{
+            permissionCheck()
+            currentImageview = binding.myFeedImageGrid3
+        }
+        binding.myFeedImageGrid4.setOnClickListener{
+            permissionCheck()
+            currentImageview = binding.myFeedImageGrid4
+        }
+        binding.myFeedImageGrid5.setOnClickListener{
+            permissionCheck()
+            currentImageview = binding.myFeedImageGrid5
+        }
+        binding.myFeedImageGrid6.setOnClickListener{
+            permissionCheck()
+            currentImageview = binding.myFeedImageGrid6
+        }
+        binding.myFeedImageGrid7.setOnClickListener{
+            permissionCheck()
+            currentImageview = binding.myFeedImageGrid7
+        }
+        binding.myFeedImageGrid8.setOnClickListener{
+            permissionCheck()
+            currentImageview = binding.myFeedImageGrid8
+        }
+        binding.myFeedImageGrid9.setOnClickListener{
+            permissionCheck()
+            currentImageview = binding.myFeedImageGrid9
+        }
+
+        //두장
+        binding.myFeedImageHorizontal1.setOnClickListener{
+            permissionCheck()
+            currentImageview = binding.myFeedImageHorizontal1
+        }
+        binding.myFeedImageHorizontal2.setOnClickListener{
+            permissionCheck()
+            currentImageview = binding.myFeedImageHorizontal2
+        }
+
+
         binding.addBtn.setOnClickListener{
             permissionCheck()
         }
@@ -105,7 +176,8 @@ class MyFeedWrite : Fragment(), View.OnTouchListener {
         viewModel.isDone.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it) {
-                    findNavController().popBackStack()
+                    //findNavController().popBackStack()
+                    findNavController().navigate(MyFeedWriteDirections.actionMyFeedWriteToMyFeed())
                 }
             }
         })
@@ -120,7 +192,7 @@ class MyFeedWrite : Fragment(), View.OnTouchListener {
 
         viewModel.selectedImage.observe(viewLifecycleOwner, Observer {
             it?.let { url ->
-                Glide.with(application).load(url).into(binding.myFeedImage)
+                Glide.with(application).load(url).into(currentImageview)
                // binding.myFeedImage.setImageURI(url)
             }
         })

@@ -26,6 +26,8 @@ class MyFeedWriteViewModel(val database:MainFeedDAO, application: Application) :
 
     var isDone = MutableLiveData<Boolean>()
 
+    var selectedTemplate = MutableLiveData<Int>()
+
     var job = Job()
     var uiScope = CoroutineScope(Dispatchers.Main + job)
 

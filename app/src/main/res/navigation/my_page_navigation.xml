@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_myFeed_to_chattingList"
             app:destination="@id/chattingList" />
+        <action
+            android:id="@+id/action_myFeed_to_templateSelect"
+            app:destination="@id/templateSelect" />
     </fragment>
     <fragment
         android:id="@+id/myFeedWrite"
@@ -41,6 +44,12 @@
         <action
             android:id="@+id/action_myFeedWrite_to_myFeedWriteLocation"
             app:destination="@id/myFeedWriteLocation" />
+        <argument
+            android:name="selectedTemplate"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_myFeedWrite_to_myFeed"
+            app:destination="@id/myFeed" />
     </fragment>
     <fragment
         android:id="@+id/myFeedWriteLocation"
@@ -108,5 +117,13 @@
         <argument
             android:name="userIdxOne"
             app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/templateSelect"
+        android:name="com.anji.babydiary.myPage.myFeedWrite.templateSelect.TemplateSelect"
+        android:label="TemplateSelect" >
+        <action
+            android:id="@+id/action_templateSelect_to_myFeedWrite"
+            app:destination="@id/myFeedWrite" />
     </fragment>
 </navigation>

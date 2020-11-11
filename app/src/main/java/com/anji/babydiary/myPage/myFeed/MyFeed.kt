@@ -69,7 +69,9 @@ class MyFeed : Fragment() {
 
 
         binding.addMyfeed.setOnClickListener {
-            findNavController().navigate(MyFeedDirections.actionMyFeedToMyFeedWrite())
+            //findNavController().navigate(MyFeedDirections.actionMyFeedToMyFeedWrite())
+            findNavController().navigate(MyFeedDirections.actionMyFeedToTemplateSelect())
+
         }
 
         viewModel.selectAll.observe(viewLifecycleOwner, Observer {
